@@ -6,3 +6,9 @@
     ui = auto
 [github]
     token = 1d87bb85ae639f8d45322e0557b9dfd3
+[alias]
+    br = branch
+    st = status
+    ci = commit -a
+    co = checkout
+    di = diff
