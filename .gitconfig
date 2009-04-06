@@ -9,7 +9,7 @@
 [alias]
     br = branch
     st = status
-    ci = commit -a
+    ci = commit
     co = checkout
     di = diff
     up = pull
