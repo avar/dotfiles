@@ -12,3 +12,4 @@
     ci = commit -a
     co = checkout
     di = diff
+    up = pull
