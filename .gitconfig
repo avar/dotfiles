@@ -7,9 +7,10 @@
 [github]
     token = 1d87bb85ae639f8d45322e0557b9dfd3
 [alias]
-    br = branch
+    br = branch -a -v
     st = status
     ci = commit
     co = checkout
-    di = diff
-    up = pull
+    di = diff -p --stat
+    up = pull --rebase # like svn does
+    lo = log --decorate --abbrev-commit --stat --color-words
