@@ -11,7 +11,7 @@
     st = status
     ci = commit
     co = checkout
-    di = diff -p --stat
+    di = diff -p --stat --color-words
     pu = pull --stat
     up = pull --stat --rebase # like svn does
     lo = log --decorate --abbrev-commit --stat --color-words
