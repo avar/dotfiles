@@ -14,7 +14,7 @@
     di = diff -p --stat --color-words
     pu = pull --stat
     up = pull --stat --rebase # like svn does
-    lo = log --decorate --abbrev-commit --stat --color-words
+    lo = log --decorate --abbrev-commit --color-words
     staged = diff --cached
 [push]
     default = tracking
