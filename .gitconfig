@@ -1,11 +1,11 @@
 [user]
-    name = Hinrik Örn Sigurðsson
-    email = hinrik.sig@gmail.com
+    name = Ævar Arnfjörð Bjarmason
+    email = avarab@gmail.com
 
 [color]
     ui = auto
 [github]
-    token = 1d87bb85ae639f8d45322e0557b9dfd3
+    token = aceb87ce35a8bd0069d0ec14aa31b035
 [alias]
     br = branch -a -v
     st = status
