@@ -113,7 +113,11 @@ export HISTIGNORE="ls:cd:cd ..:..*: *"
 # ignore these while tab-completing
 export FIGNORE="CVS:.svn:.git"
 
-export EDITOR="vim"
+export EDITOR="emacsclient"
+alias mg=$EDITOR
+alias vi=$EDITOR
+alias vim=$EDITOR
+
 export PERLDOC="-MPod::Text::Ansi"
 
 # do an ls after every successful cd
