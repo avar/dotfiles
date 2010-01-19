@@ -18,3 +18,6 @@ nethack on
 
 # Turn off the startup banner
 startup_message off
+
+# keep a long scroll buffer
+defscrollback 10000
