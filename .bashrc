@@ -142,6 +142,9 @@ alias mg=$EDITOR
 alias vi=$EDITOR
 alias vim=$EDITOR
 
+# use my locally installed Perl modules where available
+eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib 2>/dev/null)
+
 # do an ls after every successful cd
 function cd {
     builtin cd "$@" && ls
