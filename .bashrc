@@ -156,6 +156,15 @@ function svn_uplog {
     fi
 }
 
+function podcast_sync {
+    if [ $(mount | grep -c /media/SANSA) -gt 0 ]; then
+        rsync -av --delete --progress --exclude=*Ostfront* --exclude=*.mp3-* --delete /home/avar/Podcasts/ /media/SANSA/PODCASTS/
+    else
+        echo "/media/SANSA/ isn't mounted"
+        exit 1
+    fi
+}
+
 # install Common Lisp packages from the command line
 function asdf_install {
     sbcl --eval "(asdf:operate 'asdf:load-op :asdf-install)" --eval "(asdf-install:install :$1)" --eval "(quit)"
