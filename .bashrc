@@ -158,7 +158,7 @@ function svn_uplog {
 
 function podcast_sync {
     if [ $(mount | grep -c /media/SANSA) -gt 0 ]; then
-        rsync -av --delete --progress --exclude=*Ostfront* --exclude=*.mp3-* --delete /home/avar/Podcasts/ /media/SANSA/PODCASTS/
+        rsync -av --size-only --delete --progress --exclude=*Ostfront* --exclude=*.mp3-* --delete /home/avar/Podcasts/ /media/SANSA/PODCASTS/
     else
         echo "/media/SANSA/ isn't mounted"
         exit 1
