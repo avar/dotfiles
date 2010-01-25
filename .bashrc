@@ -158,7 +158,22 @@ function svn_uplog {
 
 function podcast_sync {
     if [ $(mount | grep -c /media/SANSA) -gt 0 ]; then
-        rsync -av --delete --progress --exclude=*Ostfront* --exclude=*.mp3-* --delete /home/avar/Podcasts/ /media/SANSA/PODCASTS/
+        find /media/SANSA/PODCASTS/ -type f -name '*.pdf' -exec rm -v {} \;
+        find /media/SANSA/PODCASTS/ -type f -name '*.mp4' -exec rm -v {} \;
+        find /media/SANSA/PODCASTS/ -type f -name '*Apache_Tears*' -exec rm -v {} \;
+        rsync \
+            -av \
+            --checksum \
+            --progress \
+            --exclude='*Apache_Tears*' \
+            --exclude='*Ostfront*' \
+            --exclude='*Apache*' \
+            --exclude='*.pdf' \
+            --exclude='*.mp4' \
+            --exclude='*.mp3-*' \
+            --delete \
+            /home/avar/Podcasts/ \
+            /media/SANSA/PODCASTS/
     else
         echo "/media/SANSA/ isn't mounted"
         exit 1
