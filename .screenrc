@@ -12,3 +12,6 @@ vbell off
 
 # Without this screen is unusable
 nethack on
+
+# Turn off the startup banner
+startup_message off
