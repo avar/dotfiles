@@ -161,9 +161,9 @@ function podcast_sync {
         find /media/SANSA/PODCASTS/ -type f -name '*.pdf' -exec rm -v {} \;
         find /media/SANSA/PODCASTS/ -type f -name '*.mp4' -exec rm -v {} \;
         find /media/SANSA/PODCASTS/ -type f -name '*Apache_Tears*' -exec rm -v {} \;
+        cd /media/SANSA/PODCASTS/
         rsync \
             -av \
-            --checksum \
             --progress \
             --exclude='*Apache_Tears*' \
             --exclude='*Ostfront*' \
@@ -171,9 +171,18 @@ function podcast_sync {
             --exclude='*.pdf' \
             --exclude='*.mp4' \
             --exclude='*.mp3-*' \
+            --exclude='*The_Universe_?_*' \
+            --exclude='*The_Universe_??_*' \
+            --exclude='*The_Universe_1??_*' \
+            --exclude='*Skeptics_Guide_1??_*' \
+            --exclude='*Skeptics_Guide_2[01]?_*' \
+            --exclude='*Wikipedia*' \
+            --exclude='*Naked*' \
+            --exclude='*News*' \
             --delete \
             /home/avar/Podcasts/ \
-            /media/SANSA/PODCASTS/
+            .
+        cd -
     else
         echo "/media/SANSA/ isn't mounted"
         exit 1
