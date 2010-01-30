@@ -185,7 +185,6 @@ function podcast_sync {
         cd -
     else
         echo "/media/SANSA/ isn't mounted"
-        exit 1
     fi
 }
 
