@@ -81,6 +81,8 @@ fi
 # some nice shell options
 shopt -s checkwinsize cdspell dotglob histappend no_empty_cmd_completion
 
+alias emacs="emacsclient -c"
+alias ec=emacsclient
 alias perl6="~/src/rakudo/perl6"
 alias ..="cd .."
 alias ...="cd ../.."
