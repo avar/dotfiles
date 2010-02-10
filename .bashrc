@@ -103,6 +103,9 @@ fi
 # some nice less(1) options
 export LESS="iMQRS"
 
+# For App::Nopaste
+export NOPASTE_SERVICES="Shadowcat Gist"
+
 # keep a long history without duplicates
 export HISTSIZE=10000
 export HISTFILESIZE=10000
