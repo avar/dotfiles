@@ -10,6 +10,9 @@ altscreen on
 # no visual bell, thanks
 vbell off
 
+# Unbind the `C-a x' password prompt which I keep accidentally bringing up
+bind x meta
+
 # Without this screen is unusable
 nethack on
 
