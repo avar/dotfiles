@@ -8,6 +8,7 @@
     login = avar
     token = aceb87ce35a8bd0069d0ec14aa31b035
 [alias]
+    ann = blame
     br = branch -a -v
     st = status
     ci = commit
