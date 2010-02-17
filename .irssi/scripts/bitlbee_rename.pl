@@ -51,7 +51,7 @@ sub munge_nickname
   $nick =~ s/[- ]/_/g;
   $nick = unidecode($nick); 
   $nick =~ s/[^A-Za-z0-9-]//g;
-  $nick = substr $nick, 0, 25;
+  $nick = substr $nick, 0, 24;
 
   return $nick;
 }
