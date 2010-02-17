@@ -1,7 +1,9 @@
 use strict;
-use Socket;
+use warnings;
 use Irssi;
 use Irssi::Irc;
+use Text::Unidecode;
+use Encode qw(decode);
 
 my $bitlbeeChannel = "&bitlbee";
 my %nicksToRename = ();
@@ -10,10 +12,9 @@ sub message_join
 {
   # "message join", SERVER_REC, char *channel, char *nick, char *address
   my ($server, $channel, $nick, $address) = @_;
-  my $username = substr($address, 0, index($address,'@'));
-  my $host = substr($address, index($address,'@')+1);
+  my ($username, $host) = split /@/, $address;
 
-  if ($channel =~ m/($bitlbeeChannel)/ and $nick =~ m/$username/)
+  if ($host eq 'chat.facebook.com' and $channel =~ m/$bitlbeeChannel/ and $nick =~ m/$username/)
   {
     $nicksToRename{$nick} = $channel;
     $server->command("whois $nick");
@@ -32,8 +33,7 @@ sub whois_data
 
     my $ircname = substr($data, index($data,':')+1);
 
-    $ircname =~ s/[^A-Za-z0-9]//g;
-    $ircname = substr( $ircname, 0, 25 );
+    $ircname = munge_nickname( $ircname );
 
     if ($ircname ne $nick)
     {
@@ -41,6 +41,19 @@ sub whois_data
       $server->command("msg $channel save");
     }
   }
+}
+
+sub munge_nickname
+{
+  my ($nick) = @_;
+
+  $nick = decode('utf8', $nick);
+  $nick =~ s/[- ]/_/g;
+  $nick = unidecode($nick); 
+  $nick =~ s/[^A-Za-z0-9-]//g;
+  $nick = substr $nick, 0, 25;
+
+  return $nick;
 }
 
 Irssi::signal_add_first 'message join' => 'message_join';
