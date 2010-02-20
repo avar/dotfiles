@@ -102,7 +102,7 @@ fi
 
 # So ack(1) will use unicode, this probably fixes other stuff too that
 # didn't heed my locale
-export PERL_UNICODE=SDAL
+#export PERL_UNICODE=SDAL
 
 # some nice less(1) options
 export LESS="iMQRS"
