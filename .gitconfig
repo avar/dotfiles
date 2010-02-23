@@ -1,0 +1,23 @@
+[user]
+    name = Ævar Arnfjörð Bjarmason
+    email = avarab@gmail.com
+
+[color]
+    ui = auto
+[github]
+    login = avar
+[alias]
+    ann = blame
+    br = branch -a -v
+    st = status
+    ci = commit
+    co = checkout
+    di = diff -p --stat --color-words
+    dis = diff -p --stat --color-words --staged
+    pu = pull --stat
+    up = pull --stat --rebase # like svn does
+    lo = log --decorate --abbrev-commit --color-words
+    staged = diff --cached
+    tree = log --graph --pretty=oneline --abbrev-commit --decorate
+[push]
+    default = tracking
