@@ -4,8 +4,10 @@
 
 [color]
     ui = auto
+
 [github]
     login = avar
+
 [alias]
     ann = blame
     br = branch -a -v
