@@ -175,6 +175,7 @@ function podcast_sync {
             --progress \
             --exclude='*Apache_Tears*' \
             --exclude='*Ostfront*' \
+            --exclude='*Hardcore_History*' \
             --exclude='*Apache*' \
             --exclude='*.pdf' \
             --exclude='*.mp4' \
