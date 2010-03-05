@@ -92,7 +92,6 @@ alias u2d="sed 's/$//'"
 alias lsofnames="lsof | awk '!/^\$/ && /\// { print \$9 }' | sort -u"
 alias myip="wget -q -O- 'http://www.moanmyip.com/' | perl -0777 -pe 's[.*<div class=\"ip\">(.*?)</div>.*][\$1\n]s'"
 alias mmyip="mplayer http://moanmyip.com/output/\$(myip).mp3"
-alias scp="rsync --rsh=ssh --archive --append --human-readable --progress --times"
 
 if [[ "$TERM" == "linux" ]]; then
     if type conpalette >&/dev/null; then
@@ -140,6 +139,20 @@ function mkcd {
     mkdir -p "$@" && builtin cd "$@"
 }
 
+# Sync files based on content. Useful for dynamically changing files.
+function scp {
+    rsync --rsh=ssh --archive --human-readable --progress "$@"
+}
+
+# Append to files based on file size. Useful large, static or append-only
+# files since it skips the expensive hash check. Also retry the transfer
+# if it times out.
+function leech {
+    cmd="rsync --rsh=ssh --append --archive --human-readable --progress $@"
+    $cmd
+    while [[ $? == 30 ]]; do sleep 5 && $cmd; done
+}
+
 # delete untracked files/dirs
 function svn_clean {
     svn status "$1" | grep '^\?' | cut -c8- | \
@@ -175,6 +188,7 @@ function podcast_sync {
             --progress \
             --exclude='*Apache_Tears*' \
             --exclude='*Ostfront*' \
+            --exclude='*Hardcore_History*' \
             --exclude='*Apache*' \
             --exclude='*.pdf' \
             --exclude='*.mp4' \
