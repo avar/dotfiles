@@ -107,7 +107,7 @@ fi
 export LESS="iMQRS"
 
 # For App::Nopaste
-export NOPASTE_SERVICES="Shadowcat Gist"
+export NOPASTE_SERVICES="Gist Pastie"
 
 # keep a long history without duplicates
 export HISTSIZE=10000
