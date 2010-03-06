@@ -197,6 +197,8 @@ function podcast_sync {
             -av \
             --progress \
             --exclude='*Apache_Tears*' \
+            --exclude='*History*' \
+            --exclude='*WNYC*' \
             --exclude='*Ostfront*' \
             --exclude='*Hardcore_History*' \
             --exclude='*Apache*' \
