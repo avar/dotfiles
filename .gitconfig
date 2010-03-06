@@ -9,7 +9,7 @@
     login = avar
 
 [alias]
-    # Lazyness
+    ;; Lazyness
     ann = blame
     br = branch -a -v
     st = status
@@ -18,17 +18,18 @@
     sm = submodule
     lo = log --decorate --abbrev-commit --color-words
 
-    # Diff
+    ;; Diff
     di  = diff -p --stat --color-words
     dif = diff -p --stat --color-words
     dis = diff -p --stat --color-words --staged
     staged = diff --cached
 
-    # Pull/push
+    ;; Pull/push
     pu = pull --stat
-    up = pull --stat --rebase # like svn does
+    ; like svn does
+    up = pull --stat --rebase
 
-    # Handy tools
+    ;; Handy tools
     tree = log --graph --pretty=oneline --abbrev-commit --decorate
     review = "!f() { for rev in $(git rev-list --reverse \"$@\"); do git show $rev; done; }; f"
 
