@@ -207,7 +207,7 @@ function podcast_sync {
             --exclude='*The_Universe_??_*' \
             --exclude='*The_Universe_1??_*' \
             --exclude='*Skeptics_Guide_1??_*' \
-            --exclude='*Skeptics_Guide_2[23]?_*' \
+            --exclude='*Skeptics_Guide_2[023]?_*' \
             --exclude='*Wikipedia*' \
             --exclude='*Naked*' \
             --exclude='*News*' \
