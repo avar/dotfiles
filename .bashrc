@@ -96,6 +96,13 @@ alias lsofnames="lsof | awk '!/^\$/ && /\// { print \$9 }' | sort -u"
 alias myip="wget -q -O- 'http://www.moanmyip.com/' | perl -0777 -pe 's[.*<div class=\"ip\">(.*?)</div>.*][\$1\n]s'"
 alias mmyip="mplayer http://moanmyip.com/output/\$(myip).mp3"
 
+# From jrockway
+alias perlfunc="perldoc -f"
+alias lperl="perl -Ilib"
+function lbperl {
+    perl -Ilib "bin/$1";
+}
+
 if [[ "$TERM" == "linux" ]]; then
     if type conpalette >&/dev/null; then
         conpalette tango-dark
