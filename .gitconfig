@@ -17,6 +17,7 @@
     co = checkout
     sm = submodule
     lo = log --decorate --abbrev-commit --color-words
+    uncommit = reset --soft HEAD^
 
     ;; Diff
     di  = diff -p --stat --color-words
