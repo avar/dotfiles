@@ -32,6 +32,8 @@
     ;; Handy tools
     tree = log --graph --pretty=oneline --abbrev-commit --decorate
     review = "!f() { for rev in $(git rev-list --reverse \"$@\"); do git show $rev; done; }; f"
+    ; Must git branch -d foo first, then git rmbranch foo
+    rmbranch = "!f() { git push origin :heads/$@; }; f"
 
 [push]
     default = tracking
