@@ -96,6 +96,13 @@ alias lsofnames="lsof | awk '!/^\$/ && /\// { print \$9 }' | sort -u"
 alias myip="wget -q -O- 'http://www.moanmyip.com/' | perl -0777 -pe 's[.*<div class=\"ip\">(.*?)</div>.*][\$1\n]s'"
 alias mmyip="mplayer http://moanmyip.com/output/\$(myip).mp3"
 
+# From jrockway
+alias perlfunc="perldoc -f"
+alias lperl="perl -Ilib"
+function lbperl {
+    perl -Ilib "bin/$1";
+}
+
 if [[ "$TERM" == "linux" ]]; then
     if type conpalette >&/dev/null; then
         conpalette tango-dark
@@ -190,6 +197,8 @@ function podcast_sync {
             -av \
             --progress \
             --exclude='*Apache_Tears*' \
+            --exclude='*History*' \
+            --exclude='*WNYC*' \
             --exclude='*Ostfront*' \
             --exclude='*Hardcore_History*' \
             --exclude='*Apache*' \
@@ -200,7 +209,7 @@ function podcast_sync {
             --exclude='*The_Universe_??_*' \
             --exclude='*The_Universe_1??_*' \
             --exclude='*Skeptics_Guide_1??_*' \
-            --exclude='*Skeptics_Guide_2[23]?_*' \
+            --exclude='*Skeptics_Guide_2[023]?_*' \
             --exclude='*Wikipedia*' \
             --exclude='*Naked*' \
             --exclude='*News*' \

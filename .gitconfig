@@ -17,6 +17,7 @@
     co = checkout
     sm = submodule
     lo = log --decorate --abbrev-commit --color-words
+    uncommit = reset --soft HEAD^
 
     ;; Diff
     di  = diff -p --stat --color-words
@@ -32,6 +33,7 @@
     ;; Handy tools
     tree = log --graph --pretty=oneline --abbrev-commit --decorate
     review = "!f() { for rev in $(git rev-list --reverse \"$@\"); do git show $rev; done; }; f"
+    set-master = "!f() { git config branch.master.remote origin && git config branch.master.merge refs/heads/master; }; f"
     ; Must git branch -d foo first, then git rmbranch foo
     rmbranch = "!f() { git push origin :heads/$@; }; f"
 
