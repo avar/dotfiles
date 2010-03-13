@@ -247,3 +247,6 @@ function cpan_release_hailo {
     git push hinrik master
 }
 
+function test_hailo {
+    TEST_MYSQL=1 TEST_POSTGRESQL=1 MYSQL_ROOT_PASSWORD=$(cat ~/.mypass) dzil test
+}
