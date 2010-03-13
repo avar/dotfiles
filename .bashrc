@@ -239,3 +239,11 @@ function keepalive {
 function cpan_release {
     dzil clean && dzil test && dzil build && sudo cpanm *tar.gz && dzil release && dzil clean
 }
+
+function cpan_release_hailo {
+    cpan_release
+
+    git push hinrik --tags
+    git push hinrik master
+}
+
