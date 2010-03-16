@@ -18,6 +18,7 @@
     sm = submodule
     lo = log --decorate --abbrev-commit
     uncommit = reset --soft HEAD^
+    chrp = cherry-pick
 
     ;; Diff
     di  = diff -p --stat
