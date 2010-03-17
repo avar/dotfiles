@@ -5,6 +5,11 @@
 [color]
     ui = auto
 
+;; Don't be so invasive about coloring ^M when I'm editing files that
+;; are supposed to have \r\n.
+[color "diff"]
+       whitespace = 0
+
 [github]
     login = avar
 
