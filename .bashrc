@@ -249,7 +249,7 @@ function cpan_release_hailo {
 }
 
 function cpanm_o {
-    cpan-outdated | xargs cpanm
+    sudo cpan-outdated | xargs sudo cpanm
 }
 
 function test_hailo {
