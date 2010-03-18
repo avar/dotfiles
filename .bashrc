@@ -32,7 +32,7 @@ esac
 # or else print the total size of all files in the directory
 function dir_info() {
     if type git >&/dev/null; then
-        local git_branch=$(git symbolic-ref HEAD | sed -e 's/refs\/heads\///')
+        local git_branch=$(git symbolic-ref HEAD 2>/dev/null | sed -e 's/refs\/heads\///')
         if [[ -n $git_branch ]]; then
             echo $git_branch
             return 0
