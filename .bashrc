@@ -248,6 +248,10 @@ function cpan_release_hailo {
     git push hinrik master
 }
 
+function cpanm_o {
+    sudo cpanm -i $(sudo cpanp -o | awk '{print $4}' | tr '\n' ' ')
+}
+
 function test_hailo {
     TEST_MYSQL=1 TEST_POSTGRESQL=1 MYSQL_ROOT_PASSWORD=$(cat ~/.mypass) TEST_EXHAUSTIVE=1 dzil test
 }
