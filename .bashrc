@@ -244,8 +244,8 @@ function cpan_release {
 function cpan_release_hailo {
     cpan_release
 
-    git push hinrik --tags
-    git push hinrik master
+    git push upstream master
+    git push upstream --tags
 }
 
 function cpanm_o {
