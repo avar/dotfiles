@@ -261,3 +261,13 @@ function hailo_benchmark {
         10 \
         "$(find  t -name '*.t' | egrep -v -e non_stand -e readline -e shell | tr '\n' ' ')"
 }
+
+
+# For perl5 core
+function avar_configure         {
+    ./Configure -Dcc='ccache gcc' -Dld=gcc -Doptimize=-ggdb3 -Dusedevel -d -e
+}
+
+function avar_configure_threads {
+    ./Configure -Dcc='ccache gcc' -Dld=gcc -Doptimize=-ggdb3 -Dusedevel -Dusethreads -d -e
+}
