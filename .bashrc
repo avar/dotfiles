@@ -271,3 +271,10 @@ function avar_configure         {
 function avar_configure_threads {
     ./Configure -Dcc='ccache gcc' -Dld=gcc -Doptimize=-ggdb3 -Dusedevel -Dusethreads -d -e
 }
+
+# Print out the Debian packages consuming the most space on this machine
+function package_sizes {
+    (for i in $(dpkg -l | grep ^ii | awk '{print $2}'); do
+        du -sc $(perl -E 'say for grep -f, @ARGV' $(dpkg -L $i)) | tail -n 1 | awk '{print $1}' | tr '\n' '\t' && echo $i
+    done) | sort -nr
+}
