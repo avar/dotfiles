@@ -276,5 +276,5 @@ function avar_configure_threads {
 function package_sizes {
     (for i in $(dpkg -l | grep ^ii | awk '{print $2}'); do
         du -sc $(perl -E 'say for grep -f, @ARGV' $(dpkg -L $i)) | tail -n 1 | awk '{print $1}' | tr '\n' '\t' && echo $i
-    done) | sort -nr
+    done)
 }
