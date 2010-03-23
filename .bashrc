@@ -278,3 +278,14 @@ function package_sizes {
         du -sc $(perl -E 'say for grep -f, @ARGV' $(dpkg -L $i)) | tail -n 1 | awk '{print $1}' | tr '\n' '\t' && echo $i
     done)
 }
+
+# tsocks:
+# ssh -D 8088 v
+
+# /etc/tsocks.conf:
+# server = 127.0.0.1
+# server_port = 8088
+# server_type = 5
+
+# . tsocks -on
+# firefox
