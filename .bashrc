@@ -193,6 +193,12 @@ function podcast_sync {
         find /media/SANSA/PODCASTS/ -type f -name '*.pdf' -exec rm -v {} \;
         find /media/SANSA/PODCASTS/ -type f -name '*.mp4' -exec rm -v {} \;
         find /media/SANSA/PODCASTS/ -type f -name '*Apache_Tears*' -exec rm -v {} \;
+
+        origdir=`pwd`
+
+        cd /home/avar/Podcasts/Science/Science_Talk
+        rename 's/(?<!\.mp3)$/.mp3/' *
+
         cd /media/SANSA/PODCASTS/
         rsync \
             -av \
@@ -200,24 +206,30 @@ function podcast_sync {
             --exclude='*Apache_Tears*' \
             --exclude='*History*' \
             --exclude='*WNYC*' \
+            --exclude='*German*' \
             --exclude='*Ostfront*' \
             --exclude='*Hardcore_History*' \
             --exclude='*Apache*' \
             --exclude='*.pdf' \
             --exclude='*.mp4' \
+            --exclude='*Linguistics*' \
             --exclude='*.mp3-*' \
             --exclude='*The_Universe_?_*' \
             --exclude='*The_Universe_??_*' \
             --exclude='*The_Universe_1??_*' \
             --exclude='*Skeptics_Guide_1??_*' \
             --exclude='*Skeptics_Guide_2[023]?_*' \
+            --exclude='*Skeptics_Guide_24[01234]_*' \
             --exclude='*Wikipedia*' \
             --exclude='*Naked*' \
-            --exclude='*News*' \
             --delete \
             /home/avar/Podcasts/ \
             .
-        cd -
+
+        cd /home/avar/Podcasts/Science/Science_Talk
+        rename 's/\.mp3$//' *
+
+        cd $origdir
     else
         echo "/media/SANSA/ isn't mounted"
     fi
