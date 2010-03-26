@@ -196,13 +196,16 @@ function podcast_sync {
 
         origdir=`pwd`
 
-        cd /home/avar/Podcasts/Science/Science_Talk
-        rename 's/(?<!\.mp3)$/.mp3/' *
+        if test -d /home/avar/Podcasts/Science/Science_Talk; then
+            cd /home/avar/Podcasts/Science/Science_Talk
+            rename 's/(?<!\.mp3)$/.mp3/' *
+        fi
 
         cd /media/SANSA/PODCASTS/
         rsync \
             -av \
             --progress \
+            --exclude='*.log' \
             --exclude='*Apache_Tears*' \
             --exclude='*History*' \
             --exclude='*WNYC*' \
@@ -220,14 +223,18 @@ function podcast_sync {
             --exclude='*Skeptics_Guide_1??_*' \
             --exclude='*Skeptics_Guide_2[023]?_*' \
             --exclude='*Skeptics_Guide_24[01234]_*' \
+            --exclude='*Hacking/*' \
+            --exclude='*News/*' \
             --exclude='*Wikipedia*' \
             --exclude='*Naked*' \
             --delete \
             /home/avar/Podcasts/ \
             .
 
-        cd /home/avar/Podcasts/Science/Science_Talk
-        rename 's/\.mp3$//' *
+        if test -d /home/avar/Podcasts/Science/Science_Talk; then
+            cd /home/avar/Podcasts/Science/Science_Talk
+             rename 's/\.mp3$//' *
+        fi
 
         cd $origdir
     else
