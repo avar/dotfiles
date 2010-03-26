@@ -161,9 +161,9 @@ function scp {
 # files since it skips the expensive hash check. Also retry the transfer
 # if it times out.
 function leech {
-    cmd="rsync --rsh=ssh --append --archive --human-readable --progress $@"
-    $cmd
-    while [[ $? == 30 ]]; do sleep 5 && $cmd; done
+    cmd="rsync --rsh=ssh --append --archive --human-readable --progress"
+    $cmd "$@"
+    while [[ $? == 30 ]]; do sleep 5 && $cmd "$@"; done
 }
 
 # delete untracked files/dirs
@@ -195,6 +195,12 @@ function podcast_sync {
         find /media/SANSA/PODCASTS/ -type f -name '*.pdf' -exec rm -v {} \;
         find /media/SANSA/PODCASTS/ -type f -name '*.mp4' -exec rm -v {} \;
         find /media/SANSA/PODCASTS/ -type f -name '*Apache_Tears*' -exec rm -v {} \;
+
+        origdir=`pwd`
+
+        cd /home/avar/Podcasts/Science/Science_Talk
+        rename 's/(?<!\.mp3)$/.mp3/' *
+
         cd /media/SANSA/PODCASTS/
         rsync \
             -av \
@@ -202,24 +208,30 @@ function podcast_sync {
             --exclude='*Apache_Tears*' \
             --exclude='*History*' \
             --exclude='*WNYC*' \
+            --exclude='*German*' \
             --exclude='*Ostfront*' \
             --exclude='*Hardcore_History*' \
             --exclude='*Apache*' \
             --exclude='*.pdf' \
             --exclude='*.mp4' \
+            --exclude='*Linguistics*' \
             --exclude='*.mp3-*' \
             --exclude='*The_Universe_?_*' \
             --exclude='*The_Universe_??_*' \
             --exclude='*The_Universe_1??_*' \
             --exclude='*Skeptics_Guide_1??_*' \
             --exclude='*Skeptics_Guide_2[023]?_*' \
+            --exclude='*Skeptics_Guide_24[01234]_*' \
             --exclude='*Wikipedia*' \
             --exclude='*Naked*' \
-            --exclude='*News*' \
             --delete \
             /home/avar/Podcasts/ \
             .
-        cd -
+
+        cd /home/avar/Podcasts/Science/Science_Talk
+        rename 's/\.mp3$//' *
+
+        cd $origdir
     else
         echo "/media/SANSA/ isn't mounted"
     fi
@@ -273,3 +285,14 @@ function avar_configure         {
 function avar_configure_threads {
     ./Configure -Dcc='ccache gcc' -Dld=gcc -Doptimize=-ggdb3 -Dusedevel -Dusethreads -d -e
 }
+
+# tsocks:
+# ssh -D 8088 v
+
+# /etc/tsocks.conf:
+# server = 127.0.0.1
+# server_port = 8088
+# server_type = 5
+
+# . tsocks -on
+# firefox
