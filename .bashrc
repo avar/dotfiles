@@ -85,6 +85,7 @@ fi
 shopt -s checkwinsize cdspell histappend no_empty_cmd_completion
 
 alias pd=perldoc
+alias pdf='perldoc -f'
 alias g=git
 alias ec=emacsclient
 alias perl6="~/g/rakudo/perl6"
