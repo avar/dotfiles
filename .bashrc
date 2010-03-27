@@ -259,7 +259,7 @@ function keepalive {
 }
 
 function cpan_release {
-    dzil clean && dzil test && dzil build && sudo cpanm -v *tar.gz && dzil release && dzil clean
+    dzil clean && dzil test && dzil build && sudo cpanm -v *tar.gz && echo "Yes" | dzil release && dzil clean
 }
 
 function cpan_release_hailo {
