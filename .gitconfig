@@ -45,3 +45,7 @@
 
 [push]
     default = tracking
+[sendemail]
+	smtpserver = smtp.gmail.com
+	smtpssl = 1
+	smtpuser = avarab@gmail.com
