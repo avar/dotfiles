@@ -16,7 +16,8 @@
 [alias]
     ;; Lazyness
     ann = blame
-    br = branch -a -v
+    br = branch -v
+    bra = branch -a -v
     st = status
     ci = commit
     co = checkout
