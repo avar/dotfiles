@@ -38,7 +38,8 @@
 
     ;; Handy tools
     tree = log --graph --pretty=oneline --abbrev-commit --decorate
-    review = "!f() { for rev in $(git rev-list --reverse \"$@\"); do git show $rev; done; }; f"
+    review = "!f() { for rev in $(git rev-list --reverse \"$@\"); do git show $rev; done; }; f" 
+    hist = "!f() { git blame -l \"$@\" | git name-rev --stdin --tags; }; f"
     set-master = "!f() { git config branch.master.remote origin && git config branch.master.merge refs/heads/master; }; f"
     ; Must git branch -d foo first, then git rmbranch foo
     rmbranch = "!f() { git push origin :heads/$@; }; f"
