@@ -303,3 +303,6 @@ function avar_configure_threads {
 
 # . tsocks -on
 # firefox
+
+# cpan jfdi is 'prerequisites_policy' => q[follow], in your .cpan/CPAN/MyConfig.pm and PERL_MM_USE_DEFAULT=1 in the environment.
+# follow deps is PERL_AUTOINSTALL=--defaultdeps PERL_MM_USE_DEFAULT=1 in the environment and o conf prerequisites_policy follow; o conf commit; in the cpan shell
