@@ -286,11 +286,11 @@ function hailo_benchmark {
 
 # For perl5 core
 function avar_configure         {
-    ./Configure -Dcc='ccache gcc' -Dld=gcc -Doptimize=-ggdb3 -Dusedevel -d -e
+    ./Configure -Dcc='ccache gcc' -Dld=gcc -Doptimize="-ggdb3 -DDEBUGGING" -Dusedevel -d -e
 }
 
 function avar_configure_threads {
-    ./Configure -Dcc='ccache gcc' -Dld=gcc -Doptimize=-ggdb3 -Dusedevel -Dusethreads -d -e
+    ./Configure -Dcc='ccache gcc' -Dld=gcc -Doptimize="-ggdb3 -DDEBUGGING" -Dusedevel -Dusethreads -d -e
 }
 
 # tsocks:
