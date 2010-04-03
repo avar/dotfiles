@@ -38,6 +38,7 @@
     up = pull --stat --rebase
 
     ;; Handy tools
+    cat  = "!f() { git show HEAD:\"$@\"; }; f"
     tree = log --graph --pretty=oneline --abbrev-commit --decorate
     review = "!f() { for rev in $(git rev-list --reverse \"$@\"); do git show $rev; done; }; f" 
     hist = "!f() { git blame -l \"$@\" | git name-rev --stdin --tags; }; f"
