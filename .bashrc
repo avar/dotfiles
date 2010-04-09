@@ -263,7 +263,7 @@ function cpan_release {
 }
 
 function cpan_release_hailo {
-    ack -h '^=encoding' -A 9001 $file > README.pod
+    ack -h '^=encoding' -A 9001 lib/Hailo.pm > README.pod
     cpan_release
 
     git push upstream master
