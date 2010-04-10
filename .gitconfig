@@ -18,7 +18,8 @@
     ann = blame
     br = branch -v
     bra = branch -a -v
-    st = status
+    st = status --short
+    sta = status
     ci = commit
     co = checkout
     sm = submodule
