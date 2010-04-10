@@ -229,6 +229,7 @@ function podcast_sync {
             --exclude='*News/*' \
             --exclude='*Wikipedia*' \
             --exclude='*Naked*' \
+            --exclude='*Geologic*' \
             --delete \
             /home/avar/Podcasts/ \
             .
