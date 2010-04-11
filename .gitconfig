@@ -26,6 +26,7 @@
     lo = log --decorate --abbrev-commit
     uncommit = reset --soft HEAD^
     chrp = cherry-pick
+    rv = !git --no-pager revert --no-commit
 
     ;; Diff
     di  = diff -p --stat
