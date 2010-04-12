@@ -28,6 +28,10 @@
     chrp = cherry-pick
     rv = !git --no-pager revert --no-commit
 
+    ;; Submodules
+    sm-init = !git submodule update --init
+    sm-pull-all = !git submodule foreach 'git checkout master && git pull'
+
     ;; Diff
     di  = diff -p --stat
     dif = diff -p --stat
