@@ -145,6 +145,15 @@ function leech {
     while [[ $? == 30 ]]; do sleep 5 && $cmd "$@"; done
 }
 
+# delete untracked files/dirs
+function svn_clean {
+    svn status "$1" | grep '^\?' | cut -c8- | \
+    while read fn
+        do echo "$fn"
+        rm -rf "$fn"
+    done
+}
+
 # do an svn update and show the log messages since the last update.
 function svn_uplog {
     local old_revision=$(svn info $@ | grep ^Revision | awk '{ print $2 }')
