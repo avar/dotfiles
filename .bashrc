@@ -92,6 +92,9 @@ if [[ "$TERM" == "linux" ]]; then
     fi
 fi
 
+# GNU it
+export EDITOR="emacsclient"
+
 # So ack(1) will use unicode, this probably fixes other stuff too that
 # didn't heed my locale
 #export PERL_UNICODE=SDAL
@@ -114,11 +117,6 @@ export HISTIGNORE="ls:cd:cd ..:..*: *"
 
 # ignore these while tab-completing
 export FIGNORE="CVS:.svn:.git"
-
-export EDITOR="emacsclient"
-alias mg=$EDITOR
-alias vi=$EDITOR
-alias vim=$EDITOR
 
 # use my locally installed Perl modules where available
 eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib 2>/dev/null)
