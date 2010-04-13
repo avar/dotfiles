@@ -83,8 +83,8 @@ fi
 # some nice shell options
 shopt -s checkwinsize cdspell histappend no_empty_cmd_completion
 
+# Include alias x=y statements
 . ~/.aliases
-
 
 if [[ "$TERM" == "linux" ]]; then
     if type conpalette >&/dev/null; then
