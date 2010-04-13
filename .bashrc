@@ -209,10 +209,23 @@ function hailo_benchmark {
         "$(find  t -name '*.t' | egrep -v -e non_stand -e readline -e shell | tr '\n' ' ')"
 }
 
-
 # For perl5 core
 function avar_configure         {
     ./Configure -DDEBUGGING=both -Doptimize=-ggdb3 -Dusethreads -Dprefix=~/perl5-rc3/installed -Dusedevel -des
+}
+
+# For MediaWiki
+mw_services="apache2 mysql memcached tomcat6"
+function start_mw {
+    for service in $mw_services; do
+        sudo service $service restart
+    done
+}
+
+function mw_stop {
+    for service in $mw_services; do
+        sudo service $service stop
+    done
 }
 
 # tsocks:
