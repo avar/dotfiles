@@ -1,0 +1,40 @@
+## Aliases manually included from ~/.bashrc
+
+# ls
+alias ll="ls -lh"
+
+# Dirs
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+
+# Editor
+alias ec=emacsclient
+alias g=git
+
+# Screen
+alias sc='screen'
+alias scs='screen -S'
+
+# Perl
+alias perl6="~/g/rakudo/perl6"
+alias pd=perldoc
+alias pdf='perldoc -f'
+
+alias lperl="perl -Ilib"
+function lbperl {
+    # From jrockway
+    perl -Ilib "bin/$1";
+}
+
+# dos2unix & unix2dos 
+alias d2u="sed 's/$//'"
+alias u2d="sed 's/$//'"
+
+# ???
+alias lsofnames="lsof | awk '!/^\$/ && /\// { print \$9 }' | sort -u"
+
+# Print my IP
+alias myip="wget -q -O- 'http://www.moanmyip.com/' | perl -0777 -pe 's[.*<div class=\"ip\">(.*?)</div>.*][\$1\n]s'"
+alias mmyip="mplayer http://moanmyip.com/output/\$(myip).mp3"
+

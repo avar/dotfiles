@@ -83,29 +83,8 @@ fi
 # some nice shell options
 shopt -s checkwinsize cdspell histappend no_empty_cmd_completion
 
-alias sc='screen'
-alias scs='screen -S'
-alias pd=perldoc
-alias pdf='perldoc -f'
-alias g=git
-alias ec=emacsclient
-alias perl6="~/g/rakudo/perl6"
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias ll="ls -lh"
-alias d2u="sed 's/$//'"
-alias u2d="sed 's/$//'"
-alias lsofnames="lsof | awk '!/^\$/ && /\// { print \$9 }' | sort -u"
-alias myip="wget -q -O- 'http://www.moanmyip.com/' | perl -0777 -pe 's[.*<div class=\"ip\">(.*?)</div>.*][\$1\n]s'"
-alias mmyip="mplayer http://moanmyip.com/output/\$(myip).mp3"
+. ~/.aliases
 
-# From jrockway
-alias perlfunc="perldoc -f"
-alias lperl="perl -Ilib"
-function lbperl {
-    perl -Ilib "bin/$1";
-}
 
 if [[ "$TERM" == "linux" ]]; then
     if type conpalette >&/dev/null; then
