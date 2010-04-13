@@ -83,6 +83,8 @@ fi
 # some nice shell options
 shopt -s checkwinsize cdspell histappend no_empty_cmd_completion
 
+alias sc='screen'
+alias scs='screen -S'
 alias pd=perldoc
 alias pdf='perldoc -f'
 alias g=git
