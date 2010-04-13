@@ -169,61 +169,6 @@ function svn_uplog {
     fi
 }
 
-function podcast_sync {
-    if [ $(mount | grep -c /media/SANSA) -gt 0 ]; then
-        find /media/SANSA/PODCASTS/ -type f -name '*.pdf' -exec rm -v {} \;
-        find /media/SANSA/PODCASTS/ -type f -name '*.mp4' -exec rm -v {} \;
-        find /media/SANSA/PODCASTS/ -type f -name '*Apache_Tears*' -exec rm -v {} \;
-
-        origdir=`pwd`
-
-        if test -d /home/avar/Podcasts/Science/Science_Talk; then
-            cd /home/avar/Podcasts/Science/Science_Talk
-            rename 's/(?<!\.mp3)$/.mp3/' *
-        fi
-
-        cd /media/SANSA/PODCASTS/
-        rsync \
-            -av \
-            --progress \
-            --exclude='*.log' \
-            --exclude='*Apache_Tears*' \
-            --exclude='*History*' \
-            --exclude='*WNYC*' \
-            --exclude='*German*' \
-            --exclude='*Ostfront*' \
-            --exclude='*Hardcore_History*' \
-            --exclude='*Apache*' \
-            --exclude='*.pdf' \
-            --exclude='*.mp4' \
-            --exclude='*Linguistics*' \
-            --exclude='*.mp3-*' \
-            --exclude='*The_Universe_?_*' \
-            --exclude='*The_Universe_??_*' \
-            --exclude='*The_Universe_1??_*' \
-            --exclude='*Skeptics_Guide_1??_*' \
-            --exclude='*Skeptics_Guide_2[023]?_*' \
-            --exclude='*Skeptics_Guide_24[01234]_*' \
-            --exclude='*Hacking/*' \
-            --exclude='*News/*' \
-            --exclude='*Wikipedia*' \
-            --exclude='*Naked*' \
-            --exclude='*Geologic*' \
-            --delete \
-            /home/avar/Podcasts/ \
-            .
-
-        if test -d /home/avar/Podcasts/Science/Science_Talk; then
-            cd /home/avar/Podcasts/Science/Science_Talk
-             rename 's/\.mp3$//' *
-        fi
-
-        cd $origdir
-    else
-        echo "/media/SANSA/ isn't mounted"
-    fi
-}
-
 # install Common Lisp packages from the command line
 function asdf_install {
     sbcl --eval "(asdf:operate 'asdf:load-op :asdf-install)" --eval "(asdf-install:install :$1)" --eval "(quit)"
