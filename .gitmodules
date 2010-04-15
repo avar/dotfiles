@@ -1,0 +1,3 @@
+[submodule ".irssi/scripts/irssi-bitlbee-facebook-rename"]
+	path = .irssi/scripts/irssi-bitlbee-facebook-rename
+	url = git://github.com/avar/irssi-bitlbee-facebook-rename.git
