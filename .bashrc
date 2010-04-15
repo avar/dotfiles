@@ -210,8 +210,12 @@ function hailo_benchmark {
 }
 
 # For perl5 core
-function avar_configure         {
-    ./Configure -DDEBUGGING=both -Doptimize=-ggdb3 -Dusethreads -Dprefix=~/perl5-rc3/installed -Dusedevel -des
+function avar_configure {
+    ./Configure -DDEBUGGING=both -Doptimize=-ggdb3 -Dusethreads -Dprefix=~/perl5/installed -Dusedevel -des
+}
+
+function avar_configure_nodebug {
+    ./Configure -Dusethreads -Dprefix=~/perl5/installed -Dusedevel -des
 }
 
 # For MediaWiki
