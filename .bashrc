@@ -1,4 +1,4 @@
-export PATH=$PATH:$HOME/g/misc-scripts:$HOME/g/rtmpdump
+export PATH=$PATH:$HOME/g/misc-scripts:$HOME/g/rtmpdump:$HOME/perl5/installed/bin/
 
 if [[ $- != *i* ]] ; then
     # Shell is non-interactive.  Be done now!
