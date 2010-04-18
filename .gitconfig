@@ -36,6 +36,7 @@
     di  = diff -p --stat
     dif = diff -p --stat
     dis = diff -p --stat --staged
+    dih = diff -p --stat HEAD
     staged = diff --cached
 
     ;; Pull/push
