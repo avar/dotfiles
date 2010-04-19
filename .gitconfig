@@ -59,3 +59,4 @@
 	smtpserver = smtp.gmail.com
 	smtpssl = 1
 	smtpuser = avarab@gmail.com
+	confirm = always
