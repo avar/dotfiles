@@ -41,6 +41,7 @@
 
     ;; Pull/push
     pu = pull --stat
+    pus = !git stash && git pull && git stash pop
     ; like svn does
     up = pull --stat --rebase
 
