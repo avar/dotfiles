@@ -24,6 +24,7 @@
     co = checkout
     sm = submodule
     lo = log --decorate --abbrev-commit
+    loa = log --all --date-order
     uncommit = reset --soft HEAD^
     chrp = cherry-pick
     rv = !git --no-pager revert --no-commit
