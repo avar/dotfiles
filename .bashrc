@@ -191,6 +191,9 @@ function cpan_release_hailo {
     ack -h '^=encoding' -A 9001 lib/Hailo.pm > README.pod
     cpan_release
 
+    git push origin master
+    git push origin --tags
+
     git push upstream master
     git push upstream --tags
 }
