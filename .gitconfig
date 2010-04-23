@@ -30,8 +30,9 @@
     rv = !git --no-pager revert --no-commit
 
     ;; Submodules
+    sm-mainbranch = !git branch -l | head -n 1  | perl -anle 'print *F{ARRAY}->[-1]'
     sm-init = !git submodule update --init
-    sm-pull-all = !git submodule foreach 'git checkout master && git pull'
+    sm-pull-all = !git submodule foreach 'git checkout $(git sm-mainbranch) && git pull'
 
     ;; Diff
     di  = diff -p --stat
