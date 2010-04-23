@@ -25,6 +25,7 @@
     sm = submodule
     lo = log --decorate --abbrev-commit
     loa = log --all --date-order
+    plog = log --pretty=oneline --abbrev-commit
     uncommit = reset --soft HEAD^
     chrp = cherry-pick
     rv = !git --no-pager revert --no-commit
