@@ -1,0 +1,23 @@
+[general]
+accounts = Gmail
+maxsyncaccounts = 1
+
+[Account Gmail]
+localrepository = Local
+remoterepository = Remote
+
+[Repository Local]
+type = IMAP
+remotehost = localhost
+port = 143
+remoteuser = avar
+
+[Repository Remote]
+type = IMAP
+remotehost = imap.gmail.com
+remoteuser = avarab@gmail.com
+#remotepass = your_gmail_password
+ssl = yes
+maxconnections = 1
+realdelete = no
+folderfilter = lambda foldername: foldername in ['INBOX']
