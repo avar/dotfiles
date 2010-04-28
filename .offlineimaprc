@@ -1,6 +1,7 @@
 [general]
 accounts = Gmail
 maxsyncaccounts = 1
+ui = TTY.TTYUI
 
 [Account Gmail]
 localrepository = Local
