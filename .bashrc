@@ -26,7 +26,7 @@ esac
 
 # Unfail Ubuntu 10.04
 if [ ! -z "$DISPLAY" ]; then
-    gconftool-2 --set /apps/metacity/general/button_layout --type string menu:maximize,minimize,close >/dev/null
+    gconftool-2 --set /apps/metacity/general/button_layout --type string menu:minimize,maximize,close >/dev/null
 fi
 
 # print some useful info about the current dir
