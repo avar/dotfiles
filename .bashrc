@@ -23,6 +23,12 @@ case ${TERM} in
         ;;
 esac
 
+
+# Unfail Ubuntu 10.04
+if [ ! -z "$DISPLAY" ]; then
+    gconftool-2 --set /apps/metacity/general/button_layout --type string menu:maximize,minimize,close >/dev/null
+fi
+
 # print some useful info about the current dir
 # if we're inside a git working tree, print the current git branch
 # if we're inside an svn working directory, print the current svn revision
