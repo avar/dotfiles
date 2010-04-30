@@ -23,12 +23,16 @@
     ci = commit
     co = checkout
     sm = submodule
-    lo = log --decorate --abbrev-commit
-    loa = log --all --date-order
-    plog = log --pretty=oneline --abbrev-commit
     uncommit = reset --soft HEAD^
     chrp = cherry-pick
     rv = !git --no-pager revert --no-commit
+
+    ;; Log
+    lo = log --decorate --abbrev-commit
+    loa = log --all --date-order
+    lop = log -p
+    plog = log --pretty=oneline --abbrev-commit
+    tree = log --graph --pretty=oneline --abbrev-commit --decorate
 
     ;; Submodules
     sm-mainbranch = !git branch -l | head -n 1  | perl -anle 'print *F{ARRAY}->[-1]'
@@ -50,7 +54,6 @@
 
     ;; Handy tools
     cat  = "!f() { git show HEAD:\"$@\"; }; f"
-    tree = log --graph --pretty=oneline --abbrev-commit --decorate
     review = "!f() { for rev in $(git rev-list --reverse \"$@\"); do git show $rev; done; }; f" 
     hist = "!f() { git blame -l \"$@\" | git name-rev --stdin --tags; }; f"
     set-master = "!f() { git config branch.master.remote origin && git config branch.master.merge refs/heads/master; }; f"
