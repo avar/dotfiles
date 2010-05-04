@@ -1,0 +1,2 @@
+drive i: file="/dev/sdb1"
+mtools_skip_check=1
