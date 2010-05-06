@@ -1,0 +1,3 @@
+audio_folders=MUSIC/
+folder_depth=2
+output_formats=audio/ogg,audio/x-ms-wma,audio/mpeg,audio/wav,audio/flac,audio/mp3
