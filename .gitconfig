@@ -35,7 +35,7 @@
     tree = log --graph --pretty=oneline --abbrev-commit --decorate
 
     ;; Submodules
-    sm-mainbranch = !git branch -l | head -n 1  | perl -anle 'print *F{ARRAY}->[-1]'
+    sm-mainbranch = !git describe --all --always | sed 's!^heads/!!'
     sm-init = !git submodule update --init
     sm-pull-all = !git submodule foreach 'git checkout $(git sm-mainbranch) && git pull'
 
