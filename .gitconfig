@@ -41,6 +41,7 @@
 
     ;; Diff
     di  = diff -p --stat
+    df  = diff -p --stat
     dif = diff -p --stat
     dis = diff -p --stat --staged
     dih = diff -p --stat HEAD
