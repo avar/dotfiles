@@ -18,6 +18,7 @@
     ann = blame
     br = branch -v
     bra = branch -a -v
+    brr = branch -r -v
     st = status --short
     sta = status
     ci = commit
