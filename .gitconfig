@@ -36,9 +36,11 @@
     tree = log --graph --pretty=oneline --abbrev-commit --decorate
 
     ;; Submodules
-    sm-mainbranch = !git describe --all --always | sed 's!^heads/!!' | sed 's!heads/!!'
     sm-init = !git submodule update --init
-    sm-pull-all = !git submodule foreach 'git checkout $(git sm-mainbranch) && git pull'
+    ; Try to update all the submodules, doing some guesswork to get branch names
+    sm-pull-all = !git submodule foreach 'git checkout $(NAME=$name git sm-mainbranch) && git pull'
+    ; Manually specify a branch from the main config, or try to guess it
+    sm-mainbranch = !git config --file ../.gitmodules submodule.$NAME.branch || git describe --all --always | sed 's!^heads/!!'
 
     ;; Diff
     di  = diff -p --stat
