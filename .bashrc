@@ -242,6 +242,10 @@ function mw_stop {
     done
 }
 
+function bootstrap_cpanm {
+    curl -L http://cpanmin.us | perl - App::cpanminus
+}
+
 # tsocks:
 # ssh -D 8088 v
 
