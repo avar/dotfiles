@@ -6,6 +6,10 @@ if [[ $- != *i* ]] ; then
     return
 fi
 
+# Use Icelandic
+unset LANGUAGE
+export LANG=is_IS.UTF-8
+
 # away with old aliases
 \unalias -a
 
