@@ -1,5 +1,6 @@
 export PATH=$PATH:$HOME/g/misc-scripts:$HOME/g/rtmpdump:$HOME/perl5/installed/bin/
 test -f ~/perl5/perlbrew/etc/bashrc && source ~/perl5/perlbrew/etc/bashrc
+test -f ~v-perlbrew/perl5/perlbrew/etc/bashrc && source ~v-perlbrew/perl5/perlbrew/etc/bashrc
 
 if [[ $- != *i* ]] ; then
     # Shell is non-interactive.  Be done now!
