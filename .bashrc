@@ -7,10 +7,6 @@ if [[ $- != *i* ]] ; then
     return
 fi
 
-# Use Icelandic
-unset LANGUAGE
-export LANG=is_IS.UTF-8
-
 # away with old aliases
 \unalias -a
 
@@ -249,6 +245,12 @@ function mw_stop {
 
 function bootstrap_cpanm {
     curl -L http://cpanmin.us | perl - App::cpanminus
+}
+
+function use_icelandic {
+    # Use Icelandic
+    unset LANGUAGE
+    export LANG=is_IS.UTF-8
 }
 
 # tsocks:
