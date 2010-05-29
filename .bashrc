@@ -253,6 +253,12 @@ function use_icelandic {
     export LANG=is_IS.UTF-8
 }
 
+function nuke_git {
+    sudo find /usr/local/libexec/ -name '*git*' -exec rm -rfv {} \;
+    sudo find /usr/local/share/ -name '*git*' -exec rm -rfv {} \;
+    sudo find /usr/local/bin/ -name '*git*' -exec rm -rfv {} \;
+}
+
 # tsocks:
 # ssh -D 8088 v
 
