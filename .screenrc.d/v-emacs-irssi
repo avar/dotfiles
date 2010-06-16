@@ -26,4 +26,5 @@ sessionname em
 screen -t em   0 emacs -nw
 screen -t irc  1 irssi
 screen -t htop 2 htop
+screen -t leech 3 sudo screen -rx leech/
 select 0
