@@ -1,0 +1,28 @@
+# show some info at the bottom
+caption always "%{= kw}%-w%{= gW}%n %t%{-}%+w %-= %{= r}%H%{-} %{= g}%l%{-} %c:%s"
+
+# Emacs keybindings on C-a [
+markkeys "h=^B:l=^F:$=^E"
+
+# clear the screen properly when vim (et al) exits
+altscreen on
+
+# no visual bell, thanks
+vbell off
+
+# Unbind the `C-a x' password prompt which I keep accidentally bringing up
+bind x meta
+
+# Without this screen is unusable
+nethack on
+
+# Turn off the startup banner
+startup_message off
+
+# keep a long scroll buffer
+defscrollback 10000
+
+sessionname em
+screen -t em   0 emacsclient --tty
+screen -t htop 1 htop
+select 0
