@@ -29,7 +29,7 @@
     rv = !git --no-pager revert --no-commit
 
     ;; Log
-    lo = log --decorate --abbrev-commit
+    lo = log --decorate --abbrev-commit --stat
     loa = log --all --date-order
     lop = log -p
     plog = log --pretty=oneline --abbrev-commit
