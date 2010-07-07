@@ -257,6 +257,7 @@ function nuke_git {
     sudo find /usr/local/libexec/ -name '*git*' -exec rm -rfv {} \;
     sudo find /usr/local/share/ -name '*git*' -exec rm -rfv {} \;
     sudo find /usr/local/bin/ -name '*git*' -exec rm -rfv {} \;
+    sudo find /usr/local/share/perl/ -name '*Git*' -exec rm -rfv {} \;
 }
 
 function my_git_patches {
