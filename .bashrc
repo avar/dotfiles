@@ -260,17 +260,6 @@ function nuke_git {
     sudo find /usr/local/share/perl/ -name '*Git*' -exec rm -rfv {} \;
 }
 
-function my_git_patches {
-    for branch in maint master next pu; do
-        temp=$(tempfile)
-        git log --pretty="%an <%ae> -> %s" remotes/upstream/$branch | grep Ævar > $temp
-        num=$(wc -l $temp | awk '{print $1}')
-        echo "$branch ($num commits):"
-        cat $temp | sed 's/^/    /'
-        rm $temp
-    done
-}
-
 # tsocks:
 # ssh -D 8088 v
 
