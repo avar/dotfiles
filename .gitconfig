@@ -60,6 +60,7 @@
     cat  = "!f() { git show HEAD:\"$@\"; }; f"
     review = "!f() { for rev in $(git rev-list --reverse \"$@\"); do git show $rev; done; }; f"
     review-grep = "!f() { for rev in $(git log --reverse --pretty=format:%H --grep=\"$@\"); do git show $rev; done; }; f"
+    review-file = "!f() { for rev in $(git log --reverse --pretty=format:%H \"$@\"); do git show $rev; done; }; f"
     hist = "!f() { git blame -l \"$@\" | git name-rev --stdin --tags; }; f"
     set-master = "!f() { git config branch.master.remote origin && git config branch.master.merge refs/heads/master; }; f"
     ; Must git branch -d foo first, then git rmbranch foo
