@@ -108,7 +108,7 @@ export EDITOR="emacsclient"
 #export PERL_UNICODE=SDAL
 
 # some nice less(1) options
-export LESS="iMQRS"
+export LESS="--IGNORE-CASE --LONG-PROMPT --QUIET --chop-long-lines --RAW-CONTROL-CHARS"
 
 # For App::Nopaste
 export NOPASTE_SERVICES="Gist Pastie"
