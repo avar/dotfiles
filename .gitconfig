@@ -65,6 +65,7 @@
     set-master = "!f() { git config branch.master.remote origin && git config branch.master.merge refs/heads/master; }; f"
     ; Must git branch -d foo first, then git rmbranch foo
     rmbranch = "!f() { git push origin :heads/$@; }; f"
+    deleted-branches = "!f() { git fsck | grep '^dangling commit' | while read dangling commit hash; do git log -1 --format='%at %h %s' $hash; done | less -FRSX; }; f"
 
 [push]
     default = tracking
