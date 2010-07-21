@@ -66,6 +66,7 @@
     ; Must git branch -d foo first, then git rmbranch foo
     rmbranch = "!f() { git push origin :heads/$@; }; f"
     deleted-branches = "!f() { git fsck | grep '^dangling commit' | while read dangling commit hash; do git log -1 --format='%at %h %s' $hash; done | less -FRSX; }; f"
+    abbrev-commit = "!f() { git name-rev --tags \"$@\" | sed 's|.*tags/||;s|\\([0-9a-f]\\{7\\}\\).*|\\1|'; }; f"
 
 [push]
     default = tracking
