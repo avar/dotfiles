@@ -1,4 +1,4 @@
-export PATH=$PATH:$HOME/g/misc-scripts:$HOME/g/rtmpdump:$HOME/perl5/installed/bin/
+export PATH=$PATH:$HOME/g/misc-scripts:$HOME/g/rtmpdump:$HOME/src/dl/rakudo-star-2010.07/install/bin
 test -f ~/perl5/perlbrew/etc/bashrc && source ~/perl5/perlbrew/etc/bashrc
 test -f ~v-perlbrew/perl5/perlbrew/etc/bashrc && source ~v-perlbrew/perl5/perlbrew/etc/bashrc
 
