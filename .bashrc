@@ -30,7 +30,8 @@ esac
 
 
 # Unfail Ubuntu 10.04
-if [ ! -z "$DISPLAY" ]; then
+if type gconftool-2 >/dev/null 2>&1 && test -n "$DISPLAY"
+then
     gconftool-2 --set /apps/metacity/general/button_layout --type string menu:minimize,maximize,close >/dev/null
 fi
 
