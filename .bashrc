@@ -2,9 +2,6 @@ export PATH=$HOME/g/misc-scripts:$HOME/g/rtmpdump:$HOME/src/dl/rakudo-star-2010.
 test -f ~/perl5/perlbrew/etc/bashrc && source ~/perl5/perlbrew/etc/bashrc
 test -f ~v-perlbrew/perl5/perlbrew/etc/bashrc && source ~v-perlbrew/perl5/perlbrew/etc/bashrc
 
-cpus=$(grep -c ^processor /proc/cpuinfo)
-export HARNESS_OPTIONS="j$((2*$cpus+1))"
-
 if [[ $- != *i* ]] ; then
     # Shell is non-interactive.  Be done now!
     return
@@ -151,6 +148,14 @@ export HISTIGNORE="ls:cd:cd ..:..*: *"
 
 # ignore these while tab-completing
 export FIGNORE="CVS:.svn:.git"
+
+# Use a sensible -j for Test::Harness
+case $HOSTNAME in
+    v)    __cpus=4 ;;
+    aeou) __cpus=2 ;;
+    *)    __cpus=$(grep -c ^processor /proc/cpuinfo 2>/dev/null) ;;
+esac
+export HARNESS_OPTIONS="j$((2*$__cpus+1))"
 
 # do an ls after every successful cd
 function cd {
