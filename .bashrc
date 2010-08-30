@@ -79,7 +79,7 @@ function dir_info() {
     ls -Alhs | head -n1 | cut -d' ' -f2
 }
 
-if ls --help|grep group-directories-first >&/dev/null; then
+if ls --help >&/dev/null 2>&1 | grep -q group-directories-first; then
     group_dirs=" --group-directories-first"
 else
     group_dirs=
