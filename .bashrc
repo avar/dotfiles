@@ -294,6 +294,13 @@ function nuke_git {
     sudo find /usr/local/share/perl/ -name '*Git*' -exec rm -rfv {} \;
 }
 
+# debian upgrade
+function dug {
+    sudo aptitude update
+    sudo aptitude upgrade
+    sudo aptitude dist-upgrade
+}
+
 # tsocks:
 # ssh -D 8088 v
 
