@@ -1,3 +1,9 @@
+# How to use this: Start a screen with:
+
+## while sleep 10; do nice -n 40 ionice -c 3 offlineimap ; done
+## nice -n 40 ionice -c 3 /home/avar/g/misc-scripts/lsmail.sh
+## sort -rn ~/mail-msg.txt  | less -S
+
 [general]
 accounts = Gmail
 maxsyncaccounts = 1
