@@ -73,3 +73,5 @@
 	smtpssl = 1
 	smtpuser = avarab@gmail.com
 	confirm = always
+[rebase]
+	autosquash = true
