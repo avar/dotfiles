@@ -276,6 +276,7 @@ function hailo_benchmark {
 
 # For perl5 core
 function avar_configure {
+    # For building 5.6: -Dnoextensions=IPC::SysV
     ./Configure -DDEBUGGING=both -Doptimize=-ggdb3 -Dusethreads -Dprefix=~/perl5/installed -Dusedevel -des
 }
 
