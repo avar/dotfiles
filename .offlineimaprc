@@ -21,4 +21,5 @@ remoteuser = avarab@gmail.com
 ssl = yes
 maxconnections = 1
 realdelete = no
-folderfilter = lambda foldername: foldername in ['INBOX']
+## Only get the inbox
+#folderfilter = lambda foldername: foldername in ['INBOX']
