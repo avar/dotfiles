@@ -11,8 +11,8 @@ PATH=$HOME/src/dl/rakudo-star-2010.07/install/bin:$PATH
 PATH=/home/avar/src/llvm/Release+Asserts/bin:$PATH
 
 # custom git builds
-PATH=/opt/git/ab-i18n/bin:$PATH
 PATH=/opt/git/pu/bin:$PATH
+PATH=/opt/git/ab-i18n/bin:$PATH
 
 # perlbrew
 test -f ~/perl5/perlbrew/etc/bashrc && source ~/perl5/perlbrew/etc/bashrc
