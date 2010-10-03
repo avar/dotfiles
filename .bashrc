@@ -7,6 +7,9 @@ PATH=$HOME/g/misc-scripts:$PATH
 PATH=$HOME/g/rtmpdump:$PATH
 PATH=$HOME/src/dl/rakudo-star-2010.07/install/bin:$PATH
 
+# ruby
+PATH=/var/lib/gems/1.8/bin:$PATH
+
 # llvm
 PATH=/home/avar/src/llvm/Release+Asserts/bin:$PATH
 
