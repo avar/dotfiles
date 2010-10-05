@@ -17,6 +17,9 @@ PATH=/home/avar/src/llvm/Release+Asserts/bin:$PATH
 PATH=/opt/git/pu/bin:$PATH
 PATH=/opt/git/ab-i18n/bin:$PATH
 
+# Custom binaries
+PATH=$HOME/local/bin:$PATH
+
 # perlbrew
 test -f ~/perl5/perlbrew/etc/bashrc && source ~/perl5/perlbrew/etc/bashrc
 test -f ~v-perlbrew/perl5/perlbrew/etc/bashrc && source ~v-perlbrew/perl5/perlbrew/etc/bashrc
