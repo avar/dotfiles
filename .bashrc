@@ -189,6 +189,12 @@ case $HOSTNAME in
 esac
 export HARNESS_OPTIONS="j$((2*$__cpus+1))"
 
+# OpenBSD settings
+if test "$(uname -s)" = "OpenBSD"
+then
+    export PKG_PATH=http://openbsd.informatik.uni-erlangen.de/pub/OpenBSD/4.7/packages/$(machine -a)
+fi
+
 # do an ls after every successful cd
 function cd {
     builtin cd "$@" && ls
