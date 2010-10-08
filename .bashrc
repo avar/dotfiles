@@ -64,6 +64,25 @@ then
     gconftool-2 --set /apps/metacity/general/button_layout --type string menu:minimize,maximize,close >/dev/null
 fi
 
+## Configure __git_ps1
+
+# If there're untracked files, then a '%' will be shown next to the
+# branch name.
+export GIT_PS1_SHOWUNTRACKEDFILES=yes
+
+# If something is stashed, then a '$' will be shown next to the branch
+# name.
+export GIT_PS1_SHOWSTASHSTATE=yes
+
+# Show dirty state explicitly, way too verbose in ~/
+export GIT_PS1_SHOWDIRTYSTATE=
+
+# If you would like to see the difference between HEAD and its
+# upstream, set GIT_PS1_SHOWUPSTREAM="auto".  A "<" indicates you are
+# behind, ">" indicates you are ahead, and "<>" indicates you have
+# diverged.
+export GIT_PS1_SHOWUPSTREAM=auto
+
 # print some useful info about the current dir
 # if we're inside a git working tree, print the current git branch
 # if we're inside an svn working directory, print the current svn revision
