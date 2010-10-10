@@ -58,10 +58,21 @@ case ${TERM} in
 esac
 
 
-# Unfail Ubuntu 10.04
-if type gconftool-2 >/dev/null 2>&1 && test -n "$DISPLAY"
+# Adjust GTK settings under X/Ubuntu/GTK+
+if test -n "$DISPLAY" &&
+    type gconftool-2 >/dev/null 2>&1
 then
-    gconftool-2 --set /apps/metacity/general/button_layout --type string menu:minimize,maximize,close >/dev/null
+    {
+        # Re-arrange the buttons on Ubuntu to be less confusing.
+        gconftool-2 --type string \
+            --set /apps/metacity/general/button_layout \
+            menu:minimize,maximize,close
+
+        # Use Emacs keybindings in GTK
+        gconftool --type string \
+            --set /desktop/gnome/interface/gtk_key_theme \
+            Emacs
+    } >/dev/null
 fi
 
 ## Configure __git_ps1
