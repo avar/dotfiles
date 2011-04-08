@@ -10,10 +10,6 @@ fi
 # custom scripts
 PATH=$HOME/g/misc-scripts:$PATH
 
-# various programs
-PATH=$HOME/g/rtmpdump:$PATH
-PATH=$HOME/src/dl/rakudo-star-2010.07/install/bin:$PATH
-
 # ruby
 PATH=/var/lib/gems/1.8/bin:$PATH
 
