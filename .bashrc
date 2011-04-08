@@ -13,9 +13,6 @@ PATH=$HOME/g/misc-scripts:$PATH
 # ruby
 PATH=/var/lib/gems/1.8/bin:$PATH
 
-# llvm
-PATH=/home/avar/src/llvm/Release+Asserts/bin:$PATH
-
 # custom git builds
 PATH=/opt/git/pu/bin:$PATH
 PATH=/opt/git/ab-i18n/bin:$PATH
