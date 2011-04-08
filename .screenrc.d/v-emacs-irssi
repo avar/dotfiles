@@ -28,7 +28,7 @@ defscrollback 10000
 
 # leave window open after command is finished,
 # destroy with 'd', resurrect with 'r'
-zombie ar onerror
+zombie ar
 
 sessionname em
 screen -t em   0 emacs -nw
