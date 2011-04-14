@@ -1,1 +1,0 @@
-irssi-bitlbee-facebook-rename/facebook_bitlbee_rename.pl
