@@ -37,6 +37,11 @@ function dir_info() {
     fi
 
     if type git >&/dev/null; then
+        if test -z "$(type -t __git_ps1)"; then
+            # Include my copy of the git-completion.bash
+            . ~/.bashrc.d/contrib/git-completion.bash
+        fi
+
         if test -n "$(type -t __git_ps1)"; then
             # We can hopefully use __git_ps1 which comes with git's
             # bash completion support
