@@ -1,3 +1,10 @@
+## Include system-wide bashrc
+
+if test -f /etc/bashrc
+then
+    . /etc/bashrc
+fi
+
 ## set my PATH
 
 # custom scripts
