@@ -98,7 +98,12 @@ if [[ "$TERM" == "linux" ]]; then
 fi
 
 # GNU it
-export EDITOR="emacsclient"
+if test -S /tmp/emacs*/server
+then
+    export EDITOR="emacsclient"
+else
+    export EDITOR="emacs"
+fi
 
 # So ack(1) will use unicode, this probably fixes other stuff too that
 # didn't heed my locale
