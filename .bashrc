@@ -22,11 +22,10 @@ PATH=$HOME/local/bin:$PATH
 
 # perlbrew
 test -f ~/perl5/perlbrew/etc/bashrc && source ~/perl5/perlbrew/etc/bashrc
-test -f ~v-perlbrew/perl5/perlbrew/etc/bashrc && source ~v-perlbrew/perl5/perlbrew/etc/bashrc
+test -f ~v-perlbrew/perl5/perlbrew/etc/bashrc && HOME=/home/v-perlbrew source ~v-perlbrew/perl5/perlbrew/etc/bashrc
 
 # custom blead compile
-PATH=~/perl5/installed/bin:$PATH
-export PATH
+maybe_add_path ~/perl5/installed/bin:$PATH
 
 if [[ $- != *i* ]] ; then
     # Shell is non-interactive.  Be done now!
