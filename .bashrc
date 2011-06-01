@@ -104,6 +104,9 @@ else
     export EDITOR="emacs"
 fi
 
+# Our ancient Red Hat boxes at work don't have the CA GitHub uses
+export GIT_SSL_NO_VERIFY=1
+
 # So ack(1) will use unicode, this probably fixes other stuff too that
 # didn't heed my locale
 #export PERL_UNICODE=SDAL
