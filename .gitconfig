@@ -76,3 +76,5 @@
 	confirm = always
 [rebase]
 	autosquash = true
+[http]
+	sslVerify = false
