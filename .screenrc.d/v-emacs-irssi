@@ -6,7 +6,6 @@ markkeys "h=^B:l=^F:$=^E"
 
 # Don't trap C-s and C-q
 defflow off
-flow off
 
 # clear the screen properly when vim (et al) exits
 altscreen on
