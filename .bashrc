@@ -97,12 +97,8 @@ if [[ "$TERM" == "linux" ]]; then
 fi
 
 # GNU it
-if test -S /tmp/emacs*/server
-then
-    export EDITOR="emacsclient"
-else
-    export EDITOR="emacs"
-fi
+export ALTERNATE_EDITOR=emacs
+export EDITOR=emacsclient
 
 # Our ancient Red Hat boxes at work don't have the CA GitHub uses
 export GIT_SSL_NO_VERIFY=1
