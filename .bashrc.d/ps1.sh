@@ -2,7 +2,7 @@
 
 # If there're untracked files, then a '%' will be shown next to the
 # branch name.
-export GIT_PS1_SHOWUNTRACKEDFILES=yes
+export GIT_PS1_SHOWUNTRACKEDFILES=
 
 # If something is stashed, then a '$' will be shown next to the branch
 # name.
