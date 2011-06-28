@@ -25,6 +25,13 @@ maybe_add_path /var/lib/gems/1.8/bin
 maybe_add_path /opt/git/pu/bin
 maybe_add_path /opt/git/ab-i18n/bin
 
+# Macports
+maybe_add_path /opt/local/bin
+maybe_add_path /opt/local/sbin
+
+# git on Mac OS X
+maybe_add_path /usr/local/git/bin
+
 # Custom binaries
 maybe_add_path $HOME/local/bin
 
