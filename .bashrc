@@ -304,6 +304,39 @@ function dug {
     sudo aptitude dist-upgrade
 }
 
+function bootstrap_work_dotfiles {
+    dotfiles=$HOME/g/avar-dotfiles-work
+
+    if ! test -d $dotfiles
+    then
+        mkdir -p $dotfiles
+
+        # Bootstap the repository
+        (
+            git init $dotfiles
+            cd $dotfiles
+            git config remote.origin.url ssh://git.booking.com/gitroot/users.git
+            git config remote.origin.fetch '+refs/heads/avar-dotfiles:refs/remotes/origin/avar-dotfiles'
+            git config branch.avar-dotfiles.remote origin
+            git config branch.avar-dotfiles.merge refs/heads/avar-dotfiles
+            git fetch origin
+            git checkout -t origin/avar-dotfiles
+        )
+
+        # Set up the symlinks
+        for file in $(find $dotfiles -type f | grep -v \.git)
+        do
+            ln -sfv $file $(echo $file | sed "s,^$dotfiles,$HOME,")
+        done
+    fi
+}
+
+case "$(hostname -f)" in
+    *.booking.com)
+        bootstrap_work_dotfiles
+        ;;
+esac
+
 # tsocks:
 # ssh -D 8088 v
 
