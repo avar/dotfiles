@@ -143,7 +143,7 @@ esac
 export HARNESS_OPTIONS="j$((2*$__cpus+1))"
 
 # Git will screw this up when I do a "git pull"
-chmod 600 ~/.ssh/config
+chmod 600 ~/.ssh/config 2>/dev/null
 
 # OpenBSD settings
 if test "$(uname -s)" = "OpenBSD"
