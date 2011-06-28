@@ -7,25 +7,33 @@ fi
 
 ## set my PATH
 
+maybe_add_path() {
+    if test -d $1
+    then
+        PATH=$1:$PATH
+    fi
+}
+
 # custom scripts
-PATH=$HOME/g/misc-scripts:$PATH
+maybe_add_path $HOME/g/misc-scripts
+maybe_add_path $HOME/.ssh/bin
 
 # ruby
-PATH=/var/lib/gems/1.8/bin:$PATH
+maybe_add_path /var/lib/gems/1.8/bin
 
 # custom git builds
-PATH=/opt/git/pu/bin:$PATH
-PATH=/opt/git/ab-i18n/bin:$PATH
+maybe_add_path /opt/git/pu/bin
+maybe_add_path /opt/git/ab-i18n/bin
 
 # Custom binaries
-PATH=$HOME/local/bin:$PATH
+maybe_add_path $HOME/local/bin
 
 # perlbrew
 test -f ~/perl5/perlbrew/etc/bashrc && source ~/perl5/perlbrew/etc/bashrc
 test -f ~v-perlbrew/perl5/perlbrew/etc/bashrc && HOME=/home/v-perlbrew source ~v-perlbrew/perl5/perlbrew/etc/bashrc
 
 # custom blead compile
-maybe_add_path ~/perl5/installed/bin:$PATH
+maybe_add_path ~/perl5/installed/bin
 
 if [[ $- != *i* ]] ; then
     # Shell is non-interactive.  Be done now!
