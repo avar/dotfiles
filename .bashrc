@@ -89,21 +89,24 @@ then
     } >/dev/null
 fi
 
-# Include ~/.bashrc.d/ config files
-if [ -d ~/.bashrc.d ]; then
-  for i in ~/.bashrc.d/*.sh; do
-    if [ -r $i ]; then
-      . $i
+# Include alias x=y statements
+. ~/.aliases
+
+# Include ~/.{aliases,bashrc}.d/ config files
+for dir in bashrc.d aliases.d
+do
+    if [ -d ~/.$dir ]; then
+        for i in ~/.$dir/*.sh; do
+            if [ -r $i ]; then
+                . $i
+            fi
+        done
+        unset i
     fi
-  done
-  unset i
-fi
+done
 
 # some nice shell options
 shopt -s checkwinsize cdspell histappend no_empty_cmd_completion
-
-# Include alias x=y statements
-. ~/.aliases
 
 if [[ "$TERM" == "linux" ]]; then
     if type conpalette >&/dev/null; then
