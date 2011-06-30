@@ -306,9 +306,19 @@ function dug {
     sudo aptitude dist-upgrade
 }
 
-function bootstrap_work_dotfiles {
-    dotfiles=$HOME/g/avar-dotfiles-work
+dotfiles=$HOME/g/avar-dotfiles-work
 
+function bootstrap_work_dotfiles_symlinks {
+    cd $dotfiles
+
+    # Set up the symlinks
+    for file in $(find $dotfiles -type f | grep -v \.git)
+    do
+        ln -sfv $file $(echo $file | sed "s,^$dotfiles,$HOME,")
+    done
+}
+
+function bootstrap_work_dotfiles {
     if ! test -d $dotfiles
     then
         mkdir -p $dotfiles
@@ -325,12 +335,18 @@ function bootstrap_work_dotfiles {
             git checkout -t origin/avar-dotfiles
         )
 
-        # Set up the symlinks
-        for file in $(find $dotfiles -type f | grep -v \.git)
-        do
-            ln -sfv $file $(echo $file | sed "s,^$dotfiles,$HOME,")
-        done
+        bootstrap_work_dotfiles_symlinks
     fi
+}
+
+function dud {
+    (
+        cd ~/
+        git pus
+        cd $dotfiles
+        git pus
+        bootstrap_work_dotfiles_symlinks
+    )
 }
 
 case "$(hostname -f)" in
