@@ -342,9 +342,9 @@ function bootstrap_work_dotfiles {
 function dud {
     (
         cd ~/
-        git pus
+        git pull
         cd $dotfiles
-        git pus
+        git pull
         bootstrap_work_dotfiles_symlinks
     )
 }
