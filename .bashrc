@@ -327,7 +327,7 @@ function bootstrap_work_dotfiles {
         (
             git init $dotfiles
             cd $dotfiles
-            git config remote.origin.url ssh://git.booking.com/gitroot/users.git
+            git config remote.origin.url ssh://aearnfjord@git.booking.com/gitroot/users.git
             git config remote.origin.fetch '+refs/heads/avar-dotfiles:refs/remotes/origin/avar-dotfiles'
             git config branch.avar-dotfiles.remote origin
             git config branch.avar-dotfiles.merge refs/heads/avar-dotfiles
