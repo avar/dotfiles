@@ -309,13 +309,20 @@ function dug {
 dotfiles=$HOME/g/avar-dotfiles-work
 
 function bootstrap_work_dotfiles_symlinks {
-    cd $dotfiles
+    (
+        cd $dotfiles
 
-    # Set up the symlinks
-    for file in $(find $dotfiles -type f | grep -v /\.git)
-    do
-        ln -sfv $file $(echo $file | sed "s,^$dotfiles,$HOME,")
-    done
+        # Set up the symlinks
+        for file in $(find $dotfiles -type f | grep -v /\.git)
+        do
+            target=$file
+            link=$(echo $file | sed "s,^$dotfiles,$HOME,")
+            if ! test "$(readlink $link)" = "$target"
+            then
+                ln -sfv $file $link
+            fi
+        done
+    )
 }
 
 function bootstrap_work_dotfiles {
