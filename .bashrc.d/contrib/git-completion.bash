@@ -1469,7 +1469,7 @@ _git_help ()
 	__gitcomp "$__git_all_commands $(__git_aliases)
 		attributes cli core-tutorial cvs-migration
 		diffcore gitk glossary hooks ignore modules
-		repository-layout tutorial tutorial-2
+		namespaces repository-layout tutorial tutorial-2
 		workflows
 		"
 }
@@ -2058,7 +2058,7 @@ _git_config ()
 		color.ui
 		commit.status
 		commit.template
-		core.abbrevguard
+		core.abbrev
 		core.askpass
 		core.attributesfile
 		core.autocrlf
@@ -2640,6 +2640,7 @@ _git ()
 			--exec-path
 			--html-path
 			--work-tree=
+			--namespace=
 			--help
 			"
 			;;
