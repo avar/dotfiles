@@ -67,6 +67,20 @@
     abbrev-commit = "!f() { git name-rev --tags \"$@\" | sed 's|.*tags/||;s|\\([0-9a-f]\\{7\\}\\).*|\\1|'; }; f"
     reset-permissions = "!f() { git diff --numstat | awk '{if ($1 == \"0\" && $2 == \"0\") print }' | cut -c 5- | perl -pe 's/\\n/\\0/g' | xargs -0 git checkout HEAD; }; f"
 
+    ;; Push something incrementally so systems that send E-Mail for every push (not commit) will do the right thing
+    push-incr = "!f() {\
+        remote=$1;\
+        shift;\
+        refspec=$1;\
+        shift;\
+        from=$(echo $refspec | cut -d: -f1);\
+        to=$(echo $refspec | cut -d: -f2);\
+        for rev in $(git rev-list --reverse @{u}..$from);\
+        do\
+            git push $remote $rev:$to $@;\
+        done\
+    }; f"
+
 [push]
     default = tracking
 [sendemail]
