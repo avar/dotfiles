@@ -268,20 +268,6 @@ function avar_configure_nodebug {
     ./Configure -Dusethreads -Dprefix=~/perl5/installed -Dusedevel -des
 }
 
-# For MediaWiki
-mw_services="apache2 mysql memcached tomcat6"
-function start_mw {
-    for service in $mw_services; do
-        sudo service $service restart
-    done
-}
-
-function mw_stop {
-    for service in $mw_services; do
-        sudo service $service stop
-    done
-}
-
 function bootstrap_cpanm {
     curl -L http://cpanmin.us | perl - App::cpanminus
 }
