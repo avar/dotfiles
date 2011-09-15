@@ -319,7 +319,19 @@ function bootstrap_work_dotfiles_symlinks {
             link=$(echo $file | sed "s,^$dotfiles,$HOME,")
             if ! test "$(readlink $link)" = "$target"
             then
-                ln -sfv $file $link
+                if test $USER != "avar" && test $user != "aearnfjord"
+                then
+                    case "$file" in
+                        *.ssh/config)
+                            echo "$file is the ssh config file, not symlinking"
+                            ;;
+                        *)
+                            ln -sfv $file $link
+                            ;;
+                    esac
+                else
+                    ln -sfv $file $link
+                fi
             fi
         done
     )
