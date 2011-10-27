@@ -27,6 +27,7 @@
     uncommit = reset --soft HEAD^
     chrp = cherry-pick
     rv = !git --no-pager revert --no-commit
+    pur = pull --rebase
 
     ;; Log
     lo = log --decorate --abbrev-commit --stat
