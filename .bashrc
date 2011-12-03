@@ -42,6 +42,9 @@ test -f ~v-perlbrew/perl5/perlbrew/etc/bashrc && HOME=/home/v-perlbrew source ~v
 # custom blead compile
 maybe_add_path ~/perl5/installed/bin
 
+# other custom compilations
+maybe_add_path ~/local/bin
+
 if [[ $- != *i* ]] ; then
     # Shell is non-interactive.  Be done now!
     return
