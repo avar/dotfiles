@@ -84,6 +84,8 @@
 
 [push]
     default = tracking
+[pull]
+	rebase = false
 [sendemail]
 	smtpserver = smtp.gmail.com
 	smtpssl = 1
