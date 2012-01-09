@@ -355,6 +355,7 @@ function bootstrap_work_dotfiles {
 function dud {
     (
         cd ~/
+        chmod 600 ~/.ssh/config
         git pull
         cd $dotfiles
         git pull
