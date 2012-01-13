@@ -93,5 +93,18 @@
 	confirm = always
 [rebase]
 	autosquash = true
+	;; Show stat output on rebase to show what changed
+	stat = true
 [http]
 	sslVerify = false
+[grep]
+	lineNumber = true
+	extendedRegexp = true
+[log]
+	;; Show tags and other references in "git log"
+	decorate = short
+	;; Abbreviate commits by default. I.e. don't show a full SHA1
+	abbrevCommit = true
+[merge]
+	;; Create non-ff merge commits. Pretty much the only use I have for 'git merge'
+	ff = true
