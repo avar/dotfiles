@@ -308,7 +308,7 @@ function bootstrap_work_dotfiles_symlinks {
             link=$(echo $file | sed "s,^$dotfiles,$HOME,")
             if ! test "$(readlink $link)" = "$target"
             then
-                if test $USER != "avar" -a $USER != "aearnfjord"
+                if test $USER != "avar" -a $USER != "aearnfjord" -a $USER != "aevararnfjord"
                 then
                     case "$file" in
                         *.ssh/config)
