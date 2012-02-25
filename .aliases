@@ -16,6 +16,7 @@ alias g=git
 alias sc='screen'
 alias scs='screen -S'
 alias svem='screen -c ~/.screenrc.d/v-emacs-irssi'
+alias hssnth='screen -c ~/.screenrc.d/home-snth-emacs'
 
 # Perl
 alias perl6="~/g/rakudo/perl6"
