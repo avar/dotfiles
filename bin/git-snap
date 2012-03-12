@@ -1,0 +1,4 @@
+#!/bin/sh
+
+git add -u
+git commit -m"$(curl -s http://whatthecommit.com | perl -0666 -pe 's[.*?<p>(.*?)\n</p>.*][$1]s')"
