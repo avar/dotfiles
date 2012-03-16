@@ -1,5 +1,8 @@
 ## Aliases manually included from ~/.bashrc
 
+# Common *nix commands
+alias ka=killall
+
 # ls
 alias ll="ls -lh"
 
