@@ -100,6 +100,11 @@ then
     alias fgrep='fgrep --color=auto'
     alias rgrep='rgrep --color=auto'
 else
-    PS1='\h \W ($(dir_info)) \$ '
+    ## There's some bug in Emacs + TRAMP where it can't connect to a
+    ## remote host if that remote host has ">" in the PS1. Maybe it's
+    ## some interaction with my dotfiles. Disable for now and test
+    ## later.
+    #PS1='\h \W ($(dir_info)) \$ '
+    PS1='\h \W (DUMMY) \$ '
     alias ls="ls$group_dirs"
 fi
