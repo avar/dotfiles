@@ -324,6 +324,11 @@ function bootstrap_work_dotfiles_symlinks {
                 fi
             fi
         done
+
+        for dead_link in $(find $(find $dotfiles -mindepth 1 -maxdepth 1 -type d | grep -v /\.git | sed "s,^$dotfiles,$HOME,") -type l ! -exec test -r {} \; -print)
+        do
+            rm -v -- $dead_link
+        done
     )
 }
 
