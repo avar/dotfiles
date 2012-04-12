@@ -357,6 +357,18 @@ function dud {
     (
         cd ~/
         chmod 600 ~/.ssh/config
+
+        # If the only modification to ~/.gitconfig is changing the
+        # E-Mail, just overwrite it because 
+        if git diff -U0 | grep '^[-+][^-+]' | grep -q -v email
+        then
+            echo "You have local changes to ~/, commit them:"
+            git --no-pager diff
+        else
+            echo "Nuking local E-Mail only changes to ~/.gitconfig"
+            git --no-pager diff
+            git checkout -f ~/.gitconfig
+        fi
         git pull
         cd $dotfiles
         git pull
