@@ -378,6 +378,7 @@ function dud {
         cd $dotfiles
         git pull
         bootstrap_work_dotfiles_symlinks
+        . ~/.bashrc
     )
 }
 
