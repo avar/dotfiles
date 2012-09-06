@@ -5,6 +5,10 @@ then
     . /etc/bashrc
 fi
 
+## Unset things in global bashrc's that I'd prefer to set myself
+## later.
+unset TMOUT
+
 ## set my PATH
 
 maybe_add_path() {
