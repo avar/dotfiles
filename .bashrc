@@ -21,7 +21,6 @@ maybe_add_path() {
 # custom scripts
 maybe_add_path $HOME/bin
 maybe_add_path $HOME/g/misc-scripts
-maybe_add_path $HOME/.ssh/bin
 
 # ruby
 maybe_add_path /var/lib/gems/1.8/bin
