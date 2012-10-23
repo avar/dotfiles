@@ -307,7 +307,7 @@ function bootstrap_work_dotfiles_symlinks {
         cd $dotfiles
 
         # Set up the symlinks
-        for file in $(find $dotfiles -type f | grep -v /\.git)
+        for file in $(find $dotfiles -type f | grep -v /\.git/)
         do
             target=$file
             link=$(echo $file | sed "s,^$dotfiles,$HOME,")
