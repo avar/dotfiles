@@ -379,11 +379,14 @@ function dud {
             git checkout -f ~/.gitconfig
         fi
         git pull
-        (
-            cd $dotfiles
-            git pull
-            bootstrap_work_dotfiles_symlinks
-        )
+        if test -d $dotfiles
+        then
+            (
+                cd $dotfiles
+                git pull
+                bootstrap_work_dotfiles_symlinks
+            )
+        fi
         . ~/.bashrc
     )
 }
