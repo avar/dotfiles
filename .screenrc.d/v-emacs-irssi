@@ -30,7 +30,12 @@ defscrollback 10000
 zombie ar onerror
 
 sessionname em
-screen -t em   0 emacs -nw
-screen -t irc  1 irssi
-screen -t htop 2 htop
+screen -t em   0 bash
+stuff "emacs -nw^M"
+screen -t irc  1 bash
+stuff "irssi^M"
+screen -t htop 2 bash
+stuff "htop^M"
+screen -t htop 2 leech
+stuff "sudo screen -rx leech/^M"
 select 0
