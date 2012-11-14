@@ -1,0 +1,20 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+
+sub wu {
+    my ($cmd) = @_;
+
+    print $cmd, ":\n";
+    system "$cmd 2>&1 | sed 's/^/    /'";
+}
+
+wu "date";
+wu "who";
+wu "id";
+wu "uptime";
+wu "vmstat 1 1";
+wu "df -h";
+wu "free -m";
+wu "procinfo";
+wu "ps auxf | grep avar";
