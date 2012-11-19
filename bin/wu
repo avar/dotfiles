@@ -18,3 +18,4 @@ wu "df -h";
 wu "free -m";
 wu "procinfo";
 wu "ps auxf | grep avar";
+wu "dmesg";
