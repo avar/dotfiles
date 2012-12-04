@@ -148,9 +148,6 @@ export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S  "
 # starting with whitespace, useful to selectively avoid the history
 export HISTIGNORE="ls:cd:cd ..:..*: *"
 
-# ignore these while tab-completing
-export FIGNORE="CVS:.svn:.git"
-
 # Use a sensible -j for Test::Harness
 case $HOSTNAME in
     v)    __cpus=4 ;;
