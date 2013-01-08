@@ -36,6 +36,6 @@ screen -t irc  1 bash
 stuff "irssi^M"
 screen -t htop 2 bash
 stuff "htop^M"
-screen -t htop 2 leech
+screen -t leech 2 bash
 stuff "sudo screen -rx leech/^M"
 select 0
