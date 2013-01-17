@@ -141,7 +141,7 @@ export NOPASTE_SERVICES="Gist Pastie"
 # keep a long history without duplicates
 export HISTSIZE=10000
 export HISTFILESIZE=10000
-export HISTCONTROL="ignoreboth"
+export HISTCONTROL="ignoredups"
 export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S  "
 
 # ignore some boring stuff. The " *" bit ignores all command lines
