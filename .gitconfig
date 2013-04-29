@@ -1,14 +1,14 @@
 [user]
-    name = Ævar Arnfjörð Bjarmason
-    email = avarab@gmail.com
+	name = Ævar Arnfjörð Bjarmason
+	email = avarab@gmail.com
 [github]
-    login = avar
+	login = avar
 [include]
-    #path = ~/.gitconfig.d/user-email
-    path = ~/.gitconfig.d/github-token
+	#path = ~/.gitconfig.d/user-email
+	path = ~/.gitconfig.d/github-token
 
 [color]
-    ui = auto
+	ui = auto
 
 ;; Don't be so invasive about coloring ^M when I'm editing files that
 ;; are supposed to have \r\n.
@@ -16,61 +16,61 @@
    whitespace = 0
 
 [alias]
-    ;; Lazyness
-    ann = blame
-    br = branch -v
-    bra = branch -a -v
-    brr = branch -r -v
-    st = status --short
-    sta = status
-    ci = commit
-    co = checkout
-    sm = submodule
-    uncommit = reset --soft HEAD^
-    chrp = cherry-pick
-    rv = !git --no-pager revert --no-commit
-    pur = pull --rebase
+	;; Lazyness
+	ann = blame
+	br = branch -v
+	bra = branch -a -v
+	brr = branch -r -v
+	st = status --short
+	sta = status
+	ci = commit
+	co = checkout
+	sm = submodule
+	uncommit = reset --soft HEAD^
+	chrp = cherry-pick
+	rv = !git --no-pager revert --no-commit
+	pur = pull --rebase
 
-    ;; Log
-    lo = log --decorate --abbrev-commit --stat
-    loa = log --all --date-order
-    lop = log -p
-    plog = log --pretty=oneline --abbrev-commit
-    tree = log --graph --pretty=oneline --abbrev-commit --decorate
+	;; Log
+	lo = log --decorate --abbrev-commit --stat
+	loa = log --all --date-order
+	lop = log -p
+	plog = log --pretty=oneline --abbrev-commit
+	tree = log --graph --pretty=oneline --abbrev-commit --decorate
 
-    ;; Submodules
-    sm-init = !git submodule update --init
-    ; Try to update all the submodules, doing some guesswork to get branch names
-    sm-pull-all = !git submodule foreach 'git checkout $(NAME=$name git sm-mainbranch) && git pull'
-    ; Manually specify a branch from the main config, or try to guess it
-    sm-mainbranch = !git config --file ../.gitmodules submodule.$NAME.branch || git describe --all --always | sed 's!^heads/!!'
+	;; Submodules
+	sm-init = !git submodule update --init
+	; Try to update all the submodules, doing some guesswork to get branch names
+	sm-pull-all = !git submodule foreach 'git checkout $(NAME=$name git sm-mainbranch) && git pull'
+	; Manually specify a branch from the main config, or try to guess it
+	sm-mainbranch = !git config --file ../.gitmodules submodule.$NAME.branch || git describe --all --always | sed 's!^heads/!!'
 
-    ;; Diff
-    di  = diff -p --stat
-    df  = diff -p --stat
-    dif = diff -p --stat
-    dis = diff -p --stat --staged
-    dih = diff -p --stat HEAD
-    staged = diff --cached
+	;; Diff
+	di	= diff -p --stat
+	df	= diff -p --stat
+	dif = diff -p --stat
+	dis = diff -p --stat --staged
+	dih = diff -p --stat HEAD
+	staged = diff --cached
 
-    ;; Pull/push
-    pu = pull --stat
-    pus = !git stash && git pull && git stash pop
-    ; like svn does
-    up = pull --stat --rebase
+	;; Pull/push
+	pu = pull --stat
+	pus = !git stash && git pull && git stash pop
+	; like svn does
+	up = pull --stat --rebase
 
-    ;; Handy tools
-    cat  = "!f() { git show HEAD:\"$@\"; }; f"
-    review = "!f() { for rev in $(git rev-list --reverse $@); do git show --stat -p -M $rev; done; }; f"
-    hist = "!f() { git blame -l \"$@\" | git name-rev --stdin --tags; }; f"
-    set-master = "!f() { git config branch.master.remote origin && git config branch.master.merge refs/heads/master; }; f"
-    ; Must git branch -d foo first, then git rmbranch foo
-    rmbranch = "!f() { git push origin :heads/$@; }; f"
-    deleted-branches = "!f() { git fsck | grep '^dangling commit' | while read dangling commit hash; do git log -1 --format='%at %h %s' $hash; done | less -FRSX; }; f"
-    abbrev-commit = "!f() { git name-rev --tags \"$@\" | sed 's|.*tags/||;s|\\([0-9a-f]\\{7\\}\\).*|\\1|'; }; f"
-    reset-permissions = "!f() { git diff --numstat | awk '{if ($1 == \"0\" && $2 == \"0\") print }' | cut -c 5- | perl -pe 's/\\n/\\0/g' | xargs -0 git checkout HEAD; }; f"
+	;; Handy tools
+	cat	 = "!f() { git show HEAD:\"$@\"; }; f"
+	review = "!f() { for rev in $(git rev-list --reverse $@); do git show --stat -p -M $rev; done; }; f"
+	hist = "!f() { git blame -l \"$@\" | git name-rev --stdin --tags; }; f"
+	set-master = "!f() { git config branch.master.remote origin && git config branch.master.merge refs/heads/master; }; f"
+	; Must git branch -d foo first, then git rmbranch foo
+	rmbranch = "!f() { git push origin :heads/$@; }; f"
+	deleted-branches = "!f() { git fsck | grep '^dangling commit' | while read dangling commit hash; do git log -1 --format='%at %h %s' $hash; done | less -FRSX; }; f"
+	abbrev-commit = "!f() { git name-rev --tags \"$@\" | sed 's|.*tags/||;s|\\([0-9a-f]\\{7\\}\\).*|\\1|'; }; f"
+	reset-permissions = "!f() { git diff --numstat | awk '{if ($1 == \"0\" && $2 == \"0\") print }' | cut -c 5- | perl -pe 's/\\n/\\0/g' | xargs -0 git checkout HEAD; }; f"
 [push]
-    default = tracking
+	default = tracking
 [pull]
 	rebase = true
 [sendemail]
