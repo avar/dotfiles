@@ -95,3 +95,5 @@
 [merge]
 	;; Create non-ff merge commits. Pretty much the only use I have for 'git merge'
 	ff = true
+	;; Have "git merge" do what "git pull" would have done
+	defaultToUpstream = true
