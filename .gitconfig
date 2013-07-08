@@ -97,3 +97,5 @@
 	ff = true
 	;; Have "git merge" do what "git pull" would have done
 	defaultToUpstream = true
+[annex]
+	backends = SHA256E SHA256
