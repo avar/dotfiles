@@ -28,15 +28,10 @@
 	sm = submodule
 	uncommit = reset --soft HEAD^
 	chrp = cherry-pick
-	rv = !git --no-pager revert --no-commit
-	pur = pull --rebase
 
 	;; Log
 	lo = log --decorate --abbrev-commit --stat
-	loa = log --all --date-order
-	lop = log -p
-	plog = log --pretty=oneline --abbrev-commit
-	tree = log --graph --pretty=oneline --abbrev-commit --decorate
+	tree = log --graph --pretty=format:'%C(yellow)%h%Creset -%C(bold red)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 
 	;; Submodules
 	sm-init = !git submodule update --init
