@@ -49,6 +49,9 @@ maybe_add_path ~/perl5/installed/bin
 # other custom compilations
 maybe_add_path ~/local/bin
 
+# The adk
+maybe_add_path ~/g/android/adt-bundle-linux-x86_64-20130729/sdk/platform-tools
+
 if [[ $- != *i* ]] ; then
     # Shell is non-interactive.  Be done now!
     return
