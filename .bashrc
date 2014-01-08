@@ -40,8 +40,9 @@ maybe_add_path /usr/local/git/bin
 maybe_add_path $HOME/local/bin
 
 # perlbrew
-test -f ~/perl5/perlbrew/etc/bashrc && source ~/perl5/perlbrew/etc/bashrc
-test -f ~v-perlbrew/perl5/perlbrew/etc/bashrc && HOME=/home/v-perlbrew source ~v-perlbrew/perl5/perlbrew/etc/bashrc
+#test -f ~/perl5/perlbrew/etc/bashrc && source ~/perl5/perlbrew/etc/bashrc
+#test -f ~v-perlbrew/perl5/perlbrew/etc/bashrc && HOME=/home/v-perlbrew source ~v-perlbrew/perl5/perlbrew/etc/bashrc
+maybe_add_path /home/v-perlbrew/perl5/perlbrew/perls/perl-5.19.6/bin
 
 # custom blead compile
 maybe_add_path ~/perl5/installed/bin
