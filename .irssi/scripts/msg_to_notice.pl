@@ -37,7 +37,7 @@ sub handle_privmsg {
     Irssi::signal_stop();
 }
 
-Irssi::settings_add_str('msg_to_notice', 'noticeable_nicks', 'root,deploy');
+Irssi::settings_add_str('msg_to_notice', 'noticeable_nicks', 'root,deploy,log');
 Irssi::signal_add('event privmsg', 'handle_privmsg');
 
 # vim: filetype=perl tabstop=4 shiftwidth=4 expandtab cindent:
