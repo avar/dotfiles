@@ -35,13 +35,13 @@
 	sm-mainbranch = !git config --file ../.gitmodules submodule.$NAME.branch || git describe --all --always | sed 's!^heads/!!'
 
 	;; Diff
-    diw    = diff -p --stat
-    diww   = diff -p --stat --word-diff=color
-    diwwd  = diff -p --stat --word-diff=color --word-diff-regex=.
-    dis    = diff -p --stat --staged
-    disw   = diff -p --stat --staged -w
-    disww  = diff -p --stat --staged -w --word-diff=color
-    diswwd = diff -p --stat --staged -w --word-diff=color --word-diff-regex=.
+    diw    = diff -M -p --stat
+    diww   = diff -M -p --stat --word-diff=color
+    diwwd  = diff -M -p --stat --word-diff=color --word-diff-regex=.
+    dis    = diff -M -p --stat --staged
+    disw   = diff -M -p --stat --staged -w
+    disww  = diff -M -p --stat --staged -w --word-diff=color
+    diswwd = diff -M -p --stat --staged -w --word-diff=color --word-diff-regex=.
 
 	;; Pull/push
 	pu = pull --stat
