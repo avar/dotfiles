@@ -1,12 +1,25 @@
 source /home/avar/.screenrc
 
 sessionname em
+
 screen -t em   0 bash
 stuff "emacs -nw^M"
+
 screen -t irc  1 bash
 stuff "irssi^M"
+
 screen -t htop 2 bash
 stuff "htop^M"
+
 screen -t leech 2 bash
 stuff "sudo screen -rx leech/^M"
+
+screen -t tcpdump:log bash
+stuff "OUTPUT_DIRECTORY=~/net/tcpdump/$(date --iso-8601)/ && mkdir -p \$OUTPUT_DIRECTORY && sudo tcpdump -i eth0 -vvv port 2222 | ats | tee \$OUTPUT_DIRECTORY/$(date +%Y-%m-%d-%H:%M:%S).tcpdump^M"
+
+# Sleep because of a race condition with the logs being created
+# during screen startup.
+screen -t log:tail bash
+stuff "sleep 3 && tail -F ~/net/*/$(date --iso-8601)/*^M"
+
 select 0
