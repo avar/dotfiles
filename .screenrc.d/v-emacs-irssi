@@ -2,8 +2,8 @@ source /home/avar/.screenrc
 
 sessionname em
 
-screen -t em   0 bash
-stuff "emacs -nw^M"
+screen -t e bash
+stuff "(emacsclient --tty || (emacs --daemon && emacsclient --tty))^M"
 
 screen -t irc  1 bash
 stuff "irssi^M"
