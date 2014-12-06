@@ -1,0 +1,25 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+use Time::HiRes qw(time);
+
+my $last = time;
+while (my $line = <>) {
+    chomp $line;
+    my $time = time;
+    printf "%d (+%8.3f s) %s\n", $time, ($time - $last), $line;
+    $last = $time;
+}
+
+__END__
+
+=head1 NAME
+
+ats - Add Time Stamp
+
+=head1 DESCRIPTION
+
+Pipe whatever over to this utility to add timestamps to your output.
+
+=cut
+
