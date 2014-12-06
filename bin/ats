@@ -3,6 +3,9 @@ use strict;
 use warnings;
 use Time::HiRes qw(time);
 
+# Turn off buffered output
+$| = 1;
+
 my $last = time;
 while (my $line = <>) {
     chomp $line;
