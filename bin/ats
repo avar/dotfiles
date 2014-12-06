@@ -10,7 +10,7 @@ my $last = time;
 while (my $line = <>) {
     chomp $line;
     my $time = time;
-    printf "%d (+%8.3f s) %s\n", $time, ($time - $last), $line;
+    printf "%d (+%8.2f s) %s\n", $time, ($time - $last), $line;
     $last = $time;
 }
 
