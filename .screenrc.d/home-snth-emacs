@@ -16,7 +16,7 @@ screen -t mtr:log bash
 stuff "while true; do date && OUTPUT_DIRECTORY=~/net/mtr/$(date --iso-8601)/ && mkdir -p \$OUTPUT_DIRECTORY && mtr --raw -n -r -w -c 30 212.142.62.85 | ats | tee \$OUTPUT_DIRECTORY/$(date +%Y-%m-%d-%H:%M:%S).mtr; done^M"
 
 screen -t tcpdump:log bash
-stuff "OUTPUT_DIRECTORY=~/net/tcpdump/$(date --iso-8601)/ && mkdir -p \$OUTPUT_DIRECTORY && sudo tcpdump -i wlan0 -XXX -vvv host u.nix.is and port 2222 | ats | tee \$OUTPUT_DIRECTORY/$(date +%Y-%m-%d-%H:%M:%S).tcpdump^M"
+stuff "OUTPUT_DIRECTORY=~/net/tcpdump/$(date --iso-8601)/ && mkdir -p \$OUTPUT_DIRECTORY && sudo tcpdump -i wlan0 -vvv host u.nix.is and port 2222 | ats | tee \$OUTPUT_DIRECTORY/$(date +%Y-%m-%d-%H:%M:%S).tcpdump^M"
 
 screen -t ssh:log bash
 stuff "OUTPUT_DIRECTORY=~/net/ssh/$(date --iso-8601)/ && mkdir -p \$OUTPUT_DIRECTORY && ssh -p 2222 u.nix.is 'while sleep 1; do echo .; done' | ats | tee \$OUTPUT_DIRECTORY/$(date +%Y-%m-%d-%H:%M:%S).ssh^M"
