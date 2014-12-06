@@ -10,7 +10,20 @@ screen -t t htop
 screen -t log bash
 stuff "tail -F /var/log/{syslog,messages,auth.log,user.log,daemon.log,aptitude,kern.log,dpkg.log}^M"
 
+# http://whois.arin.net/rest/net/NET-212-0-0-0-1/pft
+# http://packetpushers.net/masterclass-tcpdump-interpreting-output/
 screen -t mtr:log bash
-stuff "while true; do date && OUTPUT_DIRECTORY=~/mtr/$(date --iso-8601)/ && mkdir -p \$OUTPUT_DIRECTORY && mtr --raw -n -r -w -c 30 212.142.62.85 | tee \$OUTPUT_DIRECTORY/$(date +%Y-%m-%d-%H:%M:%S).mtr; done^M"
+stuff "while true; do date && OUTPUT_DIRECTORY=~/net/mtr/$(date --iso-8601)/ && mkdir -p \$OUTPUT_DIRECTORY && mtr --raw -n -r -w -c 30 212.142.62.85 | tee \$OUTPUT_DIRECTORY/$(date +%Y-%m-%d-%H:%M:%S).mtr; done^M"
+
+screen -t tcpdump:log bash
+stuff "OUTPUT_DIRECTORY=~/net/tcpdump/$(date --iso-8601)/ && mkdir -p \$OUTPUT_DIRECTORY && sudo tcpdump -i wlan0 -XXX -vvv host u.nix.is and port 2222 | tee \$OUTPUT_DIRECTORY/$(date +%Y-%m-%d-%H:%M:%S).tcpdump^M"
+
+screen -t ssh:log bash
+stuff "OUTPUT_DIRECTORY=~/net/ssh/$(date --iso-8601)/ && mkdir -p \$OUTPUT_DIRECTORY && ssh -p 2222 u.nix.is 'while sleep 1; do echo .; done' | perl -pe '$| = 1; s[\^][localtime . \"\\t\"]em' | tee \$OUTPUT_DIRECTORY/$(date +%Y-%m-%d-%H:%M:%S).ssh^M"
+
+# Sleep because of a race condition with the logs being created
+# during screen startup.
+screen -t log:tail bash
+stuff "sleep 3 && tail -F ~/net/*/$(date --iso-8601)/*^M"
 
 select 0
