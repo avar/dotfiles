@@ -9,6 +9,22 @@ fi
 ## later.
 unset TMOUT
 
+## Some regression in gnome-terminal @ 2015-08-31 that caused colors
+## to stop working. I didn't see any obvious package that changed.
+##
+## This causes gnome-terminal to not have any colors under screen, but
+## under xterm things work. So it's presumably some gnome-terminal
+## bug.
+##
+## See also:
+## - https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=723944
+## - http://invisible-island.net/ncurses/ncurses.faq.html#xterm_generic
+## - http://invisible-island.net/vttest/vttest-wrap.html
+if test $TERM = "screen.xterm-256color"
+then
+    export TERM="screen"
+fi
+
 ## set my PATH
 
 maybe_add_path() {
