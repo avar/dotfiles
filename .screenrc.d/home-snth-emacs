@@ -13,6 +13,6 @@ stuff "tail -F /var/log/{syslog,messages,auth.log,user.log,daemon.log,aptitude,k
 screen -t mail bash
 # No idea why I can't run nested screens without remote ssh-ing
 stuff "ssh localhost^M"
-stuff "screen -rx em-mail || hssnth-mail^M"
+stuff "screen -rx mail || hssnth-mail^M"
 
 select 0

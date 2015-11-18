@@ -1,9 +1,16 @@
 source /home/avar/.screenrc
 
-sessionname em-mail
+sessionname mail
 
 screen -t exim:l bash
 stuff "tail -F /var/log/exim4/mainlog^M"
+
+screen -t md:size bash
+stuff "du -sb ~/Maildir/work/; du -sh ~/Maildir/work; find ~/Maildir/work/ -type f | wc -l^M"
+
+screen -t md:find bash
+stuff "find ~/Maildir -type f -mmin -5|wc -l # modified in the last 5mins^M"
+stuff "find ~/Maildir -type f -cmin -5|wc -l # created in the last 5mins^M"
 
 screen -t mbsync bash
 stuff "time mbsync work"
