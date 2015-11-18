@@ -20,6 +20,7 @@ alias sc='screen'
 alias scs='screen -S'
 alias svem='screen -c ~/.screenrc.d/v-emacs-irssi'
 alias hssnth='screen -c ~/.screenrc.d/home-snth-emacs'
+alias hssnth-mail='screen -c ~/.screenrc.d/home-snth-emacs-mail'
 
 # Perl
 alias pd=perldoc

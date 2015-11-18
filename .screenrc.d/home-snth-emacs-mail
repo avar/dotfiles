@@ -1,0 +1,26 @@
+source /home/avar/.screenrc
+
+sessionname em-mail
+
+screen -t exim:l bash
+stuff "tail -F /var/log/exim4/mainlog^M"
+
+screen -t mbsync bash
+stuff "time mbsync work"
+
+screen -t m:index bash
+stuff "mu index"
+
+screen -t m:f:0 bash
+stuff "mu find avar^M"
+
+screen -t m:f:1 bash
+stuff "mu find booking^M"
+
+screen -t m:f:2 bash
+stuff "mu find booking^M"
+
+screen -t m:f:3 bash
+stuff "mu find booking^M"
+
+select 0
