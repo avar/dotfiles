@@ -1,0 +1,22 @@
+IMAPAccount work
+    Host imap.booking.com
+    User aearnfjord
+    PassCmd "cat ~/.mbsync-pass"
+    SSLType IMAPS
+    AuthMech LOGIN
+    CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore work-remote
+    Account work
+
+MaildirStore work-local
+    Path ~/Maildir/work/
+    Inbox ~/Maildir/work/INBOX
+
+Channel work
+    Master :work-remote:
+    Slave :work-local:
+    Patterns INBOX Sent Drafts Trash Archives
+    Create Both
+    Sync New ReNew Flags
+    SyncState *
