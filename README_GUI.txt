@@ -16,6 +16,8 @@
 "Windows key" -> "Terminal" -> "Right Click" -> "Profiles" -> "Profile Preferences" -> "General" -> ==> "Terminal bell" = "Off"
 ## Disable Alerts
 "Windows key" -> "Sound" -> "Sound Effects" ==> "Alert volume" = "Off"
+## Set the touchpad to edge scrolling
+"Windows key" -> "dconf editor" -> "org.gnome.settings-daemon.peripherals.touchpad" -> "scroll method" ==> "edge-scrolling" && "natural scroll" => "Off"
 
 # Set up mbsync+mu+emacs
 ## mbsync
