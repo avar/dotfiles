@@ -8,6 +8,13 @@ stuff "htop^M"
 screen -t m:exim:l bash
 stuff "tail -F /var/log/exim4/mainlog^M"
 
+screen -t m:exim:q bash
+# Shows the status of the exim mail queue, i.e. any stalled messages
+stuff "sudo exim -bp^M"
+# Forces sending of the messages, if any. See
+# http://www.electrictoolbox.com/flush-exim-mail-queue/
+stuff "# sudo exim -qf # send stalled messages^M"
+
 screen -t m:md:size bash
 stuff "du -sb ~/.mu ~/Maildir/work; du -sh ~/.mu ~/Maildir/work; find ~/Maildir/work/ -type f | wc -l; df -h /^M"
 
