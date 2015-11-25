@@ -29,9 +29,9 @@ screen -t m:index bash
 stuff "time mu index --maildir=~/Maildir/work"
 
 screen -t m:f:0 bash
-stuff "mu find avar^M"
+stuff "mu find -n 10 avar^M"
 
 screen -t m:f:1 bash
-stuff "mu find booking^M"
+stuff "mu find -n 10 booking^M"
 
 select 0
