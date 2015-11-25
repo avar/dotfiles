@@ -23,7 +23,7 @@ stuff "find ~/Maildir -type f -mmin -5|wc -l # modified in the last 5mins^M"
 stuff "find ~/Maildir -type f -cmin -5|wc -l # created in the last 5mins^M"
 
 screen -t m:sync bash
-stuff "time mbsync work"
+stuff "while true; do time mbsync --verbose work ; sleep 60; done^M"
 
 screen -t m:index bash
 stuff "time mu index --maildir=~/Maildir/work"
