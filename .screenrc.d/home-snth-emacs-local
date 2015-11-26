@@ -26,7 +26,7 @@ screen -t m:sync bash
 stuff "while true; do time mbsync --verbose work ; sleep 60; done^M"
 
 screen -t m:index bash
-stuff "time mu index --maildir=~/Maildir/work"
+stuff "killall mu; sleep 0.5; time mu index --maildir=~/Maildir/work --max-msg-size=500000000"
 
 screen -t m:f:0 bash
 stuff "mu find -n 10 avar^M"
