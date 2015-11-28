@@ -34,4 +34,5 @@ stuff "mu find -n 10 avar^M"
 screen -t m:f:1 bash
 stuff "mu find -n 10 booking^M"
 
-select 0
+# The m:sync screen
+select 5
