@@ -1,3 +1,6 @@
+FSync no
+BufferLimit 100M
+
 IMAPAccount work
     Host imap.booking.com
     Timeout 0
