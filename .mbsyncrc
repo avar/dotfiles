@@ -1,5 +1,6 @@
 IMAPAccount work
     Host imap.booking.com
+    Timeout 90
     User aearnfjord
     PassCmd "cat ~/.mbsync-pass"
     SSLType IMAPS
