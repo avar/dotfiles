@@ -26,3 +26,14 @@ Channel work
     Sync Push Delete
     Expunge Master
     SyncState *
+
+# Manually test IMAP.
+#     openssl s_client -connect imap.booking.com:993 -quiet
+#     a1 LOGIN aearnfjord <password>
+#     a1 LIST "" "*"
+#     a1 EXAMINE INBOX
+#
+# Resources:
+#
+# - http://www.anta.net/misc/telnet-troubleshooting/imap.shtml
+# - http://www.troubleshooters.com/emailtech/imap_troubleshooting.htm
