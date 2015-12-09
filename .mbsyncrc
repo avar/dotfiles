@@ -2,13 +2,24 @@ FSync no
 BufferLimit 100M
 
 IMAPAccount work
-    Host imap.booking.com
+    # Generic options
     Timeout 0
+    # User authentication
+    AuthMech LOGIN
     User aearnfjord
     PassCmd "cat ~/.mbsync-pass"
-    SSLType IMAPS
-    AuthMech LOGIN
-    CertificateFile /etc/ssl/certs/ca-certificates.crt
+    # Who do we talk to?
+    Host 127.0.0.1
+    Port 1430
+    SSLType None
+    # Needs my patch at http://sourceforge.net/p/isync/mailman/message/34682540/
+    Compression no
+    # This would be directly talking to imap.booking.com not through
+    # stunnel.
+    #Host imap.booking.com
+    #Port 993
+    #SSLType IMAPS
+    #CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 IMAPStore work-remote
     Account work

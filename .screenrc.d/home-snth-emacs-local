@@ -22,7 +22,14 @@ screen -t m:md:find bash
 stuff "find ~/Maildir -type f -mmin -5|wc -l # modified in the last 5mins^M"
 stuff "find ~/Maildir -type f -cmin -5|wc -l # created in the last 5mins^M"
 
+screen -t m:stunnel bash
+stuff "killall stunnel ; sleep 0.5 ; stunnel .mbsyncrc.stunnel^M"
+
+screen -t m:stunnel:flow bash
+stuff "sudo tcpflow -i lo -c port 1430^M"
+
 screen -t m:sync bash
+stuff "sleep 1^M"
 stuff "while true; do time mbsync --verbose work ; sleep 60; done^M"
 
 screen -t m:index bash
@@ -35,4 +42,4 @@ screen -t m:f:1 bash
 stuff "mu find -n 10 booking^M"
 
 # The m:sync screen
-select 5
+select 7

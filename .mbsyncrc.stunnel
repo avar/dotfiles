@@ -1,0 +1,15 @@
+# Don't fork, stay in the foreground
+foreground = yes
+# Turn on verbose debugging. Can also "info" etc.
+debug = debug
+# Don't try to write a pid file. Makes it simple to run this without
+# chroot or sudo.
+pid =
+[mbsync-imap-ssl-tunnel]
+# Don't do local SSL, but local -> remote SSL.
+client = yes
+accept = 127.0.0.1:1430
+connect = imap.booking.com:993
+# This means do lazy DNS lookups, not on startup, in case our network
+# changes.
+delay = yes
