@@ -12,8 +12,9 @@ IMAPAccount work
     Host 127.0.0.1
     Port 1430
     SSLType None
-    # Needs my patch at http://sourceforge.net/p/isync/mailman/message/34682540/
-    Compression no
+    # Don't do compression for tcpflow inspectability. A no-op sync
+    # goes from 6s to 10s with this.
+    DisableExtensions COMPRESS=DEFLATE
     # This would be directly talking to imap.booking.com not through
     # stunnel.
     #Host imap.booking.com
