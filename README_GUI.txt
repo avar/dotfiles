@@ -33,6 +33,11 @@ autoreconf -i
 ./configure --prefix=/home/avar/local
 make -j 3 all install 
 make -j 3 install-info
+## emacs
+git clone git@github.com:emacs-mirror/emacs.git
+sh autogen.sh
+./configure --prefix=/home/avar/local --without-x
+make -j 4 all install
 
 # Other:
 ## Switch the default display for menubars etc.
