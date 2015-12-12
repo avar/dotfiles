@@ -34,7 +34,7 @@ stuff "while true; do time mbsync --verbose --pull work ; sleep 60; done^M"
 
 screen -t m:sync:> bash
 stuff "sleep 1^M"
-stuff "time mbsync --verbose --push work"
+stuff "while true; do time mbsync --verbose --pull work ; sleep 60; done"
 
 screen -t m:index bash
 stuff "killall mu; sleep 0.5; time mu index --maildir=~/Maildir/work --max-msg-size=500000000"
