@@ -35,7 +35,7 @@ Channel work
     Patterns INBOX Sent Drafts Trash Archives
     Create Both
     Sync Pull New ReNew Flags
-    Sync Push Delete
+    Sync Push Delete Flags
     Expunge Master
     SyncState *
 
