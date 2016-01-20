@@ -42,3 +42,22 @@ make -j 4 all install
 # Other:
 ## Switch the default display for menubars etc.
 xrandr --output HDMI3 --primary
+
+## Console keymap
+
+Sometimes the console keymap reverts back to QWERTY. Not quite sure
+why, but happened on an apt upgrade once.
+
+Running this in X seems to have fixed it:
+
+    sudo update-initramfs -u
+
+The internet suggested localectl and /etc/vconsole.conf, which was
+changed by *something* from KEYMAP=is-latin1 to KEYMAP=dvorak,
+probably the update-initramfs command itself. I think it just reads
+your current settings.
+
+The important thing to realize is that the bootup password request
+doesn't read /etc/vconsole.conf directly because we haven't decrypted
+/ at that point, rather it freezes whatever the setting is in
+initramfs.
