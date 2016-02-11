@@ -31,8 +31,15 @@ sub handle_privmsg {
     for my $noticeable_nick ( split /[\s,]+/, Irssi::settings_get_str('noticeable_nicks') ) {
         $noticeable_nick =~ s/\A \s+//x;
         $noticeable_nick =~ s/\s+ \z//x;
+        my $is_regexp; $is_regexp = 1 if $noticeable_nick =~ s/^~//;
 
-        if ( lc $noticeable_nick eq lc $_[I_NICK] ){
+        # Irssi::print("Checking <$_[I_NICK]> to <$noticeable_nick> via <" . ($is_regexp ? "rx" : "eq") . ">");
+        if ( $is_regexp and $_[I_NICK] =~ $noticeable_nick ) {
+            # Irssi::print("Matched <$_[I_NICK]> to <$noticeable_nick> via <rx>");
+            $is_noticeable = 1;
+            last;
+        } elsif ( not $is_regexp and lc $noticeable_nick eq lc $_[I_NICK] ){
+            # Irssi::print("Matched <$_[I_NICK]> to <$noticeable_nick> via <eq>");
             $is_noticeable = 1;
             last;
         }
@@ -43,7 +50,7 @@ sub handle_privmsg {
     Irssi::signal_stop();
 }
 
-Irssi::settings_add_str('msg_to_notice', 'noticeable_nicks', 'root,deploy');
+Irssi::settings_add_str('msg_to_notice', 'noticeable_nicks', '~\[bot\]$,root,deploy');
 Irssi::signal_add('event privmsg', 'handle_privmsg');
 
 # vim: filetype=perl tabstop=4 shiftwidth=4 expandtab cindent:
