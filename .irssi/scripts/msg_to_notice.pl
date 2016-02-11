@@ -28,8 +28,14 @@ sub handle_privmsg {
 
     # Irssi::print("server<$_[I_SERVER]> data<$_[I_DATA]>[$target:$message] nick<$_[I_NICK]> mask<$_[I_MASK]> target<@{[ $_[I_TARGET] // '(undef)' ]}>");
     my $is_noticeable = 0;
-    for my $noticeable_nick ( split ',', Irssi::settings_get_str('noticeable_nicks') ) {
-        $is_noticeable = 1 if $noticeable_nick eq $_[I_NICK];
+    for my $noticeable_nick ( split /[\s,]+/, Irssi::settings_get_str('noticeable_nicks') ) {
+        $noticeable_nick =~ s/\A \s+//x;
+        $noticeable_nick =~ s/\s+ \z//x;
+
+        if ( lc $noticeable_nick eq lc $_[I_NICK] ){
+            $is_noticeable = 1;
+            last;
+        }
     }
     return unless $is_noticeable;
 
@@ -37,7 +43,7 @@ sub handle_privmsg {
     Irssi::signal_stop();
 }
 
-Irssi::settings_add_str('msg_to_notice', 'noticeable_nicks', 'root,deploy,log');
+Irssi::settings_add_str('msg_to_notice', 'noticeable_nicks', 'root,deploy');
 Irssi::signal_add('event privmsg', 'handle_privmsg');
 
 # vim: filetype=perl tabstop=4 shiftwidth=4 expandtab cindent:
