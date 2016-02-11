@@ -15,6 +15,17 @@ $VERSION = "1";
     changed     => '2013-04-24T17:40+0200',
 );
 
+# HOWTO:
+#
+#   /load msg_to_notice.pl
+#   /set noticeable_nicks ~\[bot\]$,~mon-[0-9]+$,~^mon-.*-[0-9]+$,root,deploy,log,jenkins,nagmetoo
+#
+# The nicks that match will be turned into notices, useful for marking
+# bots as such. Note that if the nicks start with ~ the rest is taken
+# to be a regex. Due to limitations of our dummy parser you can't use
+# {x,y} character classes or other regex constructs that require a
+# comma, but usually that's something you can work around.
+
 use constant {
     I_SERVER => 0,
     I_DATA   => 1,
