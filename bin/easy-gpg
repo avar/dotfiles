@@ -1,0 +1,79 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+use Getopt::Long ();
+use Pod::Usage ();
+
+Getopt::Long::Parser->new(
+    config => [ qw< bundling no_ignore_case no_require_order pass_through > ],
+)->getoptions(
+    'h|help'  => \my $help,
+    'man'     => \my $man,
+    'email=s' => \my $email,
+) or die;
+
+if ($help or $man) {
+    Pod::Usage::pod2usage(1) if $help;
+    Pod::Usage::pod2usage(-exitstatus => 0, -verbose => 2) if $man;
+}
+
+my ($action, @files) = @ARGV;
+
+Pod::Usage::pod2usage(1) unless $action and $action =~ /^(?:d|de|e|en)(?:crypt)?$/s;
+
+if ($action =~ /^d(?:e(?:crypt)?)?$/s) {
+    print "Enter GPG passphrase: ";
+    system 'stty','-echo';
+    chomp(my $password = <STDIN>);
+    system 'stty','echo';
+    print "\n";
+
+    for my $file (@files) {
+        # No need to sanity check for $file eq $non_gpg_file, gpg does
+        # that itself and prompts for forcing or renaming.
+        (my $non_gpg_file = $file) =~ s/\.gpg$//s;
+        system qq[echo "$password" | gpg --passphrase-fd 0 --batch -d --output "$non_gpg_file" "$file"];
+    }
+} elsif ($action =~ /^e(?:n(?:crypt)?)?$/s) {
+    for my $file (@files) {
+        chomp($email ||= $ENV{EASY_GPG_DEFAULT_EMAIL} || `git config user.email`);
+        system qq[gpg -e -r "$email" "$file"];
+    }
+} else {
+    die "PANIC: Should not reach this with validated action <$action>";
+}
+
+=head1 NAME
+
+easy-gpg - Easily do batch encryption/decryption of GPG files
+
+=head1 SYNOPSIS
+
+    # Mass en/decrypt
+    easy-gpg encrypt *.jpeg
+    easy-gpg decrypt *.jpeg
+
+    # Abbreviated version
+    easy-gpg e *.jpeg
+    easy-gpg d *.jpeg
+
+    # Configure encryption E-Mail
+    - Use --email=<email>
+    - Or export EASY_GPG_DEFAULT_EMAIL=...
+    - Or we fallback on "git config user.email"
+
+    # This is the same as setting default-recipient-self in
+    # ~/.gnupg/gpg.conf and doing:
+    gpg --decrypt-files *.jpeg
+    gpg --encrypt-files *.jpeg
+
+    # I wrote this before I knew that, maybe I'll use this, maybe
+    # not...
+
+=head1 DESCRIPTION
+
+Working with multiple multiple files in GPG is needlessly tedious,
+especially decrypting multiple files. This simple utility makes it
+easy.
+
+=cut

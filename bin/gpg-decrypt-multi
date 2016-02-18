@@ -1,9 +1,0 @@
-#!/bin/bash
-# Stolen from http://stackoverflow.com/questions/18769290/decrypt-multiple-openpgp-files-in-a-directory
-
-read -rsp "Enter passphrase: " PASSPHRASE
-
-for FILE in $@; do
-    echo "Extracting $FILE to ${FILE%.gpg}"
-    echo "$PASSPHRASE" | gpg --passphrase-fd 0 --batch -d --output "${FILE%.gpg}" "$FILE"
-done
