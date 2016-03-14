@@ -35,7 +35,7 @@ make -j 3 all install
 make -j 3 install-info
 ## emacs
 git clone git@github.com:emacs-mirror/emacs.git
-sh autogen.sh
+./autogen.sh all
 ./configure --prefix=/home/avar/local --without-x
 make -j 4 all install
 
