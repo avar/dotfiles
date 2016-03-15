@@ -3,6 +3,7 @@ use warnings;
 use Irssi;
 use File::Spec::Functions qw(catdir catfile);
 
+our $VERSION = '1.0';
 our %IRSSI = (
     authors     => 'Ævar Arnfjörð Bjarmason',
     contact     => 'avarab@gmail.com',

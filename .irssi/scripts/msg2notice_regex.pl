@@ -2,6 +2,7 @@ use strict;
 use warnings;
 use Irssi;
 
+our $VERSION = '1.0';
 our %IRSSI = (
     authors     => 'Fernando Vezzosi & Ævar Arnfjörð Bjarmason',
     contact     => 'irssi@repnz.net & avarab@gmail.com',
