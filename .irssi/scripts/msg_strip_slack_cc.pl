@@ -2,7 +2,6 @@ use strict;
 use warnings;
 use Irssi;
 
-our $VERSION = "1";
 our %IRSSI = (
     authors     => 'Ævar Arnfjörð Bjarmason',
     contact     => 'avarab@gmail.com',

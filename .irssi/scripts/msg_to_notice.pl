@@ -3,9 +3,7 @@ use warnings;
 
 use Irssi;
 
-use vars qw($VERSION %IRSSI);
-$VERSION = "1";
-%IRSSI = (
+our %IRSSI = (
     authors     => 'Fernando Vezzosi',
     contact     => 'irssi@repnz.net',
     name        => 'Msg to Notice',
