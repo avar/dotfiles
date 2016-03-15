@@ -65,13 +65,14 @@ sub msg_rename_myself_in_printed_text {
     # feature.
     if ($stripped =~ /^<.?\Q$server_nick\E> /s) {
         ## DEBUG:
+        #use Data::Dumper;
         #open my $fh, ">>", "/tmp/irssi.log";
-        #print $fh "Before: " . my_dump([$data, $stripped]);
+        #print $fh "Before: " . Dumper([$data, $stripped]);
 
         s/\Q$server_nick\E/$server_username/ for $data, $stripped;
 
         ## DEBUG:
-        #print $fh "After: " . my_dump([$data, $stripped]);
+        #print $fh "After: " . Dumper([$data, $stripped]);
         #close $fh;
 
         Irssi::signal_continue($tdest, $data, $stripped);
@@ -79,9 +80,3 @@ sub msg_rename_myself_in_printed_text {
 }
 
 Irssi::signal_add_first('print text', 'msg_rename_myself_in_printed_text');
-
-sub my_dump {
-    require Data::Dumper;
-
-    return Data::Dumper->new([@_])->Useqq(1)->Indent(1)->Purity(1)->Deparse(1)->Sortkeys(\&_sortkeys)->Dump();
-}
