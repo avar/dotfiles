@@ -38,9 +38,16 @@ our %IRSSI = (
 #    on here in irssi I expect with a NICK not being overridable in
 #    the UI like this via PRIVMSG events.
 
-sub msg_rename_myself_privmsg {
-    my ($server, $data, $nick, $nick_and_address) = @_;
-    my ($target, $message) = split /:/, $data, 2;
+sub msg_rename_myself_in_printed_text {
+    my ($tdest, $data, $stripped) = @_;
+
+    # The $tdest object has various other things, like ->{target},
+    # ->{window} (object) etc.
+    my $server = $tdest->{server};
+
+    # Some events just hawe ->{window} and no ->{server}, we can
+    # ignore those
+    return unless $server;
 
     # Unpack our configuration from $server.
     my $server_username = $server->{username};
@@ -50,13 +57,21 @@ sub msg_rename_myself_privmsg {
     # username.
     return if $server_username eq $server_nick;
 
-    # We only manipulate messages from ourselves
-    return unless $server_nick eq $nick;
+    # FIXME: Doesn't do anything to the UI either
+    s/$server_nick/$server_username/g for $data, $stripped;
 
-    # Emit our manipulated event with a fake nick & message.
-    my $new_data = "$server_username :$message";
-    Irssi::signal_emit('event privmsg', $server, $new_data, $server_username, $nick_and_address);
-    Irssi::signal_stop();
+    #use Data::Dumper;
+    #open my $fh, ">>", "/tmp/irssi.log";
+    #print $fh "Raw print event = " . Data::Dumper->new([[$data, $stripped]])->Useqq(1)->Indent(1)->Purity(1)->Deparse(1)->Sortkeys(\&_sortkeys)->Dump();
+    #close $fh;
+
+    Irssi::signal_continue($tdest, $data, $stripped);
+
+    ## Infinite loop!
+    #Irssi::signal_emit('print text', $tdest, $data, $stripped);
+    #Irssi::signal_stop();
+
+    return;
 }
 
-Irssi::signal_add('event privmsg', 'msg_rename_myself_privmsg');
+Irssi::signal_add_last('print text', 'msg_rename_myself_in_printed_text');
