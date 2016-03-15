@@ -20,23 +20,19 @@ our %IRSSI = (
 # that has LDAP-connected accounts.
 #
 # In that case your NICK may not be what you're used to. This
-# intercepts PRIVMSG from you and rewrites them so that they appear to
-# come from the "nick" configured in settings.core.user_name instead
-# of whatever your nickname is on the server.
+# intercepts "print text" events from irssi and rewrites them so that
+# they appear to come from the "nick" configured in
+# settings.core.user_name instead of whatever your nickname is on the
+# server.
+#
+# The result is that you'll appear to yourself to have your "correct"
+# nickname. The illusion goes pretty far, even down to your IRC logs,
+# but of course everyone else will see you as your real nickname, or
+# maybe your username (I use this for a IRC->Slack/Bitlee gateway).
 #
 # This should just automatically work, it'll detect what your nick is,
 # what you're username is, and automatically substitute
 # s/nick/username/ if applicable.
-#
-# XXX TODO: This doesn't work, bugs:
-#
-#  - When you /query YOURNICK and type "hi" it ends up in another
-#    window of YOURUSERNAME.
-#
-#  - When I type something in a channel it just plain doesn't work as
-#    I expect. Only my NICK is visible. There's something deeper going
-#    on here in irssi I expect with a NICK not being overridable in
-#    the UI like this via PRIVMSG events.
 
 sub msg_rename_myself_in_printed_text {
     my ($tdest, $data, $stripped) = @_;
@@ -57,21 +53,35 @@ sub msg_rename_myself_in_printed_text {
     # username.
     return if $server_username eq $server_nick;
 
-    # FIXME: Doesn't do anything to the UI either
-    s/$server_nick/$server_username/g for $data, $stripped;
+    # We're matching against $stripped but replacing both because the
+    # $data thing is escaped and much harder to match against.
+    #
+    # We're just replacing nick mentions, so e.g. if you say "Hi I'm
+    # bob here but my username is bobby" it won't turn into "Hi I'm
+    # bobby here but my username is bobby".
+    #
+    # The illusion here isn't complete, e.g. if you do /NAMES your
+    # nick will show up and not your username, but I consider that a
+    # feature.
+    if ($stripped =~ /^<.?\Q$server_nick\E> /s) {
+        ## DEBUG:
+        #open my $fh, ">>", "/tmp/irssi.log";
+        #print $fh "Before: " . my_dump([$data, $stripped]);
 
-    #use Data::Dumper;
-    #open my $fh, ">>", "/tmp/irssi.log";
-    #print $fh "Raw print event = " . Data::Dumper->new([[$data, $stripped]])->Useqq(1)->Indent(1)->Purity(1)->Deparse(1)->Sortkeys(\&_sortkeys)->Dump();
-    #close $fh;
+        s/\Q$server_nick\E/$server_username/ for $data, $stripped;
 
-    Irssi::signal_continue($tdest, $data, $stripped);
+        ## DEBUG:
+        #print $fh "After: " . my_dump([$data, $stripped]);
+        #close $fh;
 
-    ## Infinite loop!
-    #Irssi::signal_emit('print text', $tdest, $data, $stripped);
-    #Irssi::signal_stop();
-
-    return;
+        Irssi::signal_continue($tdest, $data, $stripped);
+    }
 }
 
-Irssi::signal_add_last('print text', 'msg_rename_myself_in_printed_text');
+Irssi::signal_add_first('print text', 'msg_rename_myself_in_printed_text');
+
+sub my_dump {
+    require Data::Dumper;
+
+    return Data::Dumper->new([@_])->Useqq(1)->Indent(1)->Purity(1)->Deparse(1)->Sortkeys(\&_sortkeys)->Dump();
+}
