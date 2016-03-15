@@ -1,0 +1,1 @@
+../bitlbee_hide_password.pl
