@@ -5,21 +5,21 @@ use Irssi;
 our %IRSSI = (
     authors     => 'Ævar Arnfjörð Bjarmason',
     contact     => 'avarab@gmail.com',
-    name        => 'Msg strip slack CC',
-    description => 'Strips the annoying mentions of your nickname via [cc: <you>]',
+    name        => 'slack_strip_auto_cc.pl',
+    description => 'Strips the annoying mentions of your nickname on Slack via [cc: <you>]',
     license     => 'Public Domain',
-    url         => 'http://irssi.org/',
+    url         => 'http://scripts.irssi.org & https://github.com/avar/dotfiles/blob/master/.irssi/scripts/slack_strip_auto_cc.pl',
 );
 
 # HOWTO:
 #
-#   /load msg_strip_slack_cc.pl
+#   /load slack_strip_auto_cc.pl
 #
 # This should just automatically work, it'll detect if you're using
 # the slack IRC gateway and auto-detect the nick it should be
 # stripping as well.
 
-sub rewrite_privmsg {
+sub privmsg_slack_strip_auto_cc {
     my ($server, $data, $nick, $nick_and_address) = @_;
     my ($target, $message) = split /:/, $data, 2;
 
@@ -28,8 +28,7 @@ sub rewrite_privmsg {
     return unless $message =~ s/ \[cc: \Q$wanted_nick\E\]$//s;
 
     my $new_data = "$target:$message";
-    Irssi::signal_emit('event privmsg', $server, $new_data, $nick, $nick_and_address);
-    Irssi::signal_stop();
+    Irssi::signal_continue($server, $new_data, $nick, $nick_and_address);
 }
 
-Irssi::signal_add('event privmsg', 'rewrite_privmsg');
+Irssi::signal_add('event privmsg', 'privmsg_slack_strip_auto_cc');

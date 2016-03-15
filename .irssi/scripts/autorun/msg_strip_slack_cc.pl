@@ -1,1 +1,0 @@
-../msg_strip_slack_cc.pl

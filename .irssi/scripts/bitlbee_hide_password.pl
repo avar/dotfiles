@@ -8,7 +8,7 @@ our %IRSSI = (
     name        => 'bitlbee_hide_password.pl',
     description => 'Hide your REGISTER and IDENTIFY password lines in &bitlbee from screen & logs ',
     license     => 'Public Domain',
-    url         => 'http://irssi.org/',
+    url         => 'http://scripts.irssi.org & https://github.com/avar/dotfiles/blob/master/.irssi/scripts/bitlbee_hide_password.pl',
 );
 
 # HOWTO:
@@ -26,6 +26,16 @@ our %IRSSI = (
 # Your password will be shown on screen, and more importantly logged
 # in your logfiles. This extension intercepts these commands in your
 # &bitlbee channel and hides it from screen & logs.
+#
+# Note: You can avoid the password going into the log without this
+# plugin by doing:
+#
+#    IDENTIFY
+#    /OPER
+#
+# But this script also makes sure that your REGISTER commands will be
+# hidden, and of course "IDENTIFY <password>" commands if you ever
+# forget to IDENTIFY with /OPER.
 
 sub msg_intercept_bitlbee_password_lines {
     my ($tdest, $data, $stripped) = @_;

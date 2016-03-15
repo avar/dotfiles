@@ -5,15 +5,15 @@ use Irssi;
 our %IRSSI = (
     authors     => 'Ævar Arnfjörð Bjarmason',
     contact     => 'avarab@gmail.com',
-    name        => 'MSG own nick to username',
+    name        => 'munge_own_nickname_to_username.pl',
     description => 'Changes messages from myself to appear to come from my username, not my nickname',
     license     => 'Public Domain',
-    url         => 'http://irssi.org/',
+    url         => 'http://scripts.irssi.org & https://github.com/avar/dotfiles/blob/master/.irssi/scripts/munge_own_nickname_to_username.pl',
 );
 
 # HOWTO:
 #
-#   /load msg_own_nick_to_username.pl
+#   /load munge_own_nickname_to_username.pl
 #
 # This is for use on servers where your NICK is forced upon you,
 # e.g. when connecting to some corporate maintained Bitlbee server
@@ -64,16 +64,7 @@ sub msg_rename_myself_in_printed_text {
     # nick will show up and not your username, but I consider that a
     # feature.
     if ($stripped =~ /^<.?\Q$server_nick\E> /s) {
-        ## DEBUG:
-        #use Data::Dumper;
-        #open my $fh, ">>", "/tmp/irssi.log";
-        #print $fh "Before: " . Dumper([$data, $stripped]);
-
         s/\Q$server_nick\E/$server_username/ for $data, $stripped;
-
-        ## DEBUG:
-        #print $fh "After: " . Dumper([$data, $stripped]);
-        #close $fh;
 
         Irssi::signal_continue($tdest, $data, $stripped);
     }

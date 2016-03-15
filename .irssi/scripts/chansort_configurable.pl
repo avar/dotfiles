@@ -9,7 +9,7 @@ our %IRSSI = (
     name        => 'chansort_configurable',
     description => "Sort channels & query windows in a configurable way, based on Peder Stray's chansort.pl",
     license     => 'GPL',
-    url         => 'http://irssi.org/',
+    url         => 'http://scripts.irssi.org & https://github.com/avar/dotfiles/blob/master/.irssi/scripts/chansort_configurable.pl',
 );
 
 # HOWTO:

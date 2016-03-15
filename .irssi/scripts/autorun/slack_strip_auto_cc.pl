@@ -1,0 +1,1 @@
+../slack_strip_auto_cc.pl

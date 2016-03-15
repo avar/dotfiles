@@ -1,1 +1,0 @@
-../msg_own_nick_to_username.pl
