@@ -20,14 +20,6 @@ our %IRSSI = (
 # the slack IRC gateway and auto-detect the nick it should be
 # stripping as well.
 
-use constant {
-    I_SERVER => 0,
-    I_DATA   => 1,
-    I_NICK   => 2,
-    I_MASK   => 3,
-    I_TARGET => 4,
-};
-
 sub rewrite_privmsg {
     my ($server, $data, $nick, $nick_and_address) = @_;
     my ($target, $message) = split /:/, $data, 2;
