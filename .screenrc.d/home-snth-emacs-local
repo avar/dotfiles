@@ -52,7 +52,7 @@ stuff "mu find -n 10 booking^M"
 screen -t s:daemon-nm-dis:l bash
 stuff "tail -f /var/log/daemon.log | grep nm-dispatcher^M"
 
-screet -t s:squid:l bash
+screen -t s:squid:l bash
 stuff "sudo tail -f /var/log/squid3/*.log^M"
 
 # The m:sync screen
