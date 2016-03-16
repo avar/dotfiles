@@ -45,7 +45,7 @@ sub msg_intercept_bitlbee_password_lines {
     # ->{window} (object) etc.
     my $server = $tdest->{server};
 
-    # Some events just hawe ->{window} and no ->{server}, we can
+    # Some events just have ->{window} and no ->{server}, we can
     # ignore those
     return unless $server;
 
@@ -55,14 +55,6 @@ sub msg_intercept_bitlbee_password_lines {
 
     # We're matching against $stripped but replacing both because the
     # $data thing is escaped and much harder to match against.
-    #
-    # We're just replacing nick mentions, so e.g. if you say "Hi I'm
-    # bob here but my username is bobby" it won't turn into "Hi I'm
-    # bobby here but my username is bobby".
-    #
-    # The illusion here isn't complete, e.g. if you do /NAMES your
-    # nick will show up and not your username, but I consider that a
-    # feature.
     if ($stripped =~ /^<.?[^>]+> (?:register|identify) .+/si) {
         s/(identify|register) .+/$1 <password stripped by $IRSSI{name}>/i for $data, $stripped;
         Irssi::signal_continue($tdest, $data, $stripped);

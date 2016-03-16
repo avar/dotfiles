@@ -42,7 +42,7 @@ sub msg_rename_myself_in_printed_text {
     # ->{window} (object) etc.
     my $server = $tdest->{server};
 
-    # Some events just hawe ->{window} and no ->{server}, we can
+    # Some events just have ->{window} and no ->{server}, we can
     # ignore those
     return unless $server;
 
