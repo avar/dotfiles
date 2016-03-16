@@ -34,6 +34,11 @@ our %IRSSI = (
 # This should just automatically work, it'll detect what your nick is,
 # what you're username is, and automatically substitute
 # s/nick/username/ if applicable.
+#
+# Note that if your theme adjusts the msgnick rendering this may not
+# work, because we try to match "< yournick>" in the line. We could
+# potentially do better, please contact the author if you run into
+# issues with this.
 
 sub msg_rename_myself_in_printed_text {
     my ($tdest, $data, $stripped) = @_;
