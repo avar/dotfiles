@@ -61,3 +61,16 @@ The important thing to realize is that the bootup password request
 doesn't read /etc/vconsole.conf directly because we haven't decrypted
 / at that point, rather it freezes whatever the setting is in
 initramfs.
+
+Update: recently this broke, setting it back to dvorak and running
+update-initramfs -u didn't fix it. Running it would yield:
+
+    Warning: error while trying to store keymap file - ignoring
+    request to install /etc/boottime.kmap.gz
+
+Per https://lists.debian.org/debian-kernel/2015/05/msg00288.html I
+needed to do:
+
+    dpkg-reconfigure keyboard-configuration
+
+And now I'm okey again!
