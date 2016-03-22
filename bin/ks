@@ -1,0 +1,22 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+
+=head1 NAME
+
+ks - Kill screen(s) under given names
+
+=cut
+
+my @screens = qx[screen -ls|grep -E '^\\s*[0-9]+\\.'];
+my %screens;
+for my $screen (@screens) {
+    my ($pid, $screen_name) = $screen =~ m/^\s*([0-9]+)\.(\S+)/s;
+    push @{$screens{$screen_name}} => $pid;
+}
+
+for my $to_kill (@ARGV) {
+    my @pids = @{$screens{$to_kill} || []};
+    next unless @pids;
+    system "kill", @pids and die "PANIC: Couldn't kill <$to_kill>. Exited with <" . ($? >> 8) . ">";
+}
