@@ -1,0 +1,30 @@
+#!/usr/bin/env perl
+use v5.14.2;
+use strict;
+use warnings;
+use Socket qw(
+    AF_INET
+    inet_aton
+);
+
+=head1 NAME
+
+de-ip - Pipe text with IP addresses through this to get the hostnames
+
+=cut
+
+my $frag = qr/[0-9]{1,3}/s;
+my $ip = qr/($frag\.$frag\.$frag\.$frag)/;
+
+my %cache;
+while (<>) {
+    s[$ip][($cache{$1} //= ip2host($1)) || $1]ge;
+    print;
+}
+
+sub ip2host {
+    my ($ip) = @_;
+    my $aton = inet_aton($ip);
+    my $name = gethostbyaddr($aton, AF_INET);
+    return $name || '';
+}
