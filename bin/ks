@@ -15,8 +15,8 @@ for my $screen (@screens) {
     push @{$screens{$screen_name}} => $pid;
 }
 
-for my $to_kill (@ARGV) {
+for my $to_kill (@ARGV ? @ARGV : keys %screens) {
     my @pids = @{$screens{$to_kill} || []};
     next unless @pids;
-    system "kill", @pids and die "PANIC: Couldn't kill <$to_kill>. Exited with <" . ($? >> 8) . ">";
+    system "echo", "kill", @pids and die "PANIC: Couldn't kill <$to_kill>. Exited with <" . ($? >> 8) . ">";
 }
