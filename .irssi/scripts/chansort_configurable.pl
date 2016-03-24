@@ -3,7 +3,7 @@ use warnings;
 use Irssi;
 use File::Spec::Functions qw(catdir catfile);
 
-our $VERSION = '1.0';
+our $VERSION = '1.1';
 our %IRSSI = (
     authors     => 'Ævar Arnfjörð Bjarmason',
     contact     => 'avarab@gmail.com',
@@ -72,7 +72,7 @@ our %IRSSI = (
 #     };
 #
 # The above sorter will sort channels before queries, and networks
-# alphabetically, but will sort make the #irssi channel be the first
+# alphabetically, but will make the #irssi channel be the first
 # channel on the freenode network.
 
 my $sort_callback_file = catfile(catdir(Irssi::get_irssi_dir(), 'scripts'), 'chansort_configurable_callback.pl');
