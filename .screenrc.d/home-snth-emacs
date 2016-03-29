@@ -1,6 +1,6 @@
 source /home/avar/.screenrc
 
-sessionname em
+sessionname hem
 
 screen -t e bash
 stuff "(emacsclient --tty || (emacs --daemon && emacsclient --tty))^M"
