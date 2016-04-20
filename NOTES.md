@@ -13,3 +13,5 @@ sudo cryptsetup close manual-teracaddy
 ## Building
 
 The macros are in /usr/lib/rpm/macros, e.g. %configure etc.
+
+Also available via: rpm --showrc
