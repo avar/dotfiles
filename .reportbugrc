@@ -1,0 +1,22 @@
+# reportbug preferences file
+# character encoding: UTF-8
+# Version of reportbug this preferences file was written by
+reportbug_version "6.6.3"
+# default operating mode: one of: novice, standard, advanced, expert
+mode standard
+# default user interface
+ui text
+# offline setting - comment out to be online
+#offline
+# name and email setting (if non-default)
+# realname "Ævar Arnfjörð Bjarmason"
+email "avarab@gmail.com"
+# Your proxy server address
+http_proxy "http://127.0.0.1:3128"
+# If nothing else works, remove the # at the beginning
+# of the following three lines:
+#no-cc
+#header "X-Debbugs-CC: avarab@gmail.com"
+#smtphost reportbug.debian.org
+# You can add other settings after this line.  See
+# /etc/reportbug.conf for a full listing of options.
