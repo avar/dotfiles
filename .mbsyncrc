@@ -7,7 +7,7 @@ IMAPAccount work
     # User authentication
     AuthMech LOGIN
     User aearnfjord
-    PassCmd "cat ~/.mbsync-pass"
+    PassCmd "stat --format=%a ~/.mbsync-pass | grep -qx 600 && cat ~/.mbsync-pass"
     # Who do we talk to?
     Host 127.0.0.1
     Port 1430
