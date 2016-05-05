@@ -1,0 +1,4 @@
+all:
+	wget https://raw.githubusercontent.com/irssi/scripts.irssi.org/gh-pages/scripts/uberprompt.pl -O uberprompt.pl
+	wget https://raw.githubusercontent.com/irssi/scripts.irssi.org/gh-pages/scripts/ido_switcher.pl -O ido_switcher.pl
+	wget https://raw.githubusercontent.com/irssi/scripts.irssi.org/gh-pages/scripts/history_search.pl -O history_search.pl
