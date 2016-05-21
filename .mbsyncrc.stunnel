@@ -1,7 +1,7 @@
 # Don't fork, stay in the foreground
 foreground = yes
 # Turn on verbose debugging. Can also "info" etc.
-debug = debug
+debug = info
 # Don't try to write a pid file. Makes it simple to run this without
 # chroot or sudo.
 pid =
