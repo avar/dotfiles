@@ -55,5 +55,23 @@ stuff "tail -f /var/log/daemon.log | grep nm-dispatcher^M"
 screen -t s:squid:l bash
 stuff "sudo tail -f /var/log/squid3/*.log^M"
 
+# OpenVPN related
+screen -t openvpn:connect bash
+stuff "nmcli con up id 'booking'"
+
+screen -t openvpn.log bash
+stuff "tail -f /var/log/syslog | grep openvpn^M"
+
+screen -t nm-dispatcher.log bash
+stuff "tail -f /var/log/daemon.log | grep nm-dispatcher^M"
+
+screen -t tcpflow:openvpn bash
+stuff "sudo tcpflow -i wlan0 -c port 1194"
+
+screen -t investigate bash
+stuff "ip route list^M"
+stuff "ip route get 10.252.13.1^M"
+stuff "ip route get 8.8.8.8^M"
+
 # The m:sync screen
 select 7
