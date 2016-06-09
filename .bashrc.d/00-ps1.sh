@@ -61,6 +61,10 @@ function dir_info() {
     ls -Alhs | head -n1 | cut -d' ' -f2
 }
 
+function dir_color {
+    echo -n $((31 + $(pwd | cksum | cut -c1-3) % 6))
+}
+
 if ls --help >&/dev/null 2>&1 | grep -q group-directories-first; then
     group_dirs=" --group-directories-first"
 else
@@ -86,9 +90,9 @@ then
     __hostname_color=$((31 + $(hostname | cksum | cut -c1-3) % 6))
 
     if [[ ${EUID} == 0 ]] ; then
-        PS1='\[\e[1;${__hostname_color}m\]\h\[\e[m\] \[\e[1;34m\]\W\[\e[m\] (\[\e[;33m\]$(dir_info)\[\e[m\]) \[\e[1;31m\]\$\[\e[m\] '
+        PS1='\[\e[1;${__hostname_color}m\]\h\[\e[m\] \[\e[1;$(dir_color)m\]\W\[\e[m\] (\[\e[;33m\]$(dir_info)\[\e[m\]) \[\e[1;31m\]\$\[\e[m\] '
     else
-        PS1='\[\e[1;${__hostname_color}m\]\h\[\e[m\] \[\e[1;34m\]\W\[\e[m\] (\[\e[;33m\]$(dir_info)\[\e[m\]) \[\e[1;32m\]\$\[\e[m\] '
+        PS1='\[\e[1;${__hostname_color}m\]\h\[\e[m\] \[\e[1;$(dir_color)m\]\W\[\e[m\] (\[\e[;33m\]$(dir_info)\[\e[m\]) \[\e[1;32m\]\$\[\e[m\] '
     fi
 
     export PERLDOC="-MPod::Text::Ansi"
