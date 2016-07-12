@@ -9,7 +9,12 @@ pid =
 # Don't do local SSL, but local -> remote SSL.
 client = yes
 accept = 127.0.0.1:1430
-connect = imap.booking.com:993
+connect = eximap-eur.booking.com:993
 # This means do lazy DNS lookups, not on startup, in case our network
 # changes.
 delay = yes
+
+# Testing this:
+# $ nc localhost 1430
+# * OK The Microsoft Exchange IMAP4 service is ready.
+# ^C
