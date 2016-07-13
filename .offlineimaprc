@@ -65,7 +65,7 @@ holdconnectionopen = no
 # Don't sync the server's deletions locally. If it wants to delete
 # something I can manually review that so some bug doesn't wipe my
 # entire mailbox.
-sync_deletes = yes
+sync_deletes = no
 
 # Only get a select whitelist of the folders, not e.g. "Calendar".
 folderfilter = lambda f: f in ['INBOX', 'Drafts', 'Sent Items', 'Deleted Items', 'Junk E-Mail']
