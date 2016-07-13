@@ -1,31 +1,78 @@
-# How to use this: Start a screen with:
-
-## while sleep 10; do nice -n 40 ionice -c 3 offlineimap ; done
-## nice -n 40 ionice -c 3 /home/avar/g/misc-scripts/lsmail.sh
-## sort -rn ~/mail-msg.txt  | less -S
+# The work exchange IMAP configuration for offlineimap.
 
 [general]
-accounts = Gmail
+ui = ttyui
+
+# Set up my one account
+accounts = Work
+
+# I only have one account anyway, but be explicit, sync one account at
+# a time.
 maxsyncaccounts = 1
-ui = TTY.TTYUI
 
-[Account Gmail]
-localrepository = Local
-remoterepository = Remote
+# Play it fast and dangerous to get more performance + SSD lifetime.
+fsync = false
 
-[Repository Local]
+# Timeout on individual reads & writes. Not the whole operation, in
+# seconds. Setting this to e.g. 10s *will* timeout, it might still
+# timeout with the higher value, it's also timed out at 60s
+socktimeout = 180
+
+# Defines get_password() and other functions used here
+pythonfile = ~/.offlineimap.py
+
+[Account Work]
+localrepository = WorkLocal
+remoterepository = WorkRemote
+
+[Repository WorkLocal]
+type = Maildir
+localfolders = ~/Maildir/work
+
+# Sync local deletes to the remote
+sync_deletes = yes
+
+# The reverse nametrans, see the comment for the WorkRemote nametrans.
+nametrans = lambda f: re.sub('^Sent$', 'Sent Items', re.sub('^Trash$', 'Deleted Items', re.sub('^Junk$', 'Junk E-Mail', f)))
+
+[Repository WorkRemote]
 type = IMAP
+
+# Just to not waste time trying to use IPv6
+ipv6 = False
+
+# Use the tunnel set up in ~/.stunnel.work-imap and password in
+# ~/.password/work-ldap, stunnel takes care of our SSL there, so no
+# TLS/SSL.
 remotehost = localhost
-port = 143
-remoteuser = avar
+remoteport = 1430
+remoteuser = aearnfjord
+remotepasseval = get_password("work-ldap")
+starttls = no
+ssl = no
 
-[Repository Remote]
-type = IMAP
-remotehost = imap.gmail.com
-remoteuser = avarab@gmail.com
-#remotepass = your_gmail_password
-ssl = yes
+# I'd disable compression to make the tcpflow debugging easier, but
+# exchange just errors out on this, so I don't have a choice anyway.
+usecompression = no
+
+# If I were to use idlefolders / keepalive etc. this would have to be
+# at least the number of folders I'm syncing
 maxconnections = 1
-realdelete = no
-## Only get the inbox
-#folderfilter = lambda foldername: foldername in ['INBOX']
+
+# Only does something on autorefresh
+holdconnectionopen = no
+
+# Don't sync the server's deletions locally. If it wants to delete
+# something I can manually review that so some bug doesn't wipe my
+# entire mailbox.
+sync_deletes = yes
+
+# Only get a select whitelist of the folders, not e.g. "Calendar".
+folderfilter = lambda f: f in ['INBOX', 'Drafts', 'Sent Items', 'Deleted Items', 'Junk E-Mail']
+
+# Translate some of the folder names to be what they were before and
+# not have whitespace in them. See
+# http://www.offlineimap.org/doc/nametrans.html#faq-on-nametrans any
+# rule here will have to have an inverse rule in WorkLocal's nametrans
+# lambda.
+nametrans = lambda f: re.sub('^Sent Items$', 'Sent', re.sub('^Deleted Items$', 'Trash', re.sub('^Junk E-Mail$', 'Junk', f)))

@@ -23,22 +23,14 @@ stuff "find ~/Maildir -type f -mmin -5|wc -l # modified in the last 5mins^M"
 stuff "find ~/Maildir -type f -cmin -5|wc -l # created in the last 5mins^M"
 
 screen -t m:stunnel bash
-stuff "killall stunnel ; sleep 0.5 ; stunnel .mbsyncrc.stunnel^M"
+stuff "killall stunnel ; sleep 0.5 ; stunnel .stunnel.work-imap^M"
 
 screen -t m:stunnel:flow bash
 stuff "sudo tcpflow -i lo -c port 1430^M"
 
 screen -t m:sync:<> bash
 stuff "sleep 1^M"
-stuff "while true; do time mbsync --verbose work ; sleep 60; done^M"
-
-screen -t m:sync:< bash
-stuff "sleep 1^M"
-stuff "while true; do time mbsync --verbose --pull work ; sleep 60; done"
-
-screen -t m:sync:> bash
-stuff "sleep 1^M"
-stuff "while true; do time mbsync --verbose --push work ; sleep 60; done"
+stuff "while true; do time python ~/g/offlineimap/offlineimap.py -c ~/.offlineimaprc ; sleep 60; done^M"
 
 screen -t m:index bash
 stuff "killall mu; sleep 0.5; time mu index --maildir=~/Maildir/work --max-msg-size=500000000"
