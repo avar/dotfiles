@@ -25,6 +25,7 @@ while (my $file = <>) {
     push @{$msgid{$headers->{msgid}}} => {
         maildir => $maildir,
         headers => $headers,
+        file    => $file,
     };
 
     ## pv -s 1571490

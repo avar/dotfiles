@@ -31,6 +31,9 @@ for my $msgid (keys %$data) {
 
     # If it's in the Exchange version it got copied over OK
     next if $maildir eq 'Maildir';
+    # Seems they didn't sync Trashed files or some Drafts. Ignore
+    # these for "real" mails.
+    next if $one->{file} =~ m[/Trash/|/Drafts/];
 
-    say "$one->{headers}->{date}\t$msgid\t$one->{headers}->{subject}";
+    say Dumper $one;
 }
