@@ -34,8 +34,11 @@ screen -t m:sync:<> bash
 stuff "sleep 1^M"
 stuff "while true; do time python ~/g/offlineimap/offlineimap.py -c ~/.offlineimaprc ; sleep 60; done^M"
 
+screen -t m:monitor bash
+stuff "while sleep 1; do time sudo perl ~/g/dotemacs/scripts/mu-monitor.pl; done^M"
+
 screen -t m:index bash
-stuff "killall mu; sleep 0.5; time mu index --maildir=~/Maildir/work --max-msg-size=500000000"
+stuff "while sleep 30; do time mu index --maildir=~/Maildir/work --max-msg-size=500000000; done^M"
 
 screen -t m:f:0 bash
 stuff "mu find -n 10 avar^M"
