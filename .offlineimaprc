@@ -24,6 +24,7 @@ pythonfile = ~/.offlineimap.py
 [Account Work]
 localrepository = WorkLocal
 remoterepository = WorkRemote
+autorefresh = 5
 
 [Repository WorkLocal]
 type = Maildir
@@ -55,12 +56,18 @@ ssl = no
 # exchange just errors out on this, so I don't have a choice anyway.
 usecompression = no
 
+# The maxconnections needs to be at least as many as this.
+idlefolders = ['INBOX', 'Drafts', 'Sent Items', 'Deleted Items', 'Junk E-Mail']
+
 # If I were to use idlefolders / keepalive etc. this would have to be
 # at least the number of folders I'm syncing
-maxconnections = 1
+maxconnections = 5
 
 # Only does something on autorefresh
-holdconnectionopen = no
+holdconnectionopen = yes
+
+# Send a keepalive every N seconds
+keepalive = 60
 
 # Don't sync the server's deletions locally. If it wants to delete
 # something I can manually review that so some bug doesn't wipe my
