@@ -33,7 +33,7 @@ localfolders = ~/Maildir/work
 sync_deletes = yes
 
 # The reverse nametrans, see the comment for the WorkRemote nametrans.
-nametrans = lambda f: re.sub('^Sent$', 'Sent Items', re.sub('^Trash$', 'Deleted Items', re.sub('^Junk$', 'Junk E-Mail', f)))
+nametrans = lambda name: oi_work_local_nametrans(name)
 
 [Repository WorkRemote]
 type = IMAP
@@ -72,7 +72,5 @@ folderfilter = lambda f: f in ['INBOX', 'Drafts', 'Sent Items', 'Deleted Items',
 
 # Translate some of the folder names to be what they were before and
 # not have whitespace in them. See
-# http://www.offlineimap.org/doc/nametrans.html#faq-on-nametrans any
-# rule here will have to have an inverse rule in WorkLocal's nametrans
-# lambda.
-nametrans = lambda f: re.sub('^Sent Items$', 'Sent', re.sub('^Deleted Items$', 'Trash', re.sub('^Junk E-Mail$', 'Junk', f)))
+# http://www.offlineimap.org/doc/nametrans.html#faq-on-nametrans
+nametrans = lambda name: oi_work_remote_nametrans(name)
