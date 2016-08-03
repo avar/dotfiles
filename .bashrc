@@ -8,6 +8,8 @@ fi
 ## Unset things in global bashrc's that I'd prefer to set myself
 ## later.
 unset TMOUT
+unset GIT_AUTHOR_NAME
+unset GIT_COMMITTER_NAME
 
 ## Some regression in gnome-terminal @ 2015-08-31 that caused colors
 ## to stop working. I didn't see any obvious package that changed.
