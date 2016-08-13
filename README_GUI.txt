@@ -21,23 +21,13 @@
 
 # Set up mbsync+mu+emacs
 ## mbsync
-cd g
-git clone http://git.code.sf.net/p/isync/isync isync
-cd isync
-sh autogen.sh
-./configure --prefix=/home/avar/local
-make -j 3 all install
+cd g && git clone http://git.code.sf.net/p/isync/isync isync && cd isync
+sh autogen.sh && ./configure --prefix=/home/avar/local && make -j 3 all install
 ## mu
-cd ~/g/elisp/mu
-autoreconf -i
-./configure --prefix=/home/avar/local
-make -j 3 all install 
-make -j 3 install-info
+cd ~/g/elisp/mu && autoreconf -i && ./configure --prefix=/home/avar/local && make -j 3 all install && make -j 3 install-info
 ## emacs
 git clone git@github.com:emacs-mirror/emacs.git
-./autogen.sh all
-./configure --prefix=/home/avar/local --without-x
-make -j 4 all install
+cd ~/g/emacs && ./autogen.sh all && ./configure --prefix=/home/avar/local --without-x && make -j 4 all install
 
 # Other:
 ## Switch the default display for menubars etc.
