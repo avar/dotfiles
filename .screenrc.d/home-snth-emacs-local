@@ -53,6 +53,9 @@ screen -t s:squid:l bash
 stuff "sudo tail -f /var/log/squid3/*.log^M"
 
 # OpenVPN related
+screen -t yubikey:hook bash
+stuff "tail -n 0 -F /tmp/udev.70-youbikey-setxkbmap.hook | DISPLAY=:0 perl -nE 'say qx[setxkbmap -device \\$(xinput list | sed -n \"s/.*Yubikey.*id=\\\\([0-9]*\\\\).*keyboard.*/\\\\1/p\") -layout us 2>&1]'^M"
+
 screen -t openvpn:connect bash
 stuff "nmcli con up id 'booking'"
 
