@@ -60,7 +60,7 @@
 	rebase = true
 [sendemail]
 	smtpserver = smtp.gmail.com
-	smtpssl = 1
+	smtpEncryption = ssl
 	smtpuser = avarab@gmail.com
 	confirm = always
 [rebase]
