@@ -24,6 +24,9 @@ pythonfile = ~/.offlineimap.py
 [Account Work]
 localrepository = WorkLocal
 remoterepository = WorkRemote
+# When I can't sync things due to timeouts or whatever this has been
+# known to work
+#maxage = 7
 
 [Repository WorkLocal]
 type = Maildir
