@@ -55,7 +55,7 @@
 	;; Handy tools
 	review = "!f() { for rev in $(git rev-list --reverse $@); do git show --stat -p -M $rev; done; }; f"
 [push]
-	default = tracking
+	default = upstream
 [pull]
 	rebase = true
 [sendemail]
