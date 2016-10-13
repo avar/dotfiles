@@ -31,7 +31,7 @@ screen -t m:stunnel:flow bash
 stuff "sudo tcpflow -i lo -c port 1430^M"
 
 screen -t m:sync:<> bash
-stuff "sleep 1^M"
+stuff "sleep 10^M"
 stuff "while true; do time python ~/g/offlineimap/offlineimap.py -c ~/.offlineimaprc ; sleep 60; done^M"
 
 screen -t m:monitor bash
