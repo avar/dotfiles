@@ -357,26 +357,22 @@ function bootstrap_work_dotfiles_symlinks {
 function bootstrap_work_dotfiles {
     if ! test -d $dotfiles
     then
-        mkdir -p $dotfiles
-
         # Bootstap the repository
-        (
-            git init $dotfiles
-            cd $dotfiles
-            gituser=
-            if test "$USER" = "avar"
-            then
-                gituser='aearnfjord@'
-            fi
-            git config remote.origin.url ssh://${gituser}git.booking.com/gitroot/users.git
-            git config remote.origin.fetch '+refs/heads/avar-dotfiles:refs/remotes/origin/avar-dotfiles'
-            git config branch.avar-dotfiles.remote origin
-            git config branch.avar-dotfiles.merge refs/heads/avar-dotfiles
-            git fetch origin
-            git checkout -t origin/avar-dotfiles
-        )
+        git clone ssh://git.booking.com/gitroot/aearnfjord/dotfiles.git $dotfiles
 
         bootstrap_work_dotfiles_symlinks
+    elif test $(git -C ~/g/avar-dotfiles-work/.git rev-parse --abbrev-ref HEAD) = 'avar-dotfiles'
+    then
+        # Migrate the old checkouts to the new location
+        (
+            cd $dotfiles &&
+            git config remote.origin.url ssh://git.booking.com/gitroot/aearnfjord/dotfiles.git &&
+            git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' &&
+            git fetch &&
+            git checkout -t origin/master &&
+            chmod 600 ~/.ssh/config &&
+            git remote prune origin
+        )
     fi
 }
 
