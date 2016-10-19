@@ -371,7 +371,8 @@ function bootstrap_work_dotfiles {
             git fetch &&
             git checkout -t origin/master &&
             chmod 600 ~/.ssh/config &&
-            git remote prune origin
+            git remote prune origin &&
+            git branch -d avar-dotfiles
         )
     fi
 }
