@@ -100,6 +100,10 @@ case ${TERM} in
         ;;
 esac
 
+# Immediately share history between terminals & make sure history from
+# e.g. screen sessions is saved right away. See
+# http://askubuntu.com/questions/67283/is-it-possible-to-make-writing-to-bash-history-immediate
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 # Adjust GTK settings under X/Ubuntu/GTK+
 if test -n "$DISPLAY" &&
