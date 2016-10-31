@@ -180,8 +180,8 @@ export LESS="--IGNORE-CASE --LONG-PROMPT --QUIET --chop-long-lines --RAW-CONTROL
 export NOPASTE_SERVICES="Gist Pastie"
 
 # keep a long history without duplicates
-export HISTSIZE=10000
-export HISTFILESIZE=10000
+export HISTSIZE=100000
+export HISTFILESIZE=100000
 export HISTCONTROL="ignoredups"
 export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S  "
 
