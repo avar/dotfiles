@@ -100,10 +100,26 @@ case ${TERM} in
         ;;
 esac
 
-# Immediately share history between terminals & make sure history from
-# e.g. screen sessions is saved right away. See
+# Immediately append history to ~/.bash_history so that if I e.g. kill
+# screen or start a new terminal I save it / have it available.
+#
+# See the discussion at
 # http://askubuntu.com/questions/67283/is-it-possible-to-make-writing-to-bash-history-immediate
-export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+# for some more details. This used to be:
+#
+#    history -a; history -c; history -r
+#
+# Which from re-reading that might be more performant as:
+#
+#   history  -a; history -n
+#
+# But in any case, I don't want to "echo foo" in one terminal and
+# "echo bar" in another, and then have C-p in either show "foo/bar", I
+# frequently have many windows that I'd like to have independent local
+# history in, but I want them to be eventually consistent, which with
+# just "history -a" is when I open a new terminal, not right away
+# between all sessions.
+export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
 # Adjust GTK settings under X/Ubuntu/GTK+
 if test -n "$DISPLAY" &&
