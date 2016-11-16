@@ -17,23 +17,43 @@ stuff "sudo exim -bp^M"
 stuff "# sudo exim -qf # send stalled messages^M"
 stuff "# sudo exim -qff # send stalled messages, even if frozen due to bounces^M"
 
-screen -t m:md:size bash
+# Work Exchange setup
+screen -t m:we:md:size bash
 stuff "du -sb ~/.mu ~/Maildir/work; du -sh ~/.mu ~/Maildir/work; find ~/Maildir/work/ -type f | wc -l; df -h /^M"
 
-screen -t m:md:find bash
-stuff "find ~/Maildir -type f -mmin -5|wc -l # modified in the last 5mins^M"
-stuff "find ~/Maildir -type f -cmin -5|wc -l # created in the last 5mins^M"
+screen -t m:we:md:find bash
+stuff "find ~/Maildir/work -type f -mmin -5|wc -l # modified in the last 5mins^M"
+stuff "find ~/Maildir/work -type f -cmin -5|wc -l # created in the last 5mins^M"
 
-screen -t m:stunnel bash
-stuff "killall stunnel ; sleep 0.5 ; stunnel .stunnel.work-imap^M"
+screen -t m:we:stunnel bash
+stuff "(stunnel .stunnel.work-exchange-imap || (kill \$(sudo netstat -ldnp|grep -F 127.0.0.1:1430|awk '{print \$7}'|awk -F/ '{print \$1}')) && echo Restarting && sleep 1 && stunnel .stunnel.work-exchange-imap)^M"
 
-screen -t m:stunnel:flow bash
+screen -t m:we:stunnel:flow bash
 stuff "sudo tcpflow -i lo -c port 1430^M"
 
-screen -t m:sync:<> bash
+screen -t m:we:sync:<> bash
 stuff "sleep 10^M"
-stuff "while true; do time python ~/g/offlineimap/offlineimap.py -c ~/.offlineimaprc ; sleep 60; done^M"
+stuff "while true; do time python ~/g/offlineimap/offlineimap.py -a Work -d imap,maildir -c ~/.offlineimaprc ; sleep 60; done^M"
 
+# Work GMail setup
+screen -t m:wg:md:size bash
+stuff "du -sb ~/.mu ~/Maildir/work-gmail; du -sh ~/.mu ~/Maildir/work-gmail; find ~/Maildir/work-gmail/ -type f | wc -l; df -h /^M"
+
+screen -t m:wg:md:find bash
+stuff "find ~/Maildir/work-gmail -type f -mmin -5|wc -l # modified in the last 5mins^M"
+stuff "find ~/Maildir/work-gmail -type f -cmin -5|wc -l # created in the last 5mins^M"
+
+screen -t m:wg:stunnel bash
+stuff "(stunnel .stunnel.work-gmail-imap || (kill \$(sudo netstat -ldnp|grep -F 127.0.0.1:1431|awk '{print \$7}'|awk -F/ '{print \$1}')) && echo Restarting && sleep 1 && stunnel .stunnel.work-gmail-imap)^M"
+
+screen -t m:wg:stunnel:flow bash
+stuff "sudo tcpflow -i lo -c port 1431^M"
+
+screen -t m:wg:sync:<> bash
+stuff "sleep 10^M"
+stuff "while true; do time python ~/g/offlineimap/offlineimap.py -a WorkGMail -d imap,maildir -c ~/.offlineimaprc ; sleep 60; done^M"
+
+# mu
 screen -t m:monitor bash
 stuff "# while sleep 1; do time sudo perl ~/g/dotemacs/scripts/mu-monitor.pl; done^M"
 

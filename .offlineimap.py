@@ -14,16 +14,34 @@ def get_password(what):
 
 # Any rule added to one of these subs needs an inverse rule in the
 # other one.
-def oi_work_local_nametrans(name):
+def oi_work_exchange_local_nametrans(name):
     name = re.sub('^Sent$',  'Sent Items',    name)
     name = re.sub('^Trash$', 'Deleted Items', name)
     name = re.sub('^Junk$',  'Junk E-Mail',   name)
 
     return name
 
-def oi_work_remote_nametrans(name):
+def oi_work_exchange_remote_nametrans(name):
     name = re.sub('^Sent Items$',    'Sent',  name)
     name = re.sub('^Deleted Items$', 'Trash', name)
     name = re.sub('^Junk E-Mail$',   'Junk',  name)
+
+    return name
+
+# Any rule added to one of these subs needs an inverse rule in the
+# other one.
+def oi_work_gmail_local_nametrans(name):
+    name = re.sub('^Drafts$', '[Gmail]/Drafts',    name)
+    name = re.sub('^Sent$',   '[Gmail]/Sent Mail', name)
+    name = re.sub('^Junk$',   '[Gmail]/Spam',      name)
+    name = re.sub('^Trash$',  '[Gmail]/Trash',      name)
+
+    return name
+
+def oi_work_gmail_remote_nametrans(name):
+    name = re.sub('^\[Gmail\]/Drafts$',    'Drafts', name)
+    name = re.sub('^\[Gmail\]/Sent Mail$', 'Sent',   name)
+    name = re.sub('^\[Gmail\]/Spam$',      'Junk',   name)
+    name = re.sub('^\[Gmail\]/Trash$',     'Trash',  name)
 
     return name

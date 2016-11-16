@@ -21,6 +21,7 @@ socktimeout = 180
 # Defines get_password() and other functions used here
 pythonfile = ~/.offlineimap.py
 
+## The work Exchange setup
 [Account Work]
 localrepository = WorkLocal
 remoterepository = WorkRemote
@@ -36,7 +37,7 @@ localfolders = ~/Maildir/work
 sync_deletes = yes
 
 # The reverse nametrans, see the comment for the WorkRemote nametrans.
-nametrans = lambda name: oi_work_local_nametrans(name)
+nametrans = lambda name: oi_work_exchange_local_nametrans(name)
 
 [Repository WorkRemote]
 type = IMAP
@@ -76,4 +77,91 @@ folderfilter = lambda f: f in ['INBOX', 'Drafts', 'Sent Items', 'Deleted Items',
 # Translate some of the folder names to be what they were before and
 # not have whitespace in them. See
 # http://www.offlineimap.org/doc/nametrans.html#faq-on-nametrans
-nametrans = lambda name: oi_work_remote_nametrans(name)
+nametrans = lambda name: oi_work_exchange_remote_nametrans(name)
+
+## The work GMail setup
+[Account WorkGMail]
+localrepository = WorkGMailLocal
+remoterepository = WorkGMailRemote
+
+[Repository WorkGMailLocal]
+type = GmailMaildir
+localfolders = ~/Maildir/work-gmail
+sync_deletes = yes
+
+# The reverse nametrans, see the comment for the WorkGMailRemote nametrans.
+nametrans = lambda name: oi_work_gmail_local_nametrans(name)
+
+[Repository WorkGMailRemote]
+# The 'type = Gmail' here requires my pull request
+# https://github.com/OfflineIMAP/offlineimap/pull/404
+#
+# There's no hard dependency on that, and for current stock
+# offlineimap you can just use 'type = IMAP' instead. I'm just using
+# some of the provided default options by the Gmail driver, see the
+# docs at https://github.com/OfflineIMAP/offlineimap/pull/404/files
+#type = IMAP
+type = Gmail
+
+# Sync local deletes to the remote
+sync_deletes = yes
+
+# Access imap.gmail.com through an stunnel. To access it directly
+# remove all of this and uncomment sslcacertfile.
+remotehost = localhost
+remoteport = 1431
+starttls = no
+ssl = no
+#sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+
+remoteuser = avar@booking.com
+
+# I gave up with the oauth method and just went for enabling "less
+# secure apps to access your account":
+# https://support.google.com/accounts/answer/6010255
+remotepasseval = get_password("work-gmail")
+
+# See WorkRemote comments above
+usecompression = no
+maxconnections = 1
+holdconnectionopen = no
+sync_deletes = no
+
+# Only get a select whitelist of the folders which we have name
+# translations for, and especially not '[Gmail]/All Mail'
+folderfilter = lambda f: f in ['INBOX', '[Gmail]/Drafts', '[Gmail]/Sent Mail', '[Gmail]/Trash', '[Gmail]/Spam']
+
+# See http://www.offlineimap.org/doc/nametrans.html#faq-on-nametrans
+nametrans = lambda name: oi_work_gmail_remote_nametrans(name)
+
+# As noted above in the comment for remotepasseval I tried in vain to
+# get oauth working. Menno has it working following the instructions
+# for "XOAuth2 authentication":
+# https://github.com/OfflineIMAP/offlineimap/blob/v7.0.9/offlineimap.conf#L812
+#
+# Here's what I tried to set this up, all these keys have since been
+# invalidated so the below isn't a security issue:
+#
+#    $ https_proxy= python python/oauth2.py --generate_oauth2_token  --client_id=434197482151-a1iqf44bf1jc0054big9c7prvm126qke.apps.googleusercontent.com --client_secret=om0XglM0iG7WUzj8X3512Eso
+#    To authorize token, visit this url and follow the directions:
+#      https://accounts.google.com/o/oauth2/auth?client_id=434197482151-a1iqf44bf1jc0054big9c7prvm126qke.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&response_type=code&scope=https%3A%2F%2Fmail.google.com%2F
+#    Enter verification code: 4/SmF2Rhai_CUPWif9I-cYpjh_f4vKI8_3nZ4buuTLSfI
+#    Refresh Token: 1/68a5NFeXLCGT-s-Gpm7BbnrzzYFVIqvSIcUrV7I-Yc_07omOeu55g6B55hCnaXoi
+#    Access Token: ya29.Ci-YAy9Ukvgoc1uOilU8wryIGPniQF3nqXa-_392FlBtDNA92X24_zXJemSKSg4vIA
+#    Access Token Expiration Seconds: 3600
+#
+#    $ https_proxy= python python/oauth2.py --user=avar@booking.com --client_id=434197482151-a1iqf44bf1jc0054big9c7prvm126qke.apps.googleusercontent.com --client_secret=om0XglM0iG7WUzj8X3512Eso --refresh_token='1/68a5NFeXLCGT-s-Gpm7BbnrzzYFVIqvSIcUrV7I-Yc_07omOeu55g6B55hCnaXoi'
+#    Access Token: ya29.Ci-YAxDiXANEW_U_JAVV9QBs-CnJ0PlhQz3rGeAY4h9HqZnZJ9oCqUFeoCP7pRQaJg
+#    Access Token Expiration Seconds: 3600
+#
+# Then this oauth config with the details above:
+#
+#    oauth2_client_id = 434197482151-a1iqf44bf1jc0054big9c7prvm126qke.apps.googleusercontent.com
+#    oauth2_client_secret = om0XglM0iG7WUzj8X3512Eso
+#    oauth2_request_url = https://accounts.google.com/o/oauth2/token
+#    auth2_refresh_token = 1/68a5NFeXLCGT-s-Gpm7BbnrzzYFVIqvSIcUrV7I-Yc_07omOeu55g6B55hCnaXoi
+#
+# So the first thing that failed was an error about invalid JSON, this
+# was because I had to start offlineimap with https_proxy=, but then
+# it emitted some error about the authentication failing. I didn't get
+# to the bottom of that and just went with password auth.

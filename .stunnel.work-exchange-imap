@@ -5,7 +5,7 @@ debug = info
 # Don't try to write a pid file. Makes it simple to run this without
 # chroot or sudo.
 pid =
-[mbsync-imap-ssl-tunnel]
+[work-imap-exchange-ssl-tunnel]
 # Don't do local SSL, but local -> remote SSL.
 client = yes
 accept = 127.0.0.1:1430

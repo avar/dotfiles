@@ -1,0 +1,19 @@
+# Don't fork, stay in the foreground
+foreground = yes
+# Turn on verbose debugging. Can also "info" etc.
+debug = info
+# Don't try to write a pid file. Makes it simple to run this without
+# chroot or sudo.
+pid =
+[work-imap-gmail-ssl-tunnel]
+# Don't do local SSL, but local -> remote SSL.
+client = yes
+accept = 127.0.0.1:1431
+connect = imap.gmail.com:993
+# This means do lazy DNS lookups, not on startup, in case our network
+# changes.
+delay = yes
+
+# Testing this:
+# $ nc localhost 1431
+# * OK Gimap ready for requests from 5.57.20.50 ug12mb280720085wjb
