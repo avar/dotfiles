@@ -103,9 +103,6 @@ nametrans = lambda name: oi_work_gmail_local_nametrans(name)
 #type = IMAP
 type = Gmail
 
-# Sync local deletes to the remote
-sync_deletes = yes
-
 # Access imap.gmail.com through an stunnel. To access it directly
 # remove all of this and uncomment sslcacertfile.
 remotehost = localhost
