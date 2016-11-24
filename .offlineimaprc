@@ -80,6 +80,42 @@ folderfilter = lambda f: f in ['INBOX', 'Drafts', 'Sent Items', 'Deleted Items',
 nametrans = lambda name: oi_work_exchange_remote_nametrans(name)
 
 ## The work GMail setup
+##
+## The corresponding IMAP settings in GMail's Settings -> Forwarding
+## and POP/IMAP:
+##
+## * When I mark a message in IMAP as deleted: Auto-Expunge off - Wait
+##   for the client to update the server.
+##
+## * When a message is marked as deleted and expunged from the last
+##   visible IMAP folder: Move the message to the Trash
+##
+## This along with WorkGMailLocal.sync_deletes=yes &
+## WorkGMailRemote.sync_deletes = no gives me:
+##
+## * When I locally D a message (mu4e-headers-mark-for-delete) it gets
+##   unlink()'d locally, but then just gets re-synced back since as
+##   far as offlineimap is concerned it just hadn't synced it yet.
+##
+## * When I locally d a message (mu4e-headers-mark-for-trash) it gets
+##   moved to the Trash folder (requires mu reindex to find it again),
+##   and then offlineimap syncs the deletion status, so it gets the
+##   "Trashed" label in upstream.
+##
+## * When I move a message to Trash in GMail's web UI that's already
+##   been synced locally to INBOX it'll sync a copy to the Trash
+##   folder, so I'll have 2x locally, one in INBOX one in Trash.
+##
+## * When I fully delete a message in GMail (move to Trash, empty
+##   trash) without syncing in the middle, I'll have the relevant
+##   message left in my local INBOX, but not in GMail. With
+##   "sync_deletes = no" set as "sync_deletes = yes" below it would be
+##   removed locally.
+##
+## So tl;dr: To delete messages with this setup don't delete them in
+## the GMail UI, delete them in mu4e and then sync that upstream, but
+## make sure to delete them with d, not D!
+
 [Account WorkGMail]
 localrepository = WorkGMailLocal
 remoterepository = WorkGMailRemote
