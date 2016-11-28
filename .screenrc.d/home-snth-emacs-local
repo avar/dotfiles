@@ -33,7 +33,8 @@ stuff "sudo tcpflow -i lo -c port 1430^M"
 
 screen -t m:we:sync:<> bash
 stuff "sleep 10^M"
-stuff "while true; do time python ~/g/offlineimap/offlineimap.py -a Work -d imap,maildir -c ~/.offlineimaprc ; sleep 60; done^M"
+# debug: -d imap,maildir
+stuff "while true; do time python ~/g/offlineimap/offlineimap.py -a Work -c ~/.offlineimaprc ; sleep 60; done^M"
 
 # Work GMail setup
 screen -t m:wg:md:size bash
@@ -51,7 +52,8 @@ stuff "sudo tcpflow -i lo -c port 1431^M"
 
 screen -t m:wg:sync:<> bash
 stuff "sleep 10^M"
-stuff "while true; do time python ~/g/offlineimap/offlineimap.py -a WorkGMail -d imap,maildir -c ~/.offlineimaprc ; sleep 60; done^M"
+# debug: -d imap,maildir
+stuff "while true; do time python ~/g/offlineimap/offlineimap.py -a WorkGMail -c ~/.offlineimaprc ; sleep 60; done^M"
 
 # mu
 screen -t m:monitor bash
