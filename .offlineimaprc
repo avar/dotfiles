@@ -10,8 +10,9 @@ accounts = Work
 # a time.
 maxsyncaccounts = 1
 
-# Play it fast and dangerous to get more performance + SSD lifetime.
-fsync = false
+# Don't play it fast and dangerous. Maybe =false would get more more
+# performance + SSD lifetime, but meh!
+fsync = true
 
 # Timeout on individual reads & writes. Not the whole operation, in
 # seconds. Setting this to e.g. 10s *will* timeout, it might still
