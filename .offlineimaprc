@@ -1,4 +1,4 @@
-# The work exchange IMAP configuration for offlineimap.
+# The work GMail IMAP configuration for offlineimap.
 
 [general]
 ui = ttyui
@@ -21,64 +21,6 @@ socktimeout = 180
 
 # Defines get_password() and other functions used here
 pythonfile = ~/.offlineimap.py
-
-## The work Exchange setup
-[Account Work]
-localrepository = WorkLocal
-remoterepository = WorkRemote
-# When I can't sync things due to timeouts or whatever this has been
-# known to work
-maxage = 7
-
-[Repository WorkLocal]
-type = Maildir
-localfolders = ~/Maildir/work
-
-# Sync local deletes to the remote
-sync_deletes = yes
-
-# The reverse nametrans, see the comment for the WorkRemote nametrans.
-nametrans = lambda name: oi_work_exchange_local_nametrans(name)
-
-[Repository WorkRemote]
-type = IMAP
-
-# Just to not waste time trying to use IPv6
-ipv6 = False
-
-# Use the tunnel set up in ~/.stunnel.work-imap and password in
-# ~/.password/work-ldap, stunnel takes care of our SSL there, so no
-# TLS/SSL.
-remotehost = localhost
-remoteport = 1430
-remoteuser = aearnfjord
-remotepasseval = get_password("work-ldap")
-starttls = no
-ssl = no
-
-# I'd disable compression to make the tcpflow debugging easier, but
-# exchange just errors out on this, so I don't have a choice anyway.
-usecompression = no
-
-# If I were to use idlefolders / keepalive etc. this would have to be
-# at least the number of folders I'm syncing
-maxconnections = 1
-
-# Only does something on autorefresh
-holdconnectionopen = no
-
-# Don't sync the server's deletions locally. If it wants to delete
-# something I can manually review that so some bug doesn't wipe my
-# entire mailbox.
-sync_deletes = no
-
-# Only get a select whitelist of the folders, not e.g. "Calendar".
-folderfilter = lambda f: f in ['INBOX', 'Drafts', 'Sent Items', 'Deleted Items', 'Junk E-Mail']
-
-# Translate some of the folder names to be what they were before and
-# not have whitespace in them. See
-# http://www.offlineimap.org/doc/nametrans.html#faq-on-nametrans
-nametrans = lambda name: oi_work_exchange_remote_nametrans(name)
 
 ## The work GMail setup
 ##
@@ -121,9 +63,16 @@ nametrans = lambda name: oi_work_exchange_remote_nametrans(name)
 localrepository = WorkGMailLocal
 remoterepository = WorkGMailRemote
 
+# When I can't sync things due to timeouts or whatever this has been
+# known to work. Was needed with Exchange, hasn't even been needed
+# with GMail, yet...
+#maxage = 7
+
 [Repository WorkGMailLocal]
 type = GmailMaildir
 localfolders = ~/Maildir/work-gmail
+
+# Sync local deletes to the remote
 sync_deletes = yes
 
 # The reverse nametrans, see the comment for the WorkGMailRemote nametrans.
@@ -140,8 +89,9 @@ nametrans = lambda name: oi_work_gmail_local_nametrans(name)
 #type = IMAP
 type = Gmail
 
-# Access imap.gmail.com through an stunnel. To access it directly
-# remove all of this and uncomment sslcacertfile.
+# Access imap.gmail.com through an stunnel set up in
+# ~/.stunnel.work-gmail-imap. To access it directly remove all of this
+# and uncomment sslcacertfile.
 remotehost = localhost
 remoteport = 1431
 starttls = no
@@ -155,10 +105,19 @@ remoteuser = avar@booking.com
 # https://support.google.com/accounts/answer/6010255
 remotepasseval = get_password("work-gmail")
 
-# See WorkRemote comments above
+# I disable compression to make the tcpflow debugging easier.
 usecompression = no
+
+# If I were to use idlefolders / keepalive etc. this would have to be
+# at least the number of folders I'm syncing
 maxconnections = 1
+
+# Only does something on autorefresh
 holdconnectionopen = no
+
+# Don't sync the server's deletions locally. If it wants to delete
+# something I can manually review that so some bug doesn't wipe my
+# entire mailbox.
 sync_deletes = no
 
 # Only get a select whitelist of the folders which we have name

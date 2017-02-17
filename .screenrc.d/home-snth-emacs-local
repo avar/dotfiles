@@ -17,25 +17,6 @@ stuff "sudo exim -bp^M"
 stuff "# sudo exim -qf # send stalled messages^M"
 stuff "# sudo exim -qff # send stalled messages, even if frozen due to bounces^M"
 
-# Work Exchange setup
-screen -t m:we:md:size bash
-stuff "du -sb ~/.mu ~/Maildir/work; du -sh ~/.mu ~/Maildir/work; find ~/Maildir/work/ -type f | wc -l; df -h /^M"
-
-screen -t m:we:md:find bash
-stuff "find ~/Maildir/work -type f -mmin -5|wc -l # modified in the last 5mins^M"
-stuff "find ~/Maildir/work -type f -cmin -5|wc -l # created in the last 5mins^M"
-
-screen -t m:we:stunnel bash
-stuff "(stunnel .stunnel.work-exchange-imap || (kill \$(sudo netstat -ldnp|grep -F 127.0.0.1:1430|awk '{print \$7}'|awk -F/ '{print \$1}')) && echo Restarting && sleep 1 && stunnel .stunnel.work-exchange-imap)^M"
-
-screen -t m:we:stunnel:flow bash
-stuff "sudo tcpflow -i lo -c port 1430^M"
-
-screen -t m:we:sync:<> bash
-stuff "sleep 10^M"
-# debug: -d imap,maildir
-stuff "while true; do time python ~/g/offlineimap/offlineimap.py -a Work -c ~/.offlineimaprc ; sleep 60; done^M"
-
 # Work GMail setup
 screen -t m:wg:md:size bash
 stuff "du -sb ~/.mu ~/Maildir/work-gmail; du -sh ~/.mu ~/Maildir/work-gmail; find ~/Maildir/work-gmail/ -type f | wc -l; df -h /^M"
@@ -63,9 +44,11 @@ screen -t m:index bash
 stuff "# while sleep 30; do time mu index --maildir=~/Maildir/work --max-msg-size=500000000; done^M"
 
 screen -t m:f:0 bash
+stuff "export MU_HOME=/home/avar/.mu/work-gmail^M"
 stuff "mu find -n 10 avar^M"
 
 screen -t m:f:1 bash
+stuff "export MU_HOME=/home/avar/.mu/work-gmail^M"
 stuff "mu find -n 10 booking^M"
 
 screen -t s:daemon-nm-dis:l bash
