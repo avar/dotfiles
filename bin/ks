@@ -9,6 +9,12 @@ ks - Kill screen(s) under given names
 =cut
 
 my @screens = qx[screen -ls|grep -E '^\\s*[0-9]+\\.'];
+
+unless (@screens) {
+    chomp(my $msg = "No active screens found: " . qx[screen -ls]);
+    warn $msg;
+}
+
 my %screens;
 for my $screen (@screens) {
     my ($pid, $screen_name) = $screen =~ m/^\s*([0-9]+)\.(\S+)/s;
