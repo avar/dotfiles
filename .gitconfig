@@ -56,7 +56,7 @@
 	review = "!f() { for rev in $(git rev-list --reverse $@); do git show --stat -p -M $rev; done; }; f"
 
 	;; Working on git.git
-	g-name-rev = show -s --date=format:%Y-%m-%d --pretty='commit %h ("%s", %ad)'
+	git-commit-summary = show -s --date=format:%Y-%m-%d --pretty='commit %h (\"%s\", %ad)'
 [push]
 	default = upstream
 [pull]
