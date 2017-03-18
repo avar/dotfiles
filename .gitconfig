@@ -35,19 +35,19 @@
 	sm-mainbranch = !git config --file ../.gitmodules submodule.$NAME.branch || git describe --all --always | sed 's!^heads/!!'
 
 	;; Diff
-    di     = diff -M -p --stat
-    diw    = diff -M -p --stat -w
-    diww   = diff -M -p --stat -w --word-diff=color
-    diwwd  = diff -M -p --stat -w --word-diff=color --word-diff-regex=.
-    dis    = diff -M -p --stat --staged
-    disw   = diff -M -p --stat --staged -w
-    disww  = diff -M -p --stat --staged -w --word-diff=color
-    diswwd = diff -M -p --stat --staged -w --word-diff=color --word-diff-regex=.
-    ;; Show
-    s      = show -M -p --stat
-    sw     = show -M -p --stat -w
-    sww    = show -M -p --stat -w --word-diff=color
-    swwd   = show -M -p --stat -w --word-diff=color --word-diff-regex=.
+	di     = diff -M -p --stat
+	diw    = diff -M -p --stat -w
+	diww   = diff -M -p --stat -w --word-diff=color
+	diwwd  = diff -M -p --stat -w --word-diff=color --word-diff-regex=.
+	dis    = diff -M -p --stat --staged
+	disw   = diff -M -p --stat --staged -w
+	disww  = diff -M -p --stat --staged -w --word-diff=color
+	diswwd = diff -M -p --stat --staged -w --word-diff=color --word-diff-regex=.
+	;; Show
+	s      = show -M -p --stat
+	sw     = show -M -p --stat -w
+	sww    = show -M -p --stat -w --word-diff=color
+	swwd   = show -M -p --stat -w --word-diff=color --word-diff-regex=.
 
 	;; Pull/push
 	pu = pull --stat
