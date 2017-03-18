@@ -174,7 +174,7 @@ export GIT_SSL_NO_VERIFY=1
 #export PERL_UNICODE=SDAL
 
 # some nice less(1) options
-export LESS="--IGNORE-CASE --LONG-PROMPT --QUIET --chop-long-lines --RAW-CONTROL-CHARS"
+export LESS="--IGNORE-CASE --LONG-PROMPT --QUIET --chop-long-lines --RAW-CONTROL-CHARS --no-init --quit-if-one-screen"
 
 # For App::Nopaste
 export NOPASTE_SERVICES="Gist Pastie"
