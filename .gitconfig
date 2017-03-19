@@ -53,7 +53,7 @@
 	pu = pull --stat
 
 	;; Handy tools
-	review = "!f() { for rev in $(git rev-list --reverse $@); do git show --stat -p -M $rev; done; }; f"
+	review = "!f() { for rev in $(git rev-list --reverse $@); do LESS='--IGNORE-CASE --LONG-PROMPT --QUIET --chop-long-lines --RAW-CONTROL-CHARS' git show --stat -p -M $rev; done; }; f"
 
 	;; Working on git.git
 	git-commit-summary = show -s --date=format:%Y-%m-%d --pretty='commit %h (\"%s\", %ad)'
