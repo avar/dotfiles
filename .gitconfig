@@ -55,6 +55,10 @@
 	;; Handy tools
 	review = "!f() { for rev in $(git rev-list --reverse $@); do LESS='--IGNORE-CASE --LONG-PROMPT --QUIET --chop-long-lines --RAW-CONTROL-CHARS' git show --stat -p -M $rev; done; }; f"
 
+        ;; Git doesn't have a one-shot command to copy a branch & its
+        ;; config to a new location.
+        cp-branch = "!f() { git checkout -b $2 $1 && for line in $(git config --list --file .git/config | grep \"^branch\\.$1\"); do key=$(echo $line | cut -d= -f1); newkey=$(echo $key | sed \"s!$1!$2!\"); value=$(echo $line | cut -d= -f2); git config $newkey $value; done; }; f"
+
 	;; Working on git.git
 	git-commit-summary = show -s --date=format:%Y-%m-%d --pretty='commit %h (\"%s\", %ad)'
 [push]
