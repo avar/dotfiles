@@ -60,7 +60,7 @@
         cp-branch = "!f() { git checkout -b $2 $1 && for line in $(git config --list --file .git/config | grep \"^branch\\.$1\"); do key=$(echo $line | cut -d= -f1); newkey=$(echo $key | sed \"s!$1!$2!\"); value=$(echo $line | cut -d= -f2); git config $newkey $value; done; }; f"
 
 	;; Working on git.git
-	git-commit-summary = show -s --date=format:%Y-%m-%d --pretty='commit %h (\"%s\", %ad)'
+	git-commit-summary = show -s --date=short --pretty='format:%h (\"%s\", %ad)'
 [push]
 	default = upstream
 [pull]
