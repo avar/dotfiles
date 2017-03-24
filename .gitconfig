@@ -61,6 +61,9 @@
 
 	;; Working on git.git
 	git-commit-summary = show -s --date=short --pretty='format:%h (\"%s\", %ad)'
+
+	;; Like push but harder
+	thrust = "!f() { until (sleep 0.5 && git push); do git pull --rebase; done; }; f"
 [push]
 	default = upstream
 [pull]
