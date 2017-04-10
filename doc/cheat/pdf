@@ -1,0 +1,3 @@
+# Convert PDF to JPEG; See
+http://unix.stackexchange.com/questions/11835/pdf-to-jpg-without-quality-loss-gscan2pdf
+convert -density 200 X.pdf X.jpeg

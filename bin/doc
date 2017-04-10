@@ -1,0 +1,11 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+
+chomp(my @doc = qx[find ~/doc -type f -or -type l]);
+for my $doc (@doc) {
+    next unless $doc =~ /$ARGV[0]/;
+    print $doc, ":\n";
+    system cat => $doc;
+}
+

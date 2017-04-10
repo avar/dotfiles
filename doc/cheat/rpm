@@ -1,0 +1,8 @@
+# List all packages
+rpm -qa
+# What package owns a file
+rpm -qf <file>
+# Dependencies of an *.rpm
+rpm -qpR <file>
+# What does this *.rpm provide?
+rpm -qp --provides <file>
