@@ -22,6 +22,11 @@
 	co = checkout
 	sm = submodule
 	chrp = cherry-pick
+	f = fetch
+	pf = !git pfetch
+
+	;; Parellel fetch
+	pfetch = !parallel 'git fetch {}' ::: $(git remote)
 
 	;; Log
 	lo = log --decorate --abbrev-commit --stat
