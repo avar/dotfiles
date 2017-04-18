@@ -701,7 +701,7 @@ __git_complete_revlist ()
 __git_complete_remote_or_refspec ()
 {
 	local cur_="$cur" cmd="${words[1]}"
-	local i c=2 remote="" pfx="" lhs=1 no_complete_refspec=0
+	local i c=2 remote="" pfx="" lhs=1 no_complete_refspec=0 delete=0
 	if [ "$cmd" = "remote" ]; then
 		((c++))
 	fi
@@ -709,6 +709,7 @@ __git_complete_remote_or_refspec ()
 		i="${words[c]}"
 		case "$i" in
 		--mirror) [ "$cmd" = "push" ] && no_complete_refspec=1 ;;
+		--delete) delete=1 ;;
 		--all)
 			case "$cmd" in
 			push) no_complete_refspec=1 ;;
@@ -761,7 +762,9 @@ __git_complete_remote_or_refspec ()
 		fi
 		;;
 	push)
-		if [ $lhs = 1 ]; then
+		if [ $delete = 1 ]; then
+			__git_complete_refs --remote="$remote" --pfx="$pfx" --cur="$cur_"
+		elif [ $lhs = 1 ]; then
 			__git_complete_refs --pfx="$pfx" --cur="$cur_"
 		else
 			__git_complete_refs --remote="$remote" --pfx="$pfx" --cur="$cur_"
