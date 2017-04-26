@@ -99,3 +99,5 @@
 	defaultToUpstream = true
 [annex]
 	backends = SHA256E SHA256
+[help]
+	autocorrect = 5
