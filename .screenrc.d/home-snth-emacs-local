@@ -5,6 +5,12 @@ sessionname local
 screen -t t bash
 stuff "htop^M"
 
+screen -t system:log bash
+stuff "tail -F /var/log/{syslog,messages,auth.log,user.log,daemon.log,aptitude,kern.log,dpkg.log}^M"
+
+screen -t m:avar:l bash
+stuff "tail -F /var/mail/avar^M"
+
 screen -t m:exim:l bash
 stuff "tail -F /var/log/exim4/mainlog^M"
 
@@ -79,4 +85,4 @@ stuff "ip route get 10.252.13.1^M"
 stuff "ip route get 8.8.8.8^M"
 
 # The m:sync screen
-select 7
+select 9
