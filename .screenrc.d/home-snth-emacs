@@ -19,4 +19,7 @@ stuff "while test ! -d /media/teracaddy; do sleep 3; done && cd /media/teracaddy
 screen -t tc:3 bash
 stuff "while test ! -d /media/teracaddy; do sleep 3; done && cd /media/teracaddy/annex/p*/l*/w*/c*^M"
 
+screen -t ttv bash
+stuff "torrent-to-v.sh"
+
 select 0
