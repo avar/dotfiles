@@ -38,12 +38,12 @@ screen -t c:o bash
 stuff "cd ~/g/git^M"
 stuff "make -j 8 NO_REGEX= USE_LIBPCRE=YesPlease USE_LIBPCRE2=YesPlease LIBPCREDIR=/home/avar/g/pcre2/inst NO_PTHREADS=YesPlease CC=~/perl5/installed/bin/gcc NO_R_TO_GCC_LINKER=YesPlease CFLAGS=\"-O3 -g\" LDFLAGS=-Wl,-rpath,/home/avar/g/pcre2/inst/lib all doc"
 
-screen -t p:r bash
+screen -t se:r bash
 stuff "cd ~/g/git-patches^M"
 stuff "git fetch^M"
 stuff "git status^M"
 
-screen -t p:new bash
+screen -t se:new bash
 stuff "cd ~/g/git^M"
 stuff "# gpp -F --fpa='--subject-prefix=\"PATCH\" --cover-letter' --sea='--cc=\"Junio C Hamano <gitster@pobox.com>\" --cc=\"Jeff King <peff@peff.net>\"' --no-send^M"
 stuff "# gpp -F --fpa='--subject-prefix=\"PATCH\"' --sea='--cc=\"Junio C Hamano <gitster@pobox.com>\"' --no-send^M"
