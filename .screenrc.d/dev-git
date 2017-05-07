@@ -38,6 +38,21 @@ screen -t c:o bash
 stuff "cd ~/g/git^M"
 stuff "make -j 8 NO_REGEX= USE_LIBPCRE=YesPlease USE_LIBPCRE2=YesPlease LIBPCREDIR=/home/avar/g/pcre2/inst NO_PTHREADS=YesPlease CC=~/perl5/installed/bin/gcc NO_R_TO_GCC_LINKER=YesPlease CFLAGS=\"-O3 -g\" LDFLAGS=-Wl,-rpath,/home/avar/g/pcre2/inst/lib all doc"
 
+screen -t t:0 bash
+stuff "cd ~/g/git^M"
+stuff "cd t^M"
+stuff "GIT_TEST_LONG=1 prove -j12 --state=slow,save t[0-9]*.sh"
+
+screen -t t:1 bash
+stuff "cd ~/g/git^M"
+stuff "cd t^M"
+stuff "GIT_TEST_LONG=1 prove -j12 --state=slow,save t[0-9]*grep*.sh t[0-9]*log*.sh"
+
+screen -t t:2 bash
+stuff "cd ~/g/git^M"
+stuff "cd t^M"
+stuff "./t7810-grep.sh -v -i"
+
 screen -t se:r bash
 stuff "cd ~/g/git-patches^M"
 stuff "git fetch^M"
