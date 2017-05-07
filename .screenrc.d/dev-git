@@ -38,7 +38,7 @@ screen -t c:o bash
 stuff "cd ~/g/git^M"
 stuff "make -j 8 NO_REGEX= USE_LIBPCRE=YesPlease USE_LIBPCRE2=YesPlease LIBPCREDIR=/home/avar/g/pcre2/inst NO_PTHREADS=YesPlease CC=~/perl5/installed/bin/gcc NO_R_TO_GCC_LINKER=YesPlease CFLAGS=\"-O3 -g\" LDFLAGS=-Wl,-rpath,/home/avar/g/pcre2/inst/lib all doc"
 
-screen -t p:repo bash
+screen -t p:r bash
 stuff "cd ~/g/git-patches^M"
 stuff "git fetch^M"
 stuff "git status^M"
@@ -48,8 +48,22 @@ stuff "cd ~/g/git^M"
 stuff "# gpp -F --fpa='--subject-prefix=\"PATCH\" --cover-letter' --sea='--cc=\"Junio C Hamano <gitster@pobox.com>\" --cc=\"Jeff King <peff@peff.net>\"' --no-send^M"
 stuff "# gpp -F --fpa='--subject-prefix=\"PATCH\"' --sea='--cc=\"Junio C Hamano <gitster@pobox.com>\"' --no-send^M"
 
-screen -t ml:repo
+screen -t ml:r
 stuff "cd ~/g/git-ml^M"
 stuff "while true; do if test \$(find ~/g/git/git -mmin -1440 | wc -l) = 1; then git pull; else echo too old; fi ; date ; sleep 300; done^M"
+
+screen -t ml:sh:0
+stuff "cd ~/g/git-ml^M"
+stuff "git --no-pager log --oneline -10^M"
+
+screen -t l:pcre1
+stuff "cd ~/g/pcre^M"
+stuff "git svn rebase^M"
+stuff "test -f RunTest && git clean -dxf; ./autogen.sh; CXXFLAGS=-O3 CFLAGS=-O3 ./configure --prefix=\$PWD/inst --enable-jit --enable-utf --enable-unicode-properties && time make -j6 install^M"
+
+screen -t l:pcre2
+stuff "cd ~/g/pcre2^M"
+stuff "git svn rebase^M"
+stuff "test -f RunTest && git clean -dxf; ./autogen.sh; CXXFLAGS=-O3 CFLAGS=-O3 ./configure --prefix=\$PWD/inst --enable-jit --enable-utf --enable-unicode-properties && time make -j6 install^M"
 
 select 0
