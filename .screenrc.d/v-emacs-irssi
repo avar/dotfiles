@@ -14,4 +14,7 @@ stuff "htop^M"
 screen -t leech 2 bash
 stuff "sudo screen -rx leech/^M"
 
+screen -t d:git 2 bash
+stuff "screen -rx dev-git || (dsgit -d -m && screen -rx dev-git)^M"
+
 select 0

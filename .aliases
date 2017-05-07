@@ -21,6 +21,7 @@ alias scs='screen -S'
 alias svem='screen -c ~/.screenrc.d/v-emacs-irssi'
 alias hssnth='screen -c ~/.screenrc.d/home-snth-emacs'
 alias hssnth-local='screen -c ~/.screenrc.d/home-snth-emacs-local'
+alias dsgit='screen -c ~/.screenrc.d/dev-git'
 
 # Perl
 alias pd=perldoc

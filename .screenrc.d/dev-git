@@ -1,0 +1,55 @@
+source /home/avar/.screenrc
+
+sessionname dev-git
+
+screen -t g:0 bash
+stuff "cd ~/g/git^M"
+
+screen -t g:1 bash
+stuff "cd ~/g/git^M"
+
+screen -t g:2 bash
+stuff "cd ~/g/git^M"
+
+screen -t g:3 bash
+stuff "cd ~/g/git^M"
+
+screen -t g:4 bash
+stuff "cd ~/g/git^M"
+
+screen -t p:0 bash
+stuff "cd ~/g/git^M"
+stuff "cd t/perf^M"
+stuff "GIT_PERF_LARGE_REPO=~/g/linux ./run p7820-grep-engines.sh"
+
+screen -t p:1 bash
+stuff "cd ~/g/git^M"
+stuff "cd t/perf^M"
+
+screen -t p:2 bash
+stuff "cd ~/g/git^M"
+stuff "cd t/perf^M"
+
+screen -t c:d bash
+stuff "cd ~/g/git^M"
+stuff "make -j 8 NO_REGEX= USE_LIBPCRE=YesPlease USE_LIBPCRE2=YesPlease LIBPCREDIR=/home/avar/g/pcre2/inst NO_PTHREADS=YesPlease CC=~/perl5/installed/bin/gcc NO_R_TO_GCC_LINKER=YesPlease CFLAGS=\"-O0 -g -Wall -Wdeclaration-after-statement -Wno-format-zero-length -Wold-style-definition -Woverflow -Wpointer-arith -Wstrict-prototypes -Wunused -Wvla -Wswitch -Wuninitialized -Wextra -Wno-unused-parameter -Wno-sign-compare -Wno-missing-field-initializers -Wno-implicit-fallthrough -Wno-empty-body\" LDFLAGS=-Wl,-rpath,/home/avar/g/pcre2/inst/lib all doc"
+
+screen -t c:o bash
+stuff "cd ~/g/git^M"
+stuff "make -j 8 NO_REGEX= USE_LIBPCRE=YesPlease USE_LIBPCRE2=YesPlease LIBPCREDIR=/home/avar/g/pcre2/inst NO_PTHREADS=YesPlease CC=~/perl5/installed/bin/gcc NO_R_TO_GCC_LINKER=YesPlease CFLAGS=\"-O3 -g\" LDFLAGS=-Wl,-rpath,/home/avar/g/pcre2/inst/lib all doc"
+
+screen -t p:repo bash
+stuff "cd ~/g/git-patches^M"
+stuff "git fetch^M"
+stuff "git status^M"
+
+screen -t p:new bash
+stuff "cd ~/g/git^M"
+stuff "# gpp -F --fpa='--subject-prefix=\"PATCH\" --cover-letter' --sea='--cc=\"Junio C Hamano <gitster@pobox.com>\" --cc=\"Jeff King <peff@peff.net>\"' --no-send^M"
+stuff "# gpp -F --fpa='--subject-prefix=\"PATCH\"' --sea='--cc=\"Junio C Hamano <gitster@pobox.com>\"' --no-send^M"
+
+screen -t ml:repo
+stuff "cd ~/g/git-ml^M"
+stuff "while true; do if test \$(find ~/g/git/git -mmin -1440 | wc -l) = 1; then git pull; else echo too old; fi ; date ; sleep 300; done^M"
+
+select 0
