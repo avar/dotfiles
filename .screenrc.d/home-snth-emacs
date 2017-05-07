@@ -6,6 +6,10 @@ screen -t e bash
 stuff "(emacsclient --tty || (emacs --daemon && emacsclient --tty))^M"
 
 screen -t l bash
+# ssh-ing to localhost to start screen? Why? See git history.
+stuff "ssh localhost^M"
+stuff "screen -rx local || hssnth-local^M"
+
 stuff "screen -rx local || (hssnth-local -d -m && screen -rx local)^M"
 
 screen -t tc:1 bash
