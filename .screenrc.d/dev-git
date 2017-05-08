@@ -81,4 +81,8 @@ stuff "cd ~/g/pcre2^M"
 stuff "git svn rebase^M"
 stuff "test -f RunTest && git clean -dxf; ./autogen.sh; CXXFLAGS=-O3 CFLAGS=-O3 ./configure --prefix=\$PWD/inst --enable-jit --enable-utf --enable-unicode-properties && time make -j6 install^M"
 
+screen -t l:gnulib
+stuff "cd ~/g/gnulib^M"
+stuff "git fetch^M"
+
 select 0
