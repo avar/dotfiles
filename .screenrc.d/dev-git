@@ -67,6 +67,8 @@ stuff "# gpp -F --fpa='--subject-prefix=\"PATCH\"' --sea='--cc=\"Junio C Hamano 
 # branch.
 stuff "# gpp --to ':/threading.*is.*enabled' -o ~/g/git-patches/avar/grep-and-pcre-and-more/upto/pthreads-overhead -F --fpa='--cover-letter --subject-prefix=\"PATCH\"' --sea='--cc=\"Junio C Hamano <gitster@pobox.com>\" --cc=\"Jeff King <peff@peff.net>\" --cc=\"Jeffrey Walton <noloader@gmail.com>\" --cc=\"Michał Kiedrowicz <michal.kiedrowicz@gmail.com>\" --cc=\"J Smith <dark.panda@gmail.com>\" --cc=\"Victor Leschuk <vleschuk@gmail.com>\" --cc=\"Nguyễn Thái Ngọc Duy <pclouds@gmail.com>\" --cc=\"Fredrik Kuivinen <frekui@gmail.com>\" --cc=\"Brandon Williams <bmwill@google.com>\"' --no-send^M"
 
+stuff "# gpp --from ':/assert that threading' --to ':/\^grep: add support for PCRE v2' -o ~/g/git-patches/avar/grep-and-pcre-and-more/upto/experimental -F --fpa='--cover-letter --subject-prefix=\"PATCH\"' --sea='--cc=\"Junio C Hamano <gitster@pobox.com>\" --cc=\"Jeff King <peff@peff.net>\" --cc=\"Jeffrey Walton <noloader@gmail.com>\" --cc=\"Michał Kiedrowicz <michal.kiedrowicz@gmail.com>\" --cc=\"J Smith <dark.panda@gmail.com>\" --cc=\"Victor Leschuk <vleschuk@gmail.com>\" --cc=\"Nguyễn Thái Ngọc Duy <pclouds@gmail.com>\" --cc=\"Fredrik Kuivinen <frekui@gmail.com>\" --cc=\"Brandon Williams <bmwill@google.com>\"' --no-send^M"
+
 screen -t ml:r
 stuff "cd ~/g/git-ml^M"
 stuff "while true; do if test \$(find ~/g/git/git -mmin -1440 | wc -l) = 1; then git pull; else echo too old; fi ; date ; sleep 300; done^M"
