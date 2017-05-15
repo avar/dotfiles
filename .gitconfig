@@ -93,7 +93,7 @@
 	sslVerify = false
 [grep]
 	lineNumber = true
-	extendedRegexp = true
+	patternType = perl
 [log]
 	;; Show tags and other references in "git log"
 	decorate = short
