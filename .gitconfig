@@ -4,9 +4,16 @@
 [github]
 	login = avar
 [include]
-	#path = ~/.gitconfig.d/user-email
 	path = ~/.gitconfig.d/github-token
-
+[includeIf "gitdir:~/g/perl/"]
+	path = ~/.gitconfig.d/user-perl
+[includeIf "gitdir:*/git_tree/"]
+	# Matches both the /usr/local path & ~/git_tree, but
+	# */git_tree/ is a hack around
+	# <CACBZZX5d25UyGbb6=kPmzk_5-X0GMptN0kX_--aBADsDy-9kWw@mail.gmail.com>
+	path = ~/.gitconfig.d/user-booking
+[includeIf "gitdir:~/git_tree.local/"]
+	path = ~/.gitconfig.d/user-booking
 [color]
 	ui = auto
 
