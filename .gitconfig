@@ -108,3 +108,5 @@
 	backends = SHA256E SHA256
 [help]
 	autocorrect = 5
+[core]
+	untrackedCache = true
