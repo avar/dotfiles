@@ -20,7 +20,7 @@
 ;; Don't be so invasive about coloring ^M when I'm editing files that
 ;; are supposed to have \r\n.
 [color "diff"]
-   whitespace = 0
+	whitespace = 0
 
 [alias]
 	;; Lazyness
