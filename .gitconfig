@@ -112,3 +112,5 @@
 	autocorrect = 5
 [core]
 	untrackedCache = true
+[diff]
+	indentHeuristic = true
