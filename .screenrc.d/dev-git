@@ -73,7 +73,7 @@ stuff "# gpp --from \$(git log --pretty=format:%h --grep='^grep: add support for
 
 screen -t ml:r
 stuff "cd ~/g/git-ml^M"
-stuff "while true; do if test \$(find ~/g/git/git -mmin -1440 | wc -l) = 1; then git pull; else echo too old; fi ; date ; sleep 300; done^M"
+stuff "while true; do if test \$(find ~/g/git -type f -mmin -1440 | wc -l) -gt 0; then git pull; else echo too old; fi ; date ; sleep 300; done^M"
 
 screen -t ml:sh:0
 stuff "cd ~/g/git-ml^M"
