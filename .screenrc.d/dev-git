@@ -93,4 +93,9 @@ screen -t l:gnulib
 stuff "cd ~/g/gnulib^M"
 stuff "git fetch^M"
 
+screen -t l:watchman
+stuff "cd ~/g/watchman^M"
+stuff "git fetch^M"
+stuff "# CC=~/perl5/installed/bin/gcc CXX=~/perl5/installed/bin/g++ LDFLAGS=-Wl,-rpath,/home/avar/perl5/installed/lib64 ./configure --prefix=/home/avar/local^M"
+
 select 0
