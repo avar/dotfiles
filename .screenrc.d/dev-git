@@ -3,6 +3,9 @@ source /home/aearnfjord/.screenrc
 
 sessionname dev-git
 
+screen -t t bash
+stuff "htop^M"
+
 screen -t g:0 bash
 stuff "cd ~/g/git^M"
 
@@ -13,9 +16,6 @@ screen -t g:2 bash
 stuff "cd ~/g/git^M"
 
 screen -t g:3 bash
-stuff "cd ~/g/git^M"
-
-screen -t g:4 bash
 stuff "cd ~/g/git^M"
 
 screen -t p:0 bash
@@ -33,16 +33,16 @@ stuff "cd t/perf^M"
 
 screen -t c:d bash
 stuff "cd ~/g/git^M"
-stuff "make -j 8 NO_REGEX= USE_LIBPCRE=YesPlease USE_LIBPCRE2=YesPlease LIBPCREDIR=/home/avar/g/pcre2/inst CC=~/perl5/installed/bin/gcc NO_R_TO_GCC_LINKER=YesPlease CFLAGS=\"-O0 -g -Wall -Werror -Wdeclaration-after-statement -Wno-format-zero-length -Wold-style-definition -Woverflow -Wpointer-arith -Wstrict-prototypes -Wunused -Wvla -Wswitch -Wuninitialized -Wextra -Wno-unused-parameter -Wno-sign-compare -Wno-missing-field-initializers -Wno-implicit-fallthrough -Wno-empty-body\" LDFLAGS=-Wl,-rpath,/home/avar/g/pcre2/inst/lib all doc"
+stuff "make -j \$(parallel --number-of-cores) NO_REGEX= USE_LIBPCRE=YesPlease USE_LIBPCRE2=YesPlease LIBPCREDIR=/home/avar/g/pcre2/inst NO_R_TO_GCC_LINKER=YesPlease CFLAGS=\"-O0 -g -Wall -Werror -Wdeclaration-after-statement -Wno-format-zero-length -Wold-style-definition -Woverflow -Wpointer-arith -Wstrict-prototypes -Wunused -Wvla -Wswitch -Wuninitialized -Wextra -Wno-unused-parameter -Wno-sign-compare -Wno-missing-field-initializers -Wno-implicit-fallthrough -Wno-empty-body\" LDFLAGS=-Wl,-rpath,/home/avar/g/pcre2/inst/lib all doc"
 
 screen -t c:o bash
 stuff "cd ~/g/git^M"
-stuff "make -j 8 NO_REGEX= USE_LIBPCRE=YesPlease USE_LIBPCRE2=YesPlease LIBPCREDIR=/home/avar/g/pcre2/inst CC=~/perl5/installed/bin/gcc NO_R_TO_GCC_LINKER=YesPlease CFLAGS=\"-O3 -g\" LDFLAGS=-Wl,-rpath,/home/avar/g/pcre2/inst/lib all doc"
+stuff "make -j \$(parallel --number-of-cores) NO_REGEX= USE_LIBPCRE=YesPlease USE_LIBPCRE2=YesPlease LIBPCREDIR=/home/avar/g/pcre2/inst NO_R_TO_GCC_LINKER=YesPlease CFLAGS=\"-O3 -g\" LDFLAGS=-Wl,-rpath,/home/avar/g/pcre2/inst/lib all doc"
 
 screen -t t:0 bash
 stuff "cd ~/g/git^M"
 stuff "cd t^M"
-stuff "GIT_TEST_LONG=1 prove -j12 --state=slow,save t[0-9]*.sh"
+stuff "NO_SVN_TESTS=1 GIT_TEST_HTTPD=0 prove -j\$(parallel --number-of-cores) --state=slow,save t[0-9]*.sh"
 
 screen -t t:1 bash
 stuff "cd ~/g/git^M"
