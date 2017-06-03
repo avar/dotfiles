@@ -33,11 +33,11 @@ stuff "cd t/perf^M"
 
 screen -t c:d bash
 stuff "cd ~/g/git^M"
-stuff "make -j \$(parallel --number-of-cores) NO_REGEX= USE_LIBPCRE=YesPlease USE_LIBPCRE2=YesPlease LIBPCREDIR=/home/avar/g/pcre2/inst NO_R_TO_GCC_LINKER=YesPlease CFLAGS=\"-O0 -g -Wall -Werror -Wdeclaration-after-statement -Wno-format-zero-length -Wold-style-definition -Woverflow -Wpointer-arith -Wstrict-prototypes -Wunused -Wvla -Wswitch -Wuninitialized -Wextra -Wno-unused-parameter -Wno-sign-compare -Wno-missing-field-initializers -Wno-implicit-fallthrough -Wno-empty-body\" LDFLAGS=-Wl,-rpath,/home/avar/g/pcre2/inst/lib all doc"
+stuff "time make -j \$(parallel --number-of-cores) NO_REGEX= USE_LIBPCRE=YesPlease USE_LIBPCRE2=YesPlease LIBPCREDIR=/home/avar/g/pcre2/inst NO_R_TO_GCC_LINKER=YesPlease CFLAGS=\"-O0 -g -Wall -Werror -Wdeclaration-after-statement -Wno-format-zero-length -Wold-style-definition -Woverflow -Wpointer-arith -Wstrict-prototypes -Wunused -Wvla -Wswitch -Wuninitialized -Wextra -Wno-unused-parameter -Wno-sign-compare -Wno-missing-field-initializers -Wno-implicit-fallthrough -Wno-empty-body\" LDFLAGS=-Wl,-rpath,/home/avar/g/pcre2/inst/lib all doc"
 
 screen -t c:o bash
 stuff "cd ~/g/git^M"
-stuff "make -j \$(parallel --number-of-cores) NO_REGEX= USE_LIBPCRE=YesPlease USE_LIBPCRE2=YesPlease LIBPCREDIR=/home/avar/g/pcre2/inst NO_R_TO_GCC_LINKER=YesPlease CFLAGS=\"-O3 -g\" LDFLAGS=-Wl,-rpath,/home/avar/g/pcre2/inst/lib all doc"
+stuff "time make -j \$(parallel --number-of-cores) NO_REGEX= USE_LIBPCRE=YesPlease USE_LIBPCRE2=YesPlease LIBPCREDIR=/home/avar/g/pcre2/inst NO_R_TO_GCC_LINKER=YesPlease CFLAGS=\"-O3 -g\" LDFLAGS=-Wl,-rpath,/home/avar/g/pcre2/inst/lib all doc"
 
 screen -t t:0 bash
 stuff "cd ~/g/git^M"
