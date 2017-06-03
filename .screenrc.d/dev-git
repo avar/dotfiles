@@ -42,12 +42,12 @@ stuff "make -j \$(parallel --number-of-cores) NO_REGEX= USE_LIBPCRE=YesPlease US
 screen -t t:0 bash
 stuff "cd ~/g/git^M"
 stuff "cd t^M"
-stuff "NO_SVN_TESTS=1 GIT_TEST_HTTPD=0 prove -j\$(parallel --number-of-cores) --state=slow,save t[0-9]*.sh"
+stuff "time NO_SVN_TESTS=1 GIT_TEST_HTTPD=0 prove -j\$(parallel --number-of-cores) --state=slow,save t[0-9]*.sh"
 
 screen -t t:1 bash
 stuff "cd ~/g/git^M"
 stuff "cd t^M"
-stuff "GIT_TEST_LONG=1 prove -j12 --state=slow,save t[0-9]*grep*.sh t[0-9]*log*.sh"
+stuff "time prove -j\$(parallel --number-of-cores) --state=slow,save t[0-9]*grep*.sh t[0-9]*log*.sh"
 
 screen -t t:2 bash
 stuff "cd ~/g/git^M"
