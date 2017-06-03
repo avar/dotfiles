@@ -1,4 +1,5 @@
 source /home/avar/.screenrc
+source /home/aearnfjord/.screenrc
 
 sessionname dev-git
 
