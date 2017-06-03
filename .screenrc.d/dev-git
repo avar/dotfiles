@@ -47,12 +47,12 @@ stuff "time NO_SVN_TESTS=1 GIT_TEST_HTTPD=0 prove -j\$(parallel --number-of-core
 screen -t t:1 bash
 stuff "cd ~/g/git^M"
 stuff "cd t^M"
-stuff "time prove -j\$(parallel --number-of-cores) --state=slow,save t[0-9]*grep*.sh t[0-9]*log*.sh"
+stuff "./t7810-grep.sh -v -i"
 
 screen -t t:2 bash
 stuff "cd ~/g/git^M"
 stuff "cd t^M"
-stuff "./t7810-grep.sh -v -i"
+stuff "time prove -j\$(parallel --number-of-cores) --state=slow,save t[0-9]*grep*.sh t[0-9]*log*.sh"
 
 screen -t se:r bash
 stuff "cd ~/g/git-patches^M"
