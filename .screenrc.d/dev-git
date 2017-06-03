@@ -42,7 +42,7 @@ stuff "time make -j \$(parallel --number-of-cores) NO_REGEX= USE_LIBPCRE=YesPlea
 screen -t t:0 bash
 stuff "cd ~/g/git^M"
 stuff "cd t^M"
-stuff "time NO_SVN_TESTS=1 GIT_TEST_HTTPD=0 prove -j\$(parallel --number-of-cores) --state=slow,save t[0-9]*.sh"
+stuff "time GIT_TEST_TIMEOUT=10 NO_SVN_TESTS=1 GIT_TEST_HTTPD=0 prove -j\$(parallel --number-of-cores) --state=slow,save t[0-9]*.sh"
 
 screen -t t:1 bash
 stuff "cd ~/g/git^M"
