@@ -98,15 +98,15 @@ starttls = no
 ssl = no
 #sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 
+# I disable compression to make the tcpflow debugging easier.
+usecompression = no
+
 remoteuser = avar@booking.com
 
 # I gave up with the oauth method and just went for enabling "less
 # secure apps to access your account":
 # https://support.google.com/accounts/answer/6010255
 remotepasseval = get_password("work-gmail")
-
-# I disable compression to make the tcpflow debugging easier.
-usecompression = no
 
 # If I were to use idlefolders / keepalive etc. this would have to be
 # at least the number of folders I'm syncing
