@@ -132,7 +132,7 @@ nametrans = lambda name: oi_work_gmail_remote_nametrans(name)
 [Account PersonalGMail]
 localrepository = PersonalGMailLocal
 remoterepository = PersonalGMailRemote
-maxage = 90
+maxage = 365
 
 [Repository PersonalGMailLocal]
 type = GmailMaildir
