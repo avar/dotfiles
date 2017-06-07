@@ -1,10 +1,12 @@
-# The work GMail IMAP configuration for offlineimap.
+# My configuration for offlineimap, both work GMail & personal
+# GMail. See the git log for this & .mbsyncrc for old work Cyrus IMAP
+# / Exchange IMAP configurations.
 
 [general]
 ui = ttyui
 
 # Set up my one account
-accounts = Work
+accounts = Work, PersonalGMail
 
 # I only have one account anyway, but be explicit, sync one account at
 # a time.
@@ -126,6 +128,38 @@ folderfilter = lambda f: f in ['INBOX', '[Gmail]/Drafts', '[Gmail]/Sent Mail', '
 
 # See http://www.offlineimap.org/doc/nametrans.html#faq-on-nametrans
 nametrans = lambda name: oi_work_gmail_remote_nametrans(name)
+
+[Account PersonalGMail]
+localrepository = PersonalGMailLocal
+remoterepository = PersonalGMailRemote
+maxage = 90
+
+[Repository PersonalGMailLocal]
+type = GmailMaildir
+localfolders = ~/Maildir/personal-gmail
+# Sync local deletes to the remote
+sync_deletes = yes
+
+# The reverse nametrans, see the comment for the PersonalGMailRemote
+# nametrans.
+nametrans = lambda name: oi_personal_gmail_local_nametrans(name)
+
+[Repository PersonalGMailRemote]
+type = Gmail
+remotehost = localhost
+remoteport = 1430
+starttls = no
+ssl = no
+usecompression = no
+
+remoteuser = avarab@gmail.com
+remotepasseval = get_password("personal-gmail")
+
+#folderfilter = lambda f: f in ['INBOX', '[Gmail]/Drafts', '[Gmail]/Sent Mail', '[Gmail]/Trash', '[Gmail]/Spam', 'Git']
+folderfilter = lambda f: f in ['INBOX', '[Gmail]/Drafts', '[Gmail]/Sent Mail', 'Git']
+
+# See http://www.offlineimap.org/doc/nametrans.html#faq-on-nametrans
+nametrans = lambda name: oi_personal_gmail_remote_nametrans(name)
 
 # As noted above in the comment for remotepasseval I tried in vain to
 # get oauth working. Menno has it working following the instructions

@@ -42,12 +42,34 @@ stuff "sleep 10^M"
 # debug: -d imap,maildir
 stuff "while true; do time python ~/g/offlineimap/offlineimap.py -a WorkGMail -c ~/.offlineimaprc ; sleep 60; done^M"
 
+# Personal GMail setup
+screen -t m:pg:md:size bash
+stuff "du -sb ~/.mu ~/Maildir/personal-gmail; du -sh ~/.mu ~/Maildir/personal-gmail; find ~/Maildir/personal-gmail/ -type f | wc -l; df -h /^M"
+
+screen -t m:pg:md:find bash
+stuff "find ~/Maildir/personal-gmail -type f -mmin -5|wc -l # modified in the last 5mins^M"
+stuff "find ~/Maildir/personal-gmail -type f -cmin -5|wc -l # created in the last 5mins^M"
+
+screen -t m:pg:stunnel bash
+stuff "(stunnel .stunnel.personal-gmail-imap || (kill \$(sudo netstat -ldnp|grep -F 127.0.0.1:1430|awk '{print \$7}'|awk -F/ '{print \$1}')) && echo Restarting && sleep 1 && stunnel .stunnel.personal-gmail-imap)^M"
+
+screen -t m:pg:stunnel:flow bash
+stuff "sudo tcpflow -i lo -c port 1430^M"
+
+screen -t m:pg:sync:<> bash
+stuff "sleep 10^M"
+# debug: -d imap,maildir
+#stuff "while true; time python ~/g/offlineimap/offlineimap.py -a PersonalGMail -c ~/.offlineimaprc ; sleep 60; done^M"
+stuff "# time python ~/g/offlineimap/offlineimap.py -a PersonalGMail -c ~/.offlineimaprc^M"
+
 # mu
 screen -t m:monitor bash
 stuff "# while sleep 1; do time sudo perl ~/g/dotemacs/scripts/mu-monitor.pl; done^M"
 
 screen -t m:index bash
-stuff "# while sleep 30; do time mu index --maildir=~/Maildir/work --max-msg-size=500000000; done^M"
+stuff "# mu index --muhome=/home/avar/.mu/work-exchange --maildir=~/Maildir/work --max-msg-size=500000000^M"
+stuff "# mu index --muhome=/home/avar/.mu/work-gmail --maildir=~/Maildir/work-gmail --max-msg-size=500000000^M"
+stuff "# mu index --muhome=/home/avar/.mu/personal-gmail --maildir=~/Maildir/personal-gmail --max-msg-size=500000000^M"
 
 screen -t m:f:0 bash
 stuff "export MU_HOME=/home/avar/.mu/work-gmail^M"
@@ -57,6 +79,7 @@ screen -t m:f:1 bash
 stuff "export MU_HOME=/home/avar/.mu/work-gmail^M"
 stuff "mu find -n 10 booking^M"
 
+# logs
 screen -t s:daemon-nm-dis:l bash
 stuff "tail -f /var/log/daemon.log | grep nm-dispatcher^M"
 

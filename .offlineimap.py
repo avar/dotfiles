@@ -29,3 +29,14 @@ def oi_work_gmail_remote_nametrans(name):
     name = re.sub('^\[Gmail\]/Trash$',     'Trash',  name)
 
     return name
+
+# This is a superset of the more limited work rules
+def oi_personal_gmail_local_nametrans(name):
+    name = oi_work_gmail_local_nametrans(name)
+
+    return name
+
+def oi_personal_gmail_remote_nametrans(name):
+    name = oi_work_gmail_remote_nametrans(name)
+
+    return name
