@@ -67,9 +67,9 @@ screen -t m:monitor bash
 stuff "# while sleep 1; do time sudo perl ~/g/dotemacs/scripts/mu-monitor.pl; done^M"
 
 screen -t m:index bash
-stuff "# mu index --muhome=/home/avar/.mu/work-exchange --maildir=~/Maildir/work --max-msg-size=500000000^M"
-stuff "# mu index --muhome=/home/avar/.mu/work-gmail --maildir=~/Maildir/work-gmail --max-msg-size=500000000^M"
-stuff "# mu index --muhome=/home/avar/.mu/personal-gmail --maildir=~/Maildir/personal-gmail --max-msg-size=500000000^M"
+stuff "# time mu index --muhome=/home/avar/.mu/work-exchange --maildir=~/Maildir/work --max-msg-size=500000000^M"
+stuff "# time mu index --muhome=/home/avar/.mu/work-gmail --maildir=~/Maildir/work-gmail --max-msg-size=500000000^M"
+stuff "# time mu index --muhome=/home/avar/.mu/personal-gmail --maildir=~/Maildir/personal-gmail --max-msg-size=500000000^M"
 
 screen -t m:f:0 bash
 stuff "export MU_HOME=/home/avar/.mu/work-gmail^M"
