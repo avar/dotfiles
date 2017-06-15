@@ -35,7 +35,7 @@ screen -t m:wg:stunnel bash
 stuff "(stunnel .stunnel.work-gmail-imap || (kill \$(sudo netstat -ldnp|grep -F 127.0.0.1:1431|awk '{print \$7}'|awk -F/ '{print \$1}')) && echo Restarting && sleep 1 && stunnel .stunnel.work-gmail-imap)^M"
 
 screen -t m:wg:stunnel:flow bash
-stuff "sudo tcpflow -i lo -c port 1431^M"
+stuff "sudo tcpflow -i lo -c port 1431 | grep -i -e \^subject -e \^list-id -e \^from^M"
 
 screen -t m:wg:sync:<> bash
 stuff "sleep 10^M"
@@ -54,7 +54,7 @@ screen -t m:pg:stunnel bash
 stuff "(stunnel .stunnel.personal-gmail-imap || (kill \$(sudo netstat -ldnp|grep -F 127.0.0.1:1430|awk '{print \$7}'|awk -F/ '{print \$1}')) && echo Restarting && sleep 1 && stunnel .stunnel.personal-gmail-imap)^M"
 
 screen -t m:pg:stunnel:flow bash
-stuff "sudo tcpflow -i lo -c port 1430^M"
+stuff "sudo tcpflow -i lo -c port 1430 | grep -i -e \^subject -e \^list-id -e \^from^M"
 
 screen -t m:pg:sync:<> bash
 stuff "sleep 10^M"
