@@ -192,3 +192,13 @@ nametrans = lambda name: oi_personal_gmail_remote_nametrans(name)
 # was because I had to start offlineimap with https_proxy=, but then
 # it emitted some error about the authentication failing. I didn't get
 # to the bottom of that and just went with password auth.
+
+# Debugging exim (see e.g. laptop-etc.git's 9758ce0 ("Make exim4 route
+# through different smarthosts for different addresses", 2017-06-09)
+# for such a change to be debugged & full IRC log with more details)
+#
+## Send test e-mail
+# echo | sudo exim -d -f 'avar@booking.com' avarab@gmail.com 2>&1|less -S
+## Get debug output from exim itself:
+# sudo systemctl stop exim4
+# sudo /usr/sbin/exim4 -d+all -q30m
