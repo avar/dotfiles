@@ -20,6 +20,7 @@ stuff "sudo exim -bp^M"
 # Forces sending of the messages, if any. See
 # http://www.electrictoolbox.com/flush-exim-mail-queue/
 # http://mewbies.com/how_to_setup_exim_mail_transfer_agent_for_linux_tutorial.htm
+# also: http://bradthemad.org/tech/notes/exim_cheatsheet.php
 stuff "# sudo exim -qf # send stalled messages^M"
 stuff "# sudo exim -qff # send stalled messages, even if frozen due to bounces^M"
 
