@@ -115,3 +115,4 @@
 	splitIndex = true
 [diff]
 	indentHeuristic = true
+	colorMoved = true
