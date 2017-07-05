@@ -112,7 +112,7 @@
 	autocorrect = 5
 [core]
 	untrackedCache = true
-	splitIndex = true
+	splitIndex = false
 [diff]
 	indentHeuristic = true
 	colorMoved = zebra
