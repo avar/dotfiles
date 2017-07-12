@@ -333,9 +333,9 @@ function nuke_git {
 
 # debian upgrade
 function dug {
-    sudo aptitude update
-    sudo aptitude upgrade
-    sudo aptitude dist-upgrade
+    sudo apt update
+    sudo apt upgrade
+    sudo apt dist-upgrade
 }
 
 dotfiles=$HOME/g/avar-dotfiles-work
