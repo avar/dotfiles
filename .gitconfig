@@ -116,3 +116,5 @@
 [diff]
 	indentHeuristic = true
 	colorMoved = zebra
+[status]
+	showStash = true
