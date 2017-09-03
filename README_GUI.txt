@@ -17,7 +17,9 @@
 ## Disable Alerts
 "Windows key" -> "Sound" -> "Sound Effects" ==> "Alert volume" = "Off"
 ## Set the touchpad to edge scrolling
-"Windows key" -> "dconf editor" -> "org.gnome.settings-daemon.peripherals.touchpad" -> "scroll method" ==> "edge-scrolling" && "natural scroll" => "Off"
+#"Windows key" -> "dconf editor" -> "org.gnome.settings-daemon.peripherals.touchpad" -> "scroll method" ==> "edge-scrolling" && "natural scroll" => "Off"
+## Update: This setting got renamed: https://askubuntu.com/questions/616267/cannot-use-the-unity-tweak-tool
+## Update: But it seems to be no longer needed on my new Latitude  7480
 
 # Set up mbsync+mu+emacs
 ## mbsync
