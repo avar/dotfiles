@@ -7,6 +7,8 @@
 	path = ~/.gitconfig.d/github-token
 [includeIf "gitdir:~/g/perl/"]
 	path = ~/.gitconfig.d/user-perl
+[includeIf "gitdir:~/g/avar-dotfiles-work/.git"]
+	path = ~/.gitconfig.d/user-booking
 [includeIf "gitdir:*/git_tree/"]
 	# Matches both the /usr/local path & ~/git_tree, but
 	# */git_tree/ is a hack around
