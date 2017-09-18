@@ -13,13 +13,13 @@ stuff "screen -rx local || hssnth-local^M"
 stuff "screen -rx local || (hssnth-local -d -m && screen -rx local)^M"
 
 screen -t tc:1 bash
-stuff "while test ! -d /media/teracaddy; do sleep 3; done && cd /media/teracaddy/annex/p*/l*/w*/c*^M"
+stuff "cd annex/p*/l*/w*/c*^M"
 
 screen -t tc:2 bash
-stuff "while test ! -d /media/teracaddy; do sleep 3; done && cd /media/teracaddy/annex/p*/l*/w*/c*^M"
+stuff "cd annex/p*/l*/w*/c*^M"
 
 screen -t tc:3 bash
-stuff "while test ! -d /media/teracaddy; do sleep 3; done && cd /media/teracaddy/annex/p*/l*/w*/c*^M"
+stuff "cd annex/p*/l*/w*/c*^M"
 
 screen -t ttv bash
 stuff "torrent-to-v.sh"
