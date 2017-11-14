@@ -1,0 +1,23 @@
+#!/usr/bin/expect -f
+set host [lindex $argv 0]
+set password [lindex $argv 1]
+set pin [lindex $argv 2]
+
+spawn ssh $host
+expect {
+    Password: {
+        send_user "Supplying the password"
+        send "$password\r"
+        exp_continue
+    }
+    "Two Factor Token:" {
+        send_user "Supplying the PIN, Enter the 2FA: "
+        send $pin
+        stty -echo
+        expect_user -re "(.*)\n"
+        send_user "\n"
+        send "$expect_out(1,string)\r"
+        stty echo
+        exp_continue
+    }
+}
