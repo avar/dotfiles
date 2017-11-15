@@ -5,6 +5,8 @@ debug = info
 # Don't try to write a pid file. Makes it simple to run this without
 # chroot or sudo.
 pid =
+# Ability to sniff localhost traffic, but still small on the wire
+compression = deflate
 [work-imap-gmail-ssl-tunnel]
 # Don't do local SSL, but local -> remote SSL.
 client = yes
