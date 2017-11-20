@@ -97,10 +97,10 @@ screen -t openvpn:connect bash
 stuff "nmcli con up id 'booking'"
 
 screen -t openvpn.log bash
-stuff "tail -f /var/log/syslog | grep openvpn^M"
+stuff "tail -f /var/log/syslog /var/log/daemon.log | grep openvpn^M"
 
 screen -t nm-dispatcher.log bash
-stuff "tail -f /var/log/daemon.log | grep nm-dispatcher^M"
+stuff "tail -f /var/log/syslog /var/log/daemon.log | grep nm-dispatcher^M"
 
 screen -t tcpflow:openvpn bash
 stuff "sudo tcpflow -i wlan0 -c port 1194"
