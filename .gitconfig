@@ -73,7 +73,7 @@
 
         ;; Git doesn't have a one-shot command to copy a branch & its
         ;; config to a new location.
-        cp-branch = "!f() { git checkout -b $2 $1 && for line in $(git config --list --file .git/config | grep \"^branch\\.$1\"); do key=$(echo $line | cut -d= -f1); newkey=$(echo $key | sed \"s!$1!$2!\"); value=$(echo $line | cut -d= -f2); git config $newkey $value; done; }; f"
+        cp-branch = "!f() { git branch -c $1 $2 && git checkout $2; }; f"
 
 	;; Working on git.git
 	git-commit-summary = show -s --date=short --pretty='format:%h (\"%s\", %ad)'
