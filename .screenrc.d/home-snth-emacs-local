@@ -91,7 +91,7 @@ screen -t s:daemon-nm-dis:l bash
 stuff "tail -f /var/log/daemon.log | grep nm-dispatcher^M"
 
 screen -t s:squid:l bash
-stuff "sudo tail -f /var/log/squid3/*.log^M"
+stuff "sudo tail -F /var/log/squid{,3,4}/*.log^M"
 
 # OpenVPN related
 screen -t yubikey:hook bash
