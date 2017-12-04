@@ -95,7 +95,7 @@ stuff "sudo tail -f /var/log/squid3/*.log^M"
 
 # OpenVPN related
 screen -t yubikey:hook bash
-stuff "tail -n 0 -F /tmp/udev.70-youbikey-setxkbmap.hook | DISPLAY=:0 perl -nE 'say qx[setxkbmap -device \\$(xinput list | sed -n \"s/.*Yubikey.*id=\\\\([0-9]*\\\\).*keyboard.*/\\\\1/p\") -layout us 2>&1]'^M"
+stuff "tail -n 0 -F /tmp/udev.70-youbikey-setxkbmap.hook | DISPLAY=:0 perl -nE 'sleep 1; chomp(my \$device = qx[xinput list | sed -n \"s/.*Yubikey.*id=\\\\([0-9]*\\\\).*keyboard.*/\\\\1/p\"]); unless (\$device) { say STDERR qq[Could not find device id (lagging, or plugged out?] } else { say qq[Setting device \$device to us! <] . qx[setxkbmap -device \$device -layout us 2>&1] . qq[>] }'^M"
 
 screen -t openvpn:connect bash
 stuff "nmcli con up id 'booking'"
