@@ -17,6 +17,10 @@ stuff "tail -F /var/log/exim4/mainlog^M"
 screen -t m:exim:q bash
 # Shows the status of the exim mail queue, i.e. any stalled messages
 stuff "sudo exim -bp^M"
+# Shows a summary
+stuff "sudo exim -bp | sudo exiqsumm^M"
+# What's exim doing?
+stuff "sudo exiwhat^M"
 # Forces sending of the messages, if any. See
 # http://www.electrictoolbox.com/flush-exim-mail-queue/
 # http://mewbies.com/how_to_setup_exim_mail_transfer_agent_for_linux_tutorial.htm
