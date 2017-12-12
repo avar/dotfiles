@@ -161,6 +161,26 @@ folderfilter = lambda f: f in ['INBOX', '[Gmail]/Drafts', '[Gmail]/Sent Mail', '
 # See http://www.offlineimap.org/doc/nametrans.html#faq-on-nametrans
 nametrans = lambda name: oi_personal_gmail_remote_nametrans(name)
 
+[Account WorkGitlab]
+localrepository = WorkGitlabLocal
+remoterepository = WorkGitlabRemote
+
+[Repository WorkGitlabLocal]
+type = Maildir
+localfolders = ~/Maildir/work-gitlab
+
+[Repository WorkGitlabRemote]
+type = IMAP
+# ssh -L 1443:maildirector:143 gitlab-1001
+remotehost = localhost
+remoteport = 1443
+starttls = no
+ssl = no
+usecompression = no
+
+remoteuser = gitlab
+remotepasseval = get_password("work-gitlab-account-maildirector")
+
 # As noted above in the comment for remotepasseval I tried in vain to
 # get oauth working. Menno has it working following the instructions
 # for "XOAuth2 authentication":
