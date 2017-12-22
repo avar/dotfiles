@@ -4,6 +4,6 @@ msgid=$@
 
 git -C ~/g/git-ml pull
 file=$(git -C ~/g/git-ml log --numstat --oneline -1 -i -G"^Message-id:.*$msgid.*" |tail -n 1|awk '{print $3}')
-git am ~/g/git-ml/$file
+git am -3 ~/g/git-ml/$file
 
 
