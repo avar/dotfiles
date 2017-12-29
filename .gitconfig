@@ -122,3 +122,6 @@
 	showStash = true
 [tag]
 	sort = version:refname
+[rerere]
+	enabled = true
+	autoUpdate = true
