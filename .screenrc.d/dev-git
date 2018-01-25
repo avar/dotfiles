@@ -83,12 +83,12 @@ stuff "git --no-pager log --oneline -10^M"
 screen -t l:pcre1
 stuff "cd ~/g/pcre^M"
 stuff "git svn rebase^M"
-stuff "test -f RunTest && git clean -dxf; ./autogen.sh; CXXFLAGS='-O3 -g' CFLAGS='-O3 -g' ./configure --prefix=\$PWD/inst --enable-jit --enable-utf --enable-unicode-properties && time make -j6 install^M"
+stuff "test -f RunTest && git clean -dxf; ./autogen.sh; CXXFLAGS='-O3 -g' CFLAGS='-O3 -g' ./configure --prefix=\$PWD/inst --enable-jit --enable-utf --enable-unicode-properties && time make -j6 install"
 
 screen -t l:pcre2
 stuff "cd ~/g/pcre2^M"
 stuff "git svn rebase^M"
-stuff "test -f RunTest && git clean -dxf; ./autogen.sh; CXXFLAGS='-O3 -g' CFLAGS='-O3 -g' ./configure --prefix=\$PWD/inst --enable-jit --enable-utf && time make -j6 install^M"
+stuff "test -f RunTest && git clean -dxf; ./autogen.sh; CXXFLAGS='-O3 -g' CFLAGS='-O3 -g' ./configure --prefix=\$PWD/inst --enable-jit --enable-utf && time make -j6 install"
 
 screen -t l:gnulib
 stuff "cd ~/g/gnulib^M"
