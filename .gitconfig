@@ -117,7 +117,7 @@
 	splitIndex = false
 [diff]
 	indentHeuristic = true
-	colorMoved = zebra
+	colorMoved = true
 [status]
 	showStash = true
 [tag]
