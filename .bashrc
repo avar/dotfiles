@@ -394,6 +394,9 @@ function bootstrap_work_dotfiles {
             git remote prune origin &&
             git branch -d avar-dotfiles
         )
+    elif test $(git -C ~/g/avar-dotfiles-work rev-parse --abbrev-ref HEAD) = 'master'
+    then
+        git -C ~/g/avar-dotfiles-work config remote.origin.url git@gitlab.booking.com:aearnfjord/dotfiles.git
     fi
 }
 
