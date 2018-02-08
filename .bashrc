@@ -378,7 +378,7 @@ function bootstrap_work_dotfiles {
     if ! test -d $dotfiles
     then
         # Bootstap the repository
-        git clone ssh://git.booking.com/gitroot/aearnfjord/dotfiles.git $dotfiles
+        git clone git@gitlab.booking.com:aearnfjord/dotfiles.git $dotfiles
 
         bootstrap_work_dotfiles_symlinks
     elif test $(git -C ~/g/avar-dotfiles-work/.git rev-parse --abbrev-ref HEAD) = 'avar-dotfiles'
@@ -386,7 +386,7 @@ function bootstrap_work_dotfiles {
         # Migrate the old checkouts to the new location
         (
             cd $dotfiles &&
-            git config remote.origin.url ssh://git.booking.com/gitroot/aearnfjord/dotfiles.git &&
+            git config remote.origin.url git@gitlab.booking.com:aearnfjord/dotfiles.git &&
             git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' &&
             git fetch &&
             git checkout -t origin/master &&
