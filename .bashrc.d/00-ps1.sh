@@ -37,9 +37,6 @@ function dir_info() {
     fi
 
     if type git >&/dev/null; then
-        # Include my copy of the git-prompt.sh
-        . ~/.bashrc.d/contrib/git-prompt.sh
-
         if test -n "$(type -t __git_ps1)"; then
             # We can hopefully use __git_ps1 which comes with git's
             # bash completion support
