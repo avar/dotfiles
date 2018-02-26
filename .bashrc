@@ -375,11 +375,12 @@ function bootstrap_work_dotfiles_symlinks {
 }
 
 function bootstrap_work_dotfiles {
+    sshCommand='ssh -i /usr/local/etc/gitlab_ssh_key_dotfiles/id_rsa'
     if ! test -d $dotfiles
     then
         # Bootstap the repository
-        git clone git@gitlab.booking.com:aearnfjord/dotfiles.git $dotfiles
-
+        SSH_AUTH_SOCK= GIT_SSH_COMMAND="$sshCommand" git clone git@gitlab.booking.com:aearnfjord/dotfiles.git $dotfiles &&
+        git -C ~/g/avar-dotfiles-work config core.sshCommand "$sshCommand" &&
         bootstrap_work_dotfiles_symlinks
     elif test $(git -C ~/g/avar-dotfiles-work/.git rev-parse --abbrev-ref HEAD) = 'avar-dotfiles'
     then
@@ -388,7 +389,7 @@ function bootstrap_work_dotfiles {
             cd $dotfiles &&
             git config remote.origin.url git@gitlab.booking.com:aearnfjord/dotfiles.git &&
             git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' &&
-            git fetch &&
+            SSH_AUTH_SOCK= GIT_SSH_COMMAND="$sshCommand" git fetch &&
             git checkout -t origin/master &&
             chmod 600 ~/.ssh/config &&
             git remote prune origin &&
@@ -396,7 +397,8 @@ function bootstrap_work_dotfiles {
         )
     elif test $(git -C ~/g/avar-dotfiles-work rev-parse --abbrev-ref HEAD) = 'master'
     then
-        git -C ~/g/avar-dotfiles-work config remote.origin.url git@gitlab.booking.com:aearnfjord/dotfiles.git
+        git -C ~/g/avar-dotfiles-work config remote.origin.url git@gitlab.booking.com:aearnfjord/dotfiles.git &&
+        git -C ~/g/avar-dotfiles-work config core.sshCommand "$sshCommand"
     fi
 }
 
