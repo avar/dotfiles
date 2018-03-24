@@ -1,0 +1,15 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+
+# https://www.skillsyouneed.com/num/percent-change.html
+my ($n1, $n2) = @ARGV;
+if ($n1 > $n2) {
+    # % decrease
+    my $d = $n1 - $n2;
+    printf "%f%%\n", $d / $n1 * 100;
+} else {
+    # % increase
+    my $i = $n2 - $n1;
+    printf "%f%%\n", $i / $n1 * 100;
+}
