@@ -1,0 +1,54 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+
+use List::Util;
+
+my $path_to_git_repo = $ARGV[0] // '.';
+
+my $blob = `git -C $path_to_git_repo log --pretty=format:"%ae%n%B%nPLACEHOLDER"` or die $!;
+
+my $count_per_committer;
+for my $commit (split(/PLACEHOLDER/, $blob)) {
+    my @lines = grep { $_ } split(/\n+/, $commit);
+    my $committer = shift @lines;
+    my $count = split(/\s+/, join(' ', @lines));
+
+    push @{$count_per_committer->{$committer}}, $count;
+}
+
+my $average_per_committer;
+for my $committer (keys %$count_per_committer) {
+    my $total = 0;
+    for my $count (@{$count_per_committer->{$committer}}) {
+        $total += $count;
+    }
+    $average_per_committer->{$committer} = $total / @{$count_per_committer->{$committer}};
+}
+
+my $longest_committer = List::Util::max(map { length($_) } keys %$average_per_committer);
+$longest_committer += 6;
+
+for my $committer (sort { $average_per_committer->{$a} <=> $average_per_committer->{$b} } keys %$average_per_committer) {
+    print $committer;
+    print ' ' x ($longest_committer - length($committer));
+    printf "%.02f\n", $average_per_committer->{$committer};
+}
+print "\n";
+print "^ Average word count per committer email.\n";
+print "We will now print the commits of each committer; the highest scoring ones first.\n";
+
+print "\n";
+print "Press ENTER when ready to continue.\n";
+print "Press ENTER to see the next entry, or Ctrl+C to continue or quit.\n";
+print "Press 'q' to exit the pager git log starts if it needs to.\n";
+print "\n";
+
+<STDIN>;
+
+for my $committer (sort { $average_per_committer->{$b} <=> $average_per_committer->{$a} } keys %$average_per_committer) {
+    system "clear";
+    system "git -C $path_to_git_repo log --author $committer";
+    <STDIN>;
+}
