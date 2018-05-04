@@ -18,6 +18,7 @@ alias g=git
 # Screen
 alias sc='screen'
 alias scs='screen -S'
+alias sls='screen -ls'
 alias svem='screen -rx em || screen -c ~/.screenrc.d/v-emacs-irssi'
 alias hssnth='screen -rx hem || screen -c ~/.screenrc.d/home-snth-emacs'
 alias hssnth-local='screen -rx local || screen -c ~/.screenrc.d/home-snth-emacs-local'
