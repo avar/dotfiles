@@ -128,3 +128,5 @@
 [rerere]
 	enabled = true
 	autoUpdate = true
+[mailinfo]
+	scissors = true
