@@ -156,7 +156,7 @@ remoteuser = avarab@gmail.com
 remotepasseval = get_password("personal-gmail")
 
 #folderfilter = lambda f: f in ['INBOX', '[Gmail]/Drafts', '[Gmail]/Sent Mail', '[Gmail]/Trash', '[Gmail]/Spam', 'Git']
-folderfilter = lambda f: f in ['INBOX', '[Gmail]/Drafts', '[Gmail]/Sent Mail', 'git', 'git-users', 'git-packagers', 'gnu-emacs-devel', 'house', 'mu', 'offlineimap', 'perl5-porters', 'uWSGI', 'vera']
+folderfilter = lambda f: f in ['INBOX', '[Gmail]/Drafts', '[Gmail]/Sent Mail', 'git', 'git-users', 'git-packagers', 'git-security', 'gnu-emacs-devel', 'house', 'mu', 'offlineimap', 'perl5-porters', 'uWSGI', 'vera']
 
 # See http://www.offlineimap.org/doc/nametrans.html#faq-on-nametrans
 nametrans = lambda name: oi_personal_gmail_remote_nametrans(name)
