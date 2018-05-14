@@ -53,6 +53,7 @@
 	sm-mainbranch = !git config --file ../.gitmodules submodule.$NAME.branch || git describe --all --always | sed 's!^heads/!!'
 
 	;; Diff
+	wdiff  = diff --word-diff
 	di     = diff -M -p --stat
 	diw    = diff -M -p --stat -w
 	diww   = diff -M -p --stat -w --word-diff=color
