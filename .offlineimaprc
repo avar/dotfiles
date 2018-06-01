@@ -94,14 +94,14 @@ type = Gmail
 # Access imap.gmail.com through an stunnel set up in
 # ~/.stunnel.work-gmail-imap. To access it directly remove all of this
 # and uncomment sslcacertfile.
-remotehost = localhost
-remoteport = 1431
-starttls = no
-ssl = no
-#sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+#remotehost = localhost
+#remoteport = 1431
+#starttls = no
+#ssl = no
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 
 # I disable compression to make the tcpflow debugging easier.
-usecompression = no
+#usecompression = no
 
 remoteuser = avar@booking.com
 
@@ -146,11 +146,12 @@ nametrans = lambda name: oi_personal_gmail_local_nametrans(name)
 
 [Repository PersonalGMailRemote]
 type = Gmail
-remotehost = localhost
-remoteport = 1430
-starttls = no
-ssl = no
-usecompression = no
+#remotehost = localhost
+#remoteport = 1430
+#starttls = no
+#ssl = no
+#usecompression = no
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 
 remoteuser = avarab@gmail.com
 remotepasseval = get_password("personal-gmail")
