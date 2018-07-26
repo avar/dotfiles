@@ -15,13 +15,13 @@ screen -t leech 2 bash
 stuff "sudo screen -rx leech/^M"
 
 screen -t d:git 2 bash
+# Because this is started on @reboot and ssh won't have come up before
+# cron.
+stuff "sleep 10^M"
 # ssh-ing to localhost here because I can't run `screen -c ..`
 # directly, and starting with `-d -m` results in a screen with scewed
 # up termsize, see git history for details.
 stuff "ssh localhost^M"
-# Because this is started on @reboot and ssh won't have come up before
-# cron.
-stuff "sleep 10^M"
 stuff "screen -rx dev-git || dsgit^M"
 
 select 0
