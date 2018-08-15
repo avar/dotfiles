@@ -10,7 +10,7 @@ expect {
         send "$password\r"
         exp_continue
     }
-    "Two Factor Token:" {
+    "2FA Token:" {
         send_user "Supplying the PIN, Enter the 2FA: "
         send $pin
         stty -echo
