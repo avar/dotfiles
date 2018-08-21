@@ -47,7 +47,7 @@ stuff "# sudo tcpflow -i lo -c port 1431 | grep -i -e \^subject -e \^list-id -e 
 screen -t m:wg:sync:<> bash
 stuff "sleep 10^M"
 # debug: -d imap,maildir
-stuff "while true; do time python ~/g/offlineimap/offlineimap.py -a WorkGMail,PersonalGMail -c ~/.offlineimaprc ; sleep 60; done^M"
+stuff "while true; do time python offlineimap -a WorkGMail,PersonalGMail -c ~/.offlineimaprc ; sleep 60; done^M"
 
 # Personal GMail setup
 screen -t m:pg:md:size bash
@@ -66,8 +66,8 @@ stuff "# sudo tcpflow -i lo -c port 1430 | grep -i -e \^subject -e \^list-id -e 
 screen -t m:pg:sync:<> bash
 stuff "sleep 10^M"
 # debug: -d imap,maildir
-#stuff "while true; time python ~/g/offlineimap/offlineimap.py -a PersonalGMail -c ~/.offlineimaprc ; sleep 60; done^M"
-stuff "# time python ~/g/offlineimap/offlineimap.py -a PersonalGMail -c ~/.offlineimaprc^M"
+#stuff "while true; time python offlineimap -a PersonalGMail -c ~/.offlineimaprc ; sleep 60; done^M"
+stuff "# time python offlineimap -a PersonalGMail -c ~/.offlineimaprc^M"
 
 # mu
 screen -t m:monitor bash
