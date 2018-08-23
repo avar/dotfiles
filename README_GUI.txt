@@ -5,7 +5,9 @@
 ## Swap Ctrl and Caps Lock
 "Windows key" -> "Tweak Tool" -> "Typing" -> "Ctrl key position" ==> "Swap Ctrl and Caps Lock"
 ## Show date & seconds on the clock
-"Windows key" -> "Tweak Tool" -> "Top Bar" ==> Show date & show seconds
+"Windows key" -> "Tweak Tool" -> "Top Bar" ==> "Show date & show seconds"
+## Show battery %
+"Windows key" -> "Tweak Tool" -> "Top Bar" ==> "Battery Percentage"
 ## Focus follows mouse
 "Windows key" -> "Tweak Tool" -> "Windows" -> "Focus Mode" ==> "Sloppy"
 ## Make the Terminal not have menu-bars
