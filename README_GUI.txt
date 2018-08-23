@@ -19,6 +19,12 @@
 ## Set the touchpad to edge scrolling
 "Windows key" -> "dconf editor" -> "org.gnome.settings-daemon.peripherals.touchpad" -> "scroll method" ==> "edge-scrolling" && "natural scroll" => "Off"
 
+# Make sure we're running XOrg
+## This is needet so that the "yubikey:hook" part of my local screen
+## works. Can't figure out a way to set a keyboard layout X on one
+## keyboard and layout Y on another at the same time under Wayland
+"Logout" -> "Setting icon" -> "GNOME + XOrg"
+
 # Set up mbsync+mu+emacs
 ## mbsync
 cd g && git clone http://git.code.sf.net/p/isync/isync isync && cd isync
