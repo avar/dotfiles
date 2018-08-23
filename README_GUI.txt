@@ -26,14 +26,7 @@
 "Logout" -> "Setting icon" -> "GNOME + XOrg"
 
 # Set up mbsync+mu+emacs
-## mbsync
-cd g && git clone http://git.code.sf.net/p/isync/isync isync && cd isync
-sh autogen.sh && ./configure --prefix=/home/avar/local && make -j 3 all install
-## mu
-cd ~/g/elisp/mu && autoreconf -i && ./configure --prefix=/home/avar/local && make -j 3 all install && make -j 3 install-info
-## emacs
-git clone git@github.com:emacs-mirror/emacs.git
-cd ~/g/emacs && ./autogen.sh all && ./configure --prefix=/home/avar/local --with-modules && make -j 4 all install
+cd ~/g/elisp && make
 
 # Other:
 ## Switch the default display for menubars etc.
