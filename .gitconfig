@@ -35,15 +35,9 @@
 	co = checkout
 	sm = submodule
 	chrp = cherry-pick
-	f = fetch
-	pf = !git pfetch
 
 	;; Parellel fetch
 	pfetch = !parallel 'git fetch {}' ::: $(git remote)
-
-	;; Log
-	lo = log --decorate --abbrev-commit --stat
-	tree = log --graph --pretty=format:'%C(yellow)%h%Creset -%C(bold red)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 
 	;; Submodules
 	sm-init = !git submodule update --init
@@ -67,9 +61,6 @@
 	sw     = show -M -p --stat -w
 	sww    = show -M -p --stat -w --word-diff=color
 	swwd   = show -M -p --stat -w --word-diff=color --word-diff-regex=.
-
-	;; Pull/push
-	pu = pull --stat
 
 	;; Handy tools
 	review = "!f() { for rev in $(git rev-list --reverse $@); do LESS='--IGNORE-CASE --LONG-PROMPT --QUIET --chop-long-lines --RAW-CONTROL-CHARS' git show --stat -p -M $rev; done; }; f"
@@ -107,8 +98,6 @@
 	;; Abbreviate commits by default. I.e. don't show a full SHA1
 	abbrevCommit = true
 [merge]
-	;; Create non-ff merge commits. Pretty much the only use I have for 'git merge'
-	ff = true
 	;; Have "git merge" do what "git pull" would have done
 	defaultToUpstream = true
 [annex]
