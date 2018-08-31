@@ -78,12 +78,24 @@ stuff "# time mu index --muhome=/home/avar/.mu/work-exchange --maildir=~/Maildir
 stuff "# time mu index --muhome=/home/avar/.mu/work-gmail --maildir=~/Maildir/work-gmail --max-msg-size=500000000^M"
 stuff "# time mu index --muhome=/home/avar/.mu/personal-gmail --maildir=~/Maildir/personal-gmail --max-msg-size=500000000^M"
 
-screen -t m:f:0 bash
+screen -t m:wrk:f:0 bash
 stuff "export MU_HOME=/home/avar/.mu/work-gmail^M"
+stuff "export MAILDIR=/home/avar/Maildir/work-gmail^M"
 stuff "mu find -n 10 avar^M"
 
-screen -t m:f:1 bash
+screen -t m:wrk:f:1 bash
 stuff "export MU_HOME=/home/avar/.mu/work-gmail^M"
+stuff "export MAILDIR=/home/avar/Maildir/work-gmail^M"
+stuff "mu find -n 10 booking^M"
+
+screen -t m:prsnl:f:0 bash
+stuff "export MU_HOME=/home/avar/.mu/personal-gmail^M"
+stuff "export MAILDIR=/home/avar/Maildir/personal-gmail^M"
+stuff "mu find -n 10 avar^M"
+
+screen -t m:prsnl:f:1 bash
+stuff "export MU_HOME=/home/avar/.mu/personal-gmail^M"
+stuff "export MAILDIR=/home/avar/Maildir/personal-gmail^M"
 stuff "mu find -n 10 booking^M"
 
 # logs
