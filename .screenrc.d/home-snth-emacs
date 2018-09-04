@@ -24,4 +24,9 @@ stuff "cd annex/p*/l*/w*/c*^M"
 screen -t ttv bash
 stuff "torrent-to-v.sh"
 
+screen -t bwa bash
+stuff "# annex-distribute^M"
+stuff "# annex-distribute cleanup no-backup^M"
+stuff "# backup-with-annex^M"
+
 select 0
