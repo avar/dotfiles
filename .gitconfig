@@ -48,18 +48,18 @@
 
 	;; Diff
 	di     = diff -M -p --stat
-	diw    = diff -M -p --stat -w
-	diww   = diff -M -p --stat -w --word-diff=color
-	diwwd  = diff -M -p --stat -w --word-diff=color --word-diff-regex=.
-	dis    = diff -M -p --stat --staged
-	disw   = diff -M -p --stat --staged -w
-	disww  = diff -M -p --stat --staged -w --word-diff=color
-	diswwd = diff -M -p --stat --staged -w --word-diff=color --word-diff-regex=.
+	diw    = !git di -w
+	diww   = !git diw --word-diff=color
+	diwwd  = !git diww --word-diff-regex=.
+	dis    = !git di --staged
+	disw   = !git diw --staged
+	disww  = !git diww --staged
+	diswwd = !git diwwd --staged
 	;; Show
 	s      = show -M -p --stat
-	sw     = show -M -p --stat -w
-	sww    = show -M -p --stat -w --word-diff=color
-	swwd   = show -M -p --stat -w --word-diff=color --word-diff-regex=.
+	sw     = !git s -w
+	sww    = !git sw --word-diff=color
+	swwd   = !git sww --word-diff-regex=.
 
 	;; Handy tools
 	review = "!f() { for rev in $(git rev-list --reverse $@); do LESS='--IGNORE-CASE --LONG-PROMPT --QUIET --chop-long-lines --RAW-CONTROL-CHARS' git show --stat -p -M $rev; done; }; f"
