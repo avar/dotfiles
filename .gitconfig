@@ -29,6 +29,9 @@
 	whitespace = 0
 
 [alias]
+	;; Debugging (see GIT_* vars)
+	env = !env | grep ^GIT_
+
 	;; Lazyness
 	st = status --short
 	ci = commit
