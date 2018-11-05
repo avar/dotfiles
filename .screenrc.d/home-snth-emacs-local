@@ -25,6 +25,7 @@ stuff "sudo exiwhat^M"
 # http://www.electrictoolbox.com/flush-exim-mail-queue/
 # http://mewbies.com/how_to_setup_exim_mail_transfer_agent_for_linux_tutorial.htm
 # also: http://bradthemad.org/tech/notes/exim_cheatsheet.php
+# and:  http://wikisec.free.fr/unix/exim.html
 # to remove messages: https://www.cyberciti.biz/faq/exim-remove-all-messages-from-the-mail-queue/
 # --> sudo exim -bp | awk '/^ *[0-9]+[mhd]/{print "sudo exim -Mrm " $3}'|sh
 #
