@@ -27,8 +27,20 @@ stuff "sudo exiwhat^M"
 # also: http://bradthemad.org/tech/notes/exim_cheatsheet.php
 # to remove messages: https://www.cyberciti.biz/faq/exim-remove-all-messages-from-the-mail-queue/
 # --> sudo exim -bp | awk '/^ *[0-9]+[mhd]/{print "sudo exim -Mrm " $3}'|sh
+#
+# Debug how mail from/to these addresses would be sent. When going
+# through this it'll actually send mail.
+stuff "# sudo exim -d -f '<avarab@gmail.com>' avarab@gmail.com^M"
+stuff "# sudo exim -d -f '<avar@booking.com>' avarab@gmail.com^M"
+# Queue manipulation
 stuff "# sudo exim -qf # send stalled messages^M"
 stuff "# sudo exim -qff # send stalled messages, even if frozen due to bounces^M"
+stuff "# sudo exim -Mrm QUEUE-ID # remove a specific message^M"
+stuff "# sudo exim -M QUEUE-ID # send a specific message^M"
+# Dump info
+stuff "# sudo exiqgrep -i | xargs sudo exim -Mvh # headers^M"
+stuff "# sudo exiqgrep -i | xargs sudo exim -Mvb # body^M"
+stuff "# sudo exiqgrep -i | xargs sudo exim -Mvl # logs^M"
 
 # Work GMail setup
 screen -t m:wg:md:size bash
