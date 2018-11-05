@@ -42,6 +42,9 @@ stuff "# sudo exim -M QUEUE-ID # send a specific message^M"
 stuff "# sudo exiqgrep -i | xargs sudo exim -Mvh # headers^M"
 stuff "# sudo exiqgrep -i | xargs sudo exim -Mvb # body^M"
 stuff "# sudo exiqgrep -i | xargs sudo exim -Mvl # logs^M"
+# Debugging. See also avar/laptop-etc@dec4154
+stuff "# sudo exim -bt -d+all -f avarab@gmail.com to-this-address@example.com 2>&1 | grep gmail^M"
+stuff "# sudo exim -d+all -M QUEUE-ID 2>&1 | less^M # To debug something in the queue to see how it would be sent"
 
 # Work GMail setup
 screen -t m:wg:md:size bash
