@@ -109,6 +109,8 @@
 [core]
 	untrackedCache = true
 	splitIndex = false
+[checkout]
+	defaultRemote = origin
 [diff]
 	indentHeuristic = true
 	colorMoved = true
