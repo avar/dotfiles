@@ -270,7 +270,7 @@ function keepalive {
 }
 
 function cpan_release {
-    dzil clean && RELEASE_TESTING=1 dzil test && dzil build && cpanm --sudo -v *tar.gz && yes | dzil release && dzil clean
+    dzil clean && RELEASE_TESTING=1 dzil test && dzil build && cpanm --sudo -v *tar.gz && dzil release && dzil clean
 }
 
 function cpan_release_hailo {
