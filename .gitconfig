@@ -106,6 +106,8 @@
 	backends = SHA256E SHA256
 [help]
 	autocorrect = 5
+[fetch]
+	output = compact
 [core]
 	untrackedCache = true
 	splitIndex = false
