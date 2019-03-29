@@ -6,7 +6,7 @@ set logincmd [lindex $argv 2]
 
 eval spawn ssh $host
 expect {
-    "2FA Token:" {
+    -re "^2FA Token.*:" {
 	if {![string equal $pin ""]} {
             send_user "Supplying the PIN, Enter the 2FA: "
             send $pin
