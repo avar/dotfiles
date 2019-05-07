@@ -43,3 +43,8 @@ alias lsofnames="lsof | awk '!/^\$/ && /\// { print \$9 }' | sort -u"
 
 # Print my IP -- also https://wtfismyip.com/json
 alias myip="wget -q -O- https://wtfismyip.com/text"
+
+if which mpv >/dev/null
+then
+    alias mplayer=mpv
+fi
