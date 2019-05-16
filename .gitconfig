@@ -92,7 +92,6 @@
 [http]
 	sslVerify = false
 [grep]
-	lineNumber = true
 	patternType = perl
 [log]
 	;; Show tags and other references in "git log"
