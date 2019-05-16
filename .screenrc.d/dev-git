@@ -34,11 +34,11 @@ stuff "cd t/perf^M"
 
 screen -t c:d bash
 stuff "cd ~/g/git^M"
-stuff "time make -j \$(parallel --number-of-cores) NO_REGEX= USE_LIBPCRE2=YesPlease LIBPCREDIR=\$HOME/g/pcre2/inst NO_R_TO_GCC_LINKER=YesPlease CFLAGS=\"-O0 -g\" DEVELOPER=1 DEVOPTS=no-error LDFLAGS=-Wl,-rpath,\$HOME/g/pcre2/inst/lib prefix=/usr all doc"
+stuff "time make -j \$(parallel --number-of-cores) USE_LIBPCRE=1 NO_R_TO_GCC_LINKER=1 LIBPCREDIR=\$HOME/g/pcre2/inst CFLAGS=\"-O0 -g\" DEVELOPER=1 DEVOPTS=no-error  prefix=/usr all doc"
 
 screen -t c:o bash
 stuff "cd ~/g/git^M"
-stuff "time make -j \$(parallel --number-of-cores) NO_REGEX= USE_LIBPCRE2=YesPlease LIBPCREDIR=\$HOME/g/pcre2/inst NO_R_TO_GCC_LINKER=YesPlease CFLAGS=\"-O3 -g\" LDFLAGS=-Wl,-rpath,\$HOME/g/pcre2/inst/lib all doc"
+stuff "time make -j \$(parallel --number-of-cores) USE_LIBPCRE=1 NO_R_TO_GCC_LINKER=1 LIBPCREDIR=\$HOME/g/pcre2/inst CFLAGS=\"-O3 -g\" all doc"
 
 screen -t t:0 bash
 stuff "cd ~/g/git^M"
