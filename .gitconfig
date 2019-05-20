@@ -117,6 +117,9 @@
 	colorMoved = true
 [status]
 	showStash = true
+[commit]
+        # See https://public-inbox.org/git/20190520182353.22221-1-matheus.bernardino@usp.br/
+	verbose = true
 [tag]
 	sort = version:refname
 [rerere]
