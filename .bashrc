@@ -375,43 +375,6 @@ function bootstrap_work_dotfiles_symlinks {
     )
 }
 
-function bootstrap_work_dotfiles {
-    dotfiles_key='/usr/local/etc/gitlab_ssh_key_dotfiles/id_rsa'
-    sshCommand="ssh -i $dotfiles_key"
-    if ! test -d $dotfiles
-    then
-        # Bootstap the repository
-        if test -f $dotfiles_key
-        then
-            SSH_AUTH_SOCK= GIT_SSH_COMMAND="$sshCommand" git clone git@gitlab.booking.com:aearnfjord/dotfiles.git $dotfiles &&
-            git -C ~/g/avar-dotfiles-work config core.sshCommand "$sshCommand"
-        else
-            git clone git@gitlab.booking.com:aearnfjord/dotfiles.git $dotfiles
-        fi &&
-        bootstrap_work_dotfiles_symlinks
-    elif test "$(git -C ~/g/avar-dotfiles-work/.git rev-parse --abbrev-ref HEAD 2>/dev/null)" = 'avar-dotfiles'
-    then
-        # Migrate the old checkouts to the new location
-        (
-            cd $dotfiles &&
-            git config remote.origin.url git@gitlab.booking.com:aearnfjord/dotfiles.git &&
-            git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' &&
-            SSH_AUTH_SOCK= GIT_SSH_COMMAND="$sshCommand" git fetch &&
-            git checkout -t origin/master &&
-            chmod 600 ~/.ssh/config &&
-            git remote prune origin &&
-            git branch -d avar-dotfiles
-        )
-    elif test "$(git -C ~/g/avar-dotfiles-work rev-parse --abbrev-ref HEAD 2>/dev/null)" = 'master'
-    then
-        git -C ~/g/avar-dotfiles-work config remote.origin.url git@gitlab.booking.com:aearnfjord/dotfiles.git &&
-        if test -f $dotfiles_key
-        then
-            git -C ~/g/avar-dotfiles-work config core.sshCommand "$sshCommand"
-        fi
-    fi
-}
-
 function dud {
     (
         cd ~/
@@ -434,18 +397,11 @@ function dud {
             (
                 cd $dotfiles
                 git pull
-                bootstrap_work_dotfiles_symlinks
             )
         fi
         . ~/.bashrc
     )
 }
-
-case "$(hostname -f)" in
-    *.booking.com)
-        bootstrap_work_dotfiles
-        ;;
-esac
 
 # tsocks:
 # ssh -D 8088 v

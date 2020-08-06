@@ -1,12 +1,10 @@
-# My configuration for offlineimap, both work GMail & personal
-# GMail. See the git log for this & .mbsyncrc for old work Cyrus IMAP
-# / Exchange IMAP configurations.
+# My configuration for offlineimap for personal GMail.
 
 [general]
 ui = ttyui
 
 # Set up my one account
-accounts = Work, PersonalGMail
+accounts = PersonalGMail
 
 # I only have one account anyway, but be explicit, sync one account at
 # a time.
@@ -23,111 +21,6 @@ socktimeout = 180
 
 # Defines get_password() and other functions used here
 pythonfile = ~/.offlineimap.py
-
-## The work GMail setup
-##
-## The corresponding IMAP settings in GMail's Settings -> Forwarding
-## and POP/IMAP:
-##
-## * When I mark a message in IMAP as deleted: Auto-Expunge off - Wait
-##   for the client to update the server.
-##
-## * When a message is marked as deleted and expunged from the last
-##   visible IMAP folder: Move the message to the Trash
-##
-## This along with WorkGMailLocal.sync_deletes=yes &
-## WorkGMailRemote.sync_deletes = no gives me:
-##
-## * When I locally D a message (mu4e-headers-mark-for-delete) it gets
-##   unlink()'d locally, but then just gets re-synced back since as
-##   far as offlineimap is concerned it just hadn't synced it yet.
-##
-## * When I locally d a message (mu4e-headers-mark-for-trash) it gets
-##   moved to the Trash folder (requires mu reindex to find it again),
-##   and then offlineimap syncs the deletion status, so it gets the
-##   "Trashed" label in upstream.
-##
-## * When I move a message to Trash in GMail's web UI that's already
-##   been synced locally to INBOX it'll sync a copy to the Trash
-##   folder, so I'll have 2x locally, one in INBOX one in Trash.
-##
-## * When I fully delete a message in GMail (move to Trash, empty
-##   trash) without syncing in the middle, I'll have the relevant
-##   message left in my local INBOX, but not in GMail. With
-##   "sync_deletes = no" set as "sync_deletes = yes" below it would be
-##   removed locally.
-##
-## So tl;dr: To delete messages with this setup don't delete them in
-## the GMail UI, delete them in mu4e and then sync that upstream, but
-## make sure to delete them with d, not D!
-
-[Account WorkGMail]
-localrepository = WorkGMailLocal
-remoterepository = WorkGMailRemote
-
-# When I can't sync things due to timeouts or whatever this has been
-# known to work. Was needed with Exchange, hasn't even been needed
-# with GMail, yet...
-#maxage = 7
-
-[Repository WorkGMailLocal]
-type = GmailMaildir
-localfolders = ~/Maildir/work-gmail
-
-# Sync local deletes to the remote
-sync_deletes = yes
-
-# The reverse nametrans, see the comment for the WorkGMailRemote nametrans.
-nametrans = lambda name: oi_work_gmail_local_nametrans(name)
-
-[Repository WorkGMailRemote]
-# The 'type = Gmail' here requires my pull request
-# https://github.com/OfflineIMAP/offlineimap/pull/404
-#
-# There's no hard dependency on that, and for current stock
-# offlineimap you can just use 'type = IMAP' instead. I'm just using
-# some of the provided default options by the Gmail driver, see the
-# docs at https://github.com/OfflineIMAP/offlineimap/pull/404/files
-#type = IMAP
-type = Gmail
-
-# Access imap.gmail.com through an stunnel set up in
-# ~/.stunnel.work-gmail-imap. To access it directly remove all of this
-# and uncomment sslcacertfile.
-#remotehost = localhost
-#remoteport = 1431
-#starttls = no
-#ssl = no
-sslcacertfile = /etc/ssl/certs/ca-certificates.crt
-
-# I disable compression to make the tcpflow debugging easier.
-#usecompression = no
-
-remoteuser = avar@booking.com
-
-# I gave up with the oauth method and just went for enabling "less
-# secure apps to access your account":
-# https://support.google.com/accounts/answer/6010255
-remotepasseval = get_password("work-gmail")
-
-# If I were to use idlefolders / keepalive etc. this would have to be
-# at least the number of folders I'm syncing
-maxconnections = 1
-
-# Only does something on autorefresh
-holdconnectionopen = no
-
-# Don't sync the server's deletions locally. If it wants to delete
-# something I can manually review that so some bug doesn't wipe my
-# entire mailbox.
-sync_deletes = no
-
-# Only get a select whitelist of the folders which we have name
-# translations for, and especially not '[Gmail]/All Mail'
-folderfilter = lambda f: f in ['INBOX', '[Gmail]/Drafts', '[Gmail]/Sent Mail', '[Gmail]/Trash', '[Gmail]/Spam']
-
-# See http://www.offlineimap.org/doc/nametrans.html#faq-on-nametrans
-nametrans = lambda name: oi_work_gmail_remote_nametrans(name)
 
 [Account PersonalGMail]
 localrepository = PersonalGMailLocal
@@ -161,65 +54,3 @@ folderfilter = lambda f: f in ['INBOX', '[Gmail]/Drafts', '[Gmail]/Sent Mail', '
 
 # See http://www.offlineimap.org/doc/nametrans.html#faq-on-nametrans
 nametrans = lambda name: oi_personal_gmail_remote_nametrans(name)
-
-[Account WorkGitlab]
-localrepository = WorkGitlabLocal
-remoterepository = WorkGitlabRemote
-
-[Repository WorkGitlabLocal]
-type = Maildir
-localfolders = ~/Maildir/work-gitlab
-
-[Repository WorkGitlabRemote]
-type = IMAP
-# ssh -L 1443:maildirector:143 gitlab-1001
-remotehost = localhost
-remoteport = 1443
-starttls = no
-ssl = no
-usecompression = no
-
-remoteuser = gitlab
-remotepasseval = get_password("work-gitlab-account-maildirector")
-
-# As noted above in the comment for remotepasseval I tried in vain to
-# get oauth working. Menno has it working following the instructions
-# for "XOAuth2 authentication":
-# https://github.com/OfflineIMAP/offlineimap/blob/v7.0.9/offlineimap.conf#L812
-#
-# Here's what I tried to set this up, all these keys have since been
-# invalidated so the below isn't a security issue:
-#
-#    $ https_proxy= python python/oauth2.py --generate_oauth2_token  --client_id=434197482151-a1iqf44bf1jc0054big9c7prvm126qke.apps.googleusercontent.com --client_secret=om0XglM0iG7WUzj8X3512Eso
-#    To authorize token, visit this url and follow the directions:
-#      https://accounts.google.com/o/oauth2/auth?client_id=434197482151-a1iqf44bf1jc0054big9c7prvm126qke.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&response_type=code&scope=https%3A%2F%2Fmail.google.com%2F
-#    Enter verification code: 4/SmF2Rhai_CUPWif9I-cYpjh_f4vKI8_3nZ4buuTLSfI
-#    Refresh Token: 1/68a5NFeXLCGT-s-Gpm7BbnrzzYFVIqvSIcUrV7I-Yc_07omOeu55g6B55hCnaXoi
-#    Access Token: ya29.Ci-YAy9Ukvgoc1uOilU8wryIGPniQF3nqXa-_392FlBtDNA92X24_zXJemSKSg4vIA
-#    Access Token Expiration Seconds: 3600
-#
-#    $ https_proxy= python python/oauth2.py --user=avar@booking.com --client_id=434197482151-a1iqf44bf1jc0054big9c7prvm126qke.apps.googleusercontent.com --client_secret=om0XglM0iG7WUzj8X3512Eso --refresh_token='1/68a5NFeXLCGT-s-Gpm7BbnrzzYFVIqvSIcUrV7I-Yc_07omOeu55g6B55hCnaXoi'
-#    Access Token: ya29.Ci-YAxDiXANEW_U_JAVV9QBs-CnJ0PlhQz3rGeAY4h9HqZnZJ9oCqUFeoCP7pRQaJg
-#    Access Token Expiration Seconds: 3600
-#
-# Then this oauth config with the details above:
-#
-#    oauth2_client_id = 434197482151-a1iqf44bf1jc0054big9c7prvm126qke.apps.googleusercontent.com
-#    oauth2_client_secret = om0XglM0iG7WUzj8X3512Eso
-#    oauth2_request_url = https://accounts.google.com/o/oauth2/token
-#    auth2_refresh_token = 1/68a5NFeXLCGT-s-Gpm7BbnrzzYFVIqvSIcUrV7I-Yc_07omOeu55g6B55hCnaXoi
-#
-# So the first thing that failed was an error about invalid JSON, this
-# was because I had to start offlineimap with https_proxy=, but then
-# it emitted some error about the authentication failing. I didn't get
-# to the bottom of that and just went with password auth.
-
-# Debugging exim (see e.g. laptop-etc.git's 9758ce0 ("Make exim4 route
-# through different smarthosts for different addresses", 2017-06-09)
-# for such a change to be debugged & full IRC log with more details)
-#
-## Send test e-mail
-# echo | sudo exim -d -f 'avar@booking.com' avarab@gmail.com 2>&1|less -S
-## Get debug output from exim itself:
-# sudo systemctl stop exim4
-# sudo /usr/sbin/exim4 -d+all -q30m

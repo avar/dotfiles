@@ -1,4 +1,0 @@
-[user]
-	email = avar@booking.com
-[alias]
-	bkng-commit-summary = "!f() { repo=$(git remote get-url origin | sed 's/^.*://; s/\\.git$//'); echo \"$repo@$(git git-commit-summary $@)\"; }; f"

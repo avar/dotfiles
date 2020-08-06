@@ -21,7 +21,6 @@ stuff "cd ~/g/git^M"
 screen -t p:0 bash
 stuff "cd ~/g/git^M"
 stuff "cd t/perf^M"
-stuff "# GIT_PERF_REPEAT_COUNT=3 GIT_PERF_LARGE_REPO=~/git_tree/main GIT_PERF_MAKE_COMMAND='if test \"$(git describe)\" = \"booking-git-v2018-02-02\"; then make -j56 USE_LIBPCRE2=Y; else make -j56 USE_LIBPCRE=Y; fi' ./run booking-git-v2018-02-01 booking-git-v2018-02-02 -- p4220-log-grep-engines.sh p7820-grep-engines.sh^M"
 stuff "# GIT_PERF_LARGE_REPO=~/g/linux ./run p7820-grep-engines.sh^M"
 
 screen -t p:1 bash
