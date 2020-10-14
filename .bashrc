@@ -155,6 +155,9 @@ do
     fi
 done
 
+# Bootstrap GDK (https://gitlab.com/gitlab-org/gitlab-development-kit)
+. ~/.asdf/asdf.sh
+
 # some nice shell options
 shopt -s checkwinsize cdspell histappend no_empty_cmd_completion
 
