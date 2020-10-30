@@ -33,7 +33,7 @@ stuff "cd t/perf^M"
 
 screen -t c:d bash
 stuff "cd ~/g/git^M"
-stuff "time make -j \$(parallel --number-of-cores) USE_LIBPCRE=1 LIBPCREDIR=\$HOME/g/pcre2/inst CFLAGS=\"-O0 -g\" DEVELOPER=1 DEVOPTS=no-error  prefix=/usr all doc"
+stuff "time make -j \$(parallel --number-of-cores) USE_LIBPCRE=1 LIBPCREDIR=\$HOME/g/pcre2/inst CFLAGS=\"-O0 -g\" DEVELOPER=1 DEVOPTS=no-error prefix=/usr all doc"
 
 screen -t c:o bash
 stuff "cd ~/g/git^M"
