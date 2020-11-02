@@ -1,0 +1,27 @@
+source /home/avar/.screenrc
+source /home/aearnfjord/.screenrc
+
+sessionname dev-gitlab-gdk
+
+screen -t t bash
+stuff "htop^M"
+
+screen -t gl:0 bash
+stuff "cd ~/g.gl/gitlab-development-kit^M"
+
+# See https://gitlab.com/gitlab-org/gitlab-development-kit/blob/master/doc/index.md#install-and-set-up-gdk
+stuff "# New installation^M"
+stuff "# time make bootstrap^M"
+
+
+
+screen -t gl:1 bash
+stuff "cd ~/g.gl/gitlab-development-kit^M"
+
+screen -t gl:2 bash
+stuff "cd ~/g.gl/gitlab-development-kit^M"
+
+screen -t gl:3 bash
+stuff "cd ~/g.gl/gitlab-development-kit^M"
+
+select 0

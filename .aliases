@@ -23,6 +23,7 @@ alias svem='screen -rx em || screen -c ~/.screenrc.d/v-emacs-irssi'
 alias hssnth='screen -rx hem || screen -c ~/.screenrc.d/home-snth-emacs'
 alias hssnth-local='screen -rx local || screen -c ~/.screenrc.d/home-snth-emacs-local'
 alias dsgit='screen -c ~/.screenrc.d/dev-git'
+alias dsgitlab-gdk='screen -c ~/.screenrc.d/dev-gitlab-gdk'
 
 # Perl
 alias pd=perldoc

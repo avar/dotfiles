@@ -24,4 +24,8 @@ stuff "sleep 10^M"
 stuff "ssh localhost^M"
 stuff "screen -rx dev-git || dsgit^M"
 
+screen -t d:gl:gdk
+stuff "ssh localhost^M"
+stuff "screen -rx dev-gitlab-gdk || dsgitlab-gdk^M"
+
 select 0
