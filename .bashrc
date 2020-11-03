@@ -157,10 +157,7 @@ done
 
 # Bootstrap GDK (https://gitlab.com/gitlab-org/gitlab-development-kit)
 . ~/.asdf/asdf.sh
-# Because I symlink e.g. ~/g.gl/gitlab-development-kit/gitlab to
-# ../gitlab-ee. See https://github.com/asdf-vm/asdf/issues/366 export,
-# this can be removed in a future version (fixed upstream)
-export ASDF_DEFAULT_TOOL_VERSIONS_FILENAME=~/g.gl/gitlab-development-kit/.tool-versions
+# Install the GDK completion
 . ~/g.gl/gitlab-development-kit/support/completions/gdk.bash
 
 # some nice shell options
