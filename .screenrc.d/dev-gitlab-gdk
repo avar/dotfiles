@@ -6,22 +6,78 @@ sessionname dev-gitlab-gdk
 screen -t t bash
 stuff "htop^M"
 
-screen -t gl:0 bash
+# Installation
+screen -t gl:i:0 bash
 stuff "cd ~/g.gl/gitlab-development-kit^M"
-
 # See https://gitlab.com/gitlab-org/gitlab-development-kit/blob/master/doc/index.md#install-and-set-up-gdk
 stuff "# New installation^M"
 stuff "# time make bootstrap^M"
+stuff "# cd ..^M"
+stuff "# git clone git@gitlab.com:avar/avar-gitlab.config.git^M"
+stuff "# cd gitlab-development-kit^M"
+stuff "# ln -s ../avar-gitlab.config/gdk.yml .^M"
+stuff "# cd gitaly^M"
+# https://gitlab.com/gitlab-org/gitaly/-/blob/master/doc/beginners_guide.md#setup
 
+# The webpack process would bitch about inotify limits, set:
+#    $ grep -v -e ^# -e ^$ /etc/sysctl.d/80-avar-inotify.conf
+#    fs.inotify.max_user_watches=1048576
+#    fs.inotify.max_user_instances=131072
+#    fs.inotify.max_queued_events=2097152
 
+# Then do 'make gitaly setup', see
+# https://gitlab.com/gitlab-org/gitaly/-/blob/master/doc/beginners_guide.md#editing-code-and-seeing-what-happens
+
+# Main
+screen -t gl:0 bash
+stuff "cd ~/g.gl/gitlab-development-kit^M"
 
 screen -t gl:1 bash
 stuff "cd ~/g.gl/gitlab-development-kit^M"
 
-screen -t gl:2 bash
+# Gdk
+screen -t gl:gdk:0 bash
+stuff "cd ~/g.gl/gitlab-development-kit^M"
+stuff "gdk help^M"
+stuff "# gdk update^M"
+stuff "# gdk reconfigure^M"
+
+screen -t gl:gdk:1 bash
 stuff "cd ~/g.gl/gitlab-development-kit^M"
 
-screen -t gl:3 bash
+screen -t gl:gdk:l:0 bash
 stuff "cd ~/g.gl/gitlab-development-kit^M"
+stuff "gdk tail^M"
+
+screen -t gl:gdk:l:1 bash
+stuff "cd ~/g.gl/gitlab-development-kit^M"
+stuff "# gdk tail^M"
+
+# Gitaly - Main
+screen -t gl:aly:0 bash
+stuff "cd ~/g.gl/gitlab-development-kit/gitaly^M"
+
+screen -t gl:aly:1 bash
+stuff "cd ~/g.gl/gitlab-development-kit/gitaly^M"
+
+screen -t gl:aly:2 bash
+stuff "cd ~/g.gl/gitlab-development-kit/gitaly^M"
+
+# Gitaly - Build
+screen -t gl:aly:build:0 bash
+stuff "cd ~/g.gl/gitlab-development-kit/gitaly^M"
+stuff "# make build^M"
+
+screen -t gl:aly:build:1 bash
+stuff "cd ~/g.gl/gitlab-development-kit/gitaly^M"
+
+# Gitaly - Test
+screen -t gl:aly:test:0 bash
+stuff "cd ~/g.gl/gitlab-development-kit/gitaly^M"
+stuff "# make test^M"
+
+screen -t gl:aly:test:1 bash
+stuff "cd ~/g.gl/gitlab-development-kit/gitaly^M"
+
 
 select 0
