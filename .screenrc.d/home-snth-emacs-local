@@ -46,6 +46,10 @@ stuff "# sudo exim -bt -d+all -f avarab@gmail.com to-this-address@example.com 2>
 stuff "# sudo exim -d+all -M QUEUE-ID 2>&1 | less^M # To debug something in the queue to see how it would be sent"
 
 # Personal GMail setup
+screen -t m:pg:md:init bash
+stuff "# time mu init --muhome=/home/avar/.mu/personal-gmail --my-address=avarab@gmail.com^M"
+stuff "# time mu index --muhome=/home/avar/.mu/personal-gmail^M"
+
 screen -t m:pg:md:size bash
 stuff "du -sb ~/.mu ~/Maildir/personal-gmail; du -sh ~/.mu ~/Maildir/personal-gmail; find ~/Maildir/personal-gmail/ -type f | wc -l; df -h /^M"
 
