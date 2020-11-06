@@ -155,17 +155,6 @@ do
     fi
 done
 
-if test -d ~/.asdf
-then
-    # Bootstrap GDK (https://gitlab.com/gitlab-org/gitlab-development-kit)
-    . ~/.asdf/asdf.sh
-fi
-if test -d ~/g.gl/gitlab-development-kit
-then
-    # Install the GDK completion
-    . ~/g.gl/gitlab-development-kit/support/completions/gdk.bash
-fi
-
 # some nice shell options
 shopt -s checkwinsize cdspell histappend no_empty_cmd_completion
 
