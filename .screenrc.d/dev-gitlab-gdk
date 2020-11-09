@@ -9,6 +9,7 @@ stuff "htop^M"
 # Installation
 screen -t gl:i:0 bash
 stuff "cd ~/g.gl/gitlab-development-kit^M"
+# See https://gitlab.com/gitlab-org/gitlab-development-kit/-/blob/master/doc/advanced.md#debian
 # See https://gitlab.com/gitlab-org/gitlab-development-kit/blob/master/doc/index.md#install-and-set-up-gdk
 stuff "# New installation^M"
 stuff "# time make bootstrap^M"
@@ -27,6 +28,11 @@ stuff "# cd gitaly^M"
 
 # Then do 'make gitaly setup', see
 # https://gitlab.com/gitlab-org/gitaly/-/blob/master/doc/beginners_guide.md#editing-code-and-seeing-what-happens
+
+# Also needed:
+# - make postgresql/data
+# - make redis/redis.conf
+# - make jaeger-setup
 
 # Main
 screen -t gl:0 bash
