@@ -5,7 +5,7 @@ sessionname dev-gitlab-gdk
 
 # Installation
 screen -t gl:i:0 bash
-stuff "cd ~/g.gl/gitlab-development-kit^M"
+stuff "cd ~/g.gl/gdk/gitlab-development-kit^M"
 # See https://gitlab.com/gitlab-org/gitlab-development-kit/-/blob/master/doc/advanced.md#debian
 # See https://gitlab.com/gitlab-org/gitlab-development-kit/blob/master/doc/index.md#install-and-set-up-gdk
 stuff "# New installation^M"
@@ -33,54 +33,68 @@ stuff "# cd gitaly^M"
 
 # Main
 screen -t gl:0 bash
-stuff "cd ~/g.gl/gitlab-development-kit^M"
+stuff "cd ~/g.gl/gdk/gitlab-development-kit^M"
 
 screen -t gl:1 bash
-stuff "cd ~/g.gl/gitlab-development-kit^M"
+stuff "cd ~/g.gl/gdk/gitlab-development-kit^M"
 
 # Gdk
 screen -t gl:gdk:0 bash
-stuff "cd ~/g.gl/gitlab-development-kit^M"
+stuff "cd ~/g.gl/gdk/gitlab-development-kit^M"
 stuff "gdk help^M"
 stuff "# gdk update^M"
 stuff "# gdk reconfigure^M"
 
 screen -t gl:gdk:1 bash
-stuff "cd ~/g.gl/gitlab-development-kit^M"
+stuff "cd ~/g.gl/gdk/gitlab-development-kit^M"
 
 screen -t gl:gdk:l:0 bash
-stuff "cd ~/g.gl/gitlab-development-kit^M"
+stuff "cd ~/g.gl/gdk/gitlab-development-kit^M"
 stuff "gdk tail^M"
 
 screen -t gl:gdk:l:1 bash
-stuff "cd ~/g.gl/gitlab-development-kit^M"
+stuff "cd ~/g.gl/gdk/gitlab-development-kit^M"
 stuff "# gdk tail^M"
 
 # Gitaly - Main
 screen -t gl:aly:0 bash
-stuff "cd ~/g.gl/gitlab-development-kit/gitaly^M"
+stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitaly^M"
 
 screen -t gl:aly:1 bash
-stuff "cd ~/g.gl/gitlab-development-kit/gitaly^M"
+stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitaly^M"
 
 screen -t gl:aly:2 bash
-stuff "cd ~/g.gl/gitlab-development-kit/gitaly^M"
+stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitaly^M"
 
-# Gitaly - Build
+## Gitaly - Build
 screen -t gl:aly:build:0 bash
-stuff "cd ~/g.gl/gitlab-development-kit/gitaly^M"
+stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitaly^M"
 stuff "# make build^M"
 
 screen -t gl:aly:build:1 bash
-stuff "cd ~/g.gl/gitlab-development-kit/gitaly^M"
+stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitaly^M"
 
-# Gitaly - Test
+## Gitaly - Test
 screen -t gl:aly:test:0 bash
-stuff "cd ~/g.gl/gitlab-development-kit/gitaly^M"
+stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitaly^M"
 stuff "# make test^M"
+stuff "# go test -v ./internal/git/ -run Test.*Remote^M"
+stuff "# PATH=/home/avar/g/git:\$PATH go test -v ./internal/git/ -run Test.*Remote^M"
 
 screen -t gl:aly:test:1 bash
-stuff "cd ~/g.gl/gitlab-development-kit/gitaly^M"
+stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitaly^M"
 
+# GitLab - Main
+screen -t gl:lab:0 bash
+stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitlab^M"
+
+screen -t gl:lab:1 bash
+stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitlab^M"w
+
+screen -t gl:lab:2 bash
+stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitlab^M"
+
+screen -t gl:lab:3 bash
+stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitlab^M"
 
 select 0
