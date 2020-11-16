@@ -3,9 +3,6 @@ source /home/aearnfjord/.screenrc
 
 sessionname dev-git
 
-screen -t t bash
-stuff "htop^M"
-
 screen -t g:0 bash
 stuff "cd ~/g/git^M"
 

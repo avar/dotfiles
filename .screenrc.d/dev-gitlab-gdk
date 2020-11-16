@@ -3,9 +3,6 @@ source /home/aearnfjord/.screenrc
 
 sessionname dev-gitlab-gdk
 
-screen -t t bash
-stuff "htop^M"
-
 # Installation
 screen -t gl:i:0 bash
 stuff "cd ~/g.gl/gitlab-development-kit^M"
