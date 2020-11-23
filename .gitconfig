@@ -58,8 +58,9 @@
         ;; config to a new location.
         cp-branch = "!f() { git branch -c $1 $2 && git checkout $2; }; f"
 
-	;; Working on git.git
-	git-commit-summary = show -s --date=short --pretty='format:%h (\"%s\", %ad)'
+	;; Working on git.git & other things using "reference"
+        reference = show -s --pretty=reference
+	git-commit-summary = !git reference
 
 	;; Like push but harder
 	thrust = "!f() { until (sleep 0.5 && git push); do git pull --rebase; done; }; f"
