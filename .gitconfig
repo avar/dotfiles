@@ -17,7 +17,7 @@
 
 [alias]
 	;; Debugging (see GIT_* vars)
-	env = !env | grep ^GIT_
+	env = !env --null | perl -n0E 'say if /^GIT/'
 
 	;; Lazyness
 	st = status --short
