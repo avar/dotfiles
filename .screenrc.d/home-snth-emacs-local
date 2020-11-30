@@ -46,46 +46,38 @@ stuff "# sudo exim -bt -d+all -f avarab@gmail.com to-this-address@example.com 2>
 stuff "# sudo exim -d+all -M QUEUE-ID 2>&1 | less^M # To debug something in the queue to see how it would be sent"
 
 # Personal GMail setup
-screen -t m:pg:md:init bash
-stuff "# time mu init --muhome=/home/avar/.mu/personal-gmail --my-address=avarab@gmail.com^M"
-stuff "# time mu index --muhome=/home/avar/.mu/personal-gmail^M"
+screen -t m:mu:init bash
+stuff "# rm -rf ~/.mu ~/.cache/mu^M"
+stuff "# time mu init --my-address=avarab@gmail.com --my-address=abjarmason@gitlab.com --my-address=avar@gitlab.com^M"
+stuff "# time mu index^M"
 
-screen -t m:pg:md:size bash
-stuff "du -sb ~/.mu ~/Maildir/personal-gmail; du -sh ~/.mu ~/Maildir/personal-gmail; find ~/Maildir/personal-gmail/ -type f | wc -l; df -h /^M"
+screen -t m:mu:size bash
+stuff "du -sb ~/.cache/.mu ~/Maildir; du -sh ~/.mu ~/Maildir/*; find ~/Maildir/personal-gmail/ -type f | wc -l; df -h /^M"
 
-screen -t m:pg:md:find bash
+screen -t m:mu:find bash
 stuff "find ~/Maildir/personal-gmail -type f -mmin -5|wc -l # modified in the last 5mins^M"
 stuff "find ~/Maildir/personal-gmail -type f -cmin -5|wc -l # created in the last 5mins^M"
 
-screen -t m:pg:stunnel bash
-stuff "# (stunnel .stunnel.personal-gmail-imap || (kill \$(sudo netstat -ldnp|grep -F 127.0.0.1:1430|awk '{print \$7}'|awk -F/ '{print \$1}')) && echo Restarting && sleep 1 && stunnel .stunnel.personal-gmail-imap)^M"
-
-screen -t m:pg:stunnel:flow bash
-stuff "# sudo tcpflow -i lo -c port 1430 | grep -i -e \^subject -e \^list-id -e \^from -e \^date^M"
-
-screen -t m:pg:sync:<> bash
+screen -t m:oi:sync:<> bash
 stuff "sleep 10^M"
 # debug: -d imap,maildir
-stuff "while true; do time offlineimap -a PersonalGMail -c ~/.offlineimaprc ; sleep 60; done^M"
+stuff "while true; do time offlineimap -a PersonalGMail,GitLabGMail -c ~/.offlineimaprc ; sleep 60; done^M"
 
 # mu
 screen -t m:monitor bash
 stuff "# while sleep 1; do time sudo perl ~/g/dotemacs/scripts/mu-monitor.pl; done^M"
 
-screen -t m:index bash
-stuff "# time mu index --muhome=/home/avar/.mu/work-exchange --maildir=~/Maildir/work --max-msg-size=500000000^M"
-stuff "# time mu index --muhome=/home/avar/.mu/work-gmail --maildir=~/Maildir/work-gmail --max-msg-size=500000000^M"
-stuff "# time mu index --muhome=/home/avar/.mu/personal-gmail --maildir=~/Maildir/personal-gmail --max-msg-size=500000000^M"
+screen -t m:mu:pg:0 bash
+stuff "mu find 'maildir:/personal-gmail/*' -n 10 avar^M"
 
-screen -t m:prsnl:f:0 bash
-stuff "export MU_HOME=/home/avar/.mu/personal-gmail^M"
-stuff "export MAILDIR=/home/avar/Maildir/personal-gmail^M"
-stuff "mu find -n 10 avar^M"
+screen -t m:mu:pg:1 bash
+stuff "mu find 'maildir:/personal-gmail/*' -n 10 avar^M"
 
-screen -t m:prsnl:f:1 bash
-stuff "export MU_HOME=/home/avar/.mu/personal-gmail^M"
-stuff "export MAILDIR=/home/avar/Maildir/personal-gmail^M"
-stuff "mu find -n 10 avar^M"
+screen -t m:mu:gg:0 bash
+stuff "mu find 'maildir:/gitlab-gmail/*' -n 10 avar^M"
+
+screen -t m:mu:gg:1 bash
+stuff "mu find 'maildir:/gitlab-gmail/*' -n 10 avar^M"
 
 # logs
 screen -t s:daemon-nm-dis:l bash

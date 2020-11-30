@@ -54,3 +54,30 @@ folderfilter = lambda f: f in ['INBOX', '[Gmail]/Drafts', '[Gmail]/Sent Mail', '
 
 # See http://www.offlineimap.org/doc/nametrans.html#faq-on-nametrans
 nametrans = lambda name: oi_personal_gmail_remote_nametrans(name)
+
+[Account GitLabGMail]
+localrepository = GitLabGMailLocal
+remoterepository = GitLabGMailRemote
+maxage = 365
+
+[Repository GitLabGMailLocal]
+type = GmailMaildir
+localfolders = ~/Maildir/gitlab-gmail
+# Sync local deletes to the remote
+sync_deletes = yes
+
+# The reverse nametrans, see the comment for the PersonalGMailRemote
+# nametrans.
+nametrans = lambda name: oi_gitlab_gmail_local_nametrans(name)
+
+[Repository GitLabGMailRemote]
+type = Gmail
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+
+remoteuser = abjarmason@gitlab.com
+remotepasseval = get_password("gitlab-gmail")
+
+folderfilter = lambda f: f in ['INBOX', '[Gmail]/Drafts', '[Gmail]/Sent Mail', '[Gmail]/Trash', '[Gmail]/Spam']
+
+# See http://www.offlineimap.org/doc/nametrans.html#faq-on-nametrans
+nametrans = lambda name: oi_gitlab_gmail_remote_nametrans(name)
