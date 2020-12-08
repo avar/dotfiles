@@ -80,6 +80,10 @@ stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitaly^M"
 stuff "# make test^M"
 stuff "# go test -v ./internal/git/ -run Test.*Remote^M"
 stuff "# PATH=/home/avar/g/git:\$PATH go test -v ./internal/git/ -run Test.*Remote^M"
+# -count=1 is a cache buster, e.g. if the Ruby code changes Go won't
+# -actually re-run a test!. See
+# -https://stackoverflow.com/questions/48882691/force-retesting-or-disable-test-caching
+stuff "# go test -v ./internal/gitaly/service/operations/ -run 'Tag|Branch' -count=1^M"
 
 screen -t gl:aly:test:1 bash
 stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitaly^M"
