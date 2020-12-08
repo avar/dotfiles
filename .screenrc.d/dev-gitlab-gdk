@@ -101,4 +101,8 @@ stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitlab^M"
 screen -t gl:lab:3 bash
 stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitlab^M"
 
+# Repo - gitlab-test.git
+screen -t gl:lab:repo:t:0 bash
+stuff "cd ~/^g.gl/gitlab-org/gitlab-test^M"
+
 select 0
