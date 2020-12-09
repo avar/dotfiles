@@ -1,7 +1,7 @@
 source /home/avar/.screenrc
 source /home/aearnfjord/.screenrc
 
-sessionname dev-git
+sessionname dev-core-git
 
 screen -t g:0 bash
 stuff "cd ~/g/git^M"

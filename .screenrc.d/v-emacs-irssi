@@ -22,7 +22,7 @@ stuff "sleep 10^M"
 # directly, and starting with `-d -m` results in a screen with scewed
 # up termsize, see git history for details.
 stuff "ssh localhost^M"
-stuff "screen -rx dev-git || dsgit^M"
+stuff "screen -rx dev-core-git || dsgit^M"
 
 screen -t d:gl:gdk
 stuff "ssh localhost^M"
