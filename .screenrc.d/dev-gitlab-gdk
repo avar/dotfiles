@@ -78,7 +78,8 @@ stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitaly^M"
 screen -t gl:aly:test:0 bash
 stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitaly^M"
 stuff "# make test^M"
-stuff "# make test 2>&1 | tee test.out^M"
+stuff "# make test 2>&1 | tee _build/test.out^M"
+stuff "#  grep '\^--- FAIL' _build/test.out^M"
 
 screen -t gl:aly:test:1 bash
 stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitaly^M"
