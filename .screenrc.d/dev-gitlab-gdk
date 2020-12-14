@@ -94,7 +94,7 @@ screen -t gl:lab:0 bash
 stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitlab^M"
 
 screen -t gl:lab:1 bash
-stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitlab^M"w
+stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitlab^M"
 
 screen -t gl:lab:2 bash
 stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitlab^M"
