@@ -78,7 +78,7 @@ stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitaly^M"
 screen -t gl:aly:test:all:run bash
 stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitaly^M"
 stuff "# make test^M"
-stuff "# GOMAXPROCS=8 make test 2>&1 | tee _build/test.out^M"
+stuff "# time GOMAXPROCS=8 nice -n 19 make test 2>&1 | tee _build/test.out^M"
 stuff "# grep '\^--- FAIL' _build/test.out^M"
 
 screen -t gl:aly:test:all:out bash
