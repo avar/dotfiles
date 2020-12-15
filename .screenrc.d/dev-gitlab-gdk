@@ -75,11 +75,16 @@ screen -t gl:aly:build:1 bash
 stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitaly^M"
 
 ## Gitaly - Test
-screen -t gl:aly:test:0 bash
+screen -t gl:aly:test:all:run bash
 stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitaly^M"
 stuff "# make test^M"
-stuff "# make test 2>&1 | tee _build/test.out^M"
-stuff "#  grep '\^--- FAIL' _build/test.out^M"
+stuff "# GOMAXPROCS=8 make test 2>&1 | tee _build/test.out^M"
+stuff "# grep '\^--- FAIL' _build/test.out^M"
+
+screen -t gl:aly:test:all:out bash
+stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitaly^M"
+stuff "# GOMAXPROCS=8 make test 2>&1 | tee _build/test.out^M"
+stuff "tail -F _build/test.out | grep -C20 '\^--- FAIL'^M"
 
 screen -t gl:aly:test:1 bash
 stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitaly^M"
