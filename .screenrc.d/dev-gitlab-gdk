@@ -95,6 +95,9 @@ stuff "# PATH=/home/avar/g/git:\$PATH go test -v ./internal/git/ -run Test.*Remo
 # -https://stackoverflow.com/questions/48882691/force-retesting-or-disable-test-caching
 stuff "# go test -v ./internal/gitaly/service/operations/ -run 'Tag|Branch' -count=1^M"
 
+# Use "make test" with TEST_* to feed it custom options
+stuff "# TEST_OPTIONS=\"-run 'Update|Create|Delete|Tag|Branch'\" TEST_PACKAGES=\"./internal/git/updateref ./internal/gitaly/service/operations\" make test^M"
+
 # GitLab - Main
 screen -t gl:lab:0 bash
 stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitlab^M"
