@@ -78,12 +78,12 @@ stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitaly^M"
 screen -t gl:aly:test:all:run bash
 stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitaly^M"
 stuff "# make test^M"
-stuff "# time GOMAXPROCS=8 nice -n 19 make test 2>&1 | tee _build/test.out^M"
+stuff "# time nice -n 19 make test 2>&1 | tee _build/test.out^M"
 stuff "# grep '\^--- FAIL' _build/test.out^M"
 
 screen -t gl:aly:test:all:out bash
 stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitaly^M"
-stuff "# GOMAXPROCS=8 make test 2>&1 | tee _build/test.out^M"
+stuff "# make test 2>&1 | tee _build/test.out^M"
 stuff "tail -F _build/test.out | grep -C20 '\^--- FAIL'^M"
 
 screen -t gl:aly:test:1 bash
@@ -98,7 +98,7 @@ stuff "# go test -v ./internal/gitaly/service/operations/ -run 'Tag|Branch' -cou
 # Use "make test" with TEST_* to feed it custom options
 stuff "# TEST_OPTIONS=\"-run 'Update|Create|Delete|Tag|Branch'\" TEST_PACKAGES=\"./internal/git/updateref ./internal/gitaly/service/operations\" make test^M"
 
-stuff "# git rebase -i --exec=\"TEST_OPTIONS=\\\"-run \\\\\"Update|Create|Delete|Tag|Branch'\\\\\" TEST_PACKAGES=\\\\\"./internal/git/updateref ./internal/gitaly/service/operations\\\\\" make build format lint test\"^M"
+stuff "# git rebase -i --exec='make -j8 build format lint && git gitaly-make-test-tag-branch'^M"
 
 # GitLab - Main
 screen -t gl:lab:0 bash

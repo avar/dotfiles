@@ -67,6 +67,9 @@
 
 	;; Like push but harder
 	thrust = "!f() { until (sleep 0.5 && git push); do git pull --rebase; done; }; f"
+
+        ;; per-project
+        gitaly-make-test-tag-branch = "!f() { TEST_OPTIONS=\"-run \\\"Update|Create|Delete|Tag|Branch\\\"\" TEST_PACKAGES=\"./internal/git/updateref ./internal/gitaly/service/operations\" make test; }; f"
 [push]
 	default = upstream
 [pull]
