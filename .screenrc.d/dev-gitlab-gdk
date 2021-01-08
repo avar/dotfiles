@@ -117,4 +117,8 @@ stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitlab^M"
 screen -t gl:lab:repo:t:0 bash
 stuff "cd ~/^g.gl/gitlab-org/gitlab-test^M"
 
+# Repo - www-gitlab-com.git
+screen -t gl:lab:repo:www:0 bash
+stuff "cd ~/^g.gl/gitlab-org/www-gitlab-com^M"
+
 select 0
