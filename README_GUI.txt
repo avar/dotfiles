@@ -2,6 +2,9 @@
 
 ## Disable Alerts
 "Windows key" ==> "Sound" ==> "Sound Effects" ==> "Alert volume" ==> "Off"
+## Natural scrolling
+"Windows key" ==> "Mouse & Touchpad ==> "Mouse" ==> "Natural Scrolling"
+
 
 ### Tweaks (used to be gnome-tweak-tool)
 ## Change to the Emacs keybinding theme
@@ -14,8 +17,6 @@
 "Windows key" ==> "Tweaks" ==> "Top Bar" ==> "Battery Percentage"
 ## Focus follows mouse
 "Windows key" ==> "Tweaks" ==> "Windows" ==> "Window Focus" ==> "Focus on Hover"
-## Natural scrolling
-"Windows key" ==> "Tweaks" ==> "Mouse & Touchpad" ==> "Mouse" ==> "Natural Scrolling"
 
 ## Make the Terminal not have menu-bars
 "Windows key" ==> "Terminal" ==> "Edit" ==> "Preferences" ==> "General" ==> "Show menubar by default in new terminals" ==> "On"
