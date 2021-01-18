@@ -1,25 +1,28 @@
 # Things to set up on a new GNOME:
 
-## Change to the Emacs keybinding theme
-"Windows key" -> "Tweak Tool" -> "Keyboard and Mouse" -> "Key theme" ==> Emacs
-## Swap Ctrl and Caps Lock
-"Windows key" -> "Tweak Tool" -> "Typing" -> "Ctrl key position" ==> "Swap Ctrl and Caps Lock"
-## Show date & seconds on the clock
-"Windows key" -> "Tweak Tool" -> "Top Bar" ==> "Show date & show seconds"
-## Show battery %
-"Windows key" -> "Tweak Tool" -> "Top Bar" ==> "Battery Percentage"
-## Focus follows mouse
-"Windows key" -> "Tweak Tool" -> "Windows" -> "Focus Mode" ==> "Sloppy"
-## Make the Terminal not have menu-bars
-"Windows key" -> "Terminal" -> "Edit" -> "Preferences" -> "General" ==> "Show menubar by default..."
-## Make the Terminal grey on black
-"Windows key" -> "Terminal" -> "Right Click" -> "Profiles" -> "Profile Preferences" -> "Colors" -> "Built-in schemes" ==> "Grey on black"
-## Disable Terminal Bell
-"Windows key" -> "Terminal" -> "Right Click" -> "Profiles" -> "Profile Preferences" -> "General" -> ==> "Terminal bell" = "Off"
 ## Disable Alerts
-"Windows key" -> "Sound" -> "Sound Effects" ==> "Alert volume" = "Off"
-## Set the touchpad to edge scrolling
-"Windows key" -> "dconf editor" -> "org.gnome.settings-daemon.peripherals.touchpad" -> "scroll method" ==> "edge-scrolling" && "natural scroll" => "Off"
+"Windows key" ==> "Sound" ==> "Sound Effects" ==> "Alert volume" ==> "Off"
+
+### Tweaks (used to be gnome-tweak-tool)
+## Change to the Emacs keybinding theme
+"Windows key" ==> "Tweaks" ==> "Keyboard and Mouse" ==> "Emacs Input" ==> On
+## Swap Ctrl and Caps Lock
+"Windows key" ==> "Tweaks" ==> "Keyboard and Mouse" ==> "Additional Layout Options" ==> "Ctrl position" ==> "Swap Ctrl and Caps Lock"
+## Show date & seconds on the clock
+"Windows key" ==> "Tweaks" ==> "Top Bar" ==> "Clock" ==> ["Weekday" ==> "On" && "Date" ==> "On" && "Seconds" ==> "On"]
+## Show battery %
+"Windows key" ==> "Tweaks" ==> "Top Bar" ==> "Battery Percentage"
+## Focus follows mouse
+"Windows key" ==> "Tweaks" ==> "Windows" ==> "Window Focus" ==> "Focus on Hover"
+## Natural scrolling
+"Windows key" ==> "Tweaks" ==> "Mouse & Touchpad" ==> "Mouse" ==> "Natural Scrolling"
+
+## Make the Terminal not have menu-bars
+"Windows key" ==> "Terminal" ==> "Edit" ==> "Preferences" ==> "General" ==> "Show menubar by default in new terminals" ==> "On"
+## Make the Terminal grey on black
+"Windows key" ==> "Terminal" ==> "Edit" ==> "Profiles" ==> "Colors" ==> "Built-in schemes" ==> "Grey on black"
+## Disable Terminal Bell
+"Windows key" ==> "Terminal" ==> "Edit" ==> "Profiles" ==> "Text" ==> "Terminal bell" ==> "Off"
 
 # Make sure we're running XOrg
 ## This is needet so that the "yubikey:hook" part of my local screen
