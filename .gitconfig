@@ -39,6 +39,13 @@
 	; Manually specify a branch from the main config, or try to guess it
 	sm-mainbranch = !git config --file ../.gitmodules submodule.$NAME.branch || git describe --all --always | sed 's!^heads/!!'
 
+        ;; Rebase
+        r = rebase
+        ri = rebase -i
+        rc = rebase --continue
+        rs = rebase --skip
+        ra = rebase --abort
+
 	;; Diff
 	di     = diff -M -p --stat
 	diw    = !git di -w
