@@ -24,22 +24,24 @@ screen -t p:1 bash
 stuff "cd ~/g/git^M"
 stuff "cd t/perf^M"
 
-screen -t p:2 bash
+screen -t c:d:r bash
 stuff "cd ~/g/git^M"
-stuff "cd t/perf^M"
+stuff "# git rebase -i --exec 'time make -j \$(parallel --number-of-cores) USE_LIBPCRE=1 LIBPCREDIR=\$HOME/g/pcre2/inst CFLAGS=\"-O0 -g\" DEVELOPER=1 prefix=/usr all && (cd t && GIT_TEST_HTTPD=1 prove -j\$(parallel --number-of-cores) t000[0-9]*.sh)'^M"
 
 screen -t c:d bash
 stuff "cd ~/g/git^M"
-stuff "time make -j \$(parallel --number-of-cores) USE_LIBPCRE=1 LIBPCREDIR=\$HOME/g/pcre2/inst CFLAGS=\"-O0 -g\" DEVELOPER=1 prefix=/usr all doc"
+stuff "# time make -j \$(parallel --number-of-cores) USE_LIBPCRE=1 LIBPCREDIR=\$HOME/g/pcre2/inst CFLAGS=\"-O0 -g\" DEVELOPER=1 prefix=/usr all^M"
+stuff "# time make -j \$(parallel --number-of-cores) USE_LIBPCRE=1 LIBPCREDIR=\$HOME/g/pcre2/inst CFLAGS=\"-O0 -g\" DEVELOPER=1 prefix=/usr all^M"
 
 screen -t c:o bash
 stuff "cd ~/g/git^M"
-stuff "time make -j \$(parallel --number-of-cores) USE_LIBPCRE=1 LIBPCREDIR=\$HOME/g/pcre2/inst CFLAGS=\"-O3 -g\" all doc"
+stuff "time make -j \$(parallel --number-of-cores) USE_LIBPCRE=1 LIBPCREDIR=\$HOME/g/pcre2/inst CFLAGS=\"-O3 -g\" all"
 
 screen -t t:0 bash
 stuff "cd ~/g/git^M"
 stuff "cd t^M"
-stuff "time GIT_TEST_TIMEOUT=10 NO_SVN_TESTS=1 GIT_TEST_HTTPD=0 prove -j\$(parallel --number-of-cores) --state=slow,save t[0-9]*.sh"
+stuff "# time NO_SVN_TESTS=1 GIT_TEST_HTTPD=0 prove -j\$(parallel --number-of-cores) --state=slow,save t[0-9]*.sh^M"
+stuff "# time GIT_TEST_HTTPD=1 prove -j\$(parallel --number-of-cores) --state=slow,save t[0-9]*.sh^M"
 
 screen -t t:1 bash
 stuff "cd ~/g/git^M"
@@ -58,16 +60,9 @@ stuff "git status^M"
 
 screen -t se:new bash
 stuff "cd ~/g/git^M"
-stuff "# gpp -F --fpa='--subject-prefix=\"PATCH\" --cover-letter' --sea='--cc=\"Junio C Hamano <gitster@pobox.com>\" --cc=\"Jeff King <peff@peff.net>\"' --no-send^M"
 stuff "# gpp -F --fpa='--subject-prefix=\"PATCH\"' --sea='--cc=\"Junio C Hamano <gitster@pobox.com>\"' --no-send^M"
-
-# Using the :/ syntax to send upto a given patch in the current
-# branch.
-stuff "# gpp --to ':/threading.*is.*enabled' -o ~/g/git-patches/avar/grep-and-pcre-and-more/upto/pthreads-overhead -F --fpa='--cover-letter --subject-prefix=\"PATCH\"' --sea='--cc=\"Junio C Hamano <gitster@pobox.com>\" --cc=\"Jeff King <peff@peff.net>\" --cc=\"Jeffrey Walton <noloader@gmail.com>\" --cc=\"Michał Kiedrowicz <michal.kiedrowicz@gmail.com>\" --cc=\"J Smith <dark.panda@gmail.com>\" --cc=\"Victor Leschuk <vleschuk@gmail.com>\" --cc=\"Nguyễn Thái Ngọc Duy <pclouds@gmail.com>\" --cc=\"Fredrik Kuivinen <frekui@gmail.com>\" --cc=\"Brandon Williams <bmwill@google.com>\"' --no-send^M"
-
-stuff "# gpp --from ':/assert that threading' --to ':/\^grep: add support for PCRE v2' -o ~/g/git-patches/avar/grep-and-pcre-and-more/upto/experimental -F --fpa='--cover-letter --subject-prefix=\"PATCH\"' --sea='--cc=\"Junio C Hamano <gitster@pobox.com>\" --cc=\"Jeff King <peff@peff.net>\" --cc=\"Jeffrey Walton <noloader@gmail.com>\" --cc=\"Michał Kiedrowicz <michal.kiedrowicz@gmail.com>\" --cc=\"J Smith <dark.panda@gmail.com>\" --cc=\"Victor Leschuk <vleschuk@gmail.com>\" --cc=\"Nguyễn Thái Ngọc Duy <pclouds@gmail.com>\" --cc=\"Fredrik Kuivinen <frekui@gmail.com>\" --cc=\"Brandon Williams <bmwill@google.com>\" --cc=\"Stefan Beller <sbeller@google.com>\" --cc=\"Johannes Schindelin <johannes.schindelin@gmx.de>\"' --no-send^M"
-
-stuff "# gpp --from \$(git log --pretty=format:%h --grep='^grep: add support for PCRE v2' -1) -o ~/g/git-patches/avar/grep-and-pcre-and-more/experimental -F --fpa='--cover-letter --subject-prefix=\"PATCH\"' --sea='--cc=\"Junio C Hamano <gitster@pobox.com>\" --cc=\"Jeff King <peff@peff.net>\" --cc=\"Jeffrey Walton <noloader@gmail.com>\" --cc=\"Michał Kiedrowicz <michal.kiedrowicz@gmail.com>\" --cc=\"J Smith <dark.panda@gmail.com>\" --cc=\"Victor Leschuk <vleschuk@gmail.com>\" --cc=\"Nguyễn Thái Ngọc Duy <pclouds@gmail.com>\" --cc=\"Fredrik Kuivinen <frekui@gmail.com>\" --cc=\"Brandon Williams <bmwill@google.com>\"' --no-send^M"
+stuff "# gpp -F --fpa='--subject-prefix=\"PATCH\" --cover-letter' --sea='--cc=\"Junio C Hamano <gitster@pobox.com>\" --cc=\"Jeff King <peff@peff.net>\"' --no-send^M"
+stuff "# gpp -F --fpa='--cover-letter --subject-prefix=\"PATCH v2\" --range-diff=avar/XXX --in-reply-to=\"<>\"' --sea='--cc=\"Junio C Hamano <gitster@pobox.com>\"' --no-send^M"
 
 screen -t ml:r
 stuff "cd ~/g/git-ml^M"
@@ -77,24 +72,40 @@ screen -t ml:sh:0
 stuff "cd ~/g/git-ml^M"
 stuff "git --no-pager log --oneline -10^M"
 
-screen -t l:pcre1
+screen -t r:pcre1
 stuff "cd ~/g/pcre^M"
 stuff "git svn rebase^M"
-stuff "test -f RunTest && git clean -dxf; ./autogen.sh; CXXFLAGS='-O3 -g' CFLAGS='-O3 -g' ./configure --prefix=\$PWD/inst --enable-jit --enable-utf --enable-unicode-properties && time make -j6 install"
+stuff "test -f RunTest && git clean -dxf; ./autogen.sh; CXXFLAGS='-O3 -g' CFLAGS='-O3 -g' ./configure --prefix=\$PWD/inst --enable-jit --enable-utf --enable-unicode-properties && time make -j \$(parallel --number-of-cores) install"
 
-screen -t l:pcre2
+screen -t r:pcre2
 stuff "cd ~/g/pcre2^M"
 stuff "git svn rebase^M"
-stuff "test -f RunTest && git clean -dxf; ./autogen.sh; CXXFLAGS='-O3 -g' CFLAGS='-O3 -g' ./configure --prefix=\$PWD/inst --enable-jit --enable-utf && time make -j6 install"
+stuff "test -f RunTest && git clean -dxf; ./autogen.sh; CXXFLAGS='-O3 -g' CFLAGS='-O3 -g' ./configure --prefix=\$PWD/inst --enable-jit --enable-utf && time make -j \$(parallel --number-of-cores) install"
 
-screen -t l:gnulib
+screen -t r:gnulib
 stuff "cd ~/g/gnulib^M"
 stuff "git fetch^M"
 
-screen -t l:watchman
-stuff "cd ~/g/watchman^M"
+screen -t r:sha1dc
+stuff "cd ~/g/sha1collisiondetection^M"
 stuff "git fetch^M"
-stuff "# CC=~/perl5/installed/bin/gcc CXX=~/perl5/installed/bin/g++ LDFLAGS=-Wl,-rpath,\$HOME/perl5/installed/lib64 ./configure --prefix=\$HOME/local^M"
-stuff "# make -j8 install^M"
+
+# Farm boxes @ https://cfarm.tetaneutral.net/machines/list/
+screen -t t:gl:ci:0
+stuff "cd ~/g/git-gitlab-ci^M"
+stuff "git fetch^M"
+stuff "grep '\^#' ci/gitlab/run-on-gcc-farm.sh^M"
+stuff "# (cd ../git-gitlab-ci && OPT_JOBS=16 OPT_DEBUG=1 CI_JOB_NAME=gcc112 CI_GIT_COMMIT_SHA=HEAD OPT_NICE=1 ci/gitlab/run-on-gcc-farm.sh)^M"
+stuff "# (cd ../git-gitlab-ci && OPT_DEBUG=1 CI_JOB_NAME='gcc119' CI_GIT_COMMIT_SHA=HEAD OPT_TESTS='t1450*.sh t4212*.sh t9300*.sh' ci/gitlab/run-on-gcc-farm.sh)^M"
+
+screen -t t:gl:ci:1
+stuff "cd ~/g/git-gitlab-ci^M"
+stuff "git fetch^M"
+stuff "grep '\^#' ci/gitlab/run-on-gcc-farm.sh^M"
+
+screen -t t:gl:ci:2
+stuff "cd ~/g/git-gitlab-ci^M"
+stuff "git fetch^M"
+stuff "grep '\^#' ci/gitlab/run-on-gcc-farm.sh^M"
 
 select 0
