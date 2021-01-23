@@ -30,7 +30,7 @@
 	chrp = cherry-pick
 
 	;; Parellel fetch
-	pfetch = !parallel 'git -c gc.auto=0 fetch {}' ::: $(git remote) && git gc --auto
+	pfetch = !git fetch --all --jobs=$(parallel --number-of-cores)
 
 	;; Submodules
 	sm-init = !git submodule update --init
