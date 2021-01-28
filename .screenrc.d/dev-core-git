@@ -92,20 +92,17 @@ stuff "git fetch^M"
 
 # Farm boxes @ https://cfarm.tetaneutral.net/machines/list/
 screen -t t:gl:ci:0
-stuff "cd ~/g/git-gitlab-ci^M"
-stuff "git fetch^M"
-stuff "grep '\^#' ci/gitlab/run-on-gcc-farm.sh^M"
-stuff "# (cd ../git-gitlab-ci && OPT_JOBS=16 OPT_DEBUG=1 CI_JOB_NAME=gcc112 CI_GIT_COMMIT_SHA=HEAD OPT_NICE=1 ci/gitlab/run-on-gcc-farm.sh)^M"
-stuff "# (cd ../git-gitlab-ci && OPT_DEBUG=1 CI_JOB_NAME='gcc119' CI_GIT_COMMIT_SHA=HEAD OPT_TESTS='t1450*.sh t4212*.sh t9300*.sh' ci/gitlab/run-on-gcc-farm.sh)^M"
+stuff "cd ~/g/git^M"
+stuff "grep '\^#' ../git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
+stuff "# OPT_JOBS=16 OPT_JOB_NAME=gcc112 OPT_REVISION=HEAD ../git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
+stuff "# OPT_JOBS=3 OPT_JOB_NAME=gcc119 OPT_REVISION=HEAD OPT_TESTS='t1450*.sh t4212*.sh t9300*.sh' ../git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
 
 screen -t t:gl:ci:1
-stuff "cd ~/g/git-gitlab-ci^M"
-stuff "git fetch^M"
-stuff "grep '\^#' ci/gitlab/run-on-gcc-farm.sh^M"
+stuff "cd ~/g/git^M"
+stuff "grep '\^#' ../git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
 
 screen -t t:gl:ci:2
-stuff "cd ~/g/git-gitlab-ci^M"
-stuff "git fetch^M"
-stuff "grep '\^#' ci/gitlab/run-on-gcc-farm.sh^M"
+stuff "cd ~/g/git^M"
+stuff "grep '\^#' ../git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
 
 select 0
