@@ -91,18 +91,53 @@ stuff "cd ~/g/sha1collisiondetection^M"
 stuff "git fetch^M"
 
 # Farm boxes @ https://cfarm.tetaneutral.net/machines/list/
-screen -t t:gl:ci:0
-stuff "cd ~/g/git^M"
-stuff "grep '\^#' ../git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
-stuff "# OPT_JOBS=16 OPT_JOB_NAME=gcc112 OPT_REVISION=HEAD ../git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
-stuff "# OPT_JOBS=3 OPT_JOB_NAME=gcc119 OPT_REVISION=HEAD OPT_TESTS='t1450*.sh t4212*.sh t9300*.sh' ../git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
+screen -t t:gl:ci:sh:0
+stuff "cd ~/g/git-gitlab-ci^M"
 
-screen -t t:gl:ci:1
-stuff "cd ~/g/git^M"
-stuff "grep '\^#' ../git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
+screen -t t:gl:ci:sh:1
+stuff "cd ~/g/git-gitlab-ci^M"
 
-screen -t t:gl:ci:2
+screen -t t:gl:run:ci:0
 stuff "cd ~/g/git^M"
 stuff "grep '\^#' ../git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
+# AIX 7.2
+stuff "export OPT_TESTS='t[0-9]*.sh'^M"
+stuff "# OPT_DEBUG= OPT_JOBS=3 OPT_JOB_NAME=gcc119 OPT_REVISION=HEAD OPT_TESTS=\"\$OPT_TESTS\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
+stuff "export OPT_TESTS='1450-fsck.sh t4212-log-corrupt.sh'^M"
+
+screen -t t:gl:run:ci:1
+stuff "cd ~/g/git^M"
+stuff "grep '\^#' ../git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
+# i386
+stuff "export OPT_TESTS='t[0-9]*.sh'^M"
+stuff "# OPT_DEBUG= OPT_JOBS=3 OPT_JOB_NAME=gcc45 OPT_REVISION=HEAD OPT_TESTS=\"\$OPT_TESTS\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
+stuff "export OPT_TESTS='1450-fsck.sh t4212-log-corrupt.sh'^M"
+
+screen -t t:gl:run:ci:2
+stuff "cd ~/g/git^M"
+# Solaris 10
+stuff "export OPT_TESTS='t[0-9]*.sh'^M"
+stuff "# OPT_DEBUG= OPT_JOBS=4 OPT_JOB_NAME=gcc210 OPT_REVISION=HEAD OPT_TESTS=\"\$OPT_TESTS\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
+stuff "export OPT_TESTS='1450-fsck.sh t4212-log-corrupt.sh'^M"
+
+screen -t t:gl:run:ci:3
+stuff "cd ~/g/git^M"
+# Solaris 11
+stuff "export OPT_TESTS='t[0-9]*.sh'^M"
+stuff "# OPT_DEBUG= OPT_JOBS=4 OPT_JOB_NAME=gcc211 OPT_REVISION=HEAD OPT_TESTS=\"\$OPT_TESTS\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
+stuff "export OPT_TESTS='1450-fsck.sh t4212-log-corrupt.sh'^M"
+
+screen -t t:gl:run:ci:4
+stuff "cd ~/g/git^M"
+# OpenBSD
+stuff "export OPT_TESTS='t[0-9]*.sh'^M"
+stuff "# OPT_DEBUG= OPT_JOBS=2 OPT_JOB_NAME=gcc220 OPT_REVISION=HEAD OPT_TESTS=\"\$OPT_TESTS\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
+
+screen -t t:gl:run:ci:5
+stuff "cd ~/g/git^M"
+# OpenSUSE aarch64
+stuff "export OPT_TESTS='t[0-9]*.sh'^M"
+stuff "# OPT_DEBUG= OPT_JOBS=4 OPT_JOB_NAME=gcc118 OPT_REVISION=HEAD OPT_TESTS=\"\$OPT_TESTS\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
+stuff "export OPT_TESTS='1450-fsck.sh t4212-log-corrupt.sh'^M"
 
 select 0
