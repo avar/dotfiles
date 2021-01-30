@@ -19,23 +19,8 @@ export GIT_PS1_SHOWUPSTREAM=auto
 
 # print some useful info about the current dir
 # if we're inside a git working tree, print the current git branch
-# if we're inside an svn working directory, print the current svn revision
-# or else print the total size of all files in the directory
+# or else print the number of hardlinks in the directory
 function dir_info() {
-    # Test SVN first, because I'm more likely to have a svn checkout
-    # inside a git repository (e.g. my ~/ in Git) than the other way
-    # around.
-    if test -f .svn/entries; then
-        # Performance hack, calling svn info takes longer than just
-        # grabbing the fourth line from .svn/entries
-        local svn_rev=$(sed '4q;d' .svn/entries)
-        
-        if test -n $svn_rev; then
-            echo "r$svn_rev"
-            return 0
-        fi
-    fi
-
     if type git >&/dev/null; then
         if test -n "$(type -t __git_ps1)"; then
             # We can hopefully use __git_ps1 which comes with git's
@@ -55,7 +40,7 @@ function dir_info() {
         fi
     fi
 
-    ls -Alhs | head -n1 | cut -d' ' -f2
+    stat --format="%U %h" .
 }
 
 function dir_color {
