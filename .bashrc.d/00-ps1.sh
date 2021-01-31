@@ -44,7 +44,7 @@ function dir_info() {
 }
 
 function dir_color {
-    echo -n $((31 + $(pwd | cksum | cut -c1-3) % 6))
+    echo -n $((31 + $(echo $PWD | cksum | cut -c1-3) % 6))
 }
 
 if ls --help >&/dev/null 2>&1 | grep -q group-directories-first; then
