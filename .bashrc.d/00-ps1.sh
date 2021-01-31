@@ -78,11 +78,6 @@ then
     fi
 
     export PERLDOC="-MPod::Text::Ansi"
-
-    alias grep='grep --color=auto'
-    alias egrep='egrep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias rgrep='rgrep --color=auto'
 else
     ## There's some bug in Emacs + TRAMP where it can't connect to a
     ## remote host if that remote host has ">" in the PS1. Maybe it's
