@@ -4,6 +4,7 @@
 alias ka=killall
 
 # ls
+alias ls="ls --color=auto"
 alias ll="ls -lh"
 
 # Dirs

@@ -53,14 +53,6 @@ if type tput >/dev/null &&
     test -n "$tput_colors" &&
     test "$tput_colors" -gt 2
 then
-    if [ -x /usr/bin/dircolors ]; then
-        test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-        alias ls="ls --color=auto"
-
-        # old versions of tree(1) don't use colors by default
-        alias tree="tree -C"
-    fi
-
     # Colors on a per-server basis based on a simple
     # checksum. Inspired by http://geofft.mit.edu/blog/sipb/125
     __hostname_color=$((31 + $(hostname | cksum | cut -c1-3) % 6))
