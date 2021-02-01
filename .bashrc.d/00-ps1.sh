@@ -48,10 +48,7 @@ function dir_color {
 }
 
 # check if we support colors
-if type tput >/dev/null &&
-    tput_colors="$(tput colors)" &&
-    test -n "$tput_colors" &&
-    test "$tput_colors" -gt 2
+if test "$(tput colors 2>/dev/null || echo 2)" -gt 2
 then
     # Colors on a per-server basis based on a simple
     # checksum. Inspired by http://geofft.mit.edu/blog/sipb/125
