@@ -47,12 +47,6 @@ function dir_color {
     echo -n $((31 + $(echo $PWD | cksum | cut -c1-3) % 6))
 }
 
-if ls --help >&/dev/null 2>&1 | grep -q group-directories-first; then
-    group_dirs=" --group-directories-first"
-else
-    group_dirs=
-fi
-
 # check if we support colors
 if type tput >/dev/null &&
     tput_colors="$(tput colors)" &&
@@ -61,7 +55,7 @@ if type tput >/dev/null &&
 then
     if [ -x /usr/bin/dircolors ]; then
         test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-        alias ls="ls$group_dirs --color=auto"
+        alias ls="ls --color=auto"
 
         # old versions of tree(1) don't use colors by default
         alias tree="tree -C"
