@@ -86,8 +86,6 @@ then
     __hostname_color=$((31 + $(hostname | cksum | cut -c1-3) % 6))
 
     PS1='\[\e[1;${__hostname_color}m\]\h\[\e[m\] \[\e[1;$(dir_color)m\]\W\[\e[m\] (\[\e[;33m\]$(dir_info)\[\e[m\]) \[\e[1;32m\]\$\[\e[m\] '
-
-    export PERLDOC="-MPod::Text::Ansi"
 else
     ## There's some bug in Emacs + TRAMP where it can't connect to a
     ## remote host if that remote host has ">" in the PS1. Maybe it's
