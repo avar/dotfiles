@@ -95,5 +95,4 @@ else
     ## later.
     #PS1='\h \W ($(dir_info)) \$ '
     PS1='\h \W (DUMMY) \$ '
-    alias ls="ls$group_dirs"
 fi
