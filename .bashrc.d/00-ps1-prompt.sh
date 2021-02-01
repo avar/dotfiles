@@ -85,11 +85,7 @@ then
     # checksum. Inspired by http://geofft.mit.edu/blog/sipb/125
     __hostname_color=$((31 + $(hostname | cksum | cut -c1-3) % 6))
 
-    if [[ ${EUID} == 0 ]] ; then
-        PS1='\[\e[1;${__hostname_color}m\]\h\[\e[m\] \[\e[1;$(dir_color)m\]\W\[\e[m\] (\[\e[;33m\]$(dir_info)\[\e[m\]) \[\e[1;31m\]\$\[\e[m\] '
-    else
-        PS1='\[\e[1;${__hostname_color}m\]\h\[\e[m\] \[\e[1;$(dir_color)m\]\W\[\e[m\] (\[\e[;33m\]$(dir_info)\[\e[m\]) \[\e[1;32m\]\$\[\e[m\] '
-    fi
+    PS1='\[\e[1;${__hostname_color}m\]\h\[\e[m\] \[\e[1;$(dir_color)m\]\W\[\e[m\] (\[\e[;33m\]$(dir_info)\[\e[m\]) \[\e[1;32m\]\$\[\e[m\] '
 
     export PERLDOC="-MPod::Text::Ansi"
 else
