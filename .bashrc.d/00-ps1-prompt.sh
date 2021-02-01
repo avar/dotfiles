@@ -78,6 +78,17 @@ esac
 # between all sessions.
 export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
+__exit_color=
+function set_exit_color() {
+    # TODO: Why couldn't I get this to work with $(()), different bash
+    # math? In any case, I want 0 green, 1 red, etc, so I need to
+    # count down with %.
+    __exit_status=$?
+    __exit_color=$(perl -e 'print 31 + (6-(shift()-1)) % 6' $__exit_status)
+}
+
+export PROMPT_COMMAND="set_exit_color; $PROMPT_COMMAND"
+
 # check if we support colors
 if test "$(tput colors 2>/dev/null || echo 2)" -gt 2
 then
@@ -85,7 +96,7 @@ then
     # checksum. Inspired by http://geofft.mit.edu/blog/sipb/125
     __hostname_color=$((31 + $(hostname | cksum | cut -c1-3) % 6))
 
-    PS1='\[\e[1;${__hostname_color}m\]\h\[\e[m\] \[\e[1;$(dir_color)m\]\W\[\e[m\] (\[\e[;33m\]$(dir_info)\[\e[m\]) \[\e[1;32m\]\$\[\e[m\] '
+    PS1='\[\e[1;${__hostname_color}m\]\h\[\e[m\] \[\e[1;$(dir_color)m\]\W\[\e[m\] (\[\e[;33m\]$(dir_info)\[\e[m\]) \[\e[1;${__exit_color}m\]${__exit_status}\[\e[m\] \[\e[1;32m\]\$\[\e[m\] '
 else
     ## There's some bug in Emacs + TRAMP where it can't connect to a
     ## remote host if that remote host has ">" in the PS1. Maybe it's
