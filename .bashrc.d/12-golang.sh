@@ -7,6 +7,6 @@ then
 
     if type parallel >/dev/null 2>&1
     then
-        export GOMAXPROCS=$(parallel --number-of-cores)
+        export GOMAXPROCS=$(nproc)
     fi
 fi

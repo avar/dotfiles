@@ -26,22 +26,22 @@ stuff "cd t/perf^M"
 
 screen -t c:d:r bash
 stuff "cd ~/g/git^M"
-stuff "# git rebase -i --exec 'time make -j \$(parallel --number-of-cores) USE_LIBPCRE=1 LIBPCREDIR=\$HOME/g/pcre2/inst CFLAGS=\"-O0 -g\" DEVELOPER=1 prefix=/usr all && (cd t && GIT_TEST_HTTPD=1 prove -j\$(parallel --number-of-cores) t000[0-9]*.sh)'^M"
+stuff "# git rebase -i --exec 'time make -j \$(nproc) USE_LIBPCRE=1 LIBPCREDIR=\$HOME/g/pcre2/inst CFLAGS=\"-O0 -g\" DEVELOPER=1 prefix=/usr all && (cd t && GIT_TEST_HTTPD=1 prove -j\$(nproc) t000[0-9]*.sh)'^M"
 
 screen -t c:d bash
 stuff "cd ~/g/git^M"
-stuff "# time make -j \$(parallel --number-of-cores) USE_LIBPCRE=1 LIBPCREDIR=\$HOME/g/pcre2/inst CFLAGS=\"-O0 -g\" DEVELOPER=1 prefix=/usr all^M"
-stuff "# time make -j \$(parallel --number-of-cores) USE_LIBPCRE=1 LIBPCREDIR=\$HOME/g/pcre2/inst CFLAGS=\"-O0 -g\" DEVELOPER=1 prefix=/usr all^M"
+stuff "# time make -j \$(nproc) USE_LIBPCRE=1 LIBPCREDIR=\$HOME/g/pcre2/inst CFLAGS=\"-O0 -g\" DEVELOPER=1 prefix=/usr all^M"
+stuff "# time make -j \$(nproc) USE_LIBPCRE=1 LIBPCREDIR=\$HOME/g/pcre2/inst CFLAGS=\"-O0 -g\" DEVELOPER=1 prefix=/usr all^M"
 
 screen -t c:o bash
 stuff "cd ~/g/git^M"
-stuff "time make -j \$(parallel --number-of-cores) USE_LIBPCRE=1 LIBPCREDIR=\$HOME/g/pcre2/inst CFLAGS=\"-O3 -g\" all"
+stuff "time make -j \$(nproc) USE_LIBPCRE=1 LIBPCREDIR=\$HOME/g/pcre2/inst CFLAGS=\"-O3 -g\" all"
 
 screen -t t:0 bash
 stuff "cd ~/g/git^M"
 stuff "cd t^M"
-stuff "# time NO_SVN_TESTS=1 GIT_TEST_HTTPD=0 prove -j\$(parallel --number-of-cores) --state=slow,save t[0-9]*.sh^M"
-stuff "# time GIT_TEST_HTTPD=1 prove -j\$(parallel --number-of-cores) --state=slow,save t[0-9]*.sh^M"
+stuff "# time NO_SVN_TESTS=1 GIT_TEST_HTTPD=0 prove -j\$(nproc) --state=slow,save t[0-9]*.sh^M"
+stuff "# time GIT_TEST_HTTPD=1 prove -j\$(nproc) --state=slow,save t[0-9]*.sh^M"
 
 screen -t t:1 bash
 stuff "cd ~/g/git^M"
@@ -51,7 +51,7 @@ stuff "./t7810-grep.sh -v -i"
 screen -t t:2 bash
 stuff "cd ~/g/git^M"
 stuff "cd t^M"
-stuff "time prove -j\$(parallel --number-of-cores) --state=slow,save t[0-9]*grep*.sh t[0-9]*log*.sh"
+stuff "time prove -j\$(nproc) --state=slow,save t[0-9]*grep*.sh t[0-9]*log*.sh"
 
 screen -t se:r bash
 stuff "cd ~/g/git-patches^M"
@@ -75,7 +75,7 @@ stuff "git --no-pager log --oneline -10^M"
 screen -t r:pcre1
 stuff "cd ~/g/pcre^M"
 stuff "git svn rebase^M"
-stuff "test -f RunTest && git clean -dxf; ./autogen.sh; CXXFLAGS='-O3 -g' CFLAGS='-O3 -g' ./configure --prefix=\$PWD/inst --enable-jit --enable-utf --enable-unicode-properties && time make -j \$(parallel --number-of-cores) install"
+stuff "test -f RunTest && git clean -dxf; ./autogen.sh; CXXFLAGS='-O3 -g' CFLAGS='-O3 -g' ./configure --prefix=\$PWD/inst --enable-jit --enable-utf --enable-unicode-properties && time make -j \$(nproc) install"
 
 screen -t r:pcre2
 stuff "cd ~/g/pcre2^M"

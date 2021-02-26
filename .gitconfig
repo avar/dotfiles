@@ -30,7 +30,7 @@
 	chrp = cherry-pick
 
 	;; Parellel fetch
-	pfetch = !git fetch --all --jobs=$(parallel --number-of-cores)
+	pfetch = !git fetch --all --jobs=$(nproc)
 
 	;; Submodules
 	sm-init = !git submodule update --init
