@@ -28,6 +28,7 @@
 	co = checkout
 	sm = submodule
 	chrp = cherry-pick
+	sl = shortlog
 
 	;; Parellel fetch
 	pfetch = !git fetch --all --jobs=$(nproc)
