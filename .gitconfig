@@ -112,6 +112,9 @@
 [core]
 	untrackedCache = true
 	splitIndex = false
+[rerere]
+	enabled = true
+	autoUpdate = true
 [checkout]
 	defaultRemote = origin
 [diff]
