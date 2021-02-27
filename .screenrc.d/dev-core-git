@@ -23,6 +23,8 @@ stuff "# GIT_PERF_LARGE_REPO=~/g/linux ./run p7820-grep-engines.sh^M"
 screen -t p:1 bash
 stuff "cd ~/g/git^M"
 stuff "cd t/perf^M"
+# GIT_PERF_REPEAT_COUNT=30 GIT_PERF_LARGE_REPO=~/g/linux GIT_PERF_MAKE_OPTS='-j8 USE_LIBPCRE1=Y CFLAGS=-O3 LIBPCREDIR=/home/avar/g/pcre/inst' ./run HEAD
+# GIT_PERF_REPEAT_COUNT=5 GIT_PERF_REPO=~/g/sha1collisiondetection/ GIT_PERF_MAKE_OPTS='-j8 USE_LIBPCRE=Y CFLAGS=-O3 LIBPCREDIR=/home/avar/g/pcre2/inst' ./run origin/next HEAD p4209-pickaxe.sh
 
 screen -t c:d:r bash
 stuff "cd ~/g/git^M"
@@ -80,7 +82,8 @@ stuff "test -f RunTest && git clean -dxf; ./autogen.sh; CXXFLAGS='-O3 -g' CFLAGS
 screen -t r:pcre2
 stuff "cd ~/g/pcre2^M"
 stuff "git svn rebase^M"
-stuff "test -f RunTest && git clean -dxf; ./autogen.sh; CXXFLAGS='-O3 -g' CFLAGS='-O3 -g' ./configure --prefix=\$PWD/inst --enable-jit --enable-utf && time make -j \$(parallel --number-of-cores) install"
+stuff "# test -f RunTest && git clean -dxf; ./autogen.sh; CXXFLAGS='-O3 -g' CFLAGS='-O3 -g' ./configure --prefix=\$PWD/inst --enable-jit --enable-utf && time make -j \$(nproc) install"
+stuff "# test -f RunTest && git clean -dxf; ./autogen.sh; CXXFLAGS='-O3 -g' CFLAGS='-O3 -g' ./configure --prefix=\$PWD/inst --enable-jit --enable-utf && time make -j \$(nproc) install"
 
 screen -t r:gnulib
 stuff "cd ~/g/gnulib^M"
@@ -116,6 +119,12 @@ stuff "export OPT_TESTS='t[0-9]*.sh'^M"
 stuff "# time OPT_DEBUG= OPT_JOBS=3 OPT_JOB_NAME=gcc119 OPT_REVISION=HEAD OPT_TESTS=\"\$OPT_TESTS\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
 stuff "export OPT_TESTS='t1450-fsck.sh t4212-log-corrupt.sh'^M"
 stuff "export OPT_TESTS='t1061-object-envelope-time.sh'^M"
+
+# i386:sh => need to have an active shell for /run/user/$(id -u) to persist
+screen -t t:gl:run:ci:2:debian:i386:sh
+stuff "cd ~/g/git^M"
+stuff "git version^M"
+stuff "ssh gcc45.fsffrance.org^M"
 
 # i386
 screen -t t:gl:run:ci:2:debian:i386
@@ -153,6 +162,12 @@ stuff "# time OPT_DEBUG= OPT_JOBS=2 OPT_JOB_NAME=gcc220 OPT_REVISION=HEAD OPT_TE
 stuff "export OPT_TESTS='t1450-fsck.sh t4212-log-corrupt.sh'^M"
 stuff "export OPT_TESTS='t1061-object-envelope-time.sh'^M"
 
+# OpenSUSE aarch64:sh
+screen -t t:gl:run:ci:6:SuSE:aarch64:sh
+stuff "cd ~/g/git^M"
+stuff "git version^M"
+stuff "ssh gcc118.fsffrance.org^M"
+
 # OpenSUSE aarch64
 screen -t t:gl:run:ci:6:SuSE:aarch64
 stuff "cd ~/g/git^M"
@@ -161,6 +176,12 @@ stuff "export OPT_TESTS='t[0-9]*.sh'^M"
 stuff "# time OPT_DEBUG= OPT_JOBS=4 OPT_JOB_NAME=gcc118 OPT_REVISION=HEAD OPT_TESTS=\"\$OPT_TESTS\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
 stuff "export OPT_TESTS='t1450-fsck.sh t4212-log-corrupt.sh'^M"
 stuff "export OPT_TESTS='t1061-object-envelope-time.sh'^M"
+
+# CentOS ppc64le:sh
+screen -t t:gl:run:ci:7:COS:ppc64le:sh
+stuff "cd ~/g/git^M"
+stuff "git version^M"
+stuff "ssh gcc135.fsffrance.org^M"
 
 # CentOS ppc64le
 screen -t t:gl:run:ci:7:COS:ppc64le
