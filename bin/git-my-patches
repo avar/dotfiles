@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+set -x
+
+last_release=$(git tag -l 'v2*' --sort=-version:refname | grep -v windows | head -n 1)
+last=$last_release
+for ref in origin/master origin/next origin/seen
+do
+	git --no-pager shortlog --author=Ævar $last..$ref
+	last=$ref
+done
