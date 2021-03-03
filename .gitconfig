@@ -1,3 +1,4 @@
+;; User
 [user]
 	name = Ævar Arnfjörð Bjarmason
 	email = avarab@gmail.com
@@ -7,14 +8,85 @@
 	path = ~/.gitconfig.d/github-token
 [includeIf "gitdir:~/g/perl/"]
 	path = ~/.gitconfig.d/user-perl
+
+;; Core
+[core]
+	untrackedCache = true
+	splitIndex = false
+
+;; Core -- UI
+[help]
+	autocorrect = 0
 [color]
 	ui = auto
 
-;; Don't be so invasive about coloring ^M when I'm editing files that
-;; are supposed to have \r\n.
+;; Core commands -- status
+[status]
+	showStash = true
+
+;; Core commands -- network
+[push]
+	default = upstream
+[fetch]
+	output = compact
+[pull]
+	rebase = true
+[sendemail]
+	smtpserver = smtp.gmail.com
+	smtpEncryption = ssl
+	smtpuser = avarab@gmail.com
+	confirm = always
+
+;; Core commands -- diff
+[diff]
+	indentHeuristic = true
+	colorMoved = true
 [color "diff"]
+	;; Don't be so invasive about coloring ^M when I'm editing
+	;; files that are supposed to have \r\n.
 	whitespace = 0
 
+;; Core commands -- rebase / merge / am
+[rebase]
+	autosquash = true
+	;; Show stat output on rebase to show what changed
+	stat = true
+[merge]
+	;; Have "git merge" do what "git pull" would have done
+	defaultToUpstream = true
+[rerere]
+	enabled = true
+	autoUpdate = true
+[gc]
+	;; Maybe I'll leave that topic branch for a while, but it
+	;; conflicts with my other own work, not upstream's
+	rerereResolved = "1 year ago"
+[mailinfo]
+	scissors = true
+
+;; Core commands -- checkout / switch etc.
+[checkout]
+	defaultRemote = origin
+
+;; Core commands -- [creating] objects
+[commit]
+        ;; See https://public-inbox.org/git/20190520182353.22221-1-matheus.bernardino@usp.br/
+	verbose = true
+[tag]
+	sort = version:refname
+
+;; Core commands -- History traversal
+[log]
+	;; Show tags and other references in "git log"
+	decorate = short
+	;; Abbreviate commits by default. I.e. don't show a full SHA1
+	abbrevCommit = true
+
+;; Core commands -- Misc
+[grep]
+	patternType = perl
+
+;; Aliases
 [alias]
         ;; Invoke an arbitrary program with git config. See
         ;; https://lore.kernel.org/git/87h7oswepj.fsf@evledraar.gmail.com/
@@ -56,6 +128,7 @@
 	disw   = !git diw --staged
 	disww  = !git diww --staged
 	diswwd = !git diwwd --staged
+
 	;; Show
 	s      = show -M -p --stat
 	sw     = !git s -w
@@ -78,57 +151,7 @@
 
         ;; per-project
         gitaly-make-test-tag-branch = "!f() { TEST_OPTIONS=\"-run \\\"Update|Create|Delete|Tag|Branch\\\"\" TEST_PACKAGES=\"./internal/git/updateref ./internal/gitaly/service/operations\" make test; }; f"
-[push]
-	default = upstream
-[pull]
-	rebase = true
-[sendemail]
-	smtpserver = smtp.gmail.com
-	smtpEncryption = ssl
-	smtpuser = avarab@gmail.com
-	confirm = always
-[rebase]
-	autosquash = true
-	;; Show stat output on rebase to show what changed
-	stat = true
-[http]
-	sslVerify = false
-[grep]
-	patternType = perl
-[log]
-	;; Show tags and other references in "git log"
-	decorate = short
-	;; Abbreviate commits by default. I.e. don't show a full SHA1
-	abbrevCommit = true
-[merge]
-	;; Have "git merge" do what "git pull" would have done
-	defaultToUpstream = true
+
+;; 3rd party tools
 [annex]
 	backends = SHA256E SHA256
-[help]
-	autocorrect = 0
-[fetch]
-	output = compact
-[core]
-	untrackedCache = true
-	splitIndex = false
-[rerere]
-	enabled = true
-	autoUpdate = true
-[checkout]
-	defaultRemote = origin
-[diff]
-	indentHeuristic = true
-	colorMoved = true
-[status]
-	showStash = true
-[commit]
-        # See https://public-inbox.org/git/20190520182353.22221-1-matheus.bernardino@usp.br/
-	verbose = true
-[tag]
-	sort = version:refname
-[rerere]
-	enabled = true
-	autoUpdate = true
-[mailinfo]
-	scissors = true
