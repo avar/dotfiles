@@ -159,14 +159,6 @@ export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S  "
 # starting with whitespace, useful to selectively avoid the history
 export HISTIGNORE="ls:cd:cd ..:..*: *"
 
-# Use a sensible -j for Test::Harness
-case $HOSTNAME in
-    v)    __cpus=4 ;;
-    aeou) __cpus=2 ;;
-    *)    __cpus=$(grep -c ^processor /proc/cpuinfo 2>/dev/null) ;;
-esac
-export HARNESS_OPTIONS="j$((2*$__cpus+1))"
-
 # Git will screw this up when I do a "git pull"
 chmod 600 ~/.ssh/config 2>/dev/null
 
