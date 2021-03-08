@@ -143,6 +143,8 @@
 
 	;; Handy tools
 	review = "!f() { for rev in $(git rev-list --reverse $@); do LESS='--IGNORE-CASE --LONG-PROMPT --QUIET --chop-long-lines --RAW-CONTROL-CHARS' git show --stat -p -M $rev; done; }; f"
+        rw = review        
+        rwu = review @{u}..
 
         ;; Git doesn't have a one-shot command to copy a branch & its
         ;; config to a new location.
