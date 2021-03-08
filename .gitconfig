@@ -112,6 +112,12 @@
 	; Manually specify a branch from the main config, or try to guess it
 	sm-mainbranch = !git config --file ../.gitmodules submodule.$NAME.branch || git describe --all --always | sed 's!^heads/!!'
 
+        ;; Commit
+        cif = commit --fixup
+        cis = commit --squash
+        ca = commit --amend
+        cane = commit --amend --no-edit
+
         ;; Rebase
         r = rebase
         ri = rebase -i
