@@ -75,7 +75,7 @@
 
 ;; Core commands -- [creating] objects
 [commit]
-        ;; See https://public-inbox.org/git/20190520182353.22221-1-matheus.bernardino@usp.br/
+	;; See https://public-inbox.org/git/20190520182353.22221-1-matheus.bernardino@usp.br/
 	verbose = true
 [tag]
 	sort = version:refname
@@ -93,9 +93,9 @@
 
 ;; Aliases
 [alias]
-        ;; Invoke an arbitrary program with git config. See
-        ;; https://lore.kernel.org/git/87h7oswepj.fsf@evledraar.gmail.com/
-        sh = !sh
+	;; Invoke an arbitrary program with git config. See
+	;; https://lore.kernel.org/git/87h7oswepj.fsf@evledraar.gmail.com/
+	sh = !sh
 	;; Debugging (see GIT_* vars)
 	env = !env --null | perl -n0E 'say if /^GIT/'
 
@@ -117,21 +117,21 @@
 	; Manually specify a branch from the main config, or try to guess it
 	sm-mainbranch = !git config --file ../.gitmodules submodule.$NAME.branch || git describe --all --always | sed 's!^heads/!!'
 
-        ;; Commit
-        cif = commit --fixup
-        cis = commit --squash
-        ca = commit --amend
-        cane = commit --amend --no-edit
+	;; Commit
+	cif = commit --fixup
+	cis = commit --squash
+	ca = commit --amend
+	cane = commit --amend --no-edit
 
-        ;; Log
-        log-psfd = "!f() { PAGER=\"less -p'^commit'\" git log -p --stat --full-diff $@; }; f"
+	;; Log
+	log-psfd = "!f() { PAGER=\"less -p'^commit'\" git log -p --stat --full-diff $@; }; f"
 
-        ;; Rebase
-        r = rebase
-        ri = rebase -i
-        rc = rebase --continue
-        rs = rebase --skip
-        ra = rebase --abort
+	;; Rebase
+	r = rebase
+	ri = rebase -i
+	rc = rebase --continue
+	rs = rebase --skip
+	ra = rebase --abort
 
 	;; Diff
 	di     = diff -M -p --stat
@@ -152,22 +152,22 @@
 
 	;; Handy tools
 	review = "!f() { for rev in $(git rev-list --reverse $@); do LESS='--IGNORE-CASE --LONG-PROMPT --QUIET --chop-long-lines --RAW-CONTROL-CHARS' git show --stat -p -M $rev; done; }; f"
-        rw = review        
-        rwu = review @{u}..
+	rw = review
+	rwu = review @{u}..
 
-        ;; Git doesn't have a one-shot command to copy a branch & its
-        ;; config to a new location.
-        cp-branch = "!f() { git branch -c $1 $2 && git checkout $2; }; f"
+	;; Git doesn't have a one-shot command to copy a branch & its
+	;; config to a new location.
+	cp-branch = "!f() { git branch -c $1 $2 && git checkout $2; }; f"
 
 	;; Working on git.git & other things using "reference"
-        reference = !git --no-pager show -s --pretty=reference
+	reference = !git --no-pager show -s --pretty=reference
 	git-commit-summary = !git reference
 
 	;; Like push but harder
 	thrust = "!f() { until (sleep 0.5 && git push); do git pull --rebase; done; }; f"
 
-        ;; per-project
-        gitaly-make-test-tag-branch = "!f() { TEST_OPTIONS=\"-run \\\"Update|Create|Delete|Tag|Branch\\\"\" TEST_PACKAGES=\"./internal/git/updateref ./internal/gitaly/service/operations\" make test; }; f"
+	;; per-project
+	gitaly-make-test-tag-branch = "!f() { TEST_OPTIONS=\"-run \\\"Update|Create|Delete|Tag|Branch\\\"\" TEST_PACKAGES=\"./internal/git/updateref ./internal/gitaly/service/operations\" make test; }; f"
 
 ;; 3rd party tools
 [annex]
