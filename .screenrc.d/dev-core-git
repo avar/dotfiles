@@ -3,11 +3,15 @@ source /home/aearnfjord/.screenrc
 
 sessionname dev-core-git
 
-screen -t g:0 bash
-stuff "cd ~/g/git^M"
+screen -t g:m:0 bash
+stuff "cd ~/g/git.meta^M"
+stuff "# git pfetch^M"
 
-screen -t g:1 bash
-stuff "cd ~/g/git^M"
+screen -t g:b:0 bash
+stuff "cd ~/g/git.meta^M"
+stuff "cat make-install-avargit.sh^M"
+stuff "git version^M"
+
 
 screen -t g:2 bash
 stuff "cd ~/g/git^M"
@@ -28,32 +32,32 @@ stuff "cd t/perf^M"
 
 screen -t c:d:r bash
 stuff "cd ~/g/git^M"
-stuff "# git rebase -i --exec 'time make -j \$(nproc) USE_LIBPCRE=1 LIBPCREDIR=\$HOME/g/pcre2/inst CFLAGS=\"-O0 -g\" DEVELOPER=1 prefix=/usr all && (cd t && GIT_TEST_HTTPD=1 prove -j\$(nproc) t000[0-9]*.sh)'^M"
+stuff "# git rebase -i --exec '~/g/git.meta/config.mak.sh && time make -j \$(nproc) all && (cd t && make -C t prove T=t000[0-9]*.sh)'^M"
 
 screen -t c:d bash
 stuff "cd ~/g/git^M"
-stuff "# time make -j \$(nproc) USE_LIBPCRE=1 LIBPCREDIR=\$HOME/g/pcre2/inst CFLAGS=\"-O0 -g\" DEVELOPER=1 prefix=/usr all^M"
-stuff "# time make -j \$(nproc) USE_LIBPCRE=1 LIBPCREDIR=\$HOME/g/pcre2/inst CFLAGS=\"-O0 -g\" DEVELOPER=1 prefix=/usr all^M"
+stuff "# ~/g/git.meta/config.mak.sh && time make -j \$(nproc) all^M"
+stuff "# ~/g/git.meta/config.mak.sh && time make -j \$(nproc) all^M"
 
 screen -t c:o bash
 stuff "cd ~/g/git^M"
-stuff "time make -j \$(nproc) USE_LIBPCRE=1 LIBPCREDIR=\$HOME/g/pcre2/inst CFLAGS=\"-O3 -g\" all"
+stuff "# ~/g/git.meta/config.mak.sh && time make -j \$(nproc) CFLAGS=\"-O3 -g\" all"
 
 screen -t t:0 bash
 stuff "cd ~/g/git^M"
 stuff "cd t^M"
-stuff "# time NO_SVN_TESTS=1 GIT_TEST_HTTPD=0 prove -j\$(nproc) --state=slow,save t[0-9]*.sh^M"
-stuff "# time GIT_TEST_HTTPD=1 prove -j\$(nproc) --state=slow,save t[0-9]*.sh^M"
+stuff "# time NO_SVN_TESTS=1 GIT_TEST_HTTPD=0 make prove^M"
+stuff "# time GIT_TEST_HTTPD=1 make prove^M"
 
 screen -t t:1 bash
 stuff "cd ~/g/git^M"
 stuff "cd t^M"
-stuff "./t7810-grep.sh -v -i"
+stuff "# ./t7810-grep.sh -v -i"
 
 screen -t t:2 bash
 stuff "cd ~/g/git^M"
 stuff "cd t^M"
-stuff "time prove -j\$(nproc) --state=slow,save t[0-9]*grep*.sh t[0-9]*log*.sh"
+stuff "time make prove T='t[0-9]*grep*.sh t[0-9]*log*.sh'"
 
 screen -t se:r bash
 stuff "cd ~/g/git-patches^M"
