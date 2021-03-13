@@ -51,6 +51,11 @@
 	autosquash = true
 	;; Show stat output on rebase to show what changed
 	stat = true
+
+	;; when using 'git rebase -i --exec "make test"' I want the
+	;; "make test" to run again on "git rebase --continue", the
+	;; default behavior is to omit it.
+	rescheduleFailedExec = true
 [merge]
 	;; Have "git merge" do what "git pull" would have done
 	defaultToUpstream = true
@@ -117,6 +122,9 @@
         cis = commit --squash
         ca = commit --amend
         cane = commit --amend --no-edit
+
+        ;; Log
+        log-psfd = "!f() { PAGER=\"less -p'^commit'\" git log -p --stat --full-diff $@; }; f"
 
         ;; Rebase
         r = rebase
