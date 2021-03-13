@@ -2,9 +2,17 @@
 set -e
 set -x
 
-last_release=$(git tag -l 'v2*' --sort=-version:refname | grep -v windows | head -n 1)
+junio_tags () {
+	git tag -l  --sort=-version:refname --format='%(refname:strip=2) %(taggeremail)' 'v*' |
+		grep gitster@pobox.com |
+                cut -d ' ' -f 1
+}
+
+last_release=$(junio_tags | grep -v -- -rc | head -n 1)
+last_tag=$(junio_tags | head -n 1)
+
 last=$last_release
-for ref in origin/master origin/next origin/seen
+for ref in $last_tag origin/master origin/next origin/seen
 do
 	git --no-pager shortlog --author=Ævar $last..$ref "$@"
 	last=$ref
