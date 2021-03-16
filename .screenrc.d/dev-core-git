@@ -46,8 +46,8 @@ stuff "# ~/g/git.meta/config.mak.sh && time make -j \$(nproc) CFLAGS=\"-O3 -g\" 
 screen -t t:0 bash
 stuff "cd ~/g/git^M"
 stuff "cd t^M"
-stuff "# time NO_SVN_TESTS=1 GIT_TEST_HTTPD=0 make prove test-lint^M"
-stuff "# time GIT_TEST_HTTPD=1 make prove test-lint^M"
+stuff "# time NO_SVN_TESTS=1 GIT_TEST_HTTPD=0 make GIT_PROVE_OPTS=\"--jobs=\$(nproc) --timer --state=failed,slow,save\"^M"
+stuff "# time GIT_TEST_HTTPD=1 make GIT_PROVE_OPTS=\"--jobs=\$(nproc) --timer --state=failed,slow,save\"^M"
 
 screen -t t:1 bash
 stuff "cd ~/g/git^M"
@@ -57,7 +57,7 @@ stuff "# ./t7810-grep.sh -v -i"
 screen -t t:2 bash
 stuff "cd ~/g/git^M"
 stuff "cd t^M"
-stuff "time make prove test-lint T='t[0-9]*grep*.sh t[0-9]*log*.sh'"
+stuff "time make GIT_PROVE_OPTS=\"--jobs=\$(nproc) --timer\" T='t[0-9]*grep*.sh t[0-9]*log*.sh'"
 
 screen -t se:r bash
 stuff "cd ~/g/git-patches^M"
