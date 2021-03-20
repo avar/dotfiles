@@ -66,7 +66,19 @@
 	;; Maybe I'll leave that topic branch for a while, but it
 	;; conflicts with my other own work, not upstream's
 	rerereResolved = "1 year ago"
+
+;; am, format-patch, send-email etc.
+[sendemail]
+	;; Add an X-Mailer header
+	;; (e.g. https://lore.kernel.org/git/20210317182054.5986-19-avarab@gmail.com/raw),
+	;; true by default, but...
+	xmailer = true
+[format] ; format-patch
+	;; For more sensible threading, see
+	;; https://lore.kernel.org/git/nycvar.QRO.7.76.6.2103191540330.57@tvgsbejvaqbjf.bet/
+	thread = shallow
 [mailinfo]
+	;; For JK etc. patches
 	scissors = true
 
 ;; Core commands -- checkout / switch etc.
