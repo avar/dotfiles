@@ -51,12 +51,12 @@ stuff "# time GIT_TEST_HTTPD=1 make GIT_PROVE_OPTS=\"--jobs=\$(nproc) --timer --
 screen -t t:1 bash
 stuff "cd ~/g/git^M"
 stuff "cd t^M"
-stuff "# ./t7810-grep.sh -v -i"
+stuff "time make GIT_PROVE_OPTS=\"--jobs=\$(nproc) --timer\" T='t[0-9]*grep*.sh t[0-9]*log*.sh'"
 
 screen -t t:2 bash
 stuff "cd ~/g/git^M"
 stuff "cd t^M"
-stuff "time make GIT_PROVE_OPTS=\"--jobs=\$(nproc) --timer\" T='t[0-9]*grep*.sh t[0-9]*log*.sh'"
+stuff "# ./t7810-grep.sh -v -i"
 
 screen -t se:r bash
 stuff "cd ~/g/git-patches^M"
