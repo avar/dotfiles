@@ -19,14 +19,13 @@ stuff "cd ~/g/git^M"
 screen -t g:3 bash
 stuff "cd ~/g/git^M"
 
+screen -t g:4 bash
+stuff "cd ~/g/git^M"
+
 screen -t p:0 bash
 stuff "cd ~/g/git^M"
 stuff "cd t/perf^M"
 stuff "# GIT_PERF_LARGE_REPO=~/g/linux ./run p7820-grep-engines.sh^M"
-
-screen -t p:1 bash
-stuff "cd ~/g/git^M"
-stuff "cd t/perf^M"
 # GIT_PERF_REPEAT_COUNT=30 GIT_PERF_LARGE_REPO=~/g/linux GIT_PERF_MAKE_OPTS='-j8 USE_LIBPCRE1=Y CFLAGS=-O3 LIBPCREDIR=/home/avar/g/pcre/inst' ./run HEAD
 # GIT_PERF_REPEAT_COUNT=5 GIT_PERF_REPO=~/g/sha1collisiondetection/ GIT_PERF_MAKE_OPTS='-j8 USE_LIBPCRE=Y CFLAGS=-O3 LIBPCREDIR=/home/avar/g/pcre2/inst' ./run origin/next HEAD p4209-pickaxe.sh
 
