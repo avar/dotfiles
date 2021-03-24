@@ -31,7 +31,7 @@ stuff "# GIT_PERF_LARGE_REPO=~/g/linux ./run p7820-grep-engines.sh^M"
 
 screen -t c:d:r bash
 stuff "cd ~/g/git^M"
-stuff "# git rebase -i --exec '~/g/git.meta/config.mak.sh && time make -j \$(nproc) all && (cd t && make prove test-lint T=t000[0-9]*.sh)'^M"
+stuff "# git rebase -i --exec '~/g/git.meta/config.mak.sh && time make -j \$(nproc) all && (cd t && make GIT_PROVE_OPTS=\"--jobs=\$(nproc) --timer --state=failed,slow,save\" T=t000[0-9]*.sh)'^M"
 
 screen -t c:d bash
 stuff "cd ~/g/git^M"
