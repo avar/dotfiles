@@ -13,6 +13,10 @@
 [core]
 	untrackedCache = true
 	splitIndex = false
+[init]
+	;; Enough with the spammy "This default branch name is subject
+	;; to change." advice already!
+	defaultBranch = master
 
 ;; Core -- UI
 [help]
