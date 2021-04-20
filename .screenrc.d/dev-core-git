@@ -35,8 +35,8 @@ stuff "# git rebase -i --exec '~/g/git.meta/config.mak.sh && time make -j \$(npr
 
 screen -t c:d bash
 stuff "cd ~/g/git^M"
-stuff "# ~/g/git.meta/config.mak.sh && time make -j \$(nproc) all^M"
-stuff "# ~/g/git.meta/config.mak.sh && time make -j \$(nproc) all^M"
+stuff "# ~/g/git.meta/config.mak.sh && time make -j \$(nproc) TAGS all check-docs^M"
+stuff "# ~/g/git.meta/config.mak.sh && time make -j \$(nproc) TAGS all check-docs^M"
 
 screen -t c:o bash
 stuff "cd ~/g/git^M"
