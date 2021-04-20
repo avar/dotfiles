@@ -40,6 +40,8 @@
 	smtpEncryption = ssl
 	smtpuser = avarab@gmail.com
 	confirm = always
+[include]
+	path = ~/.gitconfig.d/smtp-pass
 
 ;; Core commands -- diff
 [diff]
