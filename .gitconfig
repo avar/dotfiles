@@ -186,6 +186,9 @@
 	;; Like push but harder
 	thrust = "!f() { until (sleep 0.5 && git push); do git pull --rebase; done; }; f"
 
+	;; YOLO development, commit with a http://whatthecommit.com commit message
+	snap = "!f() { git add -u && git commit -m\"$(what-the-commit-line)\"; }; f"
+
 	;; per-project
 	gitaly-make-test-tag-branch = "!f() { TEST_OPTIONS=\"-run \\\"Update|Create|Delete|Tag|Branch\\\"\" TEST_PACKAGES=\"./internal/git/updateref ./internal/gitaly/service/operations\" make test; }; f"
 
