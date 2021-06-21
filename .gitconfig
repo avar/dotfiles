@@ -23,6 +23,10 @@
 	autocorrect = 0
 [color]
 	ui = auto
+	;; Enable the color.man patch, not covered under
+	;; color.ui=auto. See
+	;; https://lore.kernel.org/git/patch-1.1-a950ef49e28-20210621T083254Z-avarab@gmail.com/
+	man = true
 
 ;; Core commands -- status
 [status]
