@@ -51,6 +51,7 @@
 [diff]
 	indentHeuristic = true
 	colorMoved = true
+	colorMovedWS = allow-indentation-change
 [color "diff"]
 	;; Don't be so invasive about coloring ^M when I'm editing
 	;; files that are supposed to have \r\n.
