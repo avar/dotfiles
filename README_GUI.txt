@@ -2,6 +2,11 @@
 
 ## Disable Alerts
 "Windows key" ==> "Sound" ==> "Sound Effects" ==> "Alert volume" ==> "Off"
+
+Apparently this doesn't work in recent versions. You need:
+
+"dconf" -> search for "event-sounds" -> turn it off
+
 ## Natural scrolling
 "Windows key" ==> "Mouse & Touchpad ==> "Mouse" ==> "Natural Scrolling"
 
