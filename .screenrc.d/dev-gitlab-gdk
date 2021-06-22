@@ -77,13 +77,13 @@ stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitaly^M"
 ## Gitaly - Test
 screen -t gl:aly:test:all:run bash
 stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitaly^M"
-stuff "# make test^M"
-stuff "# time nice -n 19 make test 2>&1 | tee _build/test.out^M"
+stuff "# make lint test^M"
+stuff "# time nice -n 19 make lint test 2>&1 | tee _build/test.out^M"
 stuff "# grep '\^--- FAIL' _build/test.out^M"
 
 screen -t gl:aly:test:all:out bash
 stuff "cd ~/g.gl/gdk/gitlab-development-kit/gitaly^M"
-stuff "# make test 2>&1 | tee _build/test.out^M"
+stuff "# make build format lint test 2>&1 | tee _build/test.out^M"
 stuff "tail -F _build/test.out | grep -C20 '\^--- FAIL'^M"
 
 screen -t gl:aly:test:1 bash
@@ -93,7 +93,7 @@ stuff "# PATH=/home/avar/g/git:\$PATH go test -v ./internal/git/ -run Test.*Remo
 # -count=1 is a cache buster, e.g. if the Ruby code changes Go won't
 # -actually re-run a test!. See
 # -https://stackoverflow.com/questions/48882691/force-retesting-or-disable-test-caching
-stuff "# go test -v ./internal/gitaly/service/operations/ -run 'Tag|Branch' -count=1^M"
+stuff "# TEST_OPTIONS=\"-run 'UpdateBranch' -v -count=1\" TEST_PACKAGES=\"./internal/gitaly/service/operations\" make test-go^M"
 
 # Use "make test" with TEST_* to feed it custom options
 stuff "# TEST_OPTIONS=\"-run 'Update|Create|Delete|Tag|Branch'\" TEST_PACKAGES=\"./internal/git/updateref ./internal/gitaly/service/operations\" make test^M"
