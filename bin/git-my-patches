@@ -12,7 +12,7 @@ last_release=$(junio_tags | grep -v -- -rc | head -n 1)
 last_tag=$(junio_tags | head -n 1)
 
 last=$last_release
-for ref in $last_tag origin/master origin/next origin/seen
+for ref in $last_tag origin/master origin/next gitster/jch origin/seen
 do
 	git --no-pager shortlog --author=Junio --min-parents=2 --grep="Merge branch 'ab/" $last..$ref "$@"
 	git --no-pager shortlog --author=Ævar $last..$ref "$@"
