@@ -8,13 +8,23 @@ junio_tags () {
                 cut -d ' ' -f 1
 }
 
+compare_branches () {
+	last=$1
+	shift
+	for ref in $@
+	do
+		echo checking $last..$ref
+		if test "$last" != ""
+		then
+			git --no-pager shortlog --author=Junio --min-parents=2 --grep="Merge branch 'ab/" $last..$ref
+			git --no-pager shortlog --author=Ævar $last..$ref
+		fi
+		last=$ref
+	done
+}
+
+compare_branches "" origin/master gitster/jch
+
 last_release=$(junio_tags | grep -v -- -rc | head -n 1)
 last_tag=$(junio_tags | head -n 1)
-
-last=$last_release
-for ref in $last_tag origin/master origin/next gitster/jch origin/seen
-do
-	git --no-pager shortlog --author=Junio --min-parents=2 --grep="Merge branch 'ab/" $last..$ref "$@"
-	git --no-pager shortlog --author=Ævar $last..$ref "$@"
-	last=$ref
-done
+compare_branches $last_tag origin/master origin/next origin/seen
