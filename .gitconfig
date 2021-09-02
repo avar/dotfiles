@@ -13,6 +13,11 @@
 [core]
 	untrackedCache = true
 	splitIndex = false
+
+	;; Increase from 100ms to 10s, I'm not running a server, in
+	;; the rare cases where this does happen due to gc or whatever
+	;; let's give it plenty of time to recover.
+	filesRefLockTimeout = 10000
 [init]
 	;; Enough with the spammy "This default branch name is subject
 	;; to change." advice already!
