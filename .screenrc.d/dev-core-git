@@ -31,7 +31,7 @@ stuff "# GIT_PERF_LARGE_REPO=~/g/linux ./run p7820-grep-engines.sh^M"
 
 screen -t c:d:r bash
 stuff "cd ~/g/git^M"
-stuff "# git rebase -i --exec '~/g/git.meta/config.mak.sh && time make -j \$(nproc) all && (cd t && make GIT_PROVE_OPTS=\"--jobs=\$(nproc) --timer --state=failed,slow,save\" T=t000[0-9]*.sh)'^M"
+stuff "# git rebase -i --exec '~/g/git.meta/config.mak.sh && time make -j \$(nproc) TAGS all check-docs && (cd t && make GIT_PROVE_OPTS=\"--jobs=\$(nproc) --timer --state=failed,slow,save\" T=$(dedup t000[0-9]*.sh))'^M"
 
 screen -t c:d bash
 stuff "cd ~/g/git^M"
@@ -51,7 +51,8 @@ stuff "# ~/g/git.meta/config.mak.sh && time GIT_TEST_HTTPD=1 make GIT_PROVE_OPTS
 screen -t t:1 bash
 stuff "cd ~/g/git^M"
 stuff "cd t^M"
-stuff "# ~/g/git.meta/config.mak.sh && time make GIT_PROVE_OPTS=\"--jobs=\$(nproc) --timer\" T='t[0-9]*grep*.sh t[0-9]*log*.sh'"
+stuff "# ~/g/git.meta/config.mak.sh && time make GIT_PROVE_OPTS=\"--jobs=\$(nproc) --timer\" T='$(dedup t[0-9]*{grep,log}*.sh)'"
+stuff "# ~/g/git.meta/config.mak.sh && time make GIT_PROVE_OPTS=\"--jobs=\$(nproc) --timer\" T='$(dedup t[0-9]*{bundle,protocol,serve,pack,remote,receive}*.sh)'"
 
 screen -t t:2 bash
 stuff "cd ~/g/git^M"
@@ -110,7 +111,7 @@ screen -t t:gl:run:ci:0:aix71
 stuff "cd ~/g/git^M"
 stuff "git version^M"
 stuff "export OPT_TESTS='t[0-9]*.sh'^M"
-stuff "# time OPT_DEBUG= OPT_JOBS=3 OPT_JOB_NAME=gcc111 OPT_REVISION=HEAD OPT_TESTS=\"\$OPT_TESTS\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
+stuff "# time OPT_DEBUG= OPT_JOBS=3 OPT_JOB_NAME=gcc111 OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
 stuff "export OPT_TESTS='t1450-fsck.sh t4212-log-corrupt.sh'^M"
 stuff "export OPT_TESTS='t1061-object-envelope-time.sh'^M"
 
@@ -119,7 +120,7 @@ screen -t t:gl:run:ci:1:aix72
 stuff "cd ~/g/git^M"
 stuff "git version^M"
 stuff "export OPT_TESTS='t[0-9]*.sh'^M"
-stuff "# time OPT_DEBUG= OPT_JOBS=3 OPT_JOB_NAME=gcc119 OPT_REVISION=HEAD OPT_TESTS=\"\$OPT_TESTS\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
+stuff "# time OPT_DEBUG= OPT_JOBS=3 OPT_JOB_NAME=gcc119 OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
 stuff "export OPT_TESTS='t1450-fsck.sh t4212-log-corrupt.sh'^M"
 stuff "export OPT_TESTS='t1061-object-envelope-time.sh'^M"
 
@@ -134,36 +135,28 @@ screen -t t:gl:run:ci:2:debian:i386
 stuff "cd ~/g/git^M"
 stuff "git version^M"
 stuff "export OPT_TESTS='t[0-9]*.sh'^M"
-stuff "# time OPT_DEBUG= OPT_JOBS=3 OPT_JOB_NAME=gcc45 OPT_REVISION=HEAD OPT_TESTS=\"\$OPT_TESTS\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
-stuff "export OPT_TESTS='t1450-fsck.sh t4212-log-corrupt.sh'^M"
-stuff "export OPT_TESTS='t1061-object-envelope-time.sh'^M"
+stuff "# time OPT_DEBUG= OPT_JOBS=3 OPT_JOB_NAME=gcc45 OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
 
 # Solaris 10
 screen -t t:gl:run:ci:3:SPARC:Solaris10
 stuff "cd ~/g/git^M"
 stuff "git version^M"
 stuff "export OPT_TESTS='t[0-9]*.sh'^M"
-stuff "# time OPT_DEBUG= OPT_JOBS=4 OPT_JOB_NAME=gcc210 OPT_REVISION=HEAD OPT_TESTS=\"\$OPT_TESTS\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
-stuff "export OPT_TESTS='t1450-fsck.sh t4212-log-corrupt.sh'^M"
-stuff "export OPT_TESTS='t1061-object-envelope-time.sh'^M"
+stuff "# time OPT_DEBUG= OPT_JOBS=4 OPT_JOB_NAME=gcc210 OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
 
 # Solaris 11
 screen -t t:gl:run:ci:4:SPARC:Solaris11
 stuff "cd ~/g/git^M"
 stuff "git version^M"
 stuff "export OPT_TESTS='t[0-9]*.sh'^M"
-stuff "# time OPT_DEBUG= OPT_JOBS=4 OPT_JOB_NAME=gcc211 OPT_REVISION=HEAD OPT_TESTS=\"\$OPT_TESTS\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
-stuff "export OPT_TESTS='t1450-fsck.sh t4212-log-corrupt.sh'^M"
-stuff "export OPT_TESTS='t1061-object-envelope-time.sh'^M"
+stuff "# time OPT_DEBUG= OPT_JOBS=4 OPT_JOB_NAME=gcc211 OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
 
 # OpenBSD
 screen -t t:gl:run:ci:5:obsd:Xeon
 stuff "cd ~/g/git^M"
 stuff "git version^M"
 stuff "export OPT_TESTS='t[0-9]*.sh'^M"
-stuff "# time OPT_DEBUG= OPT_JOBS=2 OPT_JOB_NAME=gcc220 OPT_REVISION=HEAD OPT_TESTS=\"\$OPT_TESTS\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
-stuff "export OPT_TESTS='t1450-fsck.sh t4212-log-corrupt.sh'^M"
-stuff "export OPT_TESTS='t1061-object-envelope-time.sh'^M"
+stuff "# time OPT_DEBUG= OPT_JOBS=2 OPT_JOB_NAME=gcc220 OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
 
 # OpenSUSE aarch64:sh
 screen -t t:gl:run:ci:6:SuSE:aarch64:sh
@@ -176,9 +169,7 @@ screen -t t:gl:run:ci:6:SuSE:aarch64
 stuff "cd ~/g/git^M"
 stuff "git version^M"
 stuff "export OPT_TESTS='t[0-9]*.sh'^M"
-stuff "# time OPT_DEBUG= OPT_JOBS=4 OPT_JOB_NAME=gcc118 OPT_REVISION=HEAD OPT_TESTS=\"\$OPT_TESTS\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
-stuff "export OPT_TESTS='t1450-fsck.sh t4212-log-corrupt.sh'^M"
-stuff "export OPT_TESTS='t1061-object-envelope-time.sh'^M"
+stuff "# time OPT_DEBUG= OPT_JOBS=4 OPT_JOB_NAME=gcc118 OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
 
 # CentOS ppc64le:sh
 screen -t t:gl:run:ci:7:COS:ppc64le:sh
@@ -191,26 +182,73 @@ screen -t t:gl:run:ci:7:COS:ppc64le
 stuff "cd ~/g/git^M"
 stuff "git version^M"
 stuff "export OPT_TESTS='t[0-9]*.sh'^M"
-stuff "# time OPT_DEBUG= OPT_JOBS=24 OPT_JOB_NAME=gcc135 OPT_REVISION=HEAD OPT_TESTS=\"\$OPT_TESTS\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
-stuff "export OPT_TESTS='t1450-fsck.sh t4212-log-corrupt.sh'^M"
-stuff "export OPT_TESTS='t1061-object-envelope-time.sh'^M"
+stuff "# time OPT_DEBUG= OPT_JOBS=24 OPT_JOB_NAME=gcc135 OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
 
 # Debian ppc64
 screen -t t:gl:run:ci:8:Debian:ppc64
 stuff "cd ~/g/git^M"
 stuff "git version^M"
 stuff "export OPT_TESTS='t[0-9]*.sh'^M"
-stuff "# time OPT_DEBUG= OPT_JOBS=24 OPT_JOB_NAME=gcc203 OPT_REVISION=HEAD OPT_TESTS=\"\$OPT_TESTS\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
-stuff "export OPT_TESTS='t1450-fsck.sh t4212-log-corrupt.sh'^M"
-stuff "export OPT_TESTS='t1061-object-envelope-time.sh'^M"
+stuff "# time OPT_DEBUG= OPT_JOBS=24 OPT_JOB_NAME=gcc203 OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
 
 # OpenSUSE aarch64
 screen -t t:gl:run:ci:9:COS:debian:buster:mips64
 stuff "cd ~/g/git^M"
 stuff "git version^M"
 stuff "export OPT_TESTS='t[0-9]*.sh'^M"
-stuff "# time OPT_DEBUG= OPT_JOBS=1 OPT_JOB_NAME=gcc22 OPT_REVISION=HEAD OPT_TESTS=\"\$OPT_TESTS\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
-stuff "export OPT_TESTS='t1450-fsck.sh t4212-log-corrupt.sh'^M"
-stuff "export OPT_TESTS='t1061-object-envelope-time.sh'^M"
+stuff "# time OPT_DEBUG= OPT_JOBS=1 OPT_JOB_NAME=gcc22 OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
+
+# Apple m1 Mac Mini
+screen -t t:gl:run:ci:10:OSX:M1
+stuff "cd ~/g/git^M"
+stuff "git version^M"
+stuff "export OPT_TESTS='t[0-9]*.sh'^M"
+stuff "# time OPT_DEBUG= OPT_JOBS=8 OPT_JOB_NAME=gcc304 OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
+
+# OpenBSD i7
+screen -t t:gl:run:ci:11:obsd:xeon
+stuff "cd ~/g/git^M"
+stuff "git version^M"
+stuff "export OPT_TESTS='t[0-9]*.sh'^M"
+stuff "# time OPT_DEBUG= OPT_JOBS=1 OPT_JOB_NAME=gcc302 OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
+
+# NetBSD i7
+screen -t t:gl:run:ci:12:nbsd:i7
+stuff "cd ~/g/git^M"
+stuff "git version^M"
+stuff "export OPT_TESTS='t[0-9]*.sh'^M"
+stuff "# time OPT_DEBUG= OPT_JOBS=1 OPT_JOB_NAME=gcc300 0OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
+
+# FreeBSD i7
+screen -t t:gl:run:ci:13:fbsd:i7
+stuff "cd ~/g/git^M"
+stuff "git version^M"
+stuff "export OPT_TESTS='t[0-9]*.sh'^M"
+stuff "# time OPT_DEBUG= OPT_JOBS=1 OPT_JOB_NAME=gcc303 OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
+
+# Alpine i7 
+screen -t t:gl:run:ci:14:alpine:i7
+stuff "cd ~/g/git^M"
+stuff "git version^M"
+stuff "export OPT_TESTS='t[0-9]*.sh'^M"
+stuff "# time OPT_DEBUG= OPT_JOBS=1 OPT_JOB_NAME=gcc301 0OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
+
+# HP/UX ia64
+screen -t t:gl:run:ci:15:HP/UX:i7
+stuff "cd ~/g/git^M"
+stuff "git version^M"
+stuff "# time OPT_DEBUG= OPT_JOBS=1 OPT_JOB_NAME=gcc999 OPT_GCC_HOSTNAME=x2-ext.procura.nl OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
+
+screen -t t:gl:run:ci:13:HP/UX:sh:0
+stuff "cd ~/g/git^M"
+stuff "git version^M"
+stuff "ssh avar@x2-ext.procura.nl^M"
+stuff "cat /perl/README^M"
+
+screen -t t:gl:run:ci:13:HP/UX:sh:1
+stuff "cd ~/g/git^M"
+stuff "git version^M"
+stuff "ssh avar@x2-ext.procura.nl^M"
+stuff "cat /perl/README^M"
 
 select 0
