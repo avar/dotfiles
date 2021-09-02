@@ -153,6 +153,7 @@
 
 	;; Log
 	log-psfd = "!f() { PAGER=\"less -p'^commit'\" git log -p --stat --full-diff $@; }; f"
+	log-psd = "!f() { PAGER=\"less -p'^commit'\" git log -p --stat $@; }; f"
 
 	;; Rebase
 	r = rebase
