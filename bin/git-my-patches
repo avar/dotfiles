@@ -2,6 +2,8 @@
 set -e
 set -x
 
+args="$@"
+
 junio_tags () {
 	git tag -l  --sort=-version:refname --format='%(refname:strip=2) %(taggeremail)' 'v*' |
 		grep gitster@pobox.com |
@@ -16,8 +18,8 @@ compare_branches () {
 		echo checking $last..$ref
 		if test "$last" != ""
 		then
-			git --no-pager shortlog --author=Junio --min-parents=2 --grep="Merge branch 'ab/" $last..$ref
-			git --no-pager shortlog --author=Ævar $last..$ref
+			git --no-pager shortlog --author=Junio --min-parents=2 --grep="Merge branch 'ab/" $last..$ref $args
+			git --no-pager shortlog --author=Ævar $last..$ref $args
 		fi
 		last=$ref
 	done
