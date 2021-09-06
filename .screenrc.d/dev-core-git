@@ -31,7 +31,7 @@ stuff "# GIT_PERF_LARGE_REPO=~/g/linux ./run p7820-grep-engines.sh^M"
 
 screen -t c:d:r bash
 stuff "cd ~/g/git^M"
-stuff "# git rebase -i --exec '~/g/git.meta/config.mak.sh && time make -j \$(nproc) TAGS all check-docs && (cd t && make GIT_PROVE_OPTS=\"--jobs=\$(nproc) --timer --state=failed,slow,save\" T=$(dedup t000[0-9]*.sh))'^M"
+stuff "# git rebase -i --exec '~/g/git.meta/config.mak.sh && time make -j \$(nproc) TAGS all check-docs && (make -C t GIT_PROVE_OPTS=\"--jobs=\$(nproc) --timer\" T=\"$(dedup t000[0-9]*.sh)\")'^M"
 
 screen -t c:d bash
 stuff "cd ~/g/git^M"
@@ -51,7 +51,7 @@ stuff "# ~/g/git.meta/config.mak.sh && time GIT_TEST_HTTPD=1 make GIT_PROVE_OPTS
 screen -t t:1 bash
 stuff "cd ~/g/git^M"
 stuff "cd t^M"
-stuff "# ~/g/git.meta/config.mak.sh && time make GIT_PROVE_OPTS=\"--jobs=\$(nproc) --timer\" T='$(dedup t[0-9]*{grep,log}*.sh)'"
+stuff "# ~/g/git.meta/config.mak.sh && time make GIT_PROVE_OPTS=\"--jobs=\$(nproc) --timer\" T='$(dedup t[0-9]*{grep,log}*.sh)'^M"
 stuff "# ~/g/git.meta/config.mak.sh && time make GIT_PROVE_OPTS=\"--jobs=\$(nproc) --timer\" T='$(dedup t[0-9]*{bundle,protocol,serve,pack,remote,receive}*.sh)'"
 
 screen -t t:2 bash
