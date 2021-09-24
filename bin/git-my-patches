@@ -25,8 +25,7 @@ compare_branches () {
 	done
 }
 
-compare_branches "" origin/master gitster/jch
-
 last_release=$(junio_tags | grep -v -- -rc | head -n 1)
 last_tag=$(junio_tags | head -n 1)
-compare_branches $last_tag origin/master origin/next origin/seen
+compare_branches $last_tag origin/master origin/next gitster/jch
+compare_branches "" gitster/jch gitster/seen
