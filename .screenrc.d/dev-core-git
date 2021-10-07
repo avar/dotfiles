@@ -31,7 +31,7 @@ stuff "# GIT_PERF_LARGE_REPO=~/g/linux ./run p7820-grep-engines.sh^M"
 
 screen -t c:d:r bash
 stuff "cd ~/g/git^M"
-stuff "# git rebase -i --exec '~/g/git.meta/config.mak.sh && time make -j \$(nproc) TAGS all check-docs && (make -C t GIT_PROVE_OPTS=\"--jobs=\$(nproc) --timer\" T=\"$(dedup t000[0-9]*.sh)\")'^M"
+stuff "# git rebase -i --exec '~/g/git.meta/config.mak.sh && time make -j \$(nproc) TAGS all check-docs && (cd t && make GIT_PROVE_OPTS=\"--jobs=\$(nproc) --timer\" T=\"$(dedup t000[0-9]*.sh)\")'^M"
 
 screen -t c:d bash
 stuff "cd ~/g/git^M"
@@ -51,8 +51,8 @@ stuff "# ~/g/git.meta/config.mak.sh && time GIT_TEST_HTTPD=1 make GIT_PROVE_OPTS
 screen -t t:1 bash
 stuff "cd ~/g/git^M"
 stuff "cd t^M"
-stuff "# ~/g/git.meta/config.mak.sh && time make GIT_PROVE_OPTS=\"--jobs=\$(nproc) --timer\" T='$(dedup t[0-9]*{grep,log}*.sh)'^M"
-stuff "# ~/g/git.meta/config.mak.sh && time make GIT_PROVE_OPTS=\"--jobs=\$(nproc) --timer\" T='$(dedup t[0-9]*{bundle,protocol,serve,pack,remote,receive}*.sh)'"
+stuff "# ~/g/git.meta/config.mak.sh && time make GIT_PROVE_OPTS=\"--jobs=\$(nproc) --timer\" T=\"$(dedup $(echo t[0-9]*{grep,log}*.sh))\"^M"
+stuff "# ~/g/git.meta/config.mak.sh && time make GIT_PROVE_OPTS=\"--jobs=\$(nproc) --timer\" T=\"$(dedup $(echo t[0-9]*{bundle,protocol,serve,pack,remote,receive}*.sh))\""
 
 screen -t t:2 bash
 stuff "cd ~/g/git^M"
@@ -88,6 +88,15 @@ stuff "cd ~/g/pcre2^M"
 stuff "git svn rebase^M"
 stuff "# test -f RunTest && git clean -dxf; ./autogen.sh; CXXFLAGS='-O3 -g' CFLAGS='-O3 -g' ./configure --prefix=\$PWD/inst --enable-jit --enable-utf && time make -j \$(nproc) install"
 stuff "# test -f RunTest && git clean -dxf; ./autogen.sh; CXXFLAGS='-O3 -g' CFLAGS='-O3 -g' ./configure --prefix=\$PWD/inst --enable-jit --enable-utf && time make -j \$(nproc) install"
+
+screen -t r:curl
+stuff "cd ~/g/curl^M"
+stuff "git fetch^M"
+stuff "# git checkout curl-7_39_0^M"
+stuff "# (git clean -dxf && autoreconf -fi && ./configure --with-openssl --prefix=/home/avar/local)^M"
+stuff "# make -j \$(nproc)^M"
+stuff "# make test^M"
+stuff "# make install^M"
 
 screen -t r:gnulib
 stuff "cd ~/g/gnulib^M"
@@ -172,7 +181,7 @@ stuff "export OPT_TESTS='t[0-9]*.sh'^M"
 stuff "# time OPT_DEBUG= OPT_JOBS=4 OPT_JOB_NAME=gcc118 OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
 
 # CentOS ppc64le:sh
-screen -t t:gl:run:ci:7:COS:ppc64le:sh
+screen -t t:gl:run:ci:7:COS:ppc64le:sh:KA
 stuff "cd ~/g/git^M"
 stuff "git version^M"
 stuff "ssh gcc135.fsffrance.org^M"
@@ -190,6 +199,12 @@ stuff "cd ~/g/git^M"
 stuff "git version^M"
 stuff "export OPT_TESTS='t[0-9]*.sh'^M"
 stuff "# time OPT_DEBUG= OPT_JOBS=24 OPT_JOB_NAME=gcc203 OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
+
+# CentOS ppc64:sh
+screen -t t:gl:run:ci:7:COS:ppc64le:sh:KA
+stuff "cd ~/g/git^M"
+stuff "git version^M"
+stuff "ssh gcc203.fsffrance.org^M"
 
 # OpenSUSE aarch64
 screen -t t:gl:run:ci:9:COS:debian:buster:mips64
