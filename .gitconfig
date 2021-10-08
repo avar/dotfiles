@@ -191,7 +191,7 @@
 	cp-branch = "!f() { git branch -c $1 $2 && git checkout $2; }; f"
 
 	;; Working on git.git & other things using "reference"
-	reference = !git --no-pager show -s --pretty=reference
+	reference = !git --no-pager log --pretty=reference -1
 	git-commit-summary = !git reference
 
 	;; Like push but harder
