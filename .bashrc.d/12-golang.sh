@@ -9,4 +9,9 @@ then
     then
         export GOMAXPROCS=$(nproc)
     fi
+
+    if test -d /usr/lib/go-1.16/bin
+    then
+	export PATH=/usr/lib/go-1.16/bin:$PATH
+    fi
 fi
