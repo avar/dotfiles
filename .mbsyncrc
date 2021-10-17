@@ -1,0 +1,29 @@
+FSync no
+BufferLimit 100M
+
+IMAPAccount PersonalGMail
+    # Generic options
+    Timeout 0
+    PipelineDepth 50
+    # User authentication
+    AuthMech LOGIN
+    Host imap.gmail.com
+    User avarab@gmail.com
+    PassCmd "stat --format=%a ~/.password/personal-gmail | grep -qx 600 && cat ~/.password/personal-gmail"
+    SSLType IMAPS
+    SSLVersions TLSv1.2
+
+IMAPStore PersonalGMail-remote
+    Account PersonalGMail
+
+MaildirStore PersonalGMail-local
+    Path ~/Maildir/personal-gmail/
+    Inbox ~/Maildir/personal-gmail/INBOX
+
+Channel PersonalGMail
+    Master :PersonalGMail-remote:
+    Slave :PersonalGMail-local:
+    Create Slave
+    Sync Pull New ReNew Flags
+    Sync Push Delete Flags
+    SyncState *
