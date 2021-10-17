@@ -23,7 +23,9 @@ MaildirStore PersonalGMail-local
 Channel PersonalGMail
     Master :PersonalGMail-remote:
     Slave :PersonalGMail-local:
+    Patterns % !Trash
     Create Slave
+    Remove Slave
     Sync Pull New ReNew Flags
     Sync Push Delete Flags
     SyncState *
