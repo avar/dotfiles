@@ -6,13 +6,13 @@ screen -t htop bash
 stuff "timeout 30m htop"
 
 screen -t system:log bash
-stuff "tail -F /var/log/{syslog,messages,auth.log,user.log,daemon.log,aptitude,kern.log,dpkg.log}^M"
+stuff "sudo tail -F /var/log/{syslog,messages,auth.log,user.log,daemon.log,aptitude,kern.log,dpkg.log}^M"
 
 screen -t m:avar:l bash
-stuff "tail -F /var/mail/avar^M"
+stuff "sudo tail -F /var/mail/avar^M"
 
 screen -t m:exim:l bash
-stuff "tail -F /var/log/exim4/mainlog^M"
+stuff "sudo tail -F /var/log/exim4/mainlog^M"
 
 #
 # If I change my app password and start getting e.g. "error in
@@ -67,7 +67,7 @@ stuff "find ~/Maildir/personal-gmail -type f -cmin -5|wc -l # created in the las
 screen -t m:oi:sync:<> bash
 stuff "sleep 10^M"
 # debug: -d imap,maildir
-stuff "while true; do time offlineimap -a PersonalGMail,GitLabGMail -c ~/.offlineimaprc ; sleep 60; done^M"
+stuff "while true; do time mbsync PersonalGMail ; sleep 60; done^M"
 
 # mu
 screen -t m:monitor bash
@@ -86,21 +86,6 @@ screen -t m:mu:gg:1 bash
 stuff "mu find 'maildir:/gitlab-gmail/*' -n 10 avar^M"
 
 # logs
-screen -t s:daemon-nm-dis:l bash
-stuff "tail -f /var/log/daemon.log | grep nm-dispatcher^M"
-
-screen -t s:squid:l bash
-stuff "sudo tail -F /var/log/squid{,3,4}/*.log^M"
-
-screen -t openvpn.log bash
-stuff "tail -f /var/log/syslog /var/log/daemon.log | grep openvpn^M"
-
-screen -t nm-dispatcher.log bash
-stuff "tail -f /var/log/syslog /var/log/daemon.log | grep nm-dispatcher^M"
-
-screen -t tcpflow:openvpn bash
-stuff "sudo tcpflow -i wlan0 -c port 1194"
-
 screen -t investigate bash
 stuff "ip route list^M"
 stuff "ip route get 10.252.13.1^M"
