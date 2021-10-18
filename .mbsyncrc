@@ -20,19 +20,23 @@ MaildirStore PersonalGMail-local
     Path ~/Maildir/personal-gmail/
     Inbox ~/Maildir/personal-gmail/INBOX
 
-Channel PersonalGMail
+## "Global" Create/Remove/Sync options, applies to Channels
+## below. TODO: is ExpireUnread supported?
+Create Slave
+Remove Slave
+Sync Pull New ReNew Flags
+Sync Push Delete Flags
+
+Group PersonalGMail
+      Channel PersonalGMail-git
+
+Channel PersonalGMail-git
+    SyncState *
     Master :PersonalGMail-remote:
     Slave :PersonalGMail-local:
-    Patterns git
 
+    Patterns git
     ## Only get the last 1000, ignoring if they're "unread"
     MaxMessages 1000
     ExpireUnread yes
-
-    Create Slave
-    Remove Slave
-    Sync Pull New ReNew Flags
-    Sync Push Delete Flags
-    SyncState *
-
 
