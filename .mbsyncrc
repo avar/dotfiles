@@ -1,10 +1,9 @@
 FSync no
-BufferLimit 100M
 
-IMAPAccount PersonalGMail
+IMAPAccount personal
     # Generic options
     Timeout 0
-    PipelineDepth 50
+    PipelineDepth 100
     # User authentication
     AuthMech LOGIN
     Host imap.gmail.com
@@ -13,10 +12,10 @@ IMAPAccount PersonalGMail
     SSLType IMAPS
     SSLVersions TLSv1.2
 
-IMAPStore PersonalGMail-remote
-    Account PersonalGMail
+IMAPStore personal-remote
+    Account personal
 
-MaildirStore PersonalGMail-local
+MaildirStore personal-local
     Path ~/Maildir/personal-gmail/
     Inbox ~/Maildir/personal-gmail/INBOX
 
@@ -27,16 +26,36 @@ Remove Slave
 Sync Pull New ReNew Flags
 Sync Push Delete Flags
 
-Group PersonalGMail
-      Channel PersonalGMail-git
+Group personal
+      Channel personal-INBOX
+      Channel personal-git
+      Channel personal-longtail
 
-Channel PersonalGMail-git
+Group personal-common
+      Channel personal-INBOX
+      Channel personal-git
+
+Channel personal-INBOX
     SyncState *
-    Master :PersonalGMail-remote:
-    Slave :PersonalGMail-local:
-
-    Patterns git
+    Master :personal-remote:
+    Slave :personal-local:
+    Patterns INBOX
     ## Only get the last 1000, ignoring if they're "unread"
-    MaxMessages 1000
+    MaxMessages 10000
     ExpireUnread yes
 
+Channel personal-git
+    SyncState *
+    Master :personal-remote:
+    Slave :personal-local:
+    Patterns git
+    ## Only get the last 1000, ignoring if they're "unread"
+    MaxMessages 10000
+    ExpireUnread yes
+
+Channel personal-rest
+    SyncState *
+    Master :personal-remote:
+    Slave :personal-local:
+    # INBOX is not matched by wildcards
+    Patterns INBOX * !git !INBOX !Trash

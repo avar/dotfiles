@@ -44,46 +44,55 @@ stuff "# sudo exim -qff # send stalled messages, even if frozen due to bounces^M
 stuff "# sudo exim -Mrm QUEUE-ID # remove a specific message^M"
 stuff "# sudo exim -M QUEUE-ID # send a specific message^M"
 # Dump info
-stuff "# sudo exiqgrep -i | xargs sudo exim -Mvh # headers^M"
-stuff "# sudo exiqgrep -i | xargs sudo exim -Mvb # body^M"
-stuff "# sudo exiqgrep -i | xargs sudo exim -Mvl # logs^M"
+stuff "# sudo exiqgrep -i | xargs -n 1 sudo exim -Mvh # headers^M"
+stuff "# sudo exiqgrep -i | xargs -n 1 sudo exim -Mvb # body^M"
+stuff "# sudo exiqgrep -i | xargs -n 1 sudo exim -Mvl # logs^M"
 # Debugging. See also avar/laptop-etc@dec4154
 stuff "# sudo exim -bt -d+all -f avarab@gmail.com to-this-address@example.com 2>&1 | grep gmail^M"
 stuff "# sudo exim -d+all -M QUEUE-ID 2>&1 | less^M # To debug something in the queue to see how it would be sent"
 
 # Personal GMail setup
-screen -t m:mu:init bash
+screen -t m:mu:init+index bash
 stuff "# rm -rf ~/.mu ~/.cache/mu^M"
 stuff "# time mu init --my-address=avarab@gmail.com --my-address=abjarmason@gitlab.com --my-address=avar@gitlab.com^M"
 stuff "# time mu index^M"
+stuff "# time mu index --lazy-check --nocleanup^M"
 
 screen -t m:mu:size bash
-stuff "du -sb ~/.cache/.mu ~/Maildir; du -sh ~/.mu ~/Maildir/*; find ~/Maildir/personal-gmail/ -type f | wc -l; df -h /^M"
+stuff "du -sh ~/.cache/mu ~/Maildir ~/Maildir/*; find ~/Maildir/personal-gmail/ -type f | wc -l; df -h /^M"
 
 screen -t m:mu:find bash
 stuff "find ~/Maildir/personal-gmail -type f -mmin -5|wc -l # modified in the last 5mins^M"
 stuff "find ~/Maildir/personal-gmail -type f -cmin -5|wc -l # created in the last 5mins^M"
 
-screen -t m:oi:sync:<> bash
+## Sync, doing it in two processes so I get some mail faster, 7 and
+## 307 are prime numbers, so hopefully it splayes things out some
+## dude's load graph...
+screen -t m:sync:common bash
 stuff "sleep 10^M"
-# debug: -d imap,maildir
-stuff "while true; do time mbsync PersonalGMail ; sleep 60; done^M"
+# debug: -Dm; --debug --verbose
+stuff "while timeout 1m mbsync personal-common; do date && sleep 7; done^M"
+
+screen -t m:sync:all bash
+stuff "sleep 10^M"
+# debug: -Dm; --debug --verbose
+stuff "while timeout 10m mbsync personal-rest; do date && sleep 307; done^M"
 
 # mu
 screen -t m:monitor bash
 stuff "# while sleep 1; do time sudo perl ~/g/dotemacs/scripts/mu-monitor.pl; done^M"
 
 screen -t m:mu:pg:0 bash
-stuff "mu find 'maildir:/personal-gmail/*' -n 10 avar^M"
+stuff "mu find 'maildir:/personal-gmail/*' -n 10 from:avarab@gmail.com^M"
 
 screen -t m:mu:pg:1 bash
-stuff "mu find 'maildir:/personal-gmail/*' -n 10 avar^M"
+stuff "mu find 'maildir:/personal-gmail/*' -n 10 from:avarab@gmail.com^M"
 
 screen -t m:mu:gg:0 bash
-stuff "mu find 'maildir:/gitlab-gmail/*' -n 10 avar^M"
+stuff "mu find 'maildir:/gitlab-gmail/*' -n 10 from:avarab@gmail.com^M"
 
 screen -t m:mu:gg:1 bash
-stuff "mu find 'maildir:/gitlab-gmail/*' -n 10 avar^M"
+stuff "mu find 'maildir:/gitlab-gmail/*' -n 10 from:avarab@gmail.com^M"
 
 # logs
 screen -t investigate bash
