@@ -23,9 +23,16 @@ MaildirStore PersonalGMail-local
 Channel PersonalGMail
     Master :PersonalGMail-remote:
     Slave :PersonalGMail-local:
-    Patterns % !Trash
+    Patterns git
+
+    ## Only get the last 1000, ignoring if they're "unread"
+    MaxMessages 1000
+    ExpireUnread yes
+
     Create Slave
     Remove Slave
     Sync Pull New ReNew Flags
     Sync Push Delete Flags
     SyncState *
+
+
