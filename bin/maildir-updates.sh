@@ -47,7 +47,7 @@ do
 	if git -P diff --exit-code --no-index $tmpd/[ab]
 	then
 		# no changes
-		if test $sleep -le $max_sleep
+		if test $sleep -lt $max_sleep
 		then
 			sleep=$(($sleep + $sleep_step))
 		fi
