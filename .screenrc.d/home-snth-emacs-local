@@ -76,7 +76,7 @@ stuff "while true; do date && mbsync personal-common && sleep 7; done^M"
 screen -t m:sync:all bash
 stuff "sleep 10^M"
 # debug: -Dm; --debug --verbose
-stuff "while true; do date && timeout 10m mbsync personal-rest && sleep 307; done^M"
+stuff "while true; do date && timeout 6h mbsync personal-rest && sleep 307; done^M"
 
 # mu
 screen -t m:monitor bash

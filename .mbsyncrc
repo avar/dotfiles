@@ -70,8 +70,8 @@ Channel personal-git
     Slave :personal-local:
     Patterns git
     ## Only get the last N, ignoring if they're "unread"
-    #MaxMessages 5000
-    #ExpireUnread no
+    MaxMessages 1000
+    ExpireUnread yes
 
 # For debugging: The "[Gmail]/"-prefixed special folders, sycned with
 # "personal-GMail". To see them all run:
