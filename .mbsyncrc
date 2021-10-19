@@ -18,44 +18,140 @@ IMAPStore personal-remote
 MaildirStore personal-local
     Path ~/Maildir/personal-gmail/
     Inbox ~/Maildir/personal-gmail/INBOX
+    SubFolders Verbatim
 
 ## "Global" Create/Remove/Sync options, applies to Channels
 ## below. TODO: is ExpireUnread supported?
 Create Slave
 Remove Slave
 Sync Pull New ReNew Flags
-Sync Push Delete Flags
+Sync Push Flags #Delete
 
-Group personal
-      Channel personal-INBOX
-      Channel personal-git
-      Channel personal-longtail
-
+## Groups, unfortunately no groups-within-groups, so I have to
+## copy/paste between "personal" and "personal-common"
 Group personal-common
       Channel personal-INBOX
       Channel personal-git
+      Channel personal-Gmail-Sent-Mail
 
+Group personal
+      ## BEGIN copy/paste of "personal-common" above
+      Channel personal-INBOX
+      Channel personal-git
+      Channel personal-Gmail-Sent-Mail
+      Channel personal-Gmail-Drafts
+      ## END copy/paste of "personal-common" above
+      Channel personal-rest
+
+## The rest of the GMail special folders
+Group personal-Gmail-rest
+      Channel personal-Gmail-Chats
+      Channel personal-Gmail-Important
+      Channel personal-Gmail-Spam
+      Channel personal-Gmail-Starred
+
+###
+### "Common" things I'd like to sync with more rapidity
+###
 Channel personal-INBOX
     SyncState *
     Master :personal-remote:
     Slave :personal-local:
+    # mbsync(1): "[...]if mailbox is omitted, INBOX is assumed.", but
+    # be explicit
     Patterns INBOX
-    ## Only get the last 1000, ignoring if they're "unread"
+    ## Only get the last N, ignoring if they're "unread"
     MaxMessages 10000
-    ExpireUnread yes
+    ExpireUnread no
 
 Channel personal-git
     SyncState *
     Master :personal-remote:
     Slave :personal-local:
     Patterns git
-    ## Only get the last 1000, ignoring if they're "unread"
-    MaxMessages 10000
+    ## Only get the last N, ignoring if they're "unread"
+    MaxMessages 5000
+    ExpireUnread no
+
+# For debugging: The "[Gmail]/"-prefixed special folders, sycned with
+# "personal-GMail". To see them all run:
+#
+# mbsync --list personal-Gmail-list
+Channel personal-Gmail-list
+    Master :personal-remote:
+    Slave :personal-local:
+    Patterns "[Gmail]"/*
+
+# "[Gmail]": Map "[Gmail]/Sent Mail" to "sent". I don't know why
+# there's also a top-level "Sent".
+Channel personal-Gmail-Sent-Mail
+    SyncState *
+    Master :personal-remote:"[Gmail]/Sent Mail"
+    Slave :personal-local:sent
+    Patterns %
+    ## Only get the last N, ignoring if they're "unread"
+    MaxMessages 1000
     ExpireUnread yes
 
+# "[Gmail]": Map "[Gmail]/Drafts" to "drafts"
+Channel personal-Gmail-Drafts
+    SyncState *
+    Master :personal-remote:"[Gmail]/Drafts"
+    Slave :personal-local:drafts
+    Patterns %
+
+# "[Gmail]": Map "[Gmail]/Chats" to "chats"
+Channel personal-Gmail-Chats
+    SyncState *
+    Master :personal-remote:"[Gmail]/Chats"
+    Slave :personal-local:chats
+    Patterns %
+
+# "[Gmail]": Map "[Gmail]/Important" to "important"
+Channel personal-Gmail-Important
+    SyncState *
+    Master :personal-remote:"[Gmail]/Important"
+    Slave :personal-local:important
+    Patterns %
+
+# "[Gmail]": Map "[Gmail]/Spam" to "spam"
+Channel personal-Gmail-Spam
+    SyncState *
+    Master :personal-remote:"[Gmail]/Spam"
+    Slave :personal-local:spam
+    Patterns %
+
+# "[Gmail]": Map "[Gmail]/Starred" to "starred"
+Channel personal-Gmail-Starred
+    SyncState *
+    Master :personal-remote:"[Gmail]/Starred"
+    Slave :personal-local:starred
+    Patterns %
+
+
+##
+## Sync the long-tail of "labels". Excluding "INBOX" and "[Gmail]/*"
+## special folders.
+##
 Channel personal-rest
     SyncState *
     Master :personal-remote:
     Slave :personal-local:
-    # INBOX is not matched by wildcards
-    Patterns INBOX * !git !INBOX !Trash
+    # INBOX is not matched by wildcards. List the rest from
+    # https://mail.google.com/mail/u/0/#settings/labels and as shown with:
+    #
+    #     $ mbsync --list personal-rest|grep -i -e inbox -e starred -e snoozed -e important -e chats -e sent -e scheduled -e drafts -e "all mail" -e spam -e trash
+    #     INBOX
+    #     Drafts
+    #     Sent
+    #     Sent Mail
+    #     Trash
+    #
+    # For some reason the rest are not shown (I've configured them to
+    # show up in IMAP), nor is e.g. "snoozed" in
+    # "personal-Gmail-list", but "Chats", "All Mail", "Important",
+    # "Spam", "Starred" are (in addition to the above).
+    #
+    # Let's just blacklist all these "special" folders, so I'm
+    # guaranteed to rely on the mapping above.
+    Patterns % !INBOX !Starred !Snoozed !Important !Chats !Sent !"Sent Mail" !Scheduled !Drafts !"All Mail" !Spam !Trash

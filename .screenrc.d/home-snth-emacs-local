@@ -71,12 +71,12 @@ stuff "find ~/Maildir/personal-gmail -type f -cmin -5|wc -l # created in the las
 screen -t m:sync:common bash
 stuff "sleep 10^M"
 # debug: -Dm; --debug --verbose
-stuff "while timeout 1m mbsync personal-common; do date && sleep 7; done^M"
+stuff "while true; do date && mbsync personal-common && sleep 7; done^M"
 
 screen -t m:sync:all bash
 stuff "sleep 10^M"
 # debug: -Dm; --debug --verbose
-stuff "while timeout 10m mbsync personal-rest; do date && sleep 307; done^M"
+stuff "while true; do date && timeout 10m mbsync personal-rest && sleep 307; done^M"
 
 # mu
 screen -t m:monitor bash
