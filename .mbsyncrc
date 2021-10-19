@@ -3,7 +3,7 @@ FSync no
 IMAPAccount personal
     # Generic options
     Timeout 0
-    PipelineDepth 100
+    PipelineDepth 25
     # User authentication
     AuthMech LOGIN
     Host imap.gmail.com
@@ -23,9 +23,9 @@ MaildirStore personal-local
 ## "Global" Create/Remove/Sync options, applies to Channels
 ## below. TODO: is ExpireUnread supported?
 Create Slave
-Remove Slave
+Remove None
 Sync Pull New ReNew Flags
-Sync Push Flags #Delete
+Sync Push Flags Delete
 
 ## Groups, unfortunately no groups-within-groups, so I have to
 ## copy/paste between "personal" and "personal-common"
@@ -61,8 +61,8 @@ Channel personal-INBOX
     # be explicit
     Patterns INBOX
     ## Only get the last N, ignoring if they're "unread"
-    MaxMessages 10000
-    ExpireUnread no
+    #MaxMessages 10000
+    #ExpireUnread no
 
 Channel personal-git
     SyncState *
@@ -70,8 +70,8 @@ Channel personal-git
     Slave :personal-local:
     Patterns git
     ## Only get the last N, ignoring if they're "unread"
-    MaxMessages 5000
-    ExpireUnread no
+    #MaxMessages 5000
+    #ExpireUnread no
 
 # For debugging: The "[Gmail]/"-prefixed special folders, sycned with
 # "personal-GMail". To see them all run:
@@ -90,8 +90,8 @@ Channel personal-Gmail-Sent-Mail
     Slave :personal-local:sent
     Patterns %
     ## Only get the last N, ignoring if they're "unread"
-    MaxMessages 1000
-    ExpireUnread yes
+    #MaxMessages 1000
+    #ExpireUnread yes
 
 # "[Gmail]": Map "[Gmail]/Drafts" to "drafts"
 Channel personal-Gmail-Drafts
