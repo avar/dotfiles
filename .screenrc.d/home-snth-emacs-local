@@ -58,8 +58,8 @@ stuff "# time mu init --my-address=avarab@gmail.com --my-address=abjarmason@gitl
 stuff "# time mu index^M"
 stuff "# time mu index --lazy-check --nocleanup^M"
 
-screen -t m:mu:size bash
-stuff "du -sh ~/.cache/mu ~/Maildir ~/Maildir/*; find ~/Maildir/personal-gmail/ -type f | wc -l; df -h /^M"
+screen -t m:md:updates bash
+stuff "maildir-updates.sh^M"
 
 screen -t m:mu:find bash
 stuff "find ~/Maildir/personal-gmail -type f -mmin -5|wc -l # modified in the last 5mins^M"

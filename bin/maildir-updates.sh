@@ -19,21 +19,45 @@ trap 'cleanup' EXIT
 trap 'cleanup' INT
 
 tree_opts="-sfhi --du"
-sleep=${SLEEP:-30}
+
+sleep=${SLEEP:-60}
+sleep_step=$(($sleep / 2))
+min_sleep=$sleep_step
+max_sleep=$(($sleep * 10))
+
 tmpd=$(mktemp -d $XDG_RUNTIME_DIR/$(basename $0)-XXXXX)
 
 cd ~/Maildir
 while true
 do
-	tree $tree_opts * | pv -l -N "*/a" >$tmpd/a
-	for i in $(seq 1 $sleep)
-	do
-		echo update
-		sleep 1
-	done | pv -l -N "waiting" -s "$sleep" >/dev/null
-	tree $tree_opts * | pv -l -N "*/b" >$tmpd/b
+	updates=$(($sleep + 2))
+	{
+		tree $tree_opts * >$tmpd/a
+		echo update $tmpd/a
 
-	git -P diff --no-index $tmpd/[ab]
+		for i in $(seq 1 $sleep)
+		do
+			echo update $i
+			sleep 1
+		done
+		tree $tree_opts * >$tmpd/b
+		echo update $tmpd/b
+	}  | pv -l -N "waiting with sleep of ${sleep}s, oscillating from ${min_sleep}s..${max_sleep}s" -s "$updates" >/dev/null
+
+	if git -P diff --exit-code --no-index $tmpd/[ab]
+	then
+		# no changes
+		if test $sleep -le $max_sleep
+		then
+			sleep=$(($sleep + $sleep_step))
+		fi
+	else
+		# changes
+		if test $sleep -gt $min_sleep
+		then
+			sleep=$(($sleep - $sleep_step))
+		fi
+	fi
 done
 
 cleanup
