@@ -21,7 +21,7 @@ MaildirStore personal-local
     SubFolders Verbatim
 
 ## "Global" Create/Remove/Sync options, applies to Channels
-## below. TODO: is ExpireUnread supported?
+## below. TODO: is ExpireUnread supported in this global context?
 Create Slave
 Remove None
 Sync Pull New ReNew Flags
