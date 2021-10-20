@@ -3,7 +3,7 @@ FSync no
 IMAPAccount personal
     # Generic options
     Timeout 0
-    PipelineDepth 25
+    PipelineDepth 50
     # User authentication
     AuthMech LOGIN
     Host imap.gmail.com
