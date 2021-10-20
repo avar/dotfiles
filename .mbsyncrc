@@ -154,4 +154,4 @@ Channel personal-rest
     #
     # Let's just blacklist all these "special" folders, so I'm
     # guaranteed to rely on the mapping above.
-    Patterns % !INBOX !Starred !Snoozed !Important !Chats !Sent !"Sent Mail" !Scheduled !Drafts !"All Mail" !Spam !Trash
+    Patterns % !INBOX !"git"* !drafts !sent !trash !Starred !Snoozed !Important !Chats !"Sent Mail"
