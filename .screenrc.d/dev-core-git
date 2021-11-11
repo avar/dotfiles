@@ -232,7 +232,7 @@ screen -t t:gl:run:ci:12:nbsd:i7
 stuff "cd ~/g/git^M"
 stuff "git version^M"
 stuff "export OPT_TESTS='t[0-9]*.sh'^M"
-stuff "# time OPT_DEBUG= OPT_JOBS=1 OPT_JOB_NAME=gcc300 0OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
+stuff "# time OPT_DEBUG= OPT_JOBS=1 OPT_JOB_NAME=gcc300 OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
 
 # FreeBSD i7
 screen -t t:gl:run:ci:13:fbsd:i7
@@ -246,7 +246,7 @@ screen -t t:gl:run:ci:14:alpine:i7
 stuff "cd ~/g/git^M"
 stuff "git version^M"
 stuff "export OPT_TESTS='t[0-9]*.sh'^M"
-stuff "# time OPT_DEBUG= OPT_JOBS=1 OPT_JOB_NAME=gcc301 0OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
+stuff "# time OPT_DEBUG= OPT_JOBS=1 OPT_JOB_NAME=gcc301 OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
 
 # HP/UX ia64
 screen -t t:gl:run:ci:15:HP/UX:i7
