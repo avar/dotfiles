@@ -167,6 +167,9 @@
 	rs = rebase --skip
 	ra = rebase --abort
 
+	rix = ri --exec
+	rixr = rix 'git reference'
+
 	;; Diff
 	di     = diff -M -p --stat
 	diw    = !git di -w
