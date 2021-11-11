@@ -160,6 +160,32 @@
 	log-psfd = "!f() { PAGER=\"less -p'^commit'\" git log -p --stat --full-diff $@; }; f"
 	log-psd = "!f() { PAGER=\"less -p'^commit'\" git log -p --stat $@; }; f"
 
+	;; worktree: setup in-memory worktree, usually for perf testing
+	wt-path = "!f() { echo $XDG_RUNTIME_DIR/git-perf-$1; }; f"
+	wt-add-rev = "!f() { git worktree add $(git wt-path $1) $1 2>/dev/null || :; ~/g/git.meta/config.mak.sh -C $(git wt-path $1); }; f"
+	;;; Need to reset --hard to the <rev> in *my* repo, not theirs
+	wt-reset-rev = "!f() { rev=$(git rev-parse $1); path=$(git wt-path $1); git -C \"$path\" checkout $rev; echo -n \"$path: \"; git -C \"$path\" reference HEAD;}; f"
+	;;;; test: git wt-make HEAD all test V='"foo bar"'
+	wt-make = "!f() { r=$1; shift; echo make -j $(nproc) --no-print-directory -C $(git wt-path $r) \"$@\" ; }; f"
+
+	;; perf testing with hyperfine
+	;;;; usage: git hf-cmp-prev 'TAGS' 'TAGS' --show-output
+	;;;; debug: prefix with: printf \"arg: %s\\n\"
+	hf-cmp-prev = "!f() { \
+		a=$1; \
+		b=$2; \
+		shift 2; \
+		/home/avar/g/hyperfine/target/debug/hyperfine -r 1 -L r HEAD~,HEAD \
+		-b \"git wt-add-rev {r} && \
+		     git wt-reset-rev {r} && \
+		     git wt-make {r} $a \
+		\" \
+		\"git wt-make {r} $b\" \"$@\"; \
+	}; f"
+	hf-cmp-prev-all-all-warmup = !git hf-cmp-prev TAGS TAGS --warmup=1
+
+	hf-args = "!f() { perl -wE \"say q[one: ], \\$_ for @ARGV\" $1; }; f"
+
 	;; Rebase
 	r = rebase
 	ri = rebase -i

@@ -57,6 +57,7 @@ maybe_add_path /usr/local/git/bin
 
 # Custom binaries
 maybe_add_path $HOME/local/bin
+maybe_add_path $HOME/g/hyperfine/target/debug
 
 # perlbrew
 test -f ~/perl5/perlbrew/etc/bashrc && source ~/perl5/perlbrew/etc/bashrc
