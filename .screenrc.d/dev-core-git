@@ -59,10 +59,9 @@ stuff "cd ~/g/git^M"
 stuff "cd t^M"
 stuff "# ./t7810-grep.sh -v -i"
 
-screen -t se:r bash
-stuff "cd ~/g/git-patches^M"
-stuff "git fetch^M"
-stuff "git status^M"
+screen -t a:runner bash
+stuff "cd ~/g/actions-runner^M"
+stuff "./run.sh^M"
 
 screen -t se:new bash
 stuff "cd ~/g/git^M"
