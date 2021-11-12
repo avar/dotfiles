@@ -1,3 +1,26 @@
+# On a new debian
+
+I'll now get in /var/log/daemon.log:
+
+    Nov 10 19:15:22 gmgdl bluetoothd[5181]:
+    src/service.c:btd_service_connect() a2dp-sink profile connect
+    failed for 28:52:E0:E7:BE:F7: Protocol not available
+
+Apparently Debian/Wayland configured it instead of PulseAudio:
+https://wiki.debian.org/PipeWire
+
+Need to enable it now? Some combination of:
+
+    systemctl --user enable pulseaudio.service
+    systemctl --user disable pipewire.service
+    systemctl --user stop pipewire.service
+    systemctl --user start pulseaudio.service
+
+See:
+
+* https://wiki.archlinux.org/title/systemd/User#Automatic_start-up_of_systemd_user_instances
+* https://wiki.debian.org/PulseAudio
+
 # Things to set up on a new GNOME:
 
 ## Disable Alerts
