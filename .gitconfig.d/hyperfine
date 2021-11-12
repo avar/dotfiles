@@ -1,56 +1,10 @@
-;;;; git integration for hyperfine(1):
-;;;; https://github.com/sharkdp/hyperfine
-;;;;;
-;;;; Currently requires patches of mine to the command:
-;;;; https://github.com/sharkdp/hyperfine/pull/447 &
-;;;; https://github.com/sharkdp/hyperfine/pull/448
-
-;;; Worktree management for hyperfine
-;;;
-;;; To test a given git revision I setup a worktree for the current git
-;;; directory in "$XDG_RUNTIME_DIR/git-perf-{r}", which will be e.g.:
-;;;
-;;;     /run/user/1001/git-perf-HEAD~0
-;;;     /run/user/1001/git-perf-HEAD~1
-;;;
-;;; Note that it's not /run/user/1001/git-perf-<OID>. It could be, but
-;;; this way I can re-use recent results without worrying too much
-;;; about cleaning up my working directories.
-
+;; Config and aliases for git-hyperfine(1). See
+;; https://gitlab.com/avar/git-hyperfine/ and
+;; https://github.com/avar/git-hyperfine/
 [hyperfine]
 run-dir = $XDG_RUNTIME_DIR/git-perf
 
 [alias]
-
-;; hf-cmp: The real workhorse here and hyperfine(1) command
-;; runner. Takes:
-;;
-;;    $1 = build command, can be a string like "make && other-cmd"
-;;    $2 = test command, can likewise be chained
-;;    $@ = Any other arguments to hyperfine(1)
-;;
-;; Synopsis:
-;;    git hf-cmp ":" 'sleep 0.$(echo {r} | sed s/HEAD~//)' -L r $(echo HEAD~{0..8} | tr ' ' ',') --show-output
-;;    git hf-cmp 'make' 'make test' -L r HEAD~0,HEAD~1 -r 1 --show-output
-;;
-;; Debug or inspect what this would run by prefixing "hyperfine" with:
-;;
-;;     printf \"arg: %s\\n\"
-hf-cmp = "!f() { \
-	a=$1; \
-	b=$2; \
-	shift 2; \
-	hyperfine \
-	-b \"git wt-add-rev {r} && \
-	     git wt-reset-rev {r} && \
-	     cd \\\"$(git wt-path {r})\\\" && \
-	     $a \
-	\" \
-	--command-name=\"$(tput setaf 6)$b$(tput sgr0)' in '$(tput setaf 6){r}$(tput sgr0)\"  \
-	\"(cd \\\"\\$(git wt-path {r})\\\" && $b)\" \
-	\"$@\"; \
-}; f"
-
 ;; git hf-rev HEAD~0,HEAD~1 -r 1 'pwd; git rev-parse HEAD' --show-output
 hf-rev = hyperfine -L rev
 ;; git hf-cmp-prev -r 1 'pwd; git rev-parse HEAD' --show-output
