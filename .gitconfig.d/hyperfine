@@ -92,7 +92,7 @@ hf-cmp = "!f() { \
 	     cd \\\"$(git wt-path {r})\\\" && \
 	     $a \
 	\" \
-	--command-name=\"$(tput setaf 6)$b$(tput sgr0)' in '$(tput setaf 6)git reference {r}$(tput sgr0)\"  \
+	--command-name=\"$(tput setaf 6)$b$(tput sgr0)' in '$(tput setaf 6){r}$(tput sgr0)\"  \
 	\"(cd \\\"\\$(git wt-path {r})\\\" && $b)\" \
 	\"$@\"; \
 }; f"
