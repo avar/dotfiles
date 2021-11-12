@@ -291,10 +291,20 @@ then
 	exit 1
 fi
 
-test -n "$dry_run" && "Would have invoked hyperfine(1) as (each argv element on its on line):"
-${dry_run:+printf "\targ: %s\n"} \
-hyperfine \
-	$hyperfine_opt \
+test -n "$dry_run" && printf "Would have invoke hyperfine(1) as:\n\n" >&2
+${dry_run:+perl -wle 'print "hyperfine \\"; print "\t", "$_" for map {
+	if (s/^\t\t \t\t//g) {
+		s/"/\\"/g;
+		s/\n/ \\\n/mg;
+		s/$/"/; s/^/" \\\n/;
+		s/^(?!")/\t\t/gm;
+	}
+	s/^\t+/\t/s;
+
+	s/$/ \\/;
+	$_
+} @ARGV[1..$#ARGV]' -- } \
+hyperfine $hyperfine_opt \
 	--build "\
 		${ghf_trace:+set -x;} \
 		$(git hyperfine \
