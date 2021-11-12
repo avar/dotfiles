@@ -178,6 +178,7 @@ git_dir=$(git rev-parse --absolute-git-dir)
 ## --help output specific to git-hyperfine
 if test -n "$help"
 then
+	git hyperfine --help | asciidoctor --trace -b manpage - | man -l -
 	cat <<-\EOF
 git-hyperfine(1)
 ================
