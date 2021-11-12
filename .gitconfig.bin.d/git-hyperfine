@@ -199,23 +199,17 @@ hyperfine \
 	" \
 	${prepare:+ --prepare "\
 		${ghf_trace:+set -x;} \
-		( \
-			cd \"$run_dir/{rev}\" &&
-			$prepare \
-		) \
+		cd \"$run_dir/{rev}\" &&
+		$prepare \
 	"} \
 	${cleanup:+ --cleanup "\
 		${ghf_trace:+set -x;} \
-		( \
-			cd \"$run_dir/{rev}\" &&
-			$cleanup \
-		) \
+		cd \"$run_dir/{rev}\" &&
+		$cleanup \
 	"} \
 	${command:+--command-name="$(tput setaf 6)$command$(tput sgr0)' in '$(tput setaf 6){rev}$(tput sgr0)"  \
 	"\
 		${ghf_trace:+set -x;} \
-		( \
-			cd \"$run_dir/{rev}\" &&
-			$command \
-		) \
+		cd \"$run_dir/{rev}\" &&
+		$command \
 	"}
