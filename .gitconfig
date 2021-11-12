@@ -161,28 +161,76 @@
 	log-psd = "!f() { PAGER=\"less -p'^commit'\" git log -p --stat $@; }; f"
 
 	;; worktree: setup in-memory worktree, usually for perf testing
-	wt-path = "!f() { echo $XDG_RUNTIME_DIR/git-perf-$1; }; f"
-	wt-add-rev = "!f() { git worktree add $(git wt-path $1) $1 2>/dev/null || :; ~/g/git.meta/config.mak.sh -C $(git wt-path $1); }; f"
+	wt-path = "!f() { \
+		echo $XDG_RUNTIME_DIR/git-perf-$1; \
+	}; f"
+	wt-add-rev = "!f() { \
+		unset GIT_DIR; \
+		export GIT_DIR; \
+		git worktree add \"$(git wt-path $1)\" \"$1\" 2>/dev/null || :&& \
+		~/g/git.meta/config.mak.sh -C \"$(git wt-path $1)\"; \
+	}; f"
 	;;; Need to reset --hard to the <rev> in *my* repo, not theirs
-	wt-reset-rev = "!f() { rev=$(git rev-parse $1); path=$(git wt-path $1); git -C \"$path\" checkout $rev; echo -n \"$path: \"; git -C \"$path\" reference HEAD;}; f"
+	wt-reset-rev = "!f() { \
+		unset GIT_DIR; \
+		export GIT_DIR; \
+		ref=\"$1\" && \
+		shift; \
+		rev=\"$(git rev-parse \"$ref\")\" && \
+		path=\"$(git wt-path \"$ref\")\" && \
+		echo \"checking out <$rev> in <$path> with <$GIT_DIR>\" && \
+		git worktree list | grep perf && \
+		git -C \"$path\" reset --hard \"$rev\" && \
+		git worktree list | grep perf && \
+		echo -n \"$path: \" && \
+		git -C \"$path\" reference; \
+	}; f"
+	wt-assert-rev = "!f() { \
+		unset GIT_DIR; \
+		export GIT_DIR; \
+		ref=\"$1\" && \
+		shift; \
+		path=\"$(git wt-path \"$ref\")\" && \
+		expect=\"$(git rev-parse \"$ref\")\" && \
+		actual=\"$(git -C \"$path\" rev-parse HEAD)\" && \
+		if test \"$expect\" != \"$actual\"; \
+		then \
+			echo \"expected $actual in $path to be $expect\"; \
+			exit 1; \
+		fi; \
+	}; f"
 	;;;; test: git wt-make HEAD all test V='"foo bar"'
-	wt-make = "!f() { r=$1; shift; echo make -j $(nproc) --no-print-directory -C $(git wt-path $r) \"$@\" ; }; f"
+	wt-make = "!f() { \
+		unset GIT_DIR; \
+		export GIT_DIR; \
+		ref=\"$1\" && \
+		path=\"$(git wt-path \"$ref\")\" && \
+		rev=\"$(git -C \"$path\" rev-parse HEAD)\" && \
+		our_rev=\"$(git rev-parse \"$ref\")\" && \
+		shift && \
+		make -j \"$(nproc)\" -C \"$path\" \"$@\" && \
+		test \"$rev\" = \"$our_rev\"; \
+	 }; f"
 
 	;; perf testing with hyperfine
 	;;;; usage: git hf-cmp-prev 'TAGS' 'TAGS' --show-output
 	;;;; debug: prefix with: printf \"arg: %s\\n\"
 	hf-cmp-prev = "!f() { \
+		unset GIT_DIR; \
+		export GIT_DIR; \
 		a=$1; \
 		b=$2; \
 		shift 2; \
-		/home/avar/g/hyperfine/target/debug/hyperfine -r 1 -L r HEAD~,HEAD \
+		hyperfine -L r HEAD~,HEAD \
 		-b \"git wt-add-rev {r} && \
 		     git wt-reset-rev {r} && \
-		     git wt-make {r} $a \
+		     git wt-assert-rev {r} && \
+		     $a \
 		\" \
-		\"git wt-make {r} $b\" \"$@\"; \
+		\"$b\" \
+		\"$@\"; \
 	}; f"
-	hf-cmp-prev-all-all-warmup = !git hf-cmp-prev TAGS TAGS --warmup=1
+	hf-cmp-prev-all-all-warmup = !git hf-cmp-prev all all --warmup=1
 
 	hf-args = "!f() { perl -wE \"say q[one: ], \\$_ for @ARGV\" $1; }; f"
 
