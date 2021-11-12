@@ -1,0 +1,23 @@
+#!/usr/bin/env perl
+use feature qw(say);
+use v5.18.2;
+use strict;
+use warnings;
+
+my %seen;
+
+# $ dedup foo bar foo
+# foo bar
+if (-t STDIN) {
+	my @word = grep { !$seen{$_}++} @ARGV;
+	say "@word";
+	exit;
+}
+
+# $ echo foo bar foo | dedup
+# foo bar
+while (my $line = <STDIN>) {
+	chomp $line;
+	my @word = grep { !$seen{$_}++} split /\s+/, $line;
+	say "@word";
+}
