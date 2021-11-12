@@ -22,7 +22,7 @@ wt-path = "!f() { \
 }; f"
 ;; wt-add-rev: setup a new worktree
 wt-add-rev = "!f() { \
-	git worktree add \"$(git wt-path $1)\" \"$1\" 2>/dev/null || :&& \
+	git worktree add \"$(git wt-path $1)\" \"$1\" >/dev/null 2>&1 || :&& \
 	~/g/git.meta/config.mak.sh -C \"$(git wt-path $1)\"; \
 }; f"
 ;; wt-reset-rev: set a worktree to a <rev> {r} in *my* repo, not theirs
@@ -31,7 +31,7 @@ wt-reset-rev = "!f() { \
 	shift; \
 	rev=\"$(git rev-parse \"$ref\")\" && \
 	path=\"$(git wt-path \"$ref\")\" && \
-	echo \"$(tput bold; tput setaf 1)checking out <$rev> in <$path>$(tput sgr0)\" && \
+	echo \"$(tput bold; tput setaf 3)$path: checking out:$(tput sgr0) $(git -c color.ui=always reference $rev)\" && \
 	git -C \"$path\" reset --hard \"$rev\"; \
 }; f"
 ;;;; test: git wt-make HEAD all test V='"foo bar"'
@@ -51,7 +51,8 @@ wt-make = "!f() { \
 ;;    $@ = Any other arguments to hyperfine(1)
 ;;
 ;; Synopsis:
-;;    git hf-cmp 'make' 'make test' -L r HEAD,HEAD~ -r 1 --show-output
+;;    git hf-cmp ":" 'sleep 0.$(echo {r} | sed s/HEAD~//)' -L r $(echo HEAD~{0..8} | tr ' ' ',') --show-output
+;;    git hf-cmp 'make' 'make test' -L r HEAD~0,HEAD~1 -r 1 --show-output
 ;;
 ;; Debug or inspect what this would run by prefixing "hyperfine" with:
 ;;
@@ -71,14 +72,14 @@ hf-cmp = "!f() { \
 	\"$@\"; \
 }; f"
 
-;; hf-cmp-prev: alias for "hf-cmp" where -L r HEAD,HEAD~ is provided
+;; hf-cmp-prev: alias for "hf-cmp" where -L r HEAD~0,HEAD~1 is provided
 ;; for you
 hf-cmp-prev = "!f() { \
 	a=$1; \
 	b=$2; \
 	shift 2; \
 	git hf-cmp \"$a\" \"$b\" \
-	-L r HEAD~,HEAD \
+	-L r HEAD~0,HEAD~1 \
 	\"$@\"; \
 }; f"
 
@@ -86,8 +87,8 @@ hf-cmp-prev = "!f() { \
 ;; testing the dry-run behavior of the Makefile
 hf-cmp-prev-make-all-all-warmup = "!f() { \
 	git hf-cmp-prev \
-	\"git wt-make {r} all\" \
-	\"git wt-make {r} all\" \
+	\"make -j \\$(nproc) all\" \
+	\"make -j \\$(nproc) all\" \
 	--warmup=1; \
 }; f"
 
