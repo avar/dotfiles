@@ -22,15 +22,11 @@ wt-path = "!f() { \
 }; f"
 ;; wt-add-rev: setup a new worktree
 wt-add-rev = "!f() { \
-	unset GIT_DIR; \
-	export GIT_DIR; \
 	git worktree add \"$(git wt-path $1)\" \"$1\" 2>/dev/null || :&& \
 	~/g/git.meta/config.mak.sh -C \"$(git wt-path $1)\"; \
 }; f"
 ;; wt-reset-rev: set a worktree to a <rev> {r} in *my* repo, not theirs
 wt-reset-rev = "!f() { \
-	unset GIT_DIR; \
-	export GIT_DIR; \
 	ref=\"$1\" && \
 	shift; \
 	rev=\"$(git rev-parse \"$ref\")\" && \
@@ -38,27 +34,8 @@ wt-reset-rev = "!f() { \
 	echo \"$(tput bold; tput setaf 1)checking out <$rev> in <$path>$(tput sgr0)\" && \
 	git -C \"$path\" reset --hard \"$rev\"; \
 }; f"
-;; wt-assert-rev: sanity check that I'm on the {r} I'd like. I once
-;; had a heisenbug that came down to a stupid issue with a missing
-;; "cd" below...
-wt-assert-rev = "!f() { \
-	unset GIT_DIR; \
-	export GIT_DIR; \
-	ref=\"$1\" && \
-	shift; \
-	path=\"$(git wt-path \"$ref\")\" && \
-	expect=\"$(git rev-parse \"$ref\")\" && \
-	actual=\"$(git -C \"$path\" rev-parse HEAD)\" && \
-	if test \"$expect\" != \"$actual\"; \
-	then \
-		echo \"$(tput bold; tput setaf 1)expected $actual in $path to be $expect$(tput sgr0)\"; \
-		exit 1; \
-	fi; \
-}; f"
 ;;;; test: git wt-make HEAD all test V='"foo bar"'
 wt-make = "!f() { \
-	unset GIT_DIR; \
-	export GIT_DIR; \
 	ref=\"$1\" && \
 	path=\"$(git wt-path \"$ref\")\" && \
 	rev=\"$(git -C \"$path\" rev-parse HEAD)\" && \
@@ -80,15 +57,12 @@ wt-make = "!f() { \
 ;;
 ;;     printf \"arg: %s\\n\"
 hf-cmp = "!f() { \
-	unset GIT_DIR; \
-	export GIT_DIR; \
 	a=$1; \
 	b=$2; \
 	shift 2; \
 	hyperfine \
 	-b \"git wt-add-rev {r} && \
 	     git wt-reset-rev {r} && \
-	     git wt-assert-rev {r} && \
 	     cd \\\"$(git wt-path {r})\\\" && \
 	     $a \
 	\" \
@@ -100,8 +74,6 @@ hf-cmp = "!f() { \
 ;; hf-cmp-prev: alias for "hf-cmp" where -L r HEAD,HEAD~ is provided
 ;; for you
 hf-cmp-prev = "!f() { \
-	unset GIT_DIR; \
-	export GIT_DIR; \
 	a=$1; \
 	b=$2; \
 	shift 2; \
