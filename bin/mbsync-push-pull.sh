@@ -2,10 +2,7 @@
 
 while true
 do
-	mbsync --pull $@
+	timeout 5m mbsync $@
 
-	if test $(($RANDOM % 10)) -eq 0
-	then
-		mbsync --push $@
-	fi
+	sleep 7
 done
