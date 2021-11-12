@@ -5,43 +5,22 @@
 ;;;; https://github.com/sharkdp/hyperfine/pull/447 &
 ;;;; https://github.com/sharkdp/hyperfine/pull/448
 
-
 ;;; Worktree management for hyperfine
 ;;;
 ;;; To test a given git revision I setup a worktree for the current git
 ;;; directory in "$XDG_RUNTIME_DIR/git-perf-{r}", which will be e.g.:
 ;;;
-;;;     /run/user/1001/git-perf-HEAD
-;;;     /run/user/1001/git-perf-HEAD~
+;;;     /run/user/1001/git-perf-HEAD~0
+;;;     /run/user/1001/git-perf-HEAD~1
 ;;;
+;;; Note that it's not /run/user/1001/git-perf-<OID>. It could be, but
+;;; this way I can re-use recent results without worrying too much
+;;; about cleaning up my working directories.
+
+[hyperfine]
+run-dir = $XDG_RUNTIME_DIR/git-perf
 
 [alias]
-;; wt-path: echo {r} worktree path
-wt-path = "!f() { \
-	echo \"$XDG_RUNTIME_DIR/git-perf-$1\"; \
-}; f"
-;; wt-add-rev: setup a new worktree
-wt-add-rev = "!f() { \
-	git worktree add \"$(git wt-path $1)\" \"$1\" >/dev/null 2>&1 || :&& \
-	~/g/git.meta/config.mak.sh -C \"$(git wt-path $1)\"; \
-}; f"
-;; wt-reset-rev: set a worktree to a <rev> {r} in *my* repo, not theirs
-wt-reset-rev = "!f() { \
-	ref=\"$1\" && \
-	shift; \
-	rev=\"$(git rev-parse \"$ref\")\" && \
-	path=\"$(git wt-path \"$ref\")\" && \
-	echo \"$(tput bold; tput setaf 3)$path: checking out:$(tput sgr0) $(git -c color.ui=always reference $rev)\" && \
-	git -C \"$path\" reset --hard \"$rev\"; \
-}; f"
-;;;; test: git wt-make HEAD all test V='"foo bar"'
-wt-make = "!f() { \
-	ref=\"$1\" && \
-	path=\"$(git wt-path \"$ref\")\" && \
-	rev=\"$(git -C \"$path\" rev-parse HEAD)\" && \
-	shift && \
-	make -j \"$(nproc)\" -C \"$path\" \"$@\"; \
- }; f"
 
 ;; hf-cmp: The real workhorse here and hyperfine(1) command
 ;; runner. Takes:
@@ -72,23 +51,12 @@ hf-cmp = "!f() { \
 	\"$@\"; \
 }; f"
 
-;; hf-cmp-prev: alias for "hf-cmp" where -L r HEAD~0,HEAD~1 is provided
-;; for you
-hf-cmp-prev = "!f() { \
-	a=$1; \
-	b=$2; \
-	shift 2; \
-	git hf-cmp \"$a\" \"$b\" \
-	-L r HEAD~0,HEAD~1 \
-	\"$@\"; \
-}; f"
-
-;; hf-cmp-prev-make-all-all-warmup: test "make all" with warmup. For
+;; git hf-rev HEAD~0,HEAD~1 -r 1 'pwd; git rev-parse HEAD' --show-output
+hf-rev = hyperfine -L rev
+;; git hf-cmp-prev -r 1 'pwd; git rev-parse HEAD' --show-output
+hf-cmp-prev = hf-rev HEAD~0,HEAD~
+;; git hf-cmp-prev-warmup-1 -r 1 'pwd; git rev-parse HEAD' --show-output
+hf-cmp-prev-warmup-1 = hf-cmp-prev --warmup 1
+;; hf-cmp-prev-warmup-1-make-all-all: test "make -jN all" with warmup. For
 ;; testing the dry-run behavior of the Makefile
-hf-cmp-prev-make-all-all-warmup = "!f() { \
-	git hf-cmp-prev \
-	\"make -j \\$(nproc) all\" \
-	\"make -j \\$(nproc) all\" \
-	--warmup=1; \
-}; f"
-
+hf-cmp-prev-warmup-1-make-all-all = "hf-cmp-prev-warmup-1 --build \"make -j $(nproc) all\" \"make -j$(nproc) all\""

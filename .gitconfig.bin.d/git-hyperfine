@@ -1,0 +1,221 @@
+#!/bin/sh
+
+ghf=$(basename "$0")
+debug=
+debug() {
+	if test -n "$debug"
+	then
+		if test $# -gt 0
+		then
+			prefix=$1
+			shift
+			printf "debug: $prefix: %s\n" $@
+		fi
+		return 0
+	fi
+	return 1
+}
+
+# Chain-inovking ourselves
+ghf_build_template=
+
+# Out option variables
+trace=
+dry_run=
+
+# "Our" option variables
+build=
+prepare=
+cleanup=
+command=
+command_name=
+
+# "Our' options variables, intecepted (TODO)
+help=
+version=
+
+# Pass-through to hyperfine(1)
+hyperfine_opt=
+hyperfine_output_opt=
+
+# Pass-through to hyperfine(1), but validate
+saw_rev=
+
+while test $# -gt 0
+do
+	#debug "getopt: processing" $1
+	case "$1" in
+	# git-hyperfine's own options
+	--ghf-debug)
+		debug=t
+		;;
+	--ghf-dry-run)
+		dry_run=t
+		;;
+	--ghf-trace)
+		trace=t
+		set -x
+		;;
+	--ghf-build-template)
+		ghf_build_template=t
+		shift
+		break
+		;;
+	# I need to explicitly intercept these..
+	-b|--build)
+		build=$2
+		shift
+		;;
+	-p|-prepare)
+		prepare=$2
+		shift
+		;;
+	-c|--cleanup)
+		cleanup=$2
+		shift
+		;;
+	-n|--command-name)
+		command_name=$2
+		shift
+		;;
+
+	# ... but not really these. TODO: Better way to do passthrough
+	# "and" understand <command> than to re-parse every option it
+	# understands?
+	#
+	# Probably not, I'll need to know if -L <x> <y> has <y> as a
+	# <command> or argument for -L.
+	-P|--parameter-scan)
+		# Options for hyperfine(1) with three params
+		hyperfine_opt="${hyperfine_opt:+$hyperfine_opt }$1 $2 $3 #4"
+		shift 3
+		;;
+	# Options for hyperfine(1) with two params
+	-L|--parameter-list)
+		if test "$2" = "rev"
+		then
+			saw_rev=t
+		fi
+		hyperfine_opt="${hyperfine_opt:+$hyperfine_opt }$1 $2 $3"
+		shift 2
+		;;
+	# Options for hyperfine(1) with one param.
+	-w|--warmup| \
+	-m|--min-runs| \
+	-M|--max-runs| \
+	-r|--runs| \
+	-s|--style| \
+	-D|--parameter-step-size| \
+	-S|--shell| \
+	-u|--time-unit| \
+	--export-asciidoc| \
+	--export-csv| \
+	--export-markdown| \
+	--export-json)
+		hyperfine_opt="${hyperfine_opt:+$hyperfine_opt }$1 $2"
+		shift
+		;;
+	# Options for hyperfine(1) without params
+	-i|--ignore-failure| \
+	--show-output)
+		hyperfine_opt="${hyperfine_opt:+$hyperfine_opt }$1"
+		;;
+	# Output options for hyperfine(1) without params
+	-h|--help)
+		help=t
+		hyperfine_output_opt="${hyperfine_output_opt:+$hyperfine_output_opt }$1"
+		;;
+	-v|--version)
+		version=t
+		hyperfine_output_opt="${hyperfine_output_opt:+$hyperfine_output_opt }$1"
+		;;
+	*)
+		# Intercept hyperfine(1) <command>
+		command="${command:+$command }$1"
+		;;
+	esac
+	shift
+done
+
+## We're chain-invoking ourselves to get --build etc. output below,
+## this is to avoid some f the painful shell escaping
+if test -n "$ghf_build_template"
+then
+	cat <<-\EOF
+	git_rev="$(git -C "{git_dir}" rev-parse {rev})" &&
+	if ! test -d "{run_dir}/{rev}"
+	then
+		git worktree add "{run_dir}/{rev}" "{rev}";
+	fi &&
+	git -C "{run_dir}/{rev}" reset --hard $git_rev &&
+	cd "{run_dir}/{rev}"
+	EOF
+	exit 0
+fi
+
+## Options debug
+debug "getopt: build" $build
+debug "getopt: prepare" $prepare
+debug "getopt: cleanup" $cleanup
+debug "getopt: hyperfine opts" $hyperfine_opt
+debug "getopt: hyperfine command" $command
+debug "getopt: hyperfine command_name" $command_name
+
+## Options sanity check
+if test -z "$saw_rev"
+then
+	echo "$ghf needs a -L rev <rev>..., e.g. -L rev HEAD~1,HEAD~0" >&2
+	exit 1
+fi
+
+if test -n "$command_name"
+then
+	echo "$ghf can't take your -n|--command-name $command_name. It needs it" >&2
+	exit 1
+fi
+
+## Configuration:
+##
+##    hyperfine.runtime-dir: eval'd; usually set to: $XDG_RUNTIME_DIR
+run_dir=$(git config --get hyperfine.run-dir)
+eval "run_dir=$run_dir"
+debug "config: run-dir: <$run_dir>"
+
+## We need to resolve the {rev} from the originating repository. Not
+## our {run_dir}.
+git_dir=$(git rev-parse --absolute-git-dir)
+
+test -n "$dry_run" && "Would have invoked hyperfine(1) as (each argv element on its on line):"
+${dry_run:+printf "\targ: %s\n"} \
+hyperfine \
+	$hyperfine_opt \
+	--build "\
+		${ghf_trace:+set -x;} \
+		$(git hyperfine \
+			--ghf-build-template | sed -E \
+			-e 's!\{run_dir\}!'$run_dir'!g' \
+			-e 's!\{git_dir\}!'$git_dir'!g') \
+		${build:+ && $build} \
+	" \
+	${prepare:+ --prepare "\
+		${ghf_trace:+set -x;} \
+		( \
+			cd \"$run_dir/{rev}\" &&
+			$prepare \
+		) \
+	"} \
+	${cleanup:+ --cleanup "\
+		${ghf_trace:+set -x;} \
+		( \
+			cd \"$run_dir/{rev}\" &&
+			$cleanup \
+		) \
+	"} \
+	${command:+--command-name="$(tput setaf 6)$command$(tput sgr0)' in '$(tput setaf 6){rev}$(tput sgr0)"  \
+	"\
+		${ghf_trace:+set -x;} \
+		( \
+			cd \"$run_dir/{rev}\" &&
+			$command \
+		) \
+	"}
