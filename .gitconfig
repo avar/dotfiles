@@ -170,6 +170,9 @@
 	rs = rebase --skip
 	ra = rebase --abort
 
+	;; Merge
+	ec = !EDITOR=cat git merge --continue
+
 	rix = ri --exec
 	rixr = rix 'git reference'
 
