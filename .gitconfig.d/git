@@ -1,0 +1,2 @@
+[hyperfine "hook"]
+setup = ~/g/git.meta/config.mak.sh

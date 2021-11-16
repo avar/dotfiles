@@ -9,6 +9,8 @@
 	path = ~/g/git-hyperfine/git-hyperfine-gitconfig.cfg
 [includeIf "gitdir:~/g/perl/"]
 	path = ~/.gitconfig.d/user-perl
+[includeIf "gitdir:~/g/git*"]
+	path = ~/.gitconfig.d/git
 
 ;; Core
 [core]
