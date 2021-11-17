@@ -7,7 +7,7 @@ then
 
     if type parallel >/dev/null 2>&1
     then
-        export GOMAXPROCS=$(nproc)
+        export GOMAXPROCS=$NPROC
     fi
 
     if test -d /usr/lib/go-1.16/bin
