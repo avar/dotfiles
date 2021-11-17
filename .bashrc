@@ -1,5 +1,4 @@
 ## Include system-wide bashrc
-
 if test -f /etc/bashrc
 then
     . /etc/bashrc
@@ -28,7 +27,6 @@ then
 fi
 
 ## set my PATH
-
 maybe_add_path() {
     if test -d $1
     then
