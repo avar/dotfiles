@@ -31,28 +31,28 @@ stuff "# GIT_PERF_LARGE_REPO=~/g/linux ./run p7820-grep-engines.sh^M"
 
 screen -t c:d:r bash
 stuff "cd ~/g/git^M"
-stuff "# git rebase -i --exec '~/g/git.meta/config.mak.sh && time make -j \$(nproc) TAGS all check-docs && (cd t && make GIT_PROVE_OPTS=\"--jobs=\$(nproc) --timer\" T=\"$(dedup t000[0-9]*.sh)\")'^M"
+stuff "# git rebase -i --exec '~/g/git.meta/config.mak.sh && time make TAGS all check-docs && (cd t && make GIT_PROVE_OPTS=\"--timer\" T=\"$(dedup t000[0-9]*.sh)\")'^M"
 
 screen -t c:d bash
 stuff "cd ~/g/git^M"
-stuff "# ~/g/git.meta/config.mak.sh && time make -j \$(nproc) TAGS all check-docs^M"
-stuff "# ~/g/git.meta/config.mak.sh && time make -j \$(nproc) TAGS all check-docs^M"
+stuff "# ~/g/git.meta/config.mak.sh && time make TAGS all check-docs^M"
+stuff "# ~/g/git.meta/config.mak.sh && time make TAGS all check-docs^M"
 
 screen -t c:o bash
 stuff "cd ~/g/git^M"
-stuff "# ~/g/git.meta/config.mak.sh && time make -j \$(nproc) CFLAGS=\"-O3 -g\" all"
+stuff "# ~/g/git.meta/config.mak.sh && time make CFLAGS=\"-O3 -g\" all"
 
 screen -t t:0 bash
 stuff "cd ~/g/git^M"
 stuff "cd t^M"
-stuff "# ~/g/git.meta/config.mak.sh && time NO_SVN_TESTS=1 GIT_TEST_HTTPD=0 make GIT_PROVE_OPTS=\"--jobs=\$(nproc) --timer --state=failed,slow,save\"^M"
-stuff "# ~/g/git.meta/config.mak.sh && time GIT_TEST_HTTPD=1 GIT_TEST_PASSING_SANITIZE_LEAK= make GIT_PROVE_OPTS=\"--jobs=\$(nproc) --timer --state=failed,slow,save\"^M"
+stuff "# ~/g/git.meta/config.mak.sh && time NO_SVN_TESTS=1 GIT_TEST_HTTPD=0 make GIT_PROVE_OPTS=\"--timer --state=failed,slow,save\"^M"
+stuff "# ~/g/git.meta/config.mak.sh && time GIT_TEST_HTTPD=1 GIT_TEST_PASSING_SANITIZE_LEAK= make GIT_PROVE_OPTS=\"--timer --state=failed,slow,save\"^M"
 
 screen -t t:1 bash
 stuff "cd ~/g/git^M"
 stuff "cd t^M"
-stuff "# ~/g/git.meta/config.mak.sh && time make GIT_PROVE_OPTS=\"--jobs=\$(nproc) --timer\" T=\"$(dedup $(echo t[0-9]*{grep,log}*.sh))\"^M"
-stuff "# ~/g/git.meta/config.mak.sh && time make GIT_PROVE_OPTS=\"--jobs=\$(nproc) --timer\" T=\"$(dedup $(echo t[0-9]*{bundle,protocol,serve,pack,remote,receive}*.sh))\""
+stuff "# ~/g/git.meta/config.mak.sh && time make GIT_PROVE_OPTS=\"--timer\" T=\"$(dedup $(echo t[0-9]*{grep,log}*.sh))\"^M"
+stuff "# ~/g/git.meta/config.mak.sh && time make GIT_PROVE_OPTS=\"--timer\" T=\"$(dedup $(echo t[0-9]*{bundle,protocol,serve,pack,remote,receive}*.sh))\""
 
 screen -t t:2 bash
 stuff "cd ~/g/git^M"
@@ -80,13 +80,13 @@ stuff "git --no-pager log --oneline -10^M"
 screen -t r:pcre1
 stuff "cd ~/g/pcre^M"
 stuff "git svn rebase^M"
-stuff "test -f RunTest && git clean -dxf; ./autogen.sh; CXXFLAGS='-O3 -g' CFLAGS='-O3 -g' ./configure --prefix=\$PWD/inst --enable-jit --enable-utf --enable-unicode-properties && time make -j \$(nproc) install"
+stuff "test -f RunTest && git clean -dxf; ./autogen.sh; CXXFLAGS='-O3 -g' CFLAGS='-O3 -g' ./configure --prefix=\$PWD/inst --enable-jit --enable-utf --enable-unicode-properties && time make install"
 
 screen -t r:pcre2
 stuff "cd ~/g/pcre2^M"
 stuff "git svn rebase^M"
-stuff "# test -f RunTest && git clean -dxf; ./autogen.sh; CXXFLAGS='-O3 -g' CFLAGS='-O3 -g' ./configure --prefix=\$PWD/inst --enable-jit --enable-utf && time make -j \$(nproc) install"
-stuff "# test -f RunTest && git clean -dxf; ./autogen.sh; CXXFLAGS='-O3 -g' CFLAGS='-O3 -g' ./configure --prefix=\$PWD/inst --enable-jit --enable-utf && time make -j \$(nproc) install"
+stuff "# test -f RunTest && git clean -dxf; ./autogen.sh; CXXFLAGS='-O3 -g' CFLAGS='-O3 -g' ./configure --prefix=\$PWD/inst --enable-jit --enable-utf && time make install"
+stuff "# test -f RunTest && git clean -dxf; ./autogen.sh; CXXFLAGS='-O3 -g' CFLAGS='-O3 -g' ./configure --prefix=\$PWD/inst --enable-jit --enable-utf && time make install"
 
 screen -t r:curl
 stuff "cd ~/g/curl^M"
