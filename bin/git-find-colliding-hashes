@@ -1,0 +1,22 @@
+#!/usr/bin/env perl
+use v5.24.0;
+use strict;
+use warnings;
+use Digest::SHA qw(sha1_hex sha256_hex);
+
+my $s = "a";
+my %seen;
+while ($s++) {
+	my $str = $ENV{PF} . $s;
+	my $l = length($str) + 1;
+	my $p = "blob $l\0$str\n";
+	my $o = sha1_hex($p);
+	my $n = sha256_hex($p);
+	my $os = substr($o, 0, 4);
+	my $ns = substr($n, 0, 4);
+	if ($os eq $ns) {
+		say "hash($str) = [$os, $ns]" . ($seen{$os} ? " SEEN" : "");
+		$seen{$os} = 1;
+	}
+}
+
