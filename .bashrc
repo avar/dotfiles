@@ -59,11 +59,6 @@ maybe_add_path $HOME/local/bin
 # Custom commands
 maybe_add_path $HOME/g/hyperfine/target/debug
 
-# perlbrew
-test -f ~/perl5/perlbrew/etc/bashrc && source ~/perl5/perlbrew/etc/bashrc
-test -f ~v-perlbrew/perl5/perlbrew/etc/bashrc && HOME=/home/v-perlbrew source ~v-perlbrew/perl5/perlbrew/etc/bashrc
-#maybe_add_path /home/v-perlbrew/perl5/perlbrew/perls/perl-5.19.6/bin
-
 # custom blead compile
 maybe_add_path ~/perl5/installed/bin
 
