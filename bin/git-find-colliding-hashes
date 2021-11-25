@@ -1,15 +1,18 @@
 #!/usr/bin/env perl
-use v5.24.0;
+use v5.32.0;
 use strict;
 use warnings;
 use Digest::SHA qw(sha1_hex sha256_hex);
 
+$| = 1;
 my $s = "a";
 my %seen;
+my $type = $ENV{type} // "blob";
+my $prefix = $ENV{prefix} // "";
 while ($s++) {
-	my $str = $ENV{PF} . $s;
+	my $str = $prefix . $s;
 	my $l = length($str) + 1;
-	my $p = "blob $l\0$str\n";
+	my $p = "$type $l\0$str\n";
 	my $o = sha1_hex($p);
 	my $n = sha256_hex($p);
 	my $os = substr($o, 0, 4);
