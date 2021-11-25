@@ -4,6 +4,13 @@ then
     . /etc/bashrc
 fi
 
+if test -f /etc/bash_completion
+then
+    # On recent Debian (late 2021-ish) __git_ps1 isn't available by
+    # default, load it manually
+    . /etc/bash_completion
+fi
+
 ## Unset things in global bashrc's that I'd prefer to set myself
 ## later.
 unset TMOUT
