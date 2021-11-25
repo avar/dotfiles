@@ -11,6 +11,14 @@ then
     . /etc/bash_completion
 fi
 
+## Completion and prompt from my ~/local git
+for f in \
+    ~/local/share/bash-completion/completions/git \
+    ~/local/lib/git-core/git-sh-prompt
+do
+    test -f "$f" && . "$f"
+done
+
 ## Unset things in global bashrc's that I'd prefer to set myself
 ## later.
 unset TMOUT
