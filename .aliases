@@ -30,12 +30,6 @@ alias dsgitlab-gdk='screen -rx dev-gitlab-gdk || screen -c ~/.screenrc.d/dev-git
 alias pd=perldoc
 alias pdf='perldoc -f'
 
-alias lperl="perl -Ilib"
-function lbperl {
-    # From jrockway
-    perl -Ilib "bin/$1";
-}
-
 # dos2unix & unix2dos 
 alias d2u="sed 's/$//'"
 alias u2d="sed 's/$//'"
