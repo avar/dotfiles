@@ -1,0 +1,12 @@
+#!/bin/sh
+
+REAL_CC=gcc
+export REAL_CC
+
+#CCACHE_DEBUG=true
+#export CCACHE_DEBUG
+
+# Get rid of -no-compile, replace it with -fsyntax-only, which ccache
+# understands
+shift
+ccache /home/avar/g/sparse/cgcc -c -fsyntax-only "$@"
