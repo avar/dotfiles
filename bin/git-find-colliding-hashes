@@ -4,16 +4,22 @@ use strict;
 use warnings;
 use Digest::SHA qw(sha1_hex sha256_hex);
 
+# Usage:
+## prefix= type=bad git find-colliding-hashes | tee garbage-coll-bad.txt
+## prefix= type=bad want=bad git find-colliding-hashes | tee garbage-coll-bad.txt
+
 $| = 1;
-my $s = "a";
+my $s = $ENV{s} // "s";
 my %seen;
 my $type = $ENV{type} // "blob";
 my $prefix = $ENV{prefix} // "";
+my $want = $ENV{want} // "";
 while ($s++) {
 	my $str = $prefix . $s;
 	my $l = length($str) + 1;
 	my $p = "$type $l\0$str\n";
 	my $o = sha1_hex($p);
+	next if length $want && index($o, $want) != 0;
 	my $n = sha256_hex($p);
 	my $os = substr($o, 0, 4);
 	my $ns = substr($n, 0, 4);
