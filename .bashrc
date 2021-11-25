@@ -49,17 +49,6 @@ maybe_add_path $HOME/g/annex-distribute
 # ruby
 maybe_add_path /var/lib/gems/1.8/bin
 
-# custom git builds
-maybe_add_path /opt/git/pu/bin
-maybe_add_path /opt/git/ab-i18n/bin
-
-# Macports
-maybe_add_path /opt/local/bin
-maybe_add_path /opt/local/sbin
-
-# git on Mac OS X
-maybe_add_path /usr/local/git/bin
-
 # Custom binaries
 maybe_add_path $HOME/local/bin
 
@@ -71,9 +60,6 @@ maybe_add_path ~/perl5/installed/bin
 
 # other custom compilations
 maybe_add_path ~/local/bin
-
-# The adk
-maybe_add_path ~/g/android/adt-bundle-linux-x86_64-20130729/sdk/platform-tools
 
 if [[ $- != *i* ]] ; then
     # Shell is non-interactive.  Be done now!
