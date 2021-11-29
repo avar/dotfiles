@@ -71,10 +71,18 @@
 	;; Show stat output on rebase to show what changed
 	stat = true
 
+	;; Be more verbose than the default "ignore" about potentially
+	;; dropping data.
+	missingCommitsCheck = warn
+
 	;; when using 'git rebase -i --exec "make test"' I want the
 	;; "make test" to run again on "git rebase --continue", the
 	;; default behavior is to omit it.
 	rescheduleFailedExec = true
+
+	;; Way more useful when rebasing topic branches, don't need to
+	;; manually do "--onto @{u} <old parent OID>" anymore, hopefully
+	forkPoint = true
 [merge]
 	;; Have "git merge" do what "git pull" would have done
 	defaultToUpstream = true
