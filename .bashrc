@@ -60,8 +60,10 @@ maybe_add_path /var/lib/gems/1.8/bin
 # Custom binaries
 maybe_add_path $HOME/local/bin
 
+
 # Custom commands
 maybe_add_path $HOME/g/hyperfine/target/debug
+maybe_add_path $HOME/g/git-hyperfine
 
 # custom blead compile
 maybe_add_path ~/perl5/installed/bin
