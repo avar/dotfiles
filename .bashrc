@@ -43,9 +43,17 @@ fi
 
 ## set my PATH
 maybe_add_path() {
-    if test -d $1
+    if [[ "$PATH" != *"$1"* && -d "$1" ]]
     then
         PATH=$1:$PATH
+    fi
+}
+
+## Move $1 to the front of the PATH
+move_up_in_path () {
+    if [[ "$PATH" == *"$1"* ]]
+    then
+        PATH=$1:${PATH//:$1:/}
     fi
 }
 
@@ -60,6 +68,8 @@ maybe_add_path /var/lib/gems/1.8/bin
 # Custom binaries
 maybe_add_path $HOME/local/bin
 
+# Only if the screen configuration (dsgit) added it already
+move_up_in_path $HOME/g/git/bin-wrappers
 
 # Custom commands
 maybe_add_path $HOME/g/hyperfine/target/debug
