@@ -57,6 +57,19 @@ move_up_in_path () {
     fi
 }
 
+## Remove a given path from $PATH, e.g. to get rid of my custom git:
+##
+##    remove_from_path $(dirname $(which git)) 
+remove_from_path () {
+    if [[ "$PATH" == *"$1"* ]]
+    then
+        PATH=${PATH//:$1:/}
+        PATH=${PATH//$1:/}
+        PATH=${PATH//:$1/}
+	export PATH
+    fi	
+}
+
 # custom scripts
 maybe_add_path $HOME/bin
 maybe_add_path $HOME/g/misc-scripts
@@ -70,6 +83,9 @@ maybe_add_path $HOME/local/bin
 
 # Only if the screen configuration (dsgit) added it already
 move_up_in_path $HOME/g/git/bin-wrappers
+# If I'm running with ASAN (for git) let's not die on memory leaks,
+# just memory misuse
+export ASAN_OPTIONS=detect_leaks=0
 
 # Custom commands
 maybe_add_path $HOME/g/hyperfine/target/debug

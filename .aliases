@@ -23,7 +23,12 @@ alias sls='screen -ls'
 alias svem='screen -rx em || screen -c ~/.screenrc.d/v-emacs-irssi'
 alias hssnth='screen -rx hem || screen -c ~/.screenrc.d/home-snth-emacs'
 alias hssnth-local='screen -rx local || screen -c ~/.screenrc.d/home-snth-emacs-local'
-alias dsgit='screen -rx dev-core-git || { export PATH=/home/avar/g/git/bin-wrappers:$PATH; screen -c ~/.screenrc.d/dev-core-git; }'
+alias dsgit='false screen -rx dev-core-git || {
+      export PATH=/home/avar/g/git/bin-wrappers:$PATH;
+      export ASAN_OPTIONS=detect_leaks=0;
+
+      screen -c ~/.screenrc.d/dev-core-git;
+}'
 alias dsgitlab-gdk='screen -rx dev-gitlab-gdk || screen -c ~/.screenrc.d/dev-gitlab-gdk'
 
 # Perl
