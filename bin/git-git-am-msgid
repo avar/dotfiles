@@ -1,9 +1,10 @@
 #!/bin/sh -e
 
 msgid=$@
+regex=$(perl -we 'print quotemeta shift' "$msgid")
 
 git -C ~/g/git-ml pull
-file=$(git -C ~/g/git-ml log --numstat --oneline -1 -i -G"^Message-id:.*\Q$msgid\E.*" |tail -n 1|awk '{print $3}')
+file=$(git -C ~/g/git-ml log --numstat --oneline -1 -i -G"^Message-id:.*$regex" |tail -n 1|awk '{print $3}')
 path=~/g/git-ml/$file
 echo Applying $path
 git am -3 $path
