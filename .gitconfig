@@ -142,6 +142,8 @@
 
 	;; Debugging (see GIT_* vars)
 	env = !env --null | perl -n0E 'say if /^GIT/'
+	;; Debugging: See where pwd lands us
+	pwd = !pwd
 
 	;; Lazyness
 	st = status --short
