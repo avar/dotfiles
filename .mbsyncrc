@@ -1,5 +1,12 @@
 FSync no
 
+## "Global" Create/Remove/Sync options, applies to Channels
+## below. TODO: is ExpireUnread supported in this global context?
+Create Slave
+Remove None
+Sync Pull New ReNew Flags
+Sync Push Flags Delete
+
 IMAPAccount personal
     # Generic options
     Timeout 0
@@ -19,13 +26,6 @@ MaildirStore personal-local
     Path ~/Maildir/personal-gmail/
     Inbox ~/Maildir/personal-gmail/INBOX
     SubFolders Verbatim
-
-## "Global" Create/Remove/Sync options, applies to Channels
-## below. TODO: is ExpireUnread supported in this global context?
-Create Slave
-Remove None
-Sync Pull New ReNew Flags
-Sync Push Flags Delete
 
 ## Groups, unfortunately no groups-within-groups, so I have to
 ## copy/paste between "personal" and "personal-common"
