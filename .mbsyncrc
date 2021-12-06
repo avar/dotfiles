@@ -2,7 +2,7 @@ FSync no
 
 ## "Global" Create/Remove/Sync options, applies to Channels
 ## below. TODO: is ExpireUnread supported in this global context?
-Create Slave
+Create Near
 Remove None
 Sync Pull New ReNew Flags
 Sync Push Flags Delete
@@ -55,77 +55,79 @@ Group personal-Gmail-rest
 ###
 Channel personal-INBOX
     SyncState *
-    Master :personal-remote:
-    Slave :personal-local:
+    Far :personal-remote:
+    Near :personal-local:
     # mbsync(1): "[...]if mailbox is omitted, INBOX is assumed.", but
     # be explicit
     Patterns INBOX
     ## Only get the last N, ignoring if they're "unread"
-    #MaxMessages 10000
-    #ExpireUnread no
+    MaxMessages 10000
+    ExpireUnread yes
 
 Channel personal-git
     SyncState *
-    Master :personal-remote:
-    Slave :personal-local:
+    Far :personal-remote:
+    Near :personal-local:
     Patterns git
     ## Only get the last N, ignoring if they're "unread"
-    #MaxMessages 1000
-    #ExpireUnread yes
+    MaxMessages 1000
+    ExpireUnread yes
 
 # For debugging: The "[Gmail]/"-prefixed special folders, sycned with
 # "personal-GMail". To see them all run:
 #
 # mbsync --list personal-Gmail-list
 Channel personal-Gmail-list
-    Master :personal-remote:
-    Slave :personal-local:
+    Far :personal-remote:
+    Near :personal-local:
     Patterns "[Gmail]"/*
 
 # "[Gmail]": Map "[Gmail]/Sent Mail" to "sent". I don't know why
 # there's also a top-level "Sent".
 Channel personal-Gmail-Sent-Mail
     SyncState *
-    Master :personal-remote:"[Gmail]/Sent Mail"
-    Slave :personal-local:sent
+    Far :personal-remote:"[Gmail]/Sent Mail"
+    Near :personal-local:sent
     Patterns %
     ## Only get the last N, ignoring if they're "unread"
-    #MaxMessages 1000
-    #ExpireUnread yes
+    MaxMessages 1000
+    ExpireUnread yes
 
 # "[Gmail]": Map "[Gmail]/Drafts" to "drafts"
 Channel personal-Gmail-Drafts
     SyncState *
-    Master :personal-remote:"[Gmail]/Drafts"
-    Slave :personal-local:drafts
+    Far :personal-remote:"[Gmail]/Drafts"
+    Near :personal-local:drafts
     Patterns %
+    MaxMessages 10000
+    ExpireUnread yes
 
 # "[Gmail]": Map "[Gmail]/Chats" to "chats"
 Channel personal-Gmail-Chats
     SyncState *
-    Master :personal-remote:"[Gmail]/Chats"
-    Slave :personal-local:chats
+    Far :personal-remote:"[Gmail]/Chats"
+    Near :personal-local:chats
     Patterns %
 
 # "[Gmail]": Map "[Gmail]/Important" to "important"
 Channel personal-Gmail-Important
     SyncState *
-    Master :personal-remote:"[Gmail]/Important"
-    Slave :personal-local:important
+    Far :personal-remote:"[Gmail]/Important"
+    Near :personal-local:important
     Patterns %
 
 # "[Gmail]": Map "[Gmail]/Spam" to "spam"
 Channel personal-Gmail-Spam
     SyncState *
-    Master :personal-remote:"[Gmail]/Spam"
-    Slave :personal-local:spam
+    Far :personal-remote:"[Gmail]/Spam"
+    Near :personal-local:spam
     Patterns %
 
 # "[Gmail]": Map "[Gmail]/Starred" to "starred"
 Channel personal-Gmail-Starred
     SyncState *
-    Master :personal-remote:"[Gmail]/Starred"
-    Slave :personal-local:starred
+    Far :personal-remote:"[Gmail]/Starred"
+    Near :personal-local:starred
     Patterns %
 
 
@@ -135,8 +137,8 @@ Channel personal-Gmail-Starred
 ##
 Channel personal-rest
     SyncState *
-    Master :personal-remote:
-    Slave :personal-local:
+    Far :personal-remote:
+    Near :personal-local:
     # INBOX is not matched by wildcards. List the rest from
     # https://mail.google.com/mail/u/0/#settings/labels and as shown with:
     #
