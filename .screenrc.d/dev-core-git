@@ -41,9 +41,11 @@ stuff "remove_from_path \$(dirname $(which git))^M"
 stuff "# ~/g/git.meta/config.mak.sh && time make TAGS all check-docs^M"
 stuff "# ~/g/git.meta/config.mak.sh && time make TAGS all check-docs^M"
 
-screen -t c:o bash
+screen -t g:hf bash
 stuff "cd ~/g/git^M"
-stuff "# ~/g/git.meta/config.mak.sh && time make CFLAGS=\"-O3 -g\" all"
+stuff "# git hyperfine --ghf-worktree-xargs git worktree remove --force^M"
+stuff "# git hyperfine  -L rev origin/master,HEAD~0 -s 'make' 'make T=t0001-init.sh'^M"
+stuff "# git hyperfine  -L rev HEAD~1,HEAD~0 -s 'make' 'make T=t0001-init.sh'^M"
 
 screen -t t:0 bash
 stuff "cd ~/g/git^M"
