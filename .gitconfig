@@ -21,6 +21,10 @@
 	;; the rare cases where this does happen due to gc or whatever
 	;; let's give it plenty of time to recover.
 	filesRefLockTimeout = 10000
+
+	;; Add file names and line numbers to
+	;; {usage,die,error,warning}() messages
+	usageAddSource = true
 [init]
 	;; Enough with the spammy "This default branch name is subject
 	;; to change." advice already!
