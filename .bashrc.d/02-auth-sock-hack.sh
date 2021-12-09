@@ -30,4 +30,8 @@ then
         auth_sock_hack;
         command ssh "$@"
     }
+    ssh-add() {
+        auth_sock_hack;
+        command ssh-add "$@"
+    }
 fi
