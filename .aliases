@@ -3,6 +3,9 @@
 # Common *nix commands
 alias ka=killall
 
+# Make gdb less spammy
+alias gdb='gdb -silent'
+
 # ls
 alias ls="ls --color=auto"
 alias ll="ls -lh"
