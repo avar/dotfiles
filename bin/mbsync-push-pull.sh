@@ -2,7 +2,7 @@
 
 while true
 do
-	timeout 5m mbsync $@
+	mbsync $@
 
 	sleep 7
 done
