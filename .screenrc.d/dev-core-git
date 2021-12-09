@@ -37,6 +37,7 @@ stuff "# git rebase -i --exec '~/g/git.meta/config.mak.sh && time make TAGS all 
 
 screen -t c:d bash
 stuff "cd ~/g/git^M"
+stuff "remove_from_path \$(dirname $(which git))^M"
 stuff "# ~/g/git.meta/config.mak.sh && time make TAGS all check-docs^M"
 stuff "# ~/g/git.meta/config.mak.sh && time make TAGS all check-docs^M"
 
