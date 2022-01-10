@@ -1,0 +1,12 @@
+* Graph from Makefiles
+
+http://jonasdn.blogspot.com/2020/10/proposal-to-add-build-graph-output-to.html
+discussion at https://news.ycombinator.com/item?id=29851156 bug by
+author at https://savannah.gnu.org/bugs/?func=detailitem&item_id=59318
+
+* Trace Makefile execution:
+
+	OLD_SHELL := $(SHELL)
+	SHELL = $(warning Building $@$(if $<, (from $<))$(if $?, ($? newer)))$(OLD_SHELL) -x
+
+See https://www.cmcrossroads.com/article/tracing-rule-execution-gnu-make
