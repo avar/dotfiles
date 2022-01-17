@@ -83,9 +83,10 @@ maybe_add_path $HOME/local/bin
 
 # Only if the screen configuration (dsgit) added it already
 move_up_in_path $HOME/g/git/bin-wrappers
-# If I'm running with ASAN (for git) let's not die on memory leaks,
-# just memory misuse
-export ASAN_OPTIONS=detect_leaks=0
+
+# Use less shitty stack traces in LSAN at the cost of a bit of
+# (sometimes ~2-10%) slowdown.
+export LSAN_OPTIONS=fast_unwind_on_malloc=0
 
 # Custom commands
 maybe_add_path $HOME/g/hyperfine/target/debug
