@@ -17,15 +17,19 @@ stuff "git version^M"
 
 screen -t g:2 bash
 stuff "cd ~/g/git^M"
+stuff "remove_from_path \$(dirname $(which git))^M"
 
 screen -t g:3 bash
 stuff "cd ~/g/git^M"
+stuff "remove_from_path \$(dirname $(which git))^M"
 
 screen -t g:4 bash
 stuff "cd ~/g/git^M"
+stuff "remove_from_path \$(dirname $(which git))^M"
 
 screen -t p:0 bash
 stuff "cd ~/g/git^M"
+stuff "remove_from_path \$(dirname $(which git))^M"
 stuff "cd t/perf^M"
 stuff "# GIT_PERF_LARGE_REPO=~/g/linux ./run p7820-grep-engines.sh^M"
 # GIT_PERF_REPEAT_COUNT=30 GIT_PERF_LARGE_REPO=~/g/linux GIT_PERF_MAKE_OPTS='-j8 USE_LIBPCRE1=Y CFLAGS=-O3 LIBPCREDIR=/home/avar/g/pcre/inst' ./run HEAD
@@ -33,6 +37,7 @@ stuff "# GIT_PERF_LARGE_REPO=~/g/linux ./run p7820-grep-engines.sh^M"
 
 screen -t c:d:r bash
 stuff "cd ~/g/git^M"
+stuff "remove_from_path \$(dirname $(which git))^M"
 stuff "# git rebase -i --exec '~/g/git.meta/config.mak.sh && time make TAGS all check-docs && (cd t && make GIT_PROVE_OPTS=\"--timer\" T=\"$(dedup t000[0-9]*.sh)\")'^M"
 
 screen -t c:d bash
@@ -43,6 +48,7 @@ stuff "# ~/g/git.meta/config.mak.sh && time make TAGS all check-docs^M"
 
 screen -t g:hf bash
 stuff "cd ~/g/git^M"
+stuff "remove_from_path \$(dirname $(which git))^M"
 stuff "# git hyperfine --ghf-worktree-xargs git worktree remove --force^M"
 stuff "# git hyperfine  -L rev origin/master,HEAD~0 -s 'make' 'make T=t0001-init.sh'^M"
 stuff "# git hyperfine  -L rev HEAD~1,HEAD~0 -s 'make' 'make T=t0001-init.sh'^M"
@@ -50,18 +56,21 @@ stuff "# git hyperfine  -L rev HEAD~1,HEAD~0 -s 'make' 'make T=t0001-init.sh'^M"
 screen -t t:0 bash
 stuff "cd ~/g/git^M"
 stuff "cd t^M"
+stuff "remove_from_path \$(dirname $(which git))^M"
 stuff "# ~/g/git.meta/config.mak.sh && time NO_SVN_TESTS=1 GIT_TEST_HTTPD=0 make GIT_PROVE_OPTS=\"--timer --state=failed,slow,save\"^M"
 stuff "# ~/g/git.meta/config.mak.sh && time GIT_TEST_HTTPD=1 GIT_TEST_PASSING_SANITIZE_LEAK= make GIT_PROVE_OPTS=\"--timer --state=failed,slow,save\"^M"
 
 screen -t t:1 bash
 stuff "cd ~/g/git^M"
 stuff "cd t^M"
+stuff "remove_from_path \$(dirname $(which git))^M"
 stuff "# ~/g/git.meta/config.mak.sh && time make GIT_PROVE_OPTS=\"--timer\" T=\"$(dedup $(echo t[0-9]*{grep,log}*.sh))\"^M"
 stuff "# ~/g/git.meta/config.mak.sh && time make GIT_PROVE_OPTS=\"--timer\" T=\"$(dedup $(echo t[0-9]*{bundle,protocol,serve,pack,remote,receive}*.sh))\""
 
 screen -t t:2 bash
 stuff "cd ~/g/git^M"
 stuff "cd t^M"
+stuff "remove_from_path \$(dirname $(which git))^M"
 stuff "# ./t7810-grep.sh -v -i"
 
 screen -t a:runner bash
