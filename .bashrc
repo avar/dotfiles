@@ -16,6 +16,11 @@ fi
 ## completable command list, 2018-05-20)
 export GIT_TESTING_PORCELAIN_COMMAND_LIST="$(git --list-cmds=builtins,main,others,alias)"
 
+## Show hidden options and negatives. See e.g. "git upload-pack
+## --git-completion-helper" v.s. "git upload-pack
+## --git-completion-helper".
+export GIT_COMPLETION_SHOW_ALL=1 
+
 ## Completion and prompt from my ~/local git
 for f in \
     ~/local/share/bash-completion/completions/git \
