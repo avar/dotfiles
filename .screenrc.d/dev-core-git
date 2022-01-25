@@ -120,6 +120,21 @@ screen -t r:sha1dc
 stuff "cd ~/g/sha1collisiondetection^M"
 stuff "git fetch^M"
 
+screen -t r:llvm+clang
+stuff "cd ~/g/llvm-project^M"
+stuff "git fetch^M"
+# The -DCMAKE_BUILD_TYPE=Debug compiler is horribly slow
+stuff "# cmake -S llvm -B build -G 'Unix Makefiles' -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_PROJECTS='clang;clang-tools-extra;compiler-rt;lld;lldb' -DLLVM_ENABLE_RUNTIMES='libcxx;libcxxabi' -DCMAKE_INSTALL_PREFIX=\$HOME/local^M"
+stuff "# time nice -n 19 make -C build^M"
+
+screen -t r:gcc
+stuff "cd ~/g/gcc^M"
+stuff "git fetch^M"
+stuff "# ./configure --prefix=\$HOME/local --enable-languages=c,c++ --disable-multilib^M"
+stuff "# time nice -n 19 make^M"
+# Installs to ~/local
+stuff "# make install^M"
+
 # GCC farm boxes @ https://cfarm.tetaneutral.net/machines/list/
 screen -t t:gl:ci:sh:0
 stuff "cd ~/g/git-gitlab-ci^M"
