@@ -154,7 +154,7 @@ screen -t t:gl:run:gcc185:COS:ARMv8
 stuff "cd ~/g/git^M"
 stuff "git version^M"
 stuff "export OPT_TESTS='t[0-9]*.sh'^M"
-stuff "# time OPT_DEBUG= OPT_JOBS=40 OPT_JOB_NAME=gcc185 OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
+stuff "# time OPT_DEBUG= OPT_JOBS=32 OPT_JOB_NAME=gcc185 OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
 
 # AIX 7.1
 screen -t t:gl:run:gcc111:aix71
