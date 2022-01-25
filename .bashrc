@@ -11,6 +11,11 @@ then
     . /etc/bash_completion
 fi
 
+## Make "git <TAB>" include plumbing like cat-file. Uses a hidden
+## feature from git/git@84a97131065 (completion: let git provide the
+## completable command list, 2018-05-20)
+export GIT_TESTING_PORCELAIN_COMMAND_LIST="$(git --list-cmds=builtins,main,others,alias)"
+
 ## Completion and prompt from my ~/local git
 for f in \
     ~/local/share/bash-completion/completions/git \
