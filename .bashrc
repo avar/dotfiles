@@ -14,7 +14,11 @@ fi
 ## Make "git <TAB>" include plumbing like cat-file. Uses a hidden
 ## feature from git/git@84a97131065 (completion: let git provide the
 ## completable command list, 2018-05-20)
-export GIT_TESTING_PORCELAIN_COMMAND_LIST="$(git --list-cmds=builtins,main,others,alias)"
+export GIT_TESTING_PORCELAIN_COMMAND_LIST="$(git --list-cmds=builtins,main,list-mainporcelain,others,nohelpers,alias,list-complete,config)"
+# TODO: Remove the above line if/when my
+# https://lore.kernel.org/git/patch-1.1-5f18305ca08-20220125T124757Z-avarab@gmail.com/
+# lands in git, and replace it with this:
+export GIT_COMPLETION_SHOW_ALL_COMMANDS=1
 
 ## Show hidden options and negatives. See e.g. "git upload-pack
 ## --git-completion-helper" v.s. "git upload-pack
