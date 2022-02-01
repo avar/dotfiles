@@ -92,6 +92,31 @@ stuff "mu find 'maildir:/gitlab-gmail/*' -n 10 from:avarab@gmail.com^M"
 screen -t m:mu:gg:1 bash
 stuff "mu find 'maildir:/gitlab-gmail/*' -n 10 from:avarab@gmail.com^M"
 
+# public-inbox
+screen -t pu:git-ml:idx bash
+## Get the mailing list as a .git, without the sharded format
+## https://lore.kernel.org/git/ uses
+stuff "cd ~/g/git-ml || git clone https://public-inbox.org/git ~/g/git-ml^M"
+## This will create a .git/publici-inbox in ~/g/git-ml. Takes a while
+## the first time.
+stuff "time public-inbox-index -v \$PWD^M"
+## When we add the lei external it *must* have the ".git" part,
+## because it'll try to find the "public-inbox" folder at wherever we
+## point it.
+stuff "test -d ~/.config/lei || lei add-external ~/g/git-ml/.git^M"
+## The one-off massive import of the Git ML. TODO: No way to specify
+## an infinite limit? Not --no-limit or --limit=0.
+stuff "test -d ~/Maildir/lei-q-git-ml || time lei q --limit=999999999 -v -o ~/Maildir/lei-q-git-ml l:git.vger.kernel.org^M"
+## After the one-off import this will take forever *the first time*
+## (or around 20m), but subsequent invocations will be fast:
+stuff "time lei up ~/Maildir/lei-q-git-ml^M"
+## Run it in a loop
+stuff "while sleep 47; do git -C ~/g/git-ml pull && (cd ~/g/git-ml && time public-inbox-index -v \"\$PWD\") && time lei up ~/Maildir/lei-q-git-ml; done^M"
+
+screen -t pu:git-ml:update bash
+stuff "sleep 1^M"
+stuff "cd ~/g/git-ml^M"
+
 # logs
 screen -t investigate bash
 stuff "ip route list^M"
