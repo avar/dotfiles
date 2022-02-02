@@ -93,7 +93,7 @@ screen -t m:mu:gg:1 bash
 stuff "mu find 'maildir:/gitlab-gmail/*' -n 10 from:avarab@gmail.com^M"
 
 # public-inbox
-screen -t pu:git-ml:idx bash
+screen -t pu:git-ml:idx+update bash
 ## Get the mailing list as a .git, without the sharded format
 ## https://lore.kernel.org/git/ uses
 stuff "cd ~/g/git-ml || git clone https://public-inbox.org/git ~/g/git-ml^M"
@@ -111,7 +111,7 @@ stuff "test -d ~/Maildir/lei-q-git-ml || time lei q --limit=999999999 -v -o ~/Ma
 ## (or around 20m), but subsequent invocations will be fast:
 stuff "time lei up ~/Maildir/lei-q-git-ml^M"
 ## Run it in a loop
-stuff "while sleep 47; do git -C ~/g/git-ml pull && (cd ~/g/git-ml && time public-inbox-index -v \"\$PWD\") && time lei up ~/Maildir/lei-q-git-ml; done^M"
+stuff "public-inbox-lei-pull-index^M"
 
 screen -t pu:git-ml:update bash
 stuff "sleep 1^M"
