@@ -233,6 +233,19 @@
 	;; per-project
 	gitaly-make-test-tag-branch = "!f() { TEST_OPTIONS=\"-run \\\"Update|Create|Delete|Tag|Branch\\\"\" TEST_PACKAGES=\"./internal/git/updateref ./internal/gitaly/service/operations\" make test; }; f"
 
+	;; GitHub integration
+	github-links = "!f() { \
+		rev=$(git rev-parse HEAD); \
+		branch=$(git rev-parse --symbolic-full-name HEAD | sed 's!^refs/heads/!!'); \
+		url_a=$(git -c url.https://github.com/.insteadOf=git@github.com: remote get-url avar | sed s/\\\\.git//); \
+		url_o=$(git -c url.https://github.com/.insteadOf=git@github.com: remote get-url origin | sed s/\\\\.git//); \
+		url=$(if test -n \"$url_a\"; then echo $url_a; else echo $url_o; fi); \
+		url_a_pfx=$(if test -n \"$url_a\"; then echo avar: ; fi); \
+		master=$(git rev-parse --abbrev-ref refs/remotes/origin/HEAD | sed s,origin/,,); \
+		echo tree = $url/tree/$branch; \
+		echo compare = $url_o/compare/$master...$url_a_pfx$branch; \
+	}; f"
+
 ;; 3rd party tools
 [annex]
 	backends = SHA256E SHA256
