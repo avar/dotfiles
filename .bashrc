@@ -100,7 +100,7 @@ move_up_in_path $HOME/g/git/bin-wrappers
 
 # Use less shitty stack traces in LSAN at the cost of a bit of
 # (sometimes ~2-10%) slowdown.
-export LSAN_OPTIONS=fast_unwind_on_malloc=0
+export LSAN_OPTIONS=fast_unwind_on_malloc=0:abort_on_error=1
 
 # Custom commands
 maybe_add_path $HOME/g/hyperfine/target/debug
