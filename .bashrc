@@ -1,14 +1,14 @@
 ## Include system-wide bashrc
 if test -f /etc/bashrc
 then
-    . /etc/bashrc
+	. /etc/bashrc
 fi
 
 if test -f /etc/bash_completion
 then
-    # On recent Debian (late 2021-ish) __git_ps1 isn't available by
-    # default, load it manually
-    . /etc/bash_completion
+	# On recent Debian (late 2021-ish) __git_ps1 isn't available by
+	# default, load it manually
+	. /etc/bash_completion
 fi
 
 ## Make "git <TAB>" include plumbing like cat-file. Uses a hidden
@@ -27,10 +27,10 @@ export GIT_COMPLETION_SHOW_ALL=1
 
 ## Completion and prompt from my ~/local git
 for f in \
-    ~/local/share/bash-completion/completions/git \
-    ~/local/lib/git-core/git-sh-prompt
+	~/local/share/bash-completion/completions/git \
+	~/local/lib/git-core/git-sh-prompt
 do
-    test -f "$f" && . "$f"
+	test -f "$f" && . "$f"
 done
 
 ## Unset things in global bashrc's that I'd prefer to set myself
@@ -52,36 +52,36 @@ unset GIT_COMMITTER_NAME
 ## - http://invisible-island.net/vttest/vttest-wrap.html
 if test $TERM = "screen.xterm-256color"
 then
-    export TERM="screen"
+	export TERM="screen"
 fi
 
 ## set my PATH
 maybe_add_path() {
-    if [[ "$PATH" != *"$1"* && -d "$1" ]]
-    then
-        PATH=$1:$PATH
-    fi
+	if [[ "$PATH" != *"$1"* && -d "$1" ]]
+	then
+		PATH=$1:$PATH
+	fi
 }
 
 ## Move $1 to the front of the PATH
 move_up_in_path () {
-    if [[ "$PATH" == *"$1"* ]]
-    then
-        PATH=$1:${PATH//:$1:/}
-    fi
+	if [[ "$PATH" == *"$1"* ]]
+	then
+		PATH=$1:${PATH//:$1:/}
+	fi
 }
 
 ## Remove a given path from $PATH, e.g. to get rid of my custom git:
 ##
-##    remove_from_path $(dirname $(which git)) 
+##	remove_from_path $(dirname $(which git))
 remove_from_path () {
-    if [[ "$PATH" == *"$1"* ]]
-    then
-        PATH=${PATH//:$1:/}
-        PATH=${PATH//$1:/}
-        PATH=${PATH//:$1/}
-	export PATH
-    fi	
+	if [[ "$PATH" == *"$1"* ]]
+	then
+		PATH=${PATH//:$1:/}
+		PATH=${PATH//$1:/}
+		PATH=${PATH//:$1/}
+		export PATH
+	fi
 }
 
 # custom scripts
@@ -113,8 +113,8 @@ maybe_add_path ~/perl5/installed/bin
 maybe_add_path ~/local/bin
 
 if [[ $- != *i* ]] ; then
-    # Shell is non-interactive.  Be done now!
-    return
+	# Shell is non-interactive.  Be done now!
+	return
 fi
 
 # away with old aliases
@@ -126,14 +126,14 @@ fi
 # Include ~/.{aliases,bashrc}.d/ config files
 for dir in bashrc.d aliases.d
 do
-    if [ -d ~/.$dir ]; then
-        for i in ~/.$dir/*.sh; do
-            if [ -r $i ]; then
-                . $i
-            fi
-        done
-        unset i
-    fi
+	if [ -d ~/.$dir ]; then
+		for i in ~/.$dir/*.sh; do
+			if [ -r $i ]; then
+				. $i
+			fi
+		done
+		unset i
+	fi
 done
 
 # some nice shell options
@@ -164,48 +164,48 @@ export HISTIGNORE="ls:cd:cd ..:..*: *"
 
 # Sync files based on content. Useful for dynamically changing files.
 function scp {
-    rsync --rsh=ssh --archive --no-group --human-readable --progress "$@"
+	rsync --rsh=ssh --archive --no-group --human-readable --progress "$@"
 }
 
 # Append to files based on file size. Useful large, static or append-only
 # files since it skips the expensive hash check. Also retry the transfer
 # if it times out.
 function leech {
-    cmd="rsync --rsh=ssh --append --archive --no-group --human-readable --progress"
-    $cmd "$@"
-    while [[ $? == 30 ]]; do sleep 5 && $cmd "$@"; done
+	cmd="rsync --rsh=ssh --append --archive --no-group --human-readable --progress"
+	$cmd "$@"
+	while [[ $? == 30 ]]; do sleep 5 && $cmd "$@"; done
 }
 
 function use_icelandic {
-    # Use Icelandic
-    unset LANGUAGE
-    export LANG=is_IS.UTF-8
+	# Use Icelandic
+	unset LANGUAGE
+	export LANG=is_IS.UTF-8
 }
 
 # debian upgrade
 function dug {
-    sudo apt update
-    sudo apt upgrade
-    sudo apt dist-upgrade
+	sudo apt update
+	sudo apt upgrade
+	sudo apt dist-upgrade
 }
 
 function dud {
-    (
-        cd ~/
-        chmod 600 ~/.ssh/config
+	(
+		cd ~/
+		chmod 600 ~/.ssh/config
 
-        # If the only modification to ~/.gitconfig is changing the
-        # E-Mail, just overwrite it because 
-        if git diff -U0 | grep '^[-+][^-+]' | grep -q -v email
-        then
-            echo "You have local changes to ~/, commit them:"
-            git --no-pager diff
-        else
-            echo "Nuking local E-Mail only changes to ~/.gitconfig"
-            git --no-pager diff
-            git checkout -f ~/.gitconfig
-        fi
-        git pull
-        . ~/.bashrc
-    )
+		# If the only modification to ~/.gitconfig is changing the
+		# E-Mail, just overwrite it because
+		if git diff -U0 | grep '^[-+][^-+]' | grep -q -v email
+		then
+			echo "You have local changes to ~/, commit them:"
+			git --no-pager diff
+		else
+			echo "Nuking local E-Mail only changes to ~/.gitconfig"
+			git --no-pager diff
+			git checkout -f ~/.gitconfig
+		fi
+		git pull
+		. ~/.bashrc
+	)
 }
