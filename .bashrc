@@ -57,7 +57,12 @@ fi
 
 ## set my PATH
 maybe_add_path() {
-	if [[ "$PATH" != *"$1"* && -d "$1" ]]
+	if ! test -d "$1"
+	then
+		return
+	fi
+
+	if [[ "$PATH" != *"$1"* ]]
 	then
 		PATH=$1:$PATH
 		export PATH
