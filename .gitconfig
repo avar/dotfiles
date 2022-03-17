@@ -225,7 +225,7 @@
 	git-commit-summary = !git reference
 
 	;; Like push but harder
-	thrust = "!f() { until (sleep 0.5 && git push); do git pull --rebase; done; }; f"
+	thrust = "!f() { until git push $@; do sleep 0.5; done; }; f"
 
 	;; YOLO development, commit with a http://whatthecommit.com commit message
 	snap = "!f() { git add -u && git commit -m\"$(what-the-commit-line)\"; }; f"
