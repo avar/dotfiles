@@ -33,6 +33,7 @@ Group personal-common
       Channel personal-INBOX
       Channel personal-git
       Channel personal-Gmail-Sent-Mail
+      Channel personal-Gmail-Drafts
 
 Group personal
       ## BEGIN copy/paste of "personal-common" above
