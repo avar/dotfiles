@@ -111,7 +111,7 @@ stuff "test -d ~/Maildir/lei-q-git-ml || time lei q --limit=999999999 -v -o ~/Ma
 ## (or around 20m), but subsequent invocations will be fast:
 stuff "time lei up ~/Maildir/lei-q-git-ml^M"
 ## Run it in a loop
-stuff "public-inbox-lei-pull-index^M"
+stuff "while sleep 1; do public-inbox-lei-pull-index; done^M"
 
 screen -t pu:git-ml:update bash
 stuff "sleep 1^M"
