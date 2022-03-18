@@ -32,6 +32,7 @@ MaildirStore personal-local
 Group personal-common
       Channel personal-INBOX
       Channel personal-git
+      Channel personal-mu
       Channel personal-Gmail-Sent-Mail
       Channel personal-Gmail-Drafts
 
@@ -70,6 +71,15 @@ Channel personal-git
     Far :personal-remote:
     Near :personal-local:
     Patterns git
+    ## Only get the last N, ignoring if they're "unread"
+    MaxMessages 1000
+    ExpireUnread yes
+
+Channel personal-mu
+    SyncState *
+    Far :personal-remote:
+    Near :personal-local:
+    Patterns foss/mu
     ## Only get the last N, ignoring if they're "unread"
     MaxMessages 1000
     ExpireUnread yes
