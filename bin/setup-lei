@@ -1,0 +1,72 @@
+#!/bin/bash
+#
+## TODO: This doesn't work at all, but the snippet in
+## ~/.screenrc.d/home-snth-emacs-local using the old format dos.
+
+set -xe
+
+# Wrapper setting up lei <cmd> and public-inbox <cmd> without needing
+# "make install" of them (for debugging). Just "perl -I lib
+# script/<name> $@", for public-inbox-x map the "x" to $1.
+. ~/.bashrc.d/20-public-inbox-lei.sh
+
+# Nuke any instance running old code
+rm -rfv ~/.cache/public-inbox
+lei daemon-kill
+
+if test -n "$NUKE_OLD"
+then
+	rm -rfv ~/.cache/lei ~/.config/lei ~/.local/share/lei
+fi
+
+cd ~/g
+if test -n "$NUKE_OLD"
+then
+	rm -rfv lkml
+	mkdir -v lkml
+
+	for e in $(lei ls-external |grep $HOME/g/lkml |awk '{print $1}')
+	do
+		lei forget-external $e
+	done
+fi
+
+# Set up a mirror
+cd lkml
+
+## Instructions adapted from
+## https://lore.kernel.org/git/_/text/mirror/
+git_idx="1" # make it "0 1" for a full mirror
+for i in $git_idx
+do
+	if ! test -d ~/g/lkml/git/git/$i.git
+	then
+		git clone https://lore.kernel.org/git/$i ~/g/lkml/git/git/$i.git
+	fi
+done
+
+# If you have public-inbox 1.1+ installed, you may
+# initialize and index your mirror using the following commands:
+public-inbox init -V2 --ng org.kernel.vger.git \
+		  git ./git http://lore.kernel.org/git \
+		  git@vger.kernel.org
+public-inbox index -v ./git
+
+# lei
+for i in $git_idx
+do
+	if ! ( lei ls-external | grep -q -F "$HOME/g/lkml/git/git/$i.git ")
+	then
+		lei add-external ~/g/lkml/git/git/$i.git
+	fi
+done
+
+if test -n "$NUKE_OLD"
+then
+	rm -rfv ~/Maildir/lei-q-git-lkml
+fi
+
+# lei up ~/Maildir/lei-q-git-lkml
+
+# Amended from https://lore.kernel.org/git/220202.86leyt8uly.gmgdl@evledraar.gmail.com/
+lei q --limit=999999999 -v -o ~/Maildir/lei-q-git-lkml l:git.vger.kernel.org

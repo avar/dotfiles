@@ -1,5 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 set -xe
+
+. ~/.bashrc.d/20-public-inbox-lei.sh
 
 nuke_bad_msg () {
 	rm -vf \

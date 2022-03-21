@@ -106,7 +106,7 @@ stuff "time public-inbox-index -v \$PWD^M"
 stuff "test -d ~/.config/lei || lei add-external ~/g/git-ml/.git^M"
 ## The one-off massive import of the Git ML. TODO: No way to specify
 ## an infinite limit? Not --no-limit or --limit=0.
-stuff "test -d ~/Maildir/lei-q-git-ml || time lei q --limit=999999999 -v -o ~/Maildir/lei-q-git-ml l:git.vger.kernel.org^M"
+stuff "test -d ~/Maildir/lei-q-git-ml || time lei q --limit=999999999 -v -o ~/Maildir/lei-q-git-ml d:20220101.. AND l:git.vger.kernel.org^M"
 ## After the one-off import this will take forever *the first time*
 ## (or around 20m), but subsequent invocations will be fast:
 stuff "time lei up ~/Maildir/lei-q-git-ml^M"
