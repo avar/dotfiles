@@ -73,13 +73,16 @@ stuff "cd t^M"
 stuff "remove_from_path \$PWD/bin-wrappers^M"
 stuff "# ./t7810-grep.sh -v -i"
 
-screen -t a:runner bash
+screen -t t:3 bsh
 stuff "cd ~/g/actions-runner^M"
-stuff "./run.sh^M"
+stuff "cd ~/g/git^M"
+stuff "cd t^M"
+stuff "remove_from_path \$PWD/bin-wrappers^M"
+stuff "# ./t7810-grep.sh -v -i"
 
 screen -t se:new bash
 stuff "cd ~/g/git^M"
-stuff "remove_from_path \$(dirname $(which git))^M"
+stuff "remove_from_path \$PWD/bin-wrappers^M"
 stuff "# gpp -F --fpa='--subject-prefix=\"PATCH\"' --sea='--cc=\"Junio C Hamano <gitster@pobox.com>\"' --no-send^M"
 stuff "# gpp -F --fpa='--subject-prefix=\"PATCH\" --cover-letter' --sea='--cc=\"Junio C Hamano <gitster@pobox.com>\" --cc=\"Jeff King <peff@peff.net>\"' --no-send^M"
 stuff "# gpp -F --fpa='--cover-letter --subject-prefix=\"PATCH v2\" --range-diff=avar/XXX --in-reply-to=\"<>\"' --sea='--cc=\"Junio C Hamano <gitster@pobox.com>\"' --no-send^M"
@@ -156,6 +159,13 @@ stuff "git version^M"
 stuff "export OPT_TESTS='t[0-9]*.sh'^M"
 stuff "# time OPT_DEBUG= OPT_JOBS=32 OPT_JOB_NAME=gcc185 OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
 
+# Debian bullseye Xeon
+screen -t t:gl:run:gcc140:Debian:Xeon
+stuff "cd ~/g/git^M"
+stuff "git version^M"
+stuff "export OPT_TESTS='t[0-9]*.sh'^M"
+stuff "# time OPT_DEBUG= OPT_JOBS=32 OPT_JOB_NAME=gcc140 OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
+
 # AIX 7.1
 screen -t t:gl:run:gcc111:aix71
 stuff "cd ~/g/git^M"
@@ -219,29 +229,57 @@ stuff "git version^M"
 stuff "export OPT_TESTS='t[0-9]*.sh'^M"
 stuff "# time OPT_DEBUG= OPT_JOBS=4 OPT_JOB_NAME=gcc118 OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
 
-# CentOS ppc64le
-screen -t t:gl:run:gcc135:COS:ppc64le:sh:KA
+# Debian bookworm sparc64
+screen -t t:gl:run:gcc102:Debian:sparc64
 stuff "cd ~/g/git^M"
 stuff "git version^M"
-stuff "ssh gcc135.fsffrance.org^M"
+stuff "export OPT_TESTS='t[0-9]*.sh'^M"
+stuff "# time OPT_DEBUG= OPT_JOBS=24 OPT_JOB_NAME=gcc102 OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
 
-screen -t t:gl:run:gcc135:COS:ppc64le
+# Debian bookworm UltraSparcT5
+screen -t t:gl:run:gcc202:Debian:UltraSparcT5
+stuff "cd ~/g/git^M"
+stuff "git version^M"
+stuff "export OPT_TESTS='t[0-9]*.sh'^M"
+stuff "# time OPT_DEBUG= OPT_JOBS=24 OPT_JOB_NAME=gcc202 OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
+
+# CentOS ppc64le.PWR9
+screen -t t:gl:run:gcc135:COS:ppc64le.PWR9
 stuff "cd ~/g/git^M"
 stuff "git version^M"
 stuff "export OPT_TESTS='t[0-9]*.sh'^M"
 stuff "# time OPT_DEBUG= OPT_JOBS=24 OPT_JOB_NAME=gcc135 OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
 
-# Debian ppc64
-screen -t t:gl:run:gcc203:COS:ppc64le:sh:KA
+# CentOS ppc64le.PWR8E
+screen -t t:gl:run:gcc112:COS:ppc64le.PWR8E:sh:KA
 stuff "cd ~/g/git^M"
 stuff "git version^M"
-stuff "ssh gcc203.fsffrance.org^M"
+stuff "ssh gcc112.fsffrance.org^M"
 
-screen -t t:gl:run:gcc203:Debian:ppc64
+screen -t t:gl:run:gcc112:COS:ppc64le.PWR8E
+stuff "cd ~/g/git^M"
+stuff "git version^M"
+stuff "export OPT_TESTS='t[0-9]*.sh'^M"
+stuff "# time OPT_DEBUG= OPT_JOBS=24 OPT_JOB_NAME=gcc112 OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
+
+# Debian ppc64.PWR8
+screen -t t:gl:run:gcc203:Debian:ppc64.PWR8
 stuff "cd ~/g/git^M"
 stuff "git version^M"
 stuff "export OPT_TESTS='t[0-9]*.sh'^M"
 stuff "# time OPT_DEBUG= OPT_JOBS=24 OPT_JOB_NAME=gcc203 OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
+
+# Debian ppc64.PWR7
+screen -t t:gl:run:gcc110:Depbian:ppc64.PWR7:sh:KA
+stuff "cd ~/g/git^M"
+stuff "git version^M"
+stuff "ssh gcc110.fsffrance.org^M"
+
+screen -t t:gl:run:gcc110:Debian:ppc64.PWR7
+stuff "cd ~/g/git^M"
+stuff "git version^M"
+stuff "export OPT_TESTS='t[0-9]*.sh'^M"
+stuff "# time OPT_DEBUG= OPT_JOBS=24 OPT_JOB_NAME=gcc110 OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
 
 # OpenSUSE aarch64
 screen -t t:gl:run:gcc22:COS:debian:buster:mips64
@@ -256,6 +294,13 @@ stuff "cd ~/g/git^M"
 stuff "git version^M"
 stuff "export OPT_TESTS='t[0-9]*.sh'^M"
 stuff "# time OPT_DEBUG= OPT_JOBS=8 OPT_JOB_NAME=gcc304 OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
+
+# Apple Mac Mini M1 (16K PAGESIZE kernel) with Debian
+screen -t t:gl:run:gcc103:Debian:M1
+stuff "cd ~/g/git^M"
+stuff "git version^M"
+stuff "export OPT_TESTS='t[0-9]*.sh'^M"
+stuff "# time OPT_DEBUG= OPT_JOBS=2 OPT_JOB_NAME=gcc103 OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
 
 # OpenBSD i7
 screen -t t:gl:run:gcc302:obsd:xeon
@@ -284,6 +329,13 @@ stuff "cd ~/g/git^M"
 stuff "git version^M"
 stuff "export OPT_TESTS='t[0-9]*.sh'^M"
 stuff "# time OPT_DEBUG= OPT_JOBS=1 OPT_JOB_NAME=gcc301 OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
+
+# Nvidia Jetson AGX Xavier aarch64
+screen -t t:gl:run:gcc80:aarch64-NvidiaARMv8
+stuff "cd ~/g/git^M"
+stuff "git version^M"
+stuff "export OPT_TESTS='t[0-9]*.sh'^M"
+stuff "# time OPT_DEBUG= OPT_JOBS=4 OPT_JOB_NAME=gcc80 OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
 
 # HP/UX ia64
 screen -t t:gl:run:gcc999:HP/UX:i7
