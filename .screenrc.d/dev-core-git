@@ -164,7 +164,7 @@ screen -t t:gl:run:gcc140:Debian:Xeon
 stuff "cd ~/g/git^M"
 stuff "git version^M"
 stuff "export OPT_TESTS='t[0-9]*.sh'^M"
-stuff "# time OPT_DEBUG= OPT_JOBS=32 OPT_JOB_NAME=gcc140 OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
+stuff "# time OPT_DEBUG= OPT_JOBS=24 OPT_JOB_NAME=gcc140 OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
 
 # AIX 7.1
 screen -t t:gl:run:gcc111:aix71
@@ -331,6 +331,12 @@ stuff "export OPT_TESTS='t[0-9]*.sh'^M"
 stuff "# time OPT_DEBUG= OPT_JOBS=1 OPT_JOB_NAME=gcc301 OPT_REVISION=HEAD OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
 
 # Nvidia Jetson AGX Xavier aarch64
+
+screen -t t:gl:run:gcc80:aarch64-NvidiaARMv8:KA
+stuff "cd ~/g/git^M"
+stuff "git version^M"
+stuff "ssh gcc80.fsffrance.org^M"
+
 screen -t t:gl:run:gcc80:aarch64-NvidiaARMv8
 stuff "cd ~/g/git^M"
 stuff "git version^M"
