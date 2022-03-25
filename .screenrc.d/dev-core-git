@@ -5,12 +5,12 @@ sessionname dev-core-git
 
 screen -t g:m:0 bash
 stuff "cd ~/g/git.meta^M"
-stuff "remove_from_path \$PWD/bin-wrappers^M"
+stuff "remove_from_path \$(cd ~/g/git && echo \$PWD/bin-wrappers)^M"
 stuff "# git pfetch^M"
 
 screen -t g:b:0 bash
 stuff "cd ~/g/git.meta^M"
-stuff "remove_from_path \$PWD/bin-wrappers^M"
+stuff "remove_from_path \$(cd ~/g/git && echo \$PWD/bin-wrappers)^M"
 stuff "cat make-install-avargit.sh^M"
 stuff "git version^M"
 
