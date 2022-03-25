@@ -83,9 +83,9 @@ stuff "# ./t7810-grep.sh -v -i"
 screen -t se:new bash
 stuff "cd ~/g/git^M"
 stuff "remove_from_path \$PWD/bin-wrappers^M"
-stuff "# gpp -F --fpa='--subject-prefix=\"PATCH\"' --sea='--cc=\"Junio C Hamano <gitster@pobox.com>\"' --no-send^M"
-stuff "# gpp -F --fpa='--subject-prefix=\"PATCH\" --cover-letter' --sea='--cc=\"Junio C Hamano <gitster@pobox.com>\" --cc=\"Jeff King <peff@peff.net>\"' --no-send^M"
-stuff "# gpp -F --fpa='--cover-letter --subject-prefix=\"PATCH v2\" --range-diff=avar/XXX --in-reply-to=\"<>\"' --sea='--cc=\"Junio C Hamano <gitster@pobox.com>\"' --no-send^M"
+stuff "# gpp -F --sea='--cc=\"Junio C Hamano <gitster@pobox.com>\"' --no-send^M"
+stuff "# gpp -F --fpa='--cover-letter' --sea='--cc=\"Junio C Hamano <gitster@pobox.com>\" --cc=\"Jeff King <peff@peff.net>\"' --no-send^M"
+stuff "# gpp -F --fpa='--cover-letter -v2 --range-diff=avar/XXX --in-reply-to=\"<>\"' --sea='--cc=\"Junio C Hamano <gitster@pobox.com>\"' --no-send^M"
 
 screen -t ml:r
 stuff "cd ~/g/git-ml^M"
