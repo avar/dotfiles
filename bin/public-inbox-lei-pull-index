@@ -4,21 +4,19 @@ set -xe
 . ~/.bashrc.d/20-public-inbox-lei.sh
 
 repo=~/g/git-ml
+cd $repo
 while true
 do
-	oid=$(git -C $repo rev-parse HEAD)
-	git -C $repo pull
-	noid=$(git -C $repo rev-parse HEAD)
+	oid=$(git rev-parse HEAD)
+	git pull
+	noid=$(git rev-parse HEAD)
 	if test "$oid" = "$noid"
 	then
 		echo Nothing to update
 		sleep 60
 		continue
 	fi
-	(
-		cd $repo &&
-		public-inbox-index -v "$PWD"
-	)
+	public-inbox index -v "$PWD"
 	lei up ~/Maildir/lei-q-git-ml
 	sleep 1
 done
