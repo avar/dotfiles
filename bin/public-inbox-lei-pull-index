@@ -3,13 +3,6 @@ set -xe
 
 . ~/.bashrc.d/20-public-inbox-lei.sh
 
-nuke_bad_msg () {
-	rm -vf \
-		"/home/avar/Maildir/personal-gmail/git/cur/1634614337.67938_6548.gmgdl,U=17579:2,T" \
-		"/home/avar/Maildir/lei-q-git-ml/cur/0e19776b07c413fa3f2595cb3dbaa73d8db72e0a=99:2,"
-}
-nuke_bad_msg
-
 repo=~/g/git-ml
 while true
 do
@@ -27,6 +20,5 @@ do
 		public-inbox-index -v "$PWD"
 	)
 	lei up ~/Maildir/lei-q-git-ml
-	nuke_bad_msg
 	sleep 1
 done
