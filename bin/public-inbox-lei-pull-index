@@ -12,7 +12,14 @@ do
 	noid=$(git rev-parse HEAD)
 	if test "$oid" = "$noid"
 	then
-		echo Nothing to update
+		echo Already pulled down $noid
+	fi
+	ioid=$(sqlite3 \
+		$repo/.git/public-inbox/msgmap.sqlite3 \
+		'SELECT val FROM meta WHERE key = "last_commit"')
+	if test "$ioid" = "$noid"
+	then
+		echo Already indexed $noid
 		sleep 60
 		continue
 	fi
