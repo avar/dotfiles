@@ -202,6 +202,10 @@
 	rs = rebase --skip
 	ra = rebase --abort
 
+	;; Branch
+	bsut = branch --set-upstream-to
+	bsut-om = bsut origin/master
+
 	;; Merge
 	mc = !EDITOR=cat git merge --continue
 
