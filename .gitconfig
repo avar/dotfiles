@@ -37,6 +37,15 @@
 	;; to change." advice already!
 	defaultBranch = master
 
+;; Repository optimization
+[pack]
+	writeReverseIndex = true
+	writeBitmapHashCache = true
+[repack]
+	writeBitmaps = true
+[gc]
+	writeCommitGraph = true
+
 ;; Core -- UI
 [help]
 	autocorrect = 0
