@@ -66,6 +66,7 @@ stuff "cd t^M"
 stuff "remove_from_path \$PWD/bin-wrappers^M"
 stuff "# ~/g/git.meta/config.mak.sh && time make GIT_PROVE_OPTS=\"--timer --state=save\" T=\"$(dedup $(echo t[0-9]*{grep,log}*.sh))\"^M"
 stuff "# ~/g/git.meta/config.mak.sh && time make GIT_PROVE_OPTS=\"--timer --state=save\" T=\"$(dedup $(echo t[0-9]*{bundle,protocol,serve,pack,remote,receive}*.sh))\""
+stuff "# ~/g/git.meta/config.mak.sh && time make GIT_PROVE_OPTS=\"--timer --state=save\" T=\"$(dedup $(git grep -l -e submodule t[0-9]*.sh))\""
 
 screen -t t:2 bash
 stuff "cd ~/g/git^M"
