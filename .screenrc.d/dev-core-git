@@ -96,6 +96,39 @@ screen -t ml:sh:0
 stuff "cd ~/g/git-ml^M"
 stuff "git --no-pager log --oneline -10^M"
 
+# Analysis tools
+## TODO: I haven't got this working at all. It will start a webserver,
+## check it on the laptop with:
+##
+##    ssh -L 8081:localhost:8081 vm
+screen -t a:cscout
+stuff "cd ~/g/git^M"
+stuff "# (git worktree remove --force ~/g/git.cscout && git worktree add ~/g/git.cscout origin/master^{} && cd ~/g/git.cscout && ~/g/git.meta/config.mak.sh && csmake CC=/usr/bin/gcc && cscout make.cs)^M"
+
+# Build dependencies or other tools
+screen -t r:cscout
+stuff "test -d ~/g/cscout || git clone git@github.com:dspinellis/cscout.git ~/g/cscout^M"
+stuff "cd ~/g/cscout^M"
+stuff "# git fetch^M"
+stuff "# make clean^M"
+stuff "# make^M"
+stuff "# make install INSTALL_PREFIX=\$HOME/local^M"
+
+## This doesn't work, but: sudo apt install iwyu
+screen -t r:iwyu
+stuff "test -d ~/g/iwyu || git clone git@github.com:include-what-you-use/include-what-you-use.git ~/g/iwyu^M"
+stuff "cd ~/g/iwyu^M"
+stuff "# git fetch^M"
+## These versions need to match, see https://github.com/include-what-you-use/include-what-you-use
+stuff "clang -v^M"
+stuff "# git checkout -t origin/clang_13^M"
+stuff "# sudo apt install libclang-13-dev^M"
+stuff "# find /usr/lib/llvm-* -iname 'libclangbasic*'^M"
+stuff "# mkdir ~/g/iwyu-clang^M"
+stuff "# cd ~/g/iwyu-clang^M"
+stuff "# cmake -G \"Unix Makefiles\" -DCMAKE_PREFIX_PATH=/usr/lib/llvm-13 ../iwyu^M"
+stuff "# nice -n make^M"
+
 screen -t r:pcre1
 stuff "cd ~/g/pcre^M"
 stuff "git svn rebase^M"
