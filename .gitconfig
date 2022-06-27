@@ -25,6 +25,9 @@
 	;; Add file names and line numbers to
 	;; {usage,die,error,warning}() messages
 	usageAddSource = true
+
+	;; Reflog
+	logAllRefUpdates = true
 [init]
 	;; Enough with the spammy "This default branch name is subject
 	;; to change." advice already!
