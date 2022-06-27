@@ -194,6 +194,11 @@ stuff "export OPT_TESTS='t[0-9]*.sh'^M"
 stuff "# time OPT_JOBS=32 OPT_JOB_NAME=gcc185 OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
 
 # Debian bullseye Xeon
+screen -t t:gl:run:gcc140:Debian:Xeon:KA
+stuff "cd ~/g/git^M"
+stuff "git version^M"
+stuff "ssh gcc140.fsffrance.org^M"
+
 screen -t t:gl:run:gcc140:Debian:Xeon
 stuff "cd ~/g/git^M"
 stuff "git version^M"
@@ -271,6 +276,11 @@ stuff "export OPT_TESTS='t[0-9]*.sh'^M"
 stuff "# time OPT_JOBS=24 OPT_JOB_NAME=gcc102 OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
 
 # Debian bookworm UltraSparcT5
+screen -t t:gl:run:gcc202:Debian:UltraSparcT5:KA
+stuff "cd ~/g/git^M"
+stuff "git version^M"
+stuff "ssh gcc202.fsffrance.org^M"
+
 screen -t t:gl:run:gcc202:Debian:UltraSparcT5
 stuff "cd ~/g/git^M"
 stuff "git version^M"
