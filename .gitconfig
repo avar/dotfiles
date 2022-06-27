@@ -28,6 +28,10 @@
 
 	;; Reflog
 	logAllRefUpdates = true
+
+	;; Index performance
+	untrackedCache = true
+	splitIndex = false ; TODO?
 [init]
 	;; Enough with the spammy "This default branch name is subject
 	;; to change." advice already!
