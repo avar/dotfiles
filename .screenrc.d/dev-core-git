@@ -74,7 +74,7 @@ stuff "cd t^M"
 stuff "remove_from_path \$PWD/bin-wrappers^M"
 stuff "# ./t7810-grep.sh -v -i"
 
-screen -t t:3 bsh
+screen -t t:3 bash
 stuff "cd ~/g/actions-runner^M"
 stuff "cd ~/g/git^M"
 stuff "cd t^M"
