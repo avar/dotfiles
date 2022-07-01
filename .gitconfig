@@ -207,7 +207,10 @@
 	bsut-om = bsut origin/master
 
 	;; Merge
+	m = merge
 	mc = !EDITOR=cat git merge --continue
+	ma = merge --abort
+	mq = merge --quit
 
 	rix = ri --exec
 	rixr = rix 'git reference'
