@@ -32,6 +32,7 @@ MaildirStore personal-local
 Group personal-common
       Channel personal-INBOX
       Channel personal-git
+      Channel personal-git-sfc
       Channel personal-mu
       Channel personal-Gmail-Sent-Mail
       Channel personal-Gmail-Drafts
@@ -40,6 +41,7 @@ Group personal
       ## BEGIN copy/paste of "personal-common" above
       Channel personal-INBOX
       Channel personal-git
+      Channel personal-git-sfc
       Channel personal-Gmail-Sent-Mail
       Channel personal-Gmail-Drafts
       ## END copy/paste of "personal-common" above
@@ -74,6 +76,12 @@ Channel personal-git
     ## Only get the last N, ignoring if they're "unread"
     MaxMessages 1000
     ExpireUnread yes
+
+Channel personal-git-sfc
+    SyncState *
+    Far :personal-remote:
+    Near :personal-local:
+    Patterns git-sfc
 
 Channel personal-mu
     SyncState *
