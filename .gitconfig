@@ -39,10 +39,10 @@
 
 ;; Repository optimization
 [pack]
-	writeReverseIndex = true
-	writeBitmapHashCache = true
+	writeReverseIndex = false
+	writeBitmapHashCache = false
 [repack]
-	writeBitmaps = true
+	writeBitmaps = false
 [gc]
 	writeCommitGraph = true
 
