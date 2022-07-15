@@ -118,6 +118,7 @@ maybe_add_path ~/perl5/installed/bin
 
 # other custom compilations
 maybe_add_path ~/local/bin
+maybe_add_path $HOME/g/make
 
 if [[ $- != *i* ]] ; then
 	# Shell is non-interactive.  Be done now!
