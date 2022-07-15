@@ -2,6 +2,10 @@
 [user]
 	name = Ævar Arnfjörð Bjarmason
 	email = avarab@gmail.com
+[spatchCache]
+	dir = ~/.cache/spatchcache
+	trace = false
+	debug = false
 [github]
 	login = avar
 [include]
