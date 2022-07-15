@@ -65,7 +65,7 @@ stuff "cd ~/g/git^M"
 stuff "cd t^M"
 stuff "remove_from_path \$PWD/bin-wrappers^M"
 stuff "# ~/g/git.meta/config.mak.sh && time NO_SVN_TESTS=1 GIT_TEST_HTTPD=0 make GIT_PROVE_OPTS=\"--timer --state=failed,slow,save\"^M"
-stuff "# ~/g/git.meta/config.mak.sh && time GIT_TEST_HTTPD=1 GIT_TEST_PASSING_SANITIZE_LEAK= make GIT_PROVE_OPTS=\"--timer --state=failed,slow,save\"^M"
+stuff "# ~/g/git.meta/config.mak.sh && time GIT_TEST_HTTPD=1 GIT_TEST_PASSING_SANITIZE_LEAK= GIT_TEST_SANITIZE_LEAK_LOG=true make GIT_PROVE_OPTS=\"--timer --state=failed,slow,save\" GIT_TEST_OPTS_EXTRA=--immediate^M"
 
 screen -t t:1 bash
 stuff "cd ~/g/git^M"
@@ -74,6 +74,7 @@ stuff "remove_from_path \$PWD/bin-wrappers^M"
 stuff "# ~/g/git.meta/config.mak.sh && time make GIT_PROVE_OPTS=\"--timer --state=save\" T=\"$(dedup $(echo t[0-9]*{grep,log}*.sh))\"^M"
 stuff "# ~/g/git.meta/config.mak.sh && time make GIT_PROVE_OPTS=\"--timer --state=save\" T=\"$(dedup $(echo t[0-9]*{bundle,protocol,serve,pack,remote,receive}*.sh))\""
 stuff "# ~/g/git.meta/config.mak.sh && time make GIT_PROVE_OPTS=\"--timer --state=save\" T=\"$(dedup $(git grep -l -e submodule t[0-9]*.sh))\""
+stuff "# ~/g/git.meta/config.mak.sh && time make GIT_TEST_PASSING_SANITIZE_LEAK=check GIT_TEST_SANITIZE_LEAK_LOG=true GIT_PROVE_OPTS=\"--timer --state=save\" T=\"$(dedup $(git grep -l -e submodule t[0-9]*.sh))\" GIT_TEST_OPTS_EXTRA=--immediate"
 
 screen -t t:2 bash
 stuff "cd ~/g/git^M"
