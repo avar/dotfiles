@@ -42,6 +42,7 @@ Group personal
       Channel personal-INBOX
       Channel personal-git
       Channel personal-git-sfc
+      Channel personal-cocci
       Channel personal-Gmail-Sent-Mail
       Channel personal-Gmail-Drafts
       ## END copy/paste of "personal-common" above
@@ -82,6 +83,12 @@ Channel personal-git-sfc
     Far :personal-remote:
     Near :personal-local:
     Patterns git-sfc
+
+Channel personal-cocci
+    SyncState *
+    Far :personal-remote:
+    Near :personal-local:
+    Patterns git-cocci
 
 Channel personal-mu
     SyncState *
