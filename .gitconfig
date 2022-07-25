@@ -3,7 +3,7 @@
 	name = Ævar Arnfjörð Bjarmason
 	email = avarab@gmail.com
 [spatchCache]
-	dir = ~/.cache/spatchcache
+	spatch = ~/g/coccinelle/spatch.opt
 	trace = false
 	debug = false
 [github]
