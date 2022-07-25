@@ -14,11 +14,6 @@ stuff "remove_from_path \$(cd ~/g/git && echo \$PWD/bin-wrappers)^M"
 stuff "./make-install-avargit.sh --only-range-diff^M"
 stuff "git version^M"
 
-screen -t g:m:2:sh bash # sh (commit)
-stuff "cd ~/g/git.meta^M"
-stuff "remove_from_path \$(cd ~/g/git && echo \$PWD/bin-wrappers)^M"
-stuff "git version^M"
-
 screen -t g:0 bash
 stuff "cd ~/g/git^M"
 stuff "remove_from_path \$PWD/bin-wrappers^M"
