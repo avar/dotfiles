@@ -34,6 +34,8 @@ screen -t c:d:r bash
 stuff "cd ~/g/git^M"
 stuff "remove_from_path \$PWD/bin-wrappers^M"
 stuff "# git rebase -i --exec '~/g/git.meta/config.mak.sh && time make TAGS all check-docs && (cd t && make GIT_PROVE_OPTS=\"--timer --state=save\" T=\"$(dedup t000[0-9]*.sh)\")'^M"
+stuff "# git rixr -x 'make git-objs'^M"
+stuff "# git rixr -x 'GIT_TEST_PASSING_SANITIZE_LEAK=check GIT_TEST_SANITIZE_LEAK_LOG=true GIT_SKIP_TESTS='t2012 t6435 t7517' make SANITIZE=leak test^M"
 
 screen -t c:d bash
 stuff "cd ~/g/git^M"
