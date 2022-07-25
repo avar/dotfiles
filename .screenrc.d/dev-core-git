@@ -59,15 +59,15 @@ stuff "# git hyperfine  -L rev HEAD~1,HEAD~0 -s 'make' 'make T=t0001-init.sh'^M"
 
 screen -t t:0 bash
 stuff "cd ~/g/git^M"
-stuff "cd t^M"
 stuff "remove_from_path \$PWD/bin-wrappers^M"
+stuff "cd t^M"
 stuff "# ~/g/git.meta/config.mak.sh && time NO_SVN_TESTS=1 GIT_TEST_HTTPD=0 make GIT_PROVE_OPTS=\"--timer --state=failed,slow,save\"^M"
 stuff "# ~/g/git.meta/config.mak.sh && time GIT_TEST_HTTPD=1 GIT_TEST_PASSING_SANITIZE_LEAK= GIT_TEST_SANITIZE_LEAK_LOG=true make GIT_PROVE_OPTS=\"--timer --state=failed,slow,save\" GIT_TEST_OPTS_EXTRA=--immediate^M"
 
 screen -t t:1 bash
 stuff "cd ~/g/git^M"
-stuff "cd t^M"
 stuff "remove_from_path \$PWD/bin-wrappers^M"
+stuff "cd t^M"
 stuff "# ~/g/git.meta/config.mak.sh && time make GIT_PROVE_OPTS=\"--timer --state=save\" T=\"$(dedup $(echo t[0-9]*{grep,log}*.sh))\"^M"
 stuff "# ~/g/git.meta/config.mak.sh && time make GIT_PROVE_OPTS=\"--timer --state=save\" T=\"$(dedup $(echo t[0-9]*{bundle,protocol,serve,pack,remote,receive}*.sh))\""
 stuff "# ~/g/git.meta/config.mak.sh && time make GIT_PROVE_OPTS=\"--timer --state=save\" T=\"$(dedup $(git grep -l -e submodule t[0-9]*.sh))\""
@@ -75,15 +75,14 @@ stuff "# ~/g/git.meta/config.mak.sh && time make GIT_TEST_PASSING_SANITIZE_LEAK=
 
 screen -t t:2 bash
 stuff "cd ~/g/git^M"
-stuff "cd t^M"
 stuff "remove_from_path \$PWD/bin-wrappers^M"
+stuff "cd t^M"
 stuff "# ./t7810-grep.sh -v -i"
 
 screen -t t:3 bash
-stuff "cd ~/g/actions-runner^M"
 stuff "cd ~/g/git^M"
-stuff "cd t^M"
 stuff "remove_from_path \$PWD/bin-wrappers^M"
+stuff "cd t^M"
 stuff "# ./t7810-grep.sh -v -i"
 
 screen -t se:new bash
