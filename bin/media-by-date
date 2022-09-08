@@ -1,7 +1,21 @@
 #!/bin/sh
 ## From https://kamranzafar.org/2013/12/24/organizing-media-files-on-linux/
 
-for file in $(find . \( -iname '*.jpg' -o -iname '*.png' -o -iname '*.mp4' -o -iname '*.mov' \))
+unsorted_media_in_cwd() {
+	find . \
+		-maxdepth 1 \
+		\( \
+			-iname '*.jpg' \
+			-o -iname '*.png' \
+			-o -iname '*.mp4' \
+			-o -iname '*.mov' \
+			-o -iname '*.gpr' \
+			-o -iname '*.thm' \
+			-o -iname '*.lrv' \
+		\)
+}
+
+for file in $(unsorted_media_in_cwd)
 do
 	date="$(exiftool "$file" | grep Modification | awk '{print $5 }' | sed s%:%-%g)"
 	datepath="$date-UNSORTED"
