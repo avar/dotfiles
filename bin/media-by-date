@@ -1,0 +1,10 @@
+#!/bin/sh
+## From https://kamranzafar.org/2013/12/24/organizing-media-files-on-linux/
+
+for file in $(find . \( -iname '*.jpg' -o -iname '*.png' -o -iname '*.mp4' -o -iname '*.mov' \))
+do
+	date="$(exiftool "$file" | grep Modification | awk '{print $5 }' | sed s%:%-%g)"
+	datepath="$date-UNSORTED"
+	echo mkdir -pv "$datepath"
+	echo mv -v "$file" "$datepath"
+done
