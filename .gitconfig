@@ -276,3 +276,5 @@
 ;; 3rd party tools
 [annex]
 	backends = SHA256E SHA256
+[safe]
+	directory = /etc
