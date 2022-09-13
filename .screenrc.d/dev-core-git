@@ -12,6 +12,7 @@ screen -t g:m:1:b bash # build
 stuff "cd ~/g/git.meta^M"
 stuff "remove_from_path \$(cd ~/g/git && echo \$PWD/bin-wrappers)^M"
 stuff "./make-install-avargit.sh --only-range-diff^M"
+stuff "# ./make-install-avargit.sh --no-merge-compile^M"
 stuff "git version^M"
 
 screen -t g:0 bash
