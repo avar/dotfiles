@@ -42,7 +42,6 @@ screen -t c:d bash
 stuff "cd ~/g/git^M"
 stuff "remove_from_path \$PWD/bin-wrappers^M"
 stuff "# ~/g/git.meta/config.mak.sh && time make TAGS all check-docs^M"
-stuff "# ~/g/git.meta/config.mak.sh && time make TAGS all check-docs^M"
 
 screen -t g:hf bash
 stuff "cd ~/g/git^M"
