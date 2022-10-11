@@ -6,6 +6,7 @@
 	spatch = ~/g/coccinelle/spatch.opt
 	trace = false
 	debug = false
+	cacheWhenStderr = true
 [github]
 	login = avar
 [include]
