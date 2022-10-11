@@ -10,10 +10,9 @@
 	login = avar
 [include]
 	path = ~/.gitconfig.d/github-token
-	path = ~/g/git-hyperfine/git-hyperfine-gitconfig.cfg
 [includeIf "gitdir:~/g/perl/"]
 	path = ~/.gitconfig.d/user-perl
-[includeIf "gitdir:~/g/git*"]
+[includeIf "gitdir:~/g/git*/.git"]
 	path = ~/.gitconfig.d/git
 
 ;; Core

@@ -1,2 +1,2 @@
-[hyperfine "hook"]
-setup = ~/g/git.meta/config.mak.sh
+[include]
+	path = ~/g/git-hyperfine/git-hyperfine-gitconfig.cfg
