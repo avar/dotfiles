@@ -1,2 +1,5 @@
 [include]
 	path = ~/g/git-hyperfine/git-hyperfine-gitconfig.cfg
+
+[alias]
+	scan-leaks-top = "!f() { cd t && git -P show avar/add-new-sanitize-leak-test-modes-follow-up:t/aggregate-leaks.perl | perl - | less -S; }; f"
