@@ -1,0 +1,3 @@
+#!/bin/sh
+
+eval "$(git -P -C ~/g/git show avar/coccinelle-incremental-3:contrib/coccinelle/spatchcache)"
