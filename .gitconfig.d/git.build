@@ -1,0 +1,2 @@
+[spatchCache]
+	dependFormat = ".build/dep/$dirname/${basename%.c}.mak"

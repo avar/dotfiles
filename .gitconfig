@@ -15,6 +15,8 @@
 	path = ~/.gitconfig.d/user-perl
 [includeIf "gitdir:~/g/git*/.git"]
 	path = ~/.gitconfig.d/git
+[includeIf "onbranch:build-master"]
+	path = ~/.gitconfig.d/git.build
 
 ;; Core
 [core]
