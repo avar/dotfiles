@@ -10,6 +10,9 @@ alias gdb='gdb -silent'
 alias ls="ls --color=auto"
 alias ll="ls -lh"
 
+# prettier grep
+alias grep='grep --color=auto'
+
 # Dirs
 alias ..="cd .."
 alias ...="cd ../.."
