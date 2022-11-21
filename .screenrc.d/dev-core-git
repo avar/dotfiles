@@ -340,11 +340,11 @@ stuff "export OPT_TESTS='t[0-9]*.sh'^M"
 stuff "# time OPT_JOBS=1 OPT_JOB_NAME=gcc22 OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
 
 # Apple m1 Mac Mini
-screen -t t:gl:run:gcc304:OSX:M1
+screen -t t:gl:run:gcc104:OSX:M1
 stuff "cd ~/g/git^M"
 stuff "git version^M"
 stuff "export OPT_TESTS='t[0-9]*.sh'^M"
-stuff "# time OPT_JOBS=8 OPT_JOB_NAME=gcc304 OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
+stuff "# time OPT_JOBS=8 OPT_JOB_NAME=gcc104 OPT_TESTS=\"t[0-9]*.sh\" ~/g/git-gitlab-ci/ci/gitlab/run-on-gcc-farm.sh^M"
 
 # Apple Mac Mini M1 (16K PAGESIZE kernel) with Debian
 screen -t t:gl:run:gcc103:Debian:M1
