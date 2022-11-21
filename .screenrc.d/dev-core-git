@@ -63,6 +63,7 @@ stuff "remove_from_path \$PWD/bin-wrappers^M"
 stuff "cd t^M"
 stuff "# ~/g/git.meta/config.mak.sh && time NO_SVN_TESTS=1 GIT_TEST_HTTPD=0 make GIT_PROVE_OPTS=\"--timer --state=failed,slow,save\"^M"
 stuff "# ~/g/git.meta/config.mak.sh && time GIT_TEST_HTTPD=1 GIT_TEST_PASSING_SANITIZE_LEAK= GIT_TEST_SANITIZE_LEAK_LOG=true make GIT_PROVE_OPTS=\"--timer --state=failed,slow,save\" GIT_TEST_OPTS_EXTRA=--immediate^M"
+stuff "# ~/g/git.meta/config.mak.sh && time GIT_TEST_HTTPD=1 GIT_TEST_PASSING_SANITIZE_LEAK=check GIT_TEST_SANITIZE_LEAK_LOG=true make GIT_PROVE_OPTS=\"--timer --state=failed,slow,save\" GIT_TEST_OPTS_EXTRA=--immediate^M"
 
 screen -t t:1 bash
 stuff "cd ~/g/git^M"
