@@ -1,3 +1,11 @@
 #!/bin/sh
 
-eval "$(git -C ~/g/git cat-file blob avar/coccinelle-incremental-3:contrib/coccinelle/spatchcache)"
+export GIT_CONTRIB_SPATCHCACHE_DEBUG=default
+export GIT_CONTRIB_SPATCHCACHE_TRACE=default
+export GIT_CONTRIB_SPATCHCACHE_CACHEWHENSTDERR=true
+export GIT_CONTRIB_SPATCHCACHE_SPATCH=default
+export GIT_CONTRIB_SPATCHCACHE_DEPENDFORMAT=default
+export GIT_CONTRIB_SPATCHCACHE_SETCMD=default
+export GIT_CONTRIB_SPATCHCACHE_GETCMD=default
+
+eval "$(git -C ~/g/git cat-file blob avar/coccinelle-incremental-4:contrib/coccinelle/spatchcache)"
