@@ -118,7 +118,7 @@
 [gc]
 	;; Maybe I'll leave that topic branch for a while, but it
 	;; conflicts with my other own work, not upstream's
-	rerereResolved = "1 year ago"
+	rerereResolved = "10 years ago"
 
 ;; am, format-patch, send-email etc.
 [sendemail]
