@@ -95,10 +95,12 @@ stuff "# gpp -F --fpa='--cover-letter -v2 --range-diff=avar/XXX --in-reply-to=\"
 
 screen -t ml:r
 stuff "cd ~/g/git-ml^M"
+stuff "remove_from_path /home/avar/g/git/bin-wrappers^M"
 stuff "while true; do if test \$(find ~/g/git -type f -mmin -1440 | wc -l) -gt 0; then git pull; else echo too old; fi ; date ; sleep 300; done^M"
 
 screen -t ml:sh:0
 stuff "cd ~/g/git-ml^M"
+stuff "remove_from_path /home/avar/g/git/bin-wrappers^M"
 stuff "git --no-pager log --oneline -10^M"
 
 # Analysis tools
