@@ -18,7 +18,7 @@ compare_branches () {
 		echo checking $last..$ref
 		if test "$last" != ""
 		then
-			git --no-pager shortlog --author=Junio --min-parents=2 --grep="Merge branch 'ab/" $last..$ref $args
+			git --no-pager shortlog --author=Taylor --min-parents=2 --grep="Merge branch 'ab/" $last..$ref $args
 			git --no-pager shortlog --author=Ævar $last..$ref $args
 		fi
 		last=$ref
@@ -27,5 +27,5 @@ compare_branches () {
 
 last_release=$(junio_tags | grep -v -- -rc | head -n 1)
 last_tag=$(junio_tags | head -n 1)
-compare_branches $last_release $last_tag origin/master origin/next gitster/jch
-compare_branches "" gitster/jch origin/seen
+compare_branches $last_release $last_tag origin/master origin/next ttaylorr/jch
+compare_branches "" ttaylorr/jch origin/seen
