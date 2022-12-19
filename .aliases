@@ -35,6 +35,8 @@ alias dsgit='false screen -rx dev-core-git || {
       ASAN_OPTIONS="strip_path_prefix=/home/avar/g/git/${ASAN_OPTIONS:+:$ASAN_OPTIONS}"
       export ASAN_OPTIONS
 
+      . ~/g/git.meta/lib-mia.sh;
+
       screen -c ~/.screenrc.d/dev-core-git;
 }'
 alias dsgitlab-gdk='screen -rx dev-gitlab-gdk || screen -c ~/.screenrc.d/dev-gitlab-gdk'
