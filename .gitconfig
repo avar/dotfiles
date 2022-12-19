@@ -280,3 +280,4 @@
 	backends = SHA256E SHA256
 [safe]
 	directory = /etc
+	directory = /dns/annex/piracy
