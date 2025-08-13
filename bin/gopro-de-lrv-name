@@ -1,0 +1,19 @@
+#!/usr/bin/env perl
+use v5.22.0;
+use strict;
+use warnings;
+
+# parallel -j1 'if test -e $(gopro-de-lrv-name {}); then git rm {}; fi' ::: $(find . -type l -name '*.LRV')
+
+for (@ARGV)
+{
+	# E.g. GX011819.MP4 is the large version of GL011819.LRV
+	s/GL([0-9]+)\.LRV$/GX$1.MP4/;
+	# ... or GH012028.MP4 is the large version of
+	# GL012028.LRV. This is mutually exclusive with the
+	# above. TODO: Do a file existence check or something? Just
+	# manually commenting these out now (manually review it
+	# anyway...)
+	s/GL([0-9]+)\.LRV$/GH$1.MP4/;
+	say;
+}
